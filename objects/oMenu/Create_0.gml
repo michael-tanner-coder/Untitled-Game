@@ -311,7 +311,6 @@ Input Icons by Kenney
 				["Particle Effects",	new Toggle(true,	"particles_enabled")],					// Remove non-essential particle effects 
 				["Screenshake",	new Toggle(true,	"screenshake_enabled")],						// Toggle off screenshaking effects
 				["Flashing",	new Toggle(true,	"flashing_enabled")],							// Turn off bright white flashes
-				["Vsync",		new Toggle(0,		"vsync")],										// Enable/Disable vertical syncing
 			]],
 
 			["GAMEPLAY", [
