@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"pubsub_manager",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"pubsub_manager",
+  "parent":{
+    "name":"PubSub",
+    "path":"folders/Scripts/PubSub.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

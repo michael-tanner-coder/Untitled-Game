@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_level_start_3",
+  "audioGroupId":{
+    "name":"UI",
+    "path":"audiogroups/UI",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":3.564375,
+  "name":"snd_level_start_3",
+  "parent":{
+    "name":"UI",
+    "path":"folders/Sounds/UI.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_level_start_3.wav",
+  "type":0,
+  "volume":1.0,
+}

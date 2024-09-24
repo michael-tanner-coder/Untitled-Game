@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_block_break",
+  "audioGroupId":{
+    "name":"feedback",
+    "path":"audiogroups/feedback",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":1.019342,
+  "name":"snd_block_break",
+  "parent":{
+    "name":"Props",
+    "path":"folders/Sounds/Props.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_block_break.wav",
+  "type":0,
+  "volume":0.25,
+}

@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_character_switch",
+  "audioGroupId":{
+    "name":"feedback",
+    "path":"audiogroups/feedback",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":3.365488,
+  "name":"snd_character_switch",
+  "parent":{
+    "name":"Misc",
+    "path":"folders/Sounds/Characters/Misc.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_character_switch.wav",
+  "type":0,
+  "volume":1.0,
+}

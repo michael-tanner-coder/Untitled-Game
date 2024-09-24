@@ -1,0 +1,1 @@
+dialogue_box.speaker = inst_258863BD_1_1_1_1_1;

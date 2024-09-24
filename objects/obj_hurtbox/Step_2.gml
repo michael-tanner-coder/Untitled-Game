@@ -1,0 +1,1 @@
+vulnerable = !collided_with_lethal_actor;

@@ -1,0 +1,1 @@
+spawn_beam_sequence();

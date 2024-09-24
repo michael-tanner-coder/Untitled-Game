@@ -1,0 +1,1 @@
+spawn_inward_particles(x, y);

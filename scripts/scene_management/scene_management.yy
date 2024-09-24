@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"scene_management",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scene_management",
+  "parent":{
+    "name":"Scenes",
+    "path":"folders/Scripts/Scenes.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

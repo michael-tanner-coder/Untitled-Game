@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"particle_scripts",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"particle_scripts",
+  "parent":{
+    "name":"VFX",
+    "path":"folders/Scripts/VFX.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,1 @@
+sequence = seq_player_normal_walk;

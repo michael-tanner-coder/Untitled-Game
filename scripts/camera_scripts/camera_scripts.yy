@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"camera_scripts",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"camera_scripts",
+  "parent":{
+    "name":"VFX",
+    "path":"folders/Scripts/VFX.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

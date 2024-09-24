@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_timer_alarm",
+  "audioGroupId":{
+    "name":"danger",
+    "path":"audiogroups/danger",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":12.588912,
+  "name":"snd_timer_alarm",
+  "parent":{
+    "name":"UI",
+    "path":"folders/Sounds/UI.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_timer_alarm.wav",
+  "type":0,
+  "volume":0.75,
+}

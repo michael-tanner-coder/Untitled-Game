@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_land_float",
+  "audioGroupId":{
+    "name":"feedback",
+    "path":"audiogroups/feedback",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":0.68678,
+  "name":"snd_land_float",
+  "parent":{
+    "name":"Land",
+    "path":"folders/Sounds/Characters/Land.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_land_float.wav",
+  "type":0,
+  "volume":0.75,
+}

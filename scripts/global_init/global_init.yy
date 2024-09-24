@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"global_init",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"global_init",
+  "parent":{
+    "name":"Initialization",
+    "path":"folders/Scripts/Initialization.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

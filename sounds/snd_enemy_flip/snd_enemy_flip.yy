@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_enemy_flip",
+  "audioGroupId":{
+    "name":"feedback",
+    "path":"audiogroups/feedback",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":0.5,
+  "name":"snd_enemy_flip",
+  "parent":{
+    "name":"Enemies",
+    "path":"folders/Sounds/Enemies.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_enemy_flip.wav",
+  "type":0,
+  "volume":0.56,
+}

@@ -1,0 +1,1 @@
+dialogue_box.speaker = inst_799C9EC6;

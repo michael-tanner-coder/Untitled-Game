@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"shChangeHighlightColor",
+  "name":"shChangeHighlightColor",
+  "parent":{
+    "name":"Shaders",
+    "path":"folders/Scripts/Input/Shaders.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}

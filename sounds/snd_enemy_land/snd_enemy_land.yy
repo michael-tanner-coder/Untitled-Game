@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_enemy_land",
+  "audioGroupId":{
+    "name":"feedback",
+    "path":"audiogroups/feedback",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":0.74034,
+  "name":"snd_enemy_land",
+  "parent":{
+    "name":"Enemies",
+    "path":"folders/Sounds/Enemies.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_enemy_land.wav",
+  "type":0,
+  "volume":0.52,
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"Slider",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Slider",
+  "parent":{
+    "name":"Constructors",
+    "path":"folders/Menu/Constructors.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

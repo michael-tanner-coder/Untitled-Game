@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_spawn",
+  "audioGroupId":{
+    "name":"danger",
+    "path":"audiogroups/danger",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":2.824853,
+  "name":"snd_spawn",
+  "parent":{
+    "name":"Enemies",
+    "path":"folders/Sounds/Enemies.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_spawn.wav",
+  "type":0,
+  "volume":1.0,
+}

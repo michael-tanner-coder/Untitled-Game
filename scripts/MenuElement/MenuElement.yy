@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"MenuElement",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"MenuElement",
+  "parent":{
+    "name":"Constructors",
+    "path":"folders/Menu/Constructors.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

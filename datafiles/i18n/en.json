@@ -1,0 +1,5 @@
+{
+    "dialog": {
+        "hello": "Hello there, {name}!"
+    }
+}

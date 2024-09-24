@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"ScriptRunner",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"ScriptRunner",
+  "parent":{
+    "name":"Constructors",
+    "path":"folders/Menu/Constructors.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

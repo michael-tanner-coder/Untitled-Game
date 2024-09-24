@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"menuModePause",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"menuModePause",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Menu/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

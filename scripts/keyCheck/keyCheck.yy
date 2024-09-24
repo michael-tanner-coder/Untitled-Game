@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"keyCheck",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"keyCheck",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts/Input/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

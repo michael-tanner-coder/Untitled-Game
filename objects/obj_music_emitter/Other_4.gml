@@ -1,0 +1,1 @@
+play_layered_track(music_tracks, true);

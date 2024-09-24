@@ -1,0 +1,1 @@
+purchasing_disabled = false;
