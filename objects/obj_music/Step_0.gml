@@ -7,10 +7,6 @@ if (global.first_wave_complete) {
 	layer_vspeed(_back_layer_1, 2);
 }
 
-if (global.muted) {
-	return;
-}
-
 if (global.first_wave_complete && !audio_is_playing(snd_combat_music)) {
-	audio_play_sound(snd_combat_music, 2, true);
+	play_track(snd_combat_music, true);
 }

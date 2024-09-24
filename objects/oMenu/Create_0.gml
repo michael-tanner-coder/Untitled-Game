@@ -11,12 +11,8 @@
 
 #region Settings struct setup (system)
 	
-	// Menu save file name
-	save_filename = "save_data.json";
-	
 	// Load menu save
-	var _save_data = loadFromJson(save_filename);
-	global.settings = _save_data.settings;
+	global.settings = get_save_data_property("settings", global.settings);
 
 #endregion
 
@@ -299,47 +295,69 @@ Input Icons by Kenney
 		["NEW GAME", 	new ScriptRunner(function() {
 			menuModePause();
 			menuSetPreset(e_menu_presets.pause_menu);
-			//new_game();
+			// new_game();
 			room_goto(rm_combat_test);
 		}), undefined, undefined],
+
+		["SETTINGS", [
+			["AUDIO", [
+				["Master",	new Slider([0, 1], 0.3,		"audio_master")],	// Sets master gain see oGame
+				["Sounds",	new Slider([0, 1], 1,		"audio_sounds")],	// Not set to do anything
+				["Music",	new Slider([0, 1], 1,		"audio_music")]		// Not set to do anything
+			]],
 		
-		// ["SETTINGS", [
-		// 	["AUDIO", [
-		// 		["Master",	new Slider([0, 1], 0.3,		"audio_master")],	// Sets master gain see oGame
-		// 		["Sounds",	new Slider([0, 1], 1,		"audio_sounds")],	// Not set to do anything
-		// 		["Music",	new Slider([0, 1], 1,		"audio_music")]		// Not set to do anything
-		// 	]],
-		
-		// 	["GRAPHICS", [
-		// 		["Texture quality",	new Shift(["Low", "Medium", "High", "Ultra"], 2, "texture")],	// Not set to do anything
-		// 		["Shadows",		new Toggle(true,	"shadow")],										// Not set to do anything
-		// 		["Paricles",	new Toggle(true,	"particles")],									// Not set to do anything
-		// 		["Window Mode",	new Shift(["Windowed", "Fullscreen"], 1, "window_mode")],			// Changes window mode see oGame
-		// 		["Vsync",		new Toggle(0,		"vsync")]										// Not set to do anything
-		// 	]],
+			["GRAPHICS", [
+				["Window Mode",	new Shift(["Windowed", "Fullscreen"], 1, "window_mode")],			// Changes window mode see oGame
+				["Particle Effects",	new Toggle(true,	"particles_enabled")],					// Remove non-essential particle effects 
+				["Screenshake",	new Toggle(true,	"screenshake_enabled")],						// Toggle off screenshaking effects
+				["Flashing",	new Toggle(true,	"flashing_enabled")],							// Turn off bright white flashes
+			]],
+
+			["GAMEPLAY", [
+				["Game Speed",		new Slider([0, 1], 1, "game_speed")],				// Remove non-essential particle effects 
+				["Invincible Mode",	new Toggle(false,	"invincible_mode_enabled")],						// Toggle off screenshaking effects
+			]],
 			
-		// 	["PLAYER", [
-		// 		["Speed",		new Slider([1, 6], 4, "player_speed")],					// Changes player speed see oTest
-		// 		["Size",		new Slider([0.2, 2], 1, "player_size")],				// Changes player size see oTest
-		// 		["Color",		new Shift(["Red", "Green", "Blue"], 0, "player_col")]	// Changes player color see oTest
-		// 	]],
+			["PLAYER", [
+				["Speed",		new Slider([1, 6], 4, "player_speed")],					// Changes player speed see oTest
+				["Size",		new Slider([0.2, 2], 1, "player_size")],				// Changes player size see oTest
+				["Size",		new Slider([0.2, 2], 1, "player_size")],				// Changes player size see oTest
+				["Density",		new Slider([0, 4], 1, "player_density")],				// Changes player density
+				["Restitution",		new Slider([0, 2], 0.5, "player_restitution")],				// Changes player bounciness
+				["Linear Damping",		new Slider([0, 10], 1, "player_linear_damping")],		// Changes player linear damping
+				["Angular Damping",		new Slider([0, 50], 25, "player_angular_damping")],		// Changes player angular damping
+				["Friction",		new Slider([0, 80], 40, "player_friction")],		// Changes player friction 
+				["Color",		new Shift(["Red", "Green", "Blue"], 0, "player_col")],	// Changes player color see oTest
+			]],
+	
+			["DATA", [
+				["DELETE ALL PROGRESS?",	[
+					["NO", new ScriptRunner(function() {
+						show_debug_message("returning to previous menu");
+					})],
+					
+					["YES (CANNOT BE UNDONE)", new ScriptRunner(function() {
+						show_debug_message("deleting data");
+					})]
+				]],
+			]],
 		
-		// 	["CONTROLS", new Controls(global.input_system, "input_save.json", true, ["right", "left", "up", "down"])] // Changes player controls
-		// ]],
-		
-		["PROGRESS", [
-			["ITEMS", new ScriptRunner(function() { 
-				menuModePause();
-				menuSetPreset(e_menu_presets.pause_menu);
-				room_goto(rm_item_menu);
-			})],
+			["CONTROLS", new Controls(global.input_system, "input_save.json", true, ["right", "left", "up", "down"])] // Changes player controls
 		]],
+		
+		// ["PROGRESS", [
+		// 	["ITEMS", new ScriptRunner(function() { 
+		// 		menuModePause();
+		// 		menuSetPreset(e_menu_presets.pause_menu);
+		// 		room_goto(rm_item_menu);
+		// 	})],
+		// ]],
 		
 		// // Credits edit text above
 		// ["CREDITS",	new Credits(credits_string)],
 		
-		["QUIT",		new ScriptRunner(game_end),			// Quits game
-		"TITLE SCREEN", new ScriptRunner(function() {		// Goes to title screen when in game room
+		["CLOSE",		new ScriptRunner(game_end),			// Quits game
+		"QUIT", new ScriptRunner(function() {		// Goes to title screen when in game room
 			quit_to_menu();
 		})]
 	];
@@ -459,9 +477,9 @@ delete text_height;
 	}
 	
 	function saveMenu() {
-		var _save_data = loadFromJson(save_filename);
+		var _save_data = loadFromJson(global.save_file);
 		_save_data.settings = global.settings;
-		saveToJson(_save_data, save_filename);
+		saveToJson(_save_data, global.save_file);
 	}
 	
 	#endregion

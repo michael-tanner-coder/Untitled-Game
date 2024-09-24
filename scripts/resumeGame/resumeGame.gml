@@ -24,6 +24,8 @@ function resumeGame(keep_menu_active) {
 	if (!keep_menu_active) oMenu.menu_enabled = false;
 	
 	audio_resume_all();
+	
+	physics_pause_enable(false);
 			
 	// Resume sound
 	if (oMenu.audio.resume != undefined) audio_play_sound(oMenu.audio.resume, 5, false);

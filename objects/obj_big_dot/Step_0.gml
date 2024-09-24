@@ -1,3 +1,4 @@
+var _game_speed = global.settings.game_speed;
 
 // Follow player if we're not hit
 var _target = undefined;
@@ -12,8 +13,8 @@ if (_target && !hit) {
     
     var _magnitude = 100;
     var _x_force, _y_force;
-    _x_force = lengthdir_x(5, _target_direction) * _magnitude;
-    _y_force = lengthdir_y(5, _target_direction) * _magnitude;
+    _x_force = lengthdir_x(5, _target_direction) * _magnitude * _game_speed;
+    _y_force = lengthdir_y(5, _target_direction) * _magnitude * _game_speed;
     
     physics_apply_force(x, y, _x_force, _y_force);
     
@@ -22,7 +23,7 @@ if (_target && !hit) {
 
 
 // If we're hit by a bullet, count down until recovery
-hit_timer--;
+hit_timer -= 1 * _game_speed;
 hit_timer = max(0, hit_timer);
 if (hit_timer <= 0) {
     hit = false;

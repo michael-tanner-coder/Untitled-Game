@@ -9,9 +9,7 @@ global.intro = false;
 global.debug = false;
 global.dev_mode = true;
 lives = global.starting_life_count;
-global.settings = {
-	screenshake_enabled: true,
-};
+global.settings = loadFromJson(global.save_file);
 
 global.first_wave_complete = false;
 global.muted = false;
@@ -97,6 +95,7 @@ Example usage:
 #macro PURCHASED_ITEM "purchased_item"
 #macro FINISHED_SCENE "finished_scene"
 #macro UPDATE_TEXT "update_text"
+#macro FULLSCREEN_TOGGLED "fullscreen_toggled"
 
 // Flags
 #macro STARTED_GAME "started_game"

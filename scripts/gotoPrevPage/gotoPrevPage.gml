@@ -22,8 +22,8 @@ function gotoPrevPage() {
     	scrolling_y = undefined;
     	
     	// Save
-    	var _save_data = loadFromJson(save_filename);
+    	var _save_data = loadFromJson(global.save_file);
     	_save_data.settings = global.settings;
-    	saveToJson(_save_data, save_filename);
+    	saveToJson(_save_data, global.save_file);
     }
 }

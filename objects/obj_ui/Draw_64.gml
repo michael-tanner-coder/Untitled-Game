@@ -14,6 +14,7 @@ if (lives < 1) {
 	draw_shadow_text(room_width/2, room_height/2 + 20, "FINAL SCORE: " + string(score));
 	draw_shadow_text(room_width/2, room_height/2 + 40, "BEST SCORE: " + string(global.best_score));
 	draw_shadow_text(room_width/2, room_height/2 + 60, "RETRY: spacebar");
+	draw_shadow_text(room_width/2, room_height/2 + 80, "QUIT: escape");
 }
 
 // TUTORIAL PROMPT

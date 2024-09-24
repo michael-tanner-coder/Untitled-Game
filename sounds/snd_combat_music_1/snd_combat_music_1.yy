@@ -2,8 +2,8 @@
   "$GMSound":"",
   "%Name":"snd_combat_music_1",
   "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+    "name":"music",
+    "path":"audiogroups/music",
   },
   "bitDepth":1,
   "bitRate":128,
@@ -21,5 +21,5 @@
   "sampleRate":44100,
   "soundFile":"snd_combat_music_1.ogg",
   "type":0,
-  "volume":0.75,
+  "volume":1.0,
 }

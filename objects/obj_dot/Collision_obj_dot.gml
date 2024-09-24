@@ -1,8 +1,7 @@
 if (hit && point_value >= other.point_value) {
 	
 	if (!hit) {
-		var _sys = part_system_create();
-		part_particles_burst(_sys, x, y, part_shoot);
+		spawn_particles(part_shoot, x, y);
 	}
 	
 	other.hit = true;

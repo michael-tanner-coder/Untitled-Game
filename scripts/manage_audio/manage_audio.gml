@@ -174,6 +174,14 @@ function play_sound(_sound, _loop = false, _pitch = 1) {
 			array_push(global.sound_registry[$ _sound_name], _voice);
 		}
 		
+		// update audio gain based on sound group
+		if (_group_name == "music") {
+			VinylSetGain(_voice, global.settings.audio_music)
+		}
+		else {
+			VinylSetGain(_voice, global.settings.audio_sounds)
+		}
+		
 		// return voice for external use
 		return _voice;
 	}
