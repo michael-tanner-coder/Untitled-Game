@@ -134,8 +134,6 @@ function new_game() {
     	set_flag(_flag, false);
     END
     
-    reset_characters();
-    
     start_game();
     
 }
