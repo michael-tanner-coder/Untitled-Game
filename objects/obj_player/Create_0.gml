@@ -34,6 +34,9 @@ fsm.add("active", {
 	},
 	step: function() {
 		
+		// Settings
+		var _game_speed = global.settings.game_speed;
+		
 		// --- Inputs ---
 		var _left = keyboard_check(ord("A")) * -1;
 		var _right = keyboard_check(ord("D"));
@@ -46,8 +49,8 @@ fsm.add("active", {
 
 		// --- Movement ---
 		// get base force from user input
-		x_force = base_speed * (_left + _right);
-		y_force = base_speed * (_up + _down);
+		x_force = base_speed * (_left + _right) * _game_speed;
+		y_force = base_speed * (_up + _down) * _game_speed;
 
 		// slow down when turning / moving diagnoally
 		if (x_force != 0 && y_force != 0) {
@@ -79,8 +82,8 @@ fsm.add("active", {
     
 		    // Bullet force
 		    var _x_force, _y_force;
-		    _x_force = lengthdir_x(10, _shoot_direction) * 10;
-		    _y_force = lengthdir_y(10, _shoot_direction) * 10;
+		    _x_force = lengthdir_x(10, _shoot_direction) * 10 * _game_speed;
+		    _y_force = lengthdir_y(10, _shoot_direction) * 10 * _game_speed;
     
 		    with(_bullet) {
 		        physics_apply_impulse(x,y,_x_force, _y_force);
@@ -116,7 +119,7 @@ fsm.add("active", {
 
 		// reset speed when not firing
 		if (!_clicked) {
-		    base_speed = max_speed;
+		    base_speed = max_speed * _game_speed;
 		}
 
 		// countdown until we can make another shot
@@ -135,7 +138,7 @@ fsm.add("active", {
 		}
 
 		if (dash_timer > 0) {
-		    base_speed = 2 * max_speed;
+		    base_speed = 2 * max_speed * _game_speed;
 			leave_trail();
 		}
 

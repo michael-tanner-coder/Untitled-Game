@@ -314,7 +314,7 @@ Input Icons by Kenney
 			]],
 
 			["GAMEPLAY", [
-				["Game Speed",		new Slider([1, 6], 4, "game_speed")],				// Remove non-essential particle effects 
+				["Game Speed",		new Slider([0, 1], 1, "game_speed")],				// Remove non-essential particle effects 
 				["Invincible Mode",	new Toggle(false,	"invincible_mode_enabled")],						// Toggle off screenshaking effects
 			]],
 			
