@@ -15,4 +15,6 @@ function pauseGame(active_objs) {
     }
     
     if (is_array(active_objs)) oMenu.active_objs = active_objs;
+    
+    physics_pause_enable(true);
 }
