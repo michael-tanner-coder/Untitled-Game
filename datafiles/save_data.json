@@ -16,7 +16,7 @@
         "flashing_enabled": true,
         "particles_enabled": true,
         "high_contrast_mode_enabled": true,
-        "game_speed": 100,
+        "game_speed": 1,
         "invincible_mode_enabled": false,
         "window_mode": 0,
         "vsync": 0,

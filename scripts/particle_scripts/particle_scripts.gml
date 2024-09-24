@@ -91,3 +91,14 @@ function spawn_enemy_destruction_particles(_x, _y) {
 	var _sys = part_system_create();
 	part_particles_burst(_sys, _x, _y, enemy_destruction);
 }
+
+function spawn_particles(_part_asset = undefined, _x, _y, _mode = "burst") {
+	if (global.settings.particles_enabled) {
+		
+		if (_mode == "burst") {
+			var _sys = part_system_create();
+			part_particles_burst(_sys, _x, _y, _part_asset);
+		}
+		
+	}
+}

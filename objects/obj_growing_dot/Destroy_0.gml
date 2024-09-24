@@ -12,8 +12,7 @@ if (hit) {
 		shake_text(1, round(other.point_value/100), 0.5);
 	}
 	
-	var _sys = part_system_create();
-	part_particles_burst(_sys, x, y, part_death);
+	spawn_particles(part_death, x, y);
 	
 	return;
 }

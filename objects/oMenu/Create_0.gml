@@ -298,7 +298,7 @@ Input Icons by Kenney
 			// new_game();
 			room_goto(rm_combat_test);
 		}), undefined, undefined],
-		
+
 		["SETTINGS", [
 			["AUDIO", [
 				["Master",	new Slider([0, 1], 0.3,		"audio_master")],	// Sets master gain see oGame
@@ -307,9 +307,18 @@ Input Icons by Kenney
 			]],
 		
 			["GRAPHICS", [
-				["Paricles",	new Toggle(true,	"particles")],									// Not set to do anything
 				["Window Mode",	new Shift(["Windowed", "Fullscreen"], 1, "window_mode")],			// Changes window mode see oGame
-				["Vsync",		new Toggle(0,		"vsync")]										// Not set to do anything
+				["Particle Effects",	new Toggle(true,	"particles_enabled")],					// Remove non-essential particle effects 
+				["Screenshake",	new Toggle(true,	"screenshake_enabled")],						// Toggle off screenshaking effects
+				["Flashing",	new Toggle(true,	"flashing_enabled")],							// Turn off bright white flashes
+				["Vsync",		new Toggle(0,		"vsync")],										// Enable/Disable vertical syncing
+			]],
+
+			["GAMEPLAY", [
+				["Game Speed",		new Slider([1, 6], 4, "game_speed")],				// Remove non-essential particle effects 
+				["Invincible Mode",	new Toggle(false,	"invincible_mode_enabled")],						// Toggle off screenshaking effects
+				["Flashing",	new Toggle(true,	"flashing_enabled")],							// Turn off bright white flashes
+				["Vsync",		new Toggle(0,		"vsync")],										// Enable/Disable vertical syncing
 			]],
 			
 			["PLAYER", [
@@ -322,6 +331,18 @@ Input Icons by Kenney
 				["Angular Damping",		new Slider([0, 50], 25, "player_angular_damping")],		// Changes player angular damping
 				["Friction",		new Slider([0, 80], 40, "player_friction")],		// Changes player friction 
 				["Color",		new Shift(["Red", "Green", "Blue"], 0, "player_col")],	// Changes player color see oTest
+			]],
+	
+			["DATA", [
+				["DELETE ALL PROGRESS?",	[
+					["NO", new ScriptRunner(function() {
+						show_debug_message("returning to previous menu");
+					})],
+					
+					["YES (CANNOT BE UNDONE)", new ScriptRunner(function() {
+						show_debug_message("deleting data");
+					})]
+				]],
 			]],
 		
 			["CONTROLS", new Controls(global.input_system, "input_save.json", true, ["right", "left", "up", "down"])] // Changes player controls
