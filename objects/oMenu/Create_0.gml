@@ -11,12 +11,8 @@
 
 #region Settings struct setup (system)
 	
-	// Menu save file name
-	save_filename = "save_data.json";
-	
 	// Load menu save
-	var _save_data = loadFromJson(save_filename);
-	global.settings = _save_data.settings;
+	global.settings = get_save_data_property("settings", global.settings);
 
 #endregion
 
@@ -311,8 +307,6 @@ Input Icons by Kenney
 			]],
 		
 			["GRAPHICS", [
-				["Texture quality",	new Shift(["Low", "Medium", "High", "Ultra"], 2, "texture")],	// Not set to do anything
-				["Shadows",		new Toggle(true,	"shadow")],										// Not set to do anything
 				["Paricles",	new Toggle(true,	"particles")],									// Not set to do anything
 				["Window Mode",	new Shift(["Windowed", "Fullscreen"], 1, "window_mode")],			// Changes window mode see oGame
 				["Vsync",		new Toggle(0,		"vsync")]										// Not set to do anything
@@ -321,7 +315,13 @@ Input Icons by Kenney
 			["PLAYER", [
 				["Speed",		new Slider([1, 6], 4, "player_speed")],					// Changes player speed see oTest
 				["Size",		new Slider([0.2, 2], 1, "player_size")],				// Changes player size see oTest
-				["Color",		new Shift(["Red", "Green", "Blue"], 0, "player_col")]	// Changes player color see oTest
+				["Size",		new Slider([0.2, 2], 1, "player_size")],				// Changes player size see oTest
+				["Density",		new Slider([0, 4], 1, "player_density")],				// Changes player density
+				["Restitution",		new Slider([0, 2], 0.5, "player_restitution")],				// Changes player bounciness
+				["Linear Damping",		new Slider([0, 10], 1, "player_linear_damping")],		// Changes player linear damping
+				["Angular Damping",		new Slider([0, 50], 25, "player_angular_damping")],		// Changes player angular damping
+				["Friction",		new Slider([0, 80], 40, "player_friction")],		// Changes player friction 
+				["Color",		new Shift(["Red", "Green", "Blue"], 0, "player_col")],	// Changes player color see oTest
 			]],
 		
 			["CONTROLS", new Controls(global.input_system, "input_save.json", true, ["right", "left", "up", "down"])] // Changes player controls
@@ -459,9 +459,9 @@ delete text_height;
 	}
 	
 	function saveMenu() {
-		var _save_data = loadFromJson(save_filename);
+		var _save_data = loadFromJson(global.save_file);
 		_save_data.settings = global.settings;
-		saveToJson(_save_data, save_filename);
+		saveToJson(_save_data, global.save_file);
 	}
 	
 	#endregion
