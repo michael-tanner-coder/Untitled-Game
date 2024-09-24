@@ -15,4 +15,6 @@ if (stinger_started && !VinylIsPlaying(global.current_stinger)) {
     resume_layered_track(global.current_track_layers);
 }
 
+VinylMasterSetGain(global.settings.audio_master);
+
 

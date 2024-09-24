@@ -2,8 +2,8 @@
   "$GMSound":"",
   "%Name":"snd_hit",
   "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+    "name":"feedback",
+    "path":"audiogroups/feedback",
   },
   "bitDepth":1,
   "bitRate":128,
@@ -21,5 +21,5 @@
   "sampleRate":44100,
   "soundFile":"snd_hit.wav",
   "type":0,
-  "volume":0.6,
+  "volume":1.0,
 }

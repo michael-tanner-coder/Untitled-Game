@@ -105,7 +105,7 @@ fsm.add("active", {
 		    image_yscale = 1.2;
 	
 			// Sound Feedback
-			audio_play_sound(snd_shoot, 1, false);
+			play_sound(snd_shoot, false);
 
 		}
 

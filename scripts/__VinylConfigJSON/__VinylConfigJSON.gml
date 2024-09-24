@@ -154,6 +154,10 @@ global.VinylConfigSON = [
         mix: "danger",
         members: [
             {
+                sound: snd_die,
+                duckPrio: 5,
+            },
+            {
                 sound: snd_fire_projectile,
                 duckPrio: 5,
             },
@@ -182,6 +186,26 @@ global.VinylConfigSON = [
         mix: "feedback",
         membersDuckOn: "feedback_ducker",
         members: [
+            {
+                sound: snd_points,
+                duckPrio: 4,
+                gain: 1,
+            },
+            {
+                sound: snd_hit,
+                duckPrio: 4,
+                gain: 1,
+            },
+            {
+                sound: snd_hit_2,
+                duckPrio: 4,
+                gain: 1,
+            },
+            {
+                sound: snd_shoot,
+                duckPrio: 4,
+                gain: 1,
+            },
             {
                 sound: snd_tutorial_success,
                 duckPrio: 4,
@@ -363,6 +387,16 @@ global.VinylConfigSON = [
       mix: "music",
       members: [
         // levels
+        {
+            sound: snd_combat_music,
+            gain: 0.6,
+            duckPrio: 2,
+        },
+        {
+            sound: snd_combat_music_1,
+            gain: 0.6,
+            duckPrio: 2,
+        },
         {
             sound: snd_music_level_1_layer_1,
             gain: 0.6,
