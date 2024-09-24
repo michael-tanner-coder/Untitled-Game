@@ -316,8 +316,6 @@ Input Icons by Kenney
 			["GAMEPLAY", [
 				["Game Speed",		new Slider([1, 6], 4, "game_speed")],				// Remove non-essential particle effects 
 				["Invincible Mode",	new Toggle(false,	"invincible_mode_enabled")],						// Toggle off screenshaking effects
-				["Flashing",	new Toggle(true,	"flashing_enabled")],							// Turn off bright white flashes
-				["Vsync",		new Toggle(0,		"vsync")],										// Enable/Disable vertical syncing
 			]],
 			
 			["PLAYER", [
