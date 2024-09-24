@@ -6,6 +6,10 @@
 
 function screenshake(_time, _magnitude, _fade) {
 	
+	if (!global.settings.screenshake_enabled) {
+		return;	
+	}
+	
 	with (obj_camera_effects)
 	{
 	    shake = true;
