@@ -13,6 +13,7 @@ meter_width = 100;
 meter_height = 20;
 meter_color = PURPLE;
 first_shot = false;
+started_shooting = false;
 
 global.moved = false;
 global.shot = false;
@@ -66,9 +67,10 @@ fsm.add("active", {
 		// --- Shooting ---
 		if (_click_pressed) {
 			first_shot = true;	
+			started_shooting = true;
 		}
 
-		if (_clicked && shot_timer == 0) {
+		if (started_shooting && _clicked && shot_timer == 0) {
 			global.shot = true;
 	
    
@@ -109,6 +111,7 @@ fsm.add("active", {
 
 		if (_click_released) {
 			first_shot = false;
+			started_shooting = false;
 		}
 
 		// reset speed when not firing
