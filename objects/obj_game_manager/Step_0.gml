@@ -8,6 +8,11 @@ if (lives < 1 && keyboard_check_pressed(vk_space)) {
 	room_restart();
 }
 
-if (keyboard_check_pressed(vk_escape)) {
-	window_set_fullscreen(!window_get_fullscreen())
+if (struct_get(global.settings, "window_mode")) {
+	if (global.settings.window_mode == "Windowed") {
+		window_set_fullscreen(false);
+	}
+	else {
+		window_set_fullscreen(true);
+	}
 }
