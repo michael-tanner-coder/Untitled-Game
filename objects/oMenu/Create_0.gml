@@ -295,8 +295,7 @@ Input Icons by Kenney
 		["NEW GAME", 	new ScriptRunner(function() {
 			menuModePause();
 			menuSetPreset(e_menu_presets.pause_menu);
-			// new_game();
-			room_goto(rm_combat_test);
+			new_game();
 		}), undefined, undefined],
 
 		["SETTINGS", [

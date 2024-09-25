@@ -1,27 +1,38 @@
+// Get scene data
+var _current_scene = get_current_scene();
+if (_current_scene == undefined) {
+	_current_scene = {
+		waves: [
+			{
+				enemy_count: 15,
+				time_between_spawns: 30,
+				enemy_types: [obj_dot, obj_dot, obj_dot, obj_big_dot, obj_growing_dot],
+			},
+		],
+	};
+}
 
-// waves:
-// last for specific number of enemies
-// defeating all enemies will end the wave
-// enemies spawn at set intervals during the wave
-// maximum number of enemies allowed in a wave increases with time
-
+// Starting Wave Configuration
 wave_index = 0;
-total_wave_count = 5;
-wave_enemy_count = 15;
-enemies_spawned = 0;
-enemies_remaining = wave_enemy_count;
-wave_time = 0;
-wave_enemy_types = [obj_dot, obj_dot, obj_dot, obj_big_dot, obj_growing_dot];
+var _waves = struct_get(_current_scene, "waves");
+current_wave = _waves[wave_index];
+total_wave_count = array_length(_waves);
+wave_enemy_count = current_wave.enemy_count;
+enemies_remaining = current_wave.enemy_count;
+wave_enemy_types = current_wave.enemy_types;
+time_between_spawns = current_wave.time_between_spawns;
 
-max_enemy_count = 10;
-time_between_spawns = 30;
+// Spawner properties
+enemies_spawned = 0;
+wave_time = 0;
 spawn_timer = 30;
 previous_spawn_point = {x_pos: 0, y_pos: 0};
+max_enemy_count = 10;
 
+// Spawn Point Setup
 var _temp_spawn_points = [];
 with(obj_dot) {
     array_push(_temp_spawn_points, {x_pos: x, y_pos: y});
-    
     instance_destroy(self);
 }
 spawn_points = _temp_spawn_points;
@@ -31,7 +42,12 @@ fsm = new SnowState("wave");
 fsm.add("wave", {
 	
 	enter: function() {
-		enemies_remaining = wave_enemy_count;
+		var _waves = struct_get(get_current_scene(), "waves");
+		current_wave = _waves[wave_index];
+		wave_enemy_count = current_wave.enemy_count;
+		enemies_remaining = current_wave.enemy_count;
+		wave_enemy_types = current_wave.enemy_types;
+		time_between_spawns = current_wave.time_between_spawns;
 		spawn_timer = time_between_spawns;
 		enemies_spawned = 0;
 		wave_time = 0;
