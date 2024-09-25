@@ -13,6 +13,6 @@ if (hit) {
 	
 	// Particle animation
 	spawn_particles(part_death, x, y);
-	
-	return;
 }
+
+publish(ENEMY_DEFEATED);
