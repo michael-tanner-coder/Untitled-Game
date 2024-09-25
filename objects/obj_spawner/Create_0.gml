@@ -1,33 +1,30 @@
+
+// TODO: bring back weighted enemy spawns (too many big enemies are spawning!)
+
 // Get scene data
 var _current_scene = get_current_scene();
 if (_current_scene == undefined) {
 	_current_scene = {
-		waves: [
-			{
-				enemy_count: 15,
-				time_between_spawns: 30,
-				enemy_types: [obj_dot, obj_dot, obj_dot, obj_big_dot, obj_growing_dot],
-			},
-		],
+		goal_score: 20000,
+        time_between_spawns: 30,
+        max_enemy_count: 10,
 	};
 }
 
 // Starting Wave Configuration
 wave_index = 0;
-var _waves = struct_get(_current_scene, "waves");
-current_wave = _waves[wave_index];
-total_wave_count = array_length(_waves);
-wave_enemy_count = current_wave.enemy_count;
-enemies_remaining = current_wave.enemy_count;
-wave_enemy_types = current_wave.enemy_types;
-time_between_spawns = current_wave.time_between_spawns;
-current_max_enemy_count = current_wave.max_enemy_count;
+base_time_between_spawns = 30;
+wave_enemy_types = _current_scene.enemy_types;
+modified_time_between_spawns = _current_scene.time_between_spawns;
+current_max_enemy_count = _current_scene.max_enemy_count;
 
 // Spawner properties
-enemies_spawned = 0;
-wave_time = 0;
 spawn_timer = 30;
 previous_spawn_point = {x_pos: 0, y_pos: 0};
+tension = 1;
+tutorial_score = 400;
+goal_score = _current_scene.goal_score;
+upgrade_score = 2000;
 
 // Spawn Point Setup
 var _temp_spawn_points = [];
@@ -42,20 +39,9 @@ fsm = new SnowState("wave");
 fsm.add("wave", {
 	
 	enter: function() {
-		var _waves = struct_get(get_current_scene(), "waves");
-		current_wave = _waves[wave_index];
-		wave_enemy_count = current_wave.enemy_count;
-		enemies_remaining = current_wave.enemy_count;
-		wave_enemy_types = current_wave.enemy_types;
-		time_between_spawns = current_wave.time_between_spawns;
-		current_max_enemy_count = current_wave.max_enemy_count;
-		spawn_timer = time_between_spawns;
-		enemies_spawned = 0;
-		wave_time = 0;
-		
 		// update background animation based on level progress
-		if (wave_index >= 0) {
-			var _level_progress = wave_index / total_wave_count;
+		if (score >= tutorial_score) {
+			var _level_progress = (score/goal_score);
 			var _bg_speed = 1 + (7 * _level_progress);
 			var _back_layer = layer_get_id("Background");
 			var _back_layer_1 = layer_get_id("Background_1");
@@ -68,15 +54,17 @@ fsm.add("wave", {
 	
 	step: function() {
 	
-		if (enemies_remaining <= 0) {
-			if (wave_index >= total_wave_count-1) {
-				fsm.change("level_complete");
-			}
-			else {
-				fsm.change("rest");
-			} 
-		}
+		var _dt = delta_time/1000000;
+		tension = abs(1 * sine_wave(current_time/4000, 1000, 1, 1));
 		
+		// check for level progress based on score
+		if (score >= goal_score) {
+			fsm.change("level_complete");
+		}
+		else if (score >= upgrade_score) {
+			// fsm.change("rest");
+		} 
+			
 		// countdown to next spawn
 		var _current_enemy_count = instance_number(obj_dot);
 		if (_current_enemy_count < current_max_enemy_count && spawn_timer > 0) {
@@ -86,54 +74,50 @@ fsm.add("wave", {
 		// when it's time for the next spawn, calculate the value of an enemy spawn to determine if it will fit in the room
 		if (spawn_timer <= 0) {
 			
-			if (wave_index > 0) {
+			// turn off tutorial features once we reach an early point threshold
+			if (score >= tutorial_score) {
 				global.first_wave_complete = true;
 			}
 			
 			// get the target enemy type to spawn
 			var _chosen_spawn_point = spawn_points[irandom_range(0, array_length(spawn_points)-1)];
-			var _chosen_spawn_type = wave_enemy_types[irandom_range(0, array_length(wave_enemy_types)-1)];
-			var _total_enemy_value = instance_number(obj_dot) + (instance_number(obj_big_dot) * 2) + instance_number(obj_growing_dot);
+			var _chosen_spawn = wave_enemy_types[irandom_range(0, array_length(wave_enemy_types)-1)];
 			
 			// if the value is not too large, spawn the enemy
 			var _repeated_spawn_point = previous_spawn_point.x_pos == _chosen_spawn_point.x_pos && previous_spawn_point.y_pos == _chosen_spawn_point.y_pos;
-			if (enemies_spawned < wave_enemy_count && _current_enemy_count < current_max_enemy_count && !_repeated_spawn_point) {
-				instance_create_layer(_chosen_spawn_point.x_pos, _chosen_spawn_point.y_pos, layer, _chosen_spawn_type);
-				spawn_timer = time_between_spawns;
-				enemies_spawned++;
+			if	(
+					score >= _chosen_spawn.points &&
+					_current_enemy_count < current_max_enemy_count && 
+					!_repeated_spawn_point
+				) 
+			{
+				instance_create_layer(_chosen_spawn_point.x_pos, _chosen_spawn_point.y_pos, layer, _chosen_spawn.type);
+				spawn_timer = base_time_between_spawns + (modified_time_between_spawns * (1 - (score / goal_score)));
 			}
 			
 		}
 		
 		// update max enemy count based on progress into the wave
-		if (wave_index >= 0) {
-			wave_time += (delta_time/1000000);
-			current_max_enemy_count = 1 + floor((wave_time / current_wave.time_between_increasing_enemy_limit));
-			current_max_enemy_count = clamp(current_max_enemy_count, 1, current_wave.max_enemy_count);
-		}
-		else {
-			max_enemy_count = 1;
-			current_max_enemy_count = 1;
-		}
-		}
+		current_max_enemy_count = 1 + floor((score/800));
+
 	},
 	
 	draw: function() {
-		fillbar(room_width/2 - 100, room_height - 60, 200, 50, 1 - (enemies_remaining/wave_enemy_count), RED, PURPLE);
+		fillbar(room_width/2 - 100, room_height - 60, 200, 50, min((score/upgrade_score), 1), RED, PURPLE);
 		draw_set_halign(fa_center);
-		draw_shadow_text(room_width/2, room_height - 60, "WAVE" + string(wave_index + 1) + "/" + string(total_wave_count));
+		draw_shadow_text(room_width/2, room_height - 60, "PROGRESS " + string(score) + "/" + string(upgrade_score));
+		draw_shadow_text(100,100, "TENSION: " + string(tension));
 	}
 	
 });
 
 fsm.add("rest", {
 	enter: function() {
-		wave_index++;
+		upgrade_score *= 2;
 	},
 	
 	step: function() {
-		var _current_enemy_count = instance_number(obj_dot);
-		if (_current_enemy_count <= 0 && input_check_pressed("select")) {
+		if (input_check_pressed("select")) {
 			fsm.change("wave");
 		}
 	},
@@ -141,7 +125,7 @@ fsm.add("rest", {
 	draw: function() {
 		fillbar(room_width/2 - 100, room_height - 60, 200, 50, 1, RED, PURPLE);
 		draw_set_halign(fa_center);
-		draw_shadow_text(room_width/2, room_height - 60, "REST...");
+		draw_shadow_text(room_width/2, room_height - 60, "UPGRADE");
 	}
 });
 
@@ -162,5 +146,4 @@ fsm.add("level_complete", {
 
 // Event Subscriptions
 subscribe(id, ENEMY_DEFEATED, function() {
-	enemies_remaining--;
 });

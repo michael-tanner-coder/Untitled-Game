@@ -1,4 +1,4 @@
-// dont' spawn while still in the tutorial phase
+// don't spawn while still in the tutorial phase
 if (global.tutorial) {
 	return;
 }
