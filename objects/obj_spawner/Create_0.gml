@@ -140,6 +140,7 @@ fsm.add("level_complete", {
 		draw_set_halign(fa_center);
 		draw_set_valign(fa_middle);
 		draw_shadow_text(room_width/2, room_height/2, "LEVEL COMPLETE");
+		draw_shadow_text(room_width/2, room_height/2 + 80, "FINAL SCORE: " + string(score));
 	},
 }); 
 
