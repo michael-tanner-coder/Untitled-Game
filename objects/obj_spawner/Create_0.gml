@@ -52,6 +52,18 @@ fsm.add("wave", {
 		spawn_timer = time_between_spawns;
 		enemies_spawned = 0;
 		wave_time = 0;
+		
+		// update background animation based on level progress
+		if (wave_index >= 0) {
+			var _level_progress = wave_index / total_wave_count;
+			var _bg_speed = 1 + (7 * _level_progress);
+			var _back_layer = layer_get_id("Background");
+			var _back_layer_1 = layer_get_id("Background_1");
+			layer_hspeed(_back_layer, _bg_speed);
+			layer_vspeed(_back_layer, _bg_speed);
+			layer_hspeed(_back_layer_1, _bg_speed/2);
+			layer_vspeed(_back_layer_1, _bg_speed/2);
+		}
 	},
 	
 	step: function() {
