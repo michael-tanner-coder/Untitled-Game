@@ -21,13 +21,13 @@ wave_enemy_count = current_wave.enemy_count;
 enemies_remaining = current_wave.enemy_count;
 wave_enemy_types = current_wave.enemy_types;
 time_between_spawns = current_wave.time_between_spawns;
+current_max_enemy_count = current_wave.max_enemy_count;
 
 // Spawner properties
 enemies_spawned = 0;
 wave_time = 0;
 spawn_timer = 30;
 previous_spawn_point = {x_pos: 0, y_pos: 0};
-max_enemy_count = 10;
 
 // Spawn Point Setup
 var _temp_spawn_points = [];
@@ -48,6 +48,7 @@ fsm.add("wave", {
 		enemies_remaining = current_wave.enemy_count;
 		wave_enemy_types = current_wave.enemy_types;
 		time_between_spawns = current_wave.time_between_spawns;
+		current_max_enemy_count = current_wave.max_enemy_count;
 		spawn_timer = time_between_spawns;
 		enemies_spawned = 0;
 		wave_time = 0;
@@ -66,14 +67,14 @@ fsm.add("wave", {
 		
 		// countdown to next spawn
 		var _current_enemy_count = instance_number(obj_dot);
-		if (_current_enemy_count < max_enemy_count && spawn_timer > 0) {
+		if (_current_enemy_count < current_max_enemy_count && spawn_timer > 0) {
 			spawn_timer--;
 		}
 	
 		// when it's time for the next spawn, calculate the value of an enemy spawn to determine if it will fit in the room
 		if (spawn_timer <= 0) {
 			
-			if (score >= 400) {
+			if (wave_index > 0) {
 				global.first_wave_complete = true;
 			}
 			
@@ -84,7 +85,7 @@ fsm.add("wave", {
 			
 			// if the value is not too large, spawn the enemy
 			var _repeated_spawn_point = previous_spawn_point.x_pos == _chosen_spawn_point.x_pos && previous_spawn_point.y_pos == _chosen_spawn_point.y_pos;
-			if (enemies_spawned < wave_enemy_count && _current_enemy_count < max_enemy_count && !_repeated_spawn_point) {
+			if (enemies_spawned < wave_enemy_count && _current_enemy_count < current_max_enemy_count && !_repeated_spawn_point) {
 				instance_create_layer(_chosen_spawn_point.x_pos, _chosen_spawn_point.y_pos, layer, _chosen_spawn_type);
 				spawn_timer = time_between_spawns;
 				enemies_spawned++;
@@ -93,12 +94,15 @@ fsm.add("wave", {
 		}
 		
 		// update max enemy count based on progress into the wave
-		if (score >= 400) {
+		if (wave_index >= 0) {
 			wave_time += (delta_time/1000000);
-			max_enemy_count = 1 + floor((wave_time / 5));
+			current_max_enemy_count = 1 + floor((wave_time / current_wave.time_between_increasing_enemy_limit));
+			current_max_enemy_count = clamp(current_max_enemy_count, 1, current_wave.max_enemy_count);
 		}
 		else {
 			max_enemy_count = 1;
+			current_max_enemy_count = 1;
+		}
 		}
 	},
 	
