@@ -5,8 +5,9 @@
 // enemies spawn at set intervals during the wave
 // maximum number of enemies allowed in a wave increases with time
 
-max_wave_enemy_count = 15;
-wave_enemy_count = max_wave_enemy_count;
+wave_enemy_count = 15;
+enemies_spawned = 0;
+enemies_remaining = wave_enemy_count;
 wave_time = 0;
 wave_enemy_types = [obj_dot, obj_dot, obj_dot, obj_big_dot, obj_growing_dot];
 
@@ -28,14 +29,15 @@ fsm = new SnowState("wave");
 fsm.add("wave", {
 	
 	enter: function() {
-		wave_enemy_count = max_wave_enemy_count;
+		enemies_remaining = wave_enemy_count;
 		spawn_timer = time_between_spawns;
+		enemies_spawned = 0;
 		wave_time = 0;
 	},
 	
 	step: function() {
 	
-		if (wave_enemy_count <= 0) {
+		if (enemies_remaining <= 0) {
 			fsm.change("rest");
 		}
 		
@@ -63,9 +65,10 @@ fsm.add("wave", {
 		
 			// if the value is not too large, spawn the enemy
 			var _repeated_spawn_point = previous_spawn_point.x_pos == _chosen_spawn_point.x_pos && previous_spawn_point.y_pos == _chosen_spawn_point.y_pos;
-			if (_current_enemy_count < max_enemy_count && !_repeated_spawn_point) {
+			if (enemies_spawned < wave_enemy_count && _current_enemy_count < max_enemy_count && !_repeated_spawn_point) {
 				instance_create_layer(_chosen_spawn_point.x_pos, _chosen_spawn_point.y_pos, layer, _chosen_spawn_type);
 				spawn_timer = time_between_spawns;
+				enemies_spawned++;
 			}
 			
 		}
@@ -81,7 +84,7 @@ fsm.add("wave", {
 	},
 	
 	draw: function() {
-		draw_shadow_text(100, 100, "ENEMIES: " + string(wave_enemy_count));
+		draw_shadow_text(100, 100, "ENEMIES: " + string(enemies_remaining));
 	}
 	
 });
@@ -102,8 +105,6 @@ fsm.add("rest", {
 })
 
 // Event Subscriptions
-
 subscribe(id, ENEMY_DEFEATED, function() {
-	show_debug_message("ENEMY DEfeated");
-	wave_enemy_count--;
+	enemies_remaining--;
 });
