@@ -82,12 +82,14 @@ fsm.add("wave", {
 			// get the target enemy type to spawn
 			var _chosen_spawn_point = spawn_points[irandom_range(0, array_length(spawn_points)-1)];
 			var _chosen_spawn = wave_enemy_types[irandom_range(0, array_length(wave_enemy_types)-1)];
+			var _count_of_spawn_type = instance_number(_chosen_spawn.type);
 			
 			// if the value is not too large, spawn the enemy
 			var _repeated_spawn_point = previous_spawn_point.x_pos == _chosen_spawn_point.x_pos && previous_spawn_point.y_pos == _chosen_spawn_point.y_pos;
 			if	(
 					score >= _chosen_spawn.points &&
 					_current_enemy_count < current_max_enemy_count && 
+					_count_of_spawn_type < _chosen_spawn.limit && 
 					!_repeated_spawn_point
 				) 
 			{
