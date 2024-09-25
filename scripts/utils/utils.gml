@@ -31,3 +31,15 @@ function draw_shadow_text(x,y,_text = "",_color = WHITE, _shadow_color=PURPLE) {
 	draw_set_color(_color);
 	draw_text(x,y,_text);
 }
+
+function fillbar(_x = 0, _y = 0, _width = 100, _height = 50, _fill_percentage = 1, _fill_color = RED, _outline_color = undefined) {
+	var _border_size = 1;
+	
+	if (_outline_color != undefined) {
+		draw_set_color(_outline_color);
+		draw_rectangle(_x, _y, _x + _width, _y + _height, true);
+	}
+	
+	draw_set_color(_fill_color);
+	draw_rectangle(_x + _border_size, _y + _border_size, _x + (_width * _fill_percentage) - _border_size, _y + _height - _border_size, false);
+}

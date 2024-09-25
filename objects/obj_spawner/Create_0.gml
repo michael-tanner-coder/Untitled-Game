@@ -5,6 +5,8 @@
 // enemies spawn at set intervals during the wave
 // maximum number of enemies allowed in a wave increases with time
 
+wave_index = 0;
+total_wave_count = 5;
 wave_enemy_count = 15;
 enemies_spawned = 0;
 enemies_remaining = wave_enemy_count;
@@ -38,7 +40,12 @@ fsm.add("wave", {
 	step: function() {
 	
 		if (enemies_remaining <= 0) {
-			fsm.change("rest");
+			if (wave_index >= total_wave_count-1) {
+				fsm.change("level_complete");
+			}
+			else {
+				fsm.change("rest");
+			} 
 		}
 		
 		// countdown to next spawn
@@ -84,13 +91,17 @@ fsm.add("wave", {
 	},
 	
 	draw: function() {
-		draw_shadow_text(100, 100, "ENEMIES: " + string(enemies_remaining));
+		fillbar(room_width/2 - 100, room_height - 60, 200, 50, 1 - (enemies_remaining/wave_enemy_count), RED, PURPLE);
+		draw_set_halign(fa_center);
+		draw_shadow_text(room_width/2, room_height - 60, "WAVE" + string(wave_index + 1) + "/" + string(total_wave_count));
 	}
 	
 });
 
 fsm.add("rest", {
-	enter: function() {},
+	enter: function() {
+		wave_index++;
+	},
 	
 	step: function() {
 		var _current_enemy_count = instance_number(obj_dot);
@@ -100,9 +111,25 @@ fsm.add("rest", {
 	},
 	
 	draw: function() {
-		draw_shadow_text(100, 100, "REST");
+		fillbar(room_width/2 - 100, room_height - 60, 200, 50, 1, RED, PURPLE);
+		draw_set_halign(fa_center);
+		draw_shadow_text(room_width/2, room_height - 60, "REST...");
 	}
-})
+});
+
+fsm.add("level_complete", {
+	enter: function() {
+		
+	},
+	step: function() {
+		
+	},
+	draw: function() {
+		draw_set_halign(fa_center);
+		draw_set_valign(fa_middle);
+		draw_shadow_text(room_width/2, room_height/2, "LEVEL COMPLETE");
+	},
+}); 
 
 // Event Subscriptions
 subscribe(id, ENEMY_DEFEATED, function() {
