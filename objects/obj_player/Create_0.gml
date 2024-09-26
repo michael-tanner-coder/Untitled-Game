@@ -1,31 +1,41 @@
+// Base Player Properties
 x_force = 0;
 y_force = 0;
-max_speed = 5;
+recoil = global.settings.player_recoil;
+max_speed = global.settings.player_speed;
 base_speed = max_speed;
 shot_timer = 0;
-recoil = 23;
 dash_timer = 0;
-dash_meter = 0;
-dash_meter_max = 120;
-shot_delay_max = 30;
-show_shot_delay_meter = false;
-meter_width = 100;
-meter_height = 20;
-meter_color = PURPLE;
 first_shot = false;
 started_shooting = false;
 
+// Tutorial Variables
 global.moved = false;
 global.shot = false;
 global.dashed = false;
 
+// Base Game Variables
 lives = 1;
 score = 0;
 
+// Shadow
 var _shadow = instance_create_layer(x,y,layer,obj_shadow);
 _shadow.depth = depth + 1;
 _shadow.owner = self;
 
+// Physics Fixture
+fix = physics_fixture_create();
+physics_fixture_set_circle_shape(fix, 15);
+physics_fixture_set_density(fix, global.settings.player_density);
+physics_fixture_set_collision_group(fix, 2);
+physics_fixture_set_restitution(fix, global.settings.player_restitution);
+physics_fixture_set_linear_damping(fix, global.settings.player_linear_damping);
+physics_fixture_set_angular_damping(fix, global.settings.player_angular_damping);
+physics_fixture_set_friction(fix, global.settings.player_friction);
+my_fixture = physics_fixture_bind(fix, self);
+
+
+// State Machine
 fsm = new SnowState("active");
 
 fsm.add("active", {
@@ -34,7 +44,7 @@ fsm.add("active", {
 	},
 	step: function() {
 		
-		// Settings
+		// --- Settings ---
 		var _game_speed = global.settings.game_speed;
 		
 		// --- Inputs ---
@@ -125,10 +135,6 @@ fsm.add("active", {
 		// countdown until we can make another shot
 		shot_timer--;
 		shot_timer = max(0, shot_timer);
-
-		if (shot_timer <= 0) {
-			show_shot_delay_meter = false;
-		}
 
 		// --- Dashing ---
 		if (_dash && dash_timer == 0) {
