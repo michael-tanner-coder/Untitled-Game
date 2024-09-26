@@ -1,5 +1,4 @@
 
-// TODO: regain spawn momentum quickly when restarting a level (cache tension value?)
 // TODO: fix background speed / tutorial ending (save with a flag!)
 // TODO: prevent spawning in same place twice in a row
 
@@ -23,7 +22,6 @@ current_max_enemy_count = _current_scene.max_enemy_count;
 // Spawner properties
 spawn_timer = 30;
 previous_spawn_point = {x_pos: 0, y_pos: 0};
-tension = 0;
 tutorial_score = 400;
 goal_score = _current_scene.goal_score;
 upgrade_score = 2000;
@@ -42,6 +40,10 @@ fsm = new SnowState("wave");
 fsm.add("wave", {
 	
 	enter: function() {
+	},
+	
+	step: function() {
+		
 		// update background animation based on level progress
 		if (score >= tutorial_score) {
 			var _level_progress = (score/goal_score);
@@ -53,22 +55,19 @@ fsm.add("wave", {
 			layer_hspeed(_back_layer_1, _bg_speed/2);
 			layer_vspeed(_back_layer_1, _bg_speed/2);
 		}
-	},
-	
-	step: function() {
 	
 		// raise and lower tension of the level periodically
 		var _dt = delta_time/1000000;
 		
-		if (tension >= 1) {
+		if (global.tension >= 1) {
 			raise_tension = false;
 		}
 		
-		if (tension <= 0) {
+		if (global.tension <= 0) {
 			raise_tension = true;
 		}
 		
-		tension += (raise_tension ? 0.1 : -0.1) * _dt;
+		global.tension += (raise_tension ? 0.1 : -0.1) * _dt;
 	
 		
 		// check for level progress based on score
@@ -108,22 +107,27 @@ fsm.add("wave", {
 				) 
 			{
 				instance_create_layer(_chosen_spawn_point.x_pos, _chosen_spawn_point.y_pos, layer, _chosen_spawn.type);
-				spawn_timer = base_time_between_spawns + (modified_time_between_spawns * (1 - (score / goal_score)));
+				spawn_timer = base_time_between_spawns + (modified_time_between_spawns * (1 - global.tension));
 			}
 			
 		}
 		
 		// update max enemy count based on progress into the wave
-		current_max_enemy_count = 1 + floor((score/800));
+		current_max_enemy_count = 1 + ceil(9 * global.tension);
 		current_max_enemy_count = clamp(current_max_enemy_count, 1, 10);
+		
+		// keep spawn count low when player is first learning
+		if (!global.first_wave_complete) {
+			current_max_enemy_count = 1;
+		}
 
 	},
 	
 	draw: function() {
-		fillbar(room_width/2 - 100, room_height - 60, 200, 50, min((score/upgrade_score), 1), RED, PURPLE);
+		/*fillbar(room_width/2 - 100, room_height - 60, 200, 50, min((score/upgrade_score), 1), RED, PURPLE);
 		draw_set_halign(fa_center);
 		draw_shadow_text(room_width/2, room_height - 60, "PROGRESS " + string(score) + "/" + string(upgrade_score));
-		draw_shadow_text(100,100, "TENSION: " + string(tension));
+		draw_shadow_text(100,100, "TENSION: " + string(global.tension));*/
 	}
 	
 });

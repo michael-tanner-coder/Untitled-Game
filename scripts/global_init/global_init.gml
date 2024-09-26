@@ -10,12 +10,11 @@ global.debug = false;
 global.dev_mode = true;
 lives = global.starting_life_count;
 global.settings = loadFromJson(global.save_file);
-
+global.tension = 0;
 global.first_wave_complete = false;
 global.muted = false;
 
 // Text
-#macro TITLE "SWAPLINGS"
 
 // Game dimensions
 #macro UNIT_SIZE 64
