@@ -15,6 +15,7 @@ global.first_wave_complete = false;
 global.muted = false;
 
 // Text
+#macro TITLE "UNTITLED GAME"
 
 // Game dimensions
 #macro UNIT_SIZE 64
