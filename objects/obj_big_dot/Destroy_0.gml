@@ -16,3 +16,5 @@ if (hit) {
 }
 
 publish(ENEMY_DEFEATED);
+
+unsubscribe_all(id);

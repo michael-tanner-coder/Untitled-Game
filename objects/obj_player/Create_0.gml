@@ -34,14 +34,10 @@ physics_fixture_set_angular_damping(fix, global.settings.player_angular_damping)
 physics_fixture_set_friction(fix, global.settings.player_friction);
 my_fixture = physics_fixture_bind(fix, self);
 
-
 // State Machine
 fsm = new SnowState("active");
 
 fsm.add("active", {
-	enter: function() {
-		
-	},
 	step: function() {
 		
 		// --- Settings ---
@@ -171,3 +167,10 @@ fsm.add("active", {
 		}
 	},
 });
+fsm.add("idle", {
+	step: function() {},
+});
+
+// Event Subscriptions
+subscribe(id, ACTORS_DEACTIVATED, function() {fsm.change("idle")});
+subscribe(id, ACTORS_ACTIVATED, function() {fsm.change("active")});
