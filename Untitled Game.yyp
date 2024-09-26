@@ -312,6 +312,7 @@
     {"id":{"name":"obj_tutorial_manager","path":"objects/obj_tutorial_manager/obj_tutorial_manager.yy",},},
     {"id":{"name":"obj_ui","path":"objects/obj_ui/obj_ui.yy",},},
     {"id":{"name":"obj_underlay","path":"objects/obj_underlay/obj_underlay.yy",},},
+    {"id":{"name":"obj_upgrade_selection","path":"objects/obj_upgrade_selection/obj_upgrade_selection.yy",},},
     {"id":{"name":"obj_wall","path":"objects/obj_wall/obj_wall.yy",},},
     {"id":{"name":"obj_waypoint","path":"objects/obj_waypoint/obj_waypoint.yy",},},
     {"id":{"name":"oInputManager","path":"objects/oInputManager/oInputManager.yy",},},
