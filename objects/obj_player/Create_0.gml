@@ -46,7 +46,7 @@ fsm.add("active", {
 		var _clicked = mouse_check_button(mb_left);
 		var _click_pressed = mouse_check_button_pressed(mb_left);
 		var _click_released = mouse_check_button_released(mb_left);
-
+		
 		// --- Movement ---
 		// get base force from user input
 		x_force = base_speed * (_left + _right) * _game_speed;

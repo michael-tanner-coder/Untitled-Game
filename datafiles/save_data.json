@@ -6,7 +6,8 @@
     "flags": {
         "started_game": false,
         "finished_tutorial": false,
-        "beat_game": false
+        "beat_game": false,
+        "needs_tutorial": true
     },
     "settings": {
         "audio_master": 0.5,
