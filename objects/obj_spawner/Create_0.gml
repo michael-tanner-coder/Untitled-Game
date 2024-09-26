@@ -1,7 +1,7 @@
 
-// TODO: update tension value to slowly move between 0 and 1
 // TODO: regain spawn momentum quickly when restarting a level (cache tension value?)
 // TODO: fix background speed / tutorial ending (save with a flag!)
+// TODO: prevent spawning in same place twice in a row
 
 // Get scene data
 var _current_scene = get_current_scene();
@@ -23,10 +23,11 @@ current_max_enemy_count = _current_scene.max_enemy_count;
 // Spawner properties
 spawn_timer = 30;
 previous_spawn_point = {x_pos: 0, y_pos: 0};
-tension = 1;
+tension = 0;
 tutorial_score = 400;
 goal_score = _current_scene.goal_score;
 upgrade_score = 2000;
+raise_tension = true;
 
 // Spawn Point Setup
 var _temp_spawn_points = [];
@@ -56,8 +57,19 @@ fsm.add("wave", {
 	
 	step: function() {
 	
+		// raise and lower tension of the level periodically
 		var _dt = delta_time/1000000;
-		tension = abs(1 * sine_wave(current_time/4000, 1000, 1, 1));
+		
+		if (tension >= 1) {
+			raise_tension = false;
+		}
+		
+		if (tension <= 0) {
+			raise_tension = true;
+		}
+		
+		tension += (raise_tension ? 0.1 : -0.1) * _dt;
+	
 		
 		// check for level progress based on score
 		if (score >= goal_score) {
