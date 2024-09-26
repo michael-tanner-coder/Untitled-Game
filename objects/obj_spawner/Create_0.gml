@@ -1,6 +1,3 @@
-
-// TODO: prevent spawning in same place twice in a row
-
 // Get scene data
 var _current_scene = get_current_scene();
 if (_current_scene == undefined) {
@@ -105,6 +102,7 @@ fsm.add("wave", {
 					!_repeated_spawn_point
 				) 
 			{
+				previous_spawn_point = _chosen_spawn_point;
 				instance_create_layer(_chosen_spawn_point.x_pos, _chosen_spawn_point.y_pos, layer, _chosen_spawn.type);
 				spawn_timer = base_time_between_spawns + (modified_time_between_spawns * (1 - global.tension));
 			}
