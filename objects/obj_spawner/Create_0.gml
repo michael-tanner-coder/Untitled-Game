@@ -1,5 +1,4 @@
 
-// TODO: fix background speed / tutorial ending (save with a flag!)
 // TODO: prevent spawning in same place twice in a row
 
 // Get scene data

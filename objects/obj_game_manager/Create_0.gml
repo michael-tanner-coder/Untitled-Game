@@ -7,7 +7,6 @@ if (is_array(_available_characters)) {
 	set_character_queue(_available_characters);
 }
 else {
-	// save_character_queue([CHARACTER.NORMAL, CHARACTER.TALL, CHARACTER.SMALL, CHARACTER.BIG, CHARACTER.SPIKEY, CHARACTER.BOUNCE, CHARACTER.TWIN, CHARACTER.FLOAT]);
 	load_character_queue();
 }
 
@@ -39,7 +38,9 @@ powerup_timer = 0;
 powerup_active = false;
 
 global.best_score = 0;
-global.tutorial = true;
+show_debug_message("TUTORIAL FLAG:");
+show_debug_message(get_flag("needs_tutorial"));
+global.tutorial = get_flag("needs_tutorial");
 score = 0;
 cursor_sprite = spr_reticle;
 window_set_cursor(cr_none);
