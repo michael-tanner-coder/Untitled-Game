@@ -1,5 +1,7 @@
 
-// TODO: bring back weighted enemy spawns (too many big enemies are spawning!)
+// TODO: update tension value to slowly move between 0 and 1
+// TODO: regain spawn momentum quickly when restarting a level (cache tension value?)
+// TODO: fix background speed / tutorial ending (save with a flag!)
 
 // Get scene data
 var _current_scene = get_current_scene();
@@ -101,6 +103,7 @@ fsm.add("wave", {
 		
 		// update max enemy count based on progress into the wave
 		current_max_enemy_count = 1 + floor((score/800));
+		current_max_enemy_count = clamp(current_max_enemy_count, 1, 10);
 
 	},
 	
