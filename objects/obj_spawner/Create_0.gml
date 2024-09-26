@@ -8,19 +8,18 @@ if (_current_scene == undefined) {
 	};
 }
 
-// Starting Wave Configuration
-wave_index = 0;
-base_time_between_spawns = 30;
-wave_enemy_types = _current_scene.enemy_types;
+// Current Scene Configurations
+enemy_types = _current_scene.enemy_types;
 modified_time_between_spawns = _current_scene.time_between_spawns;
 current_max_enemy_count = _current_scene.max_enemy_count;
-
-// Spawner properties
-spawn_timer = 30;
-previous_spawn_point = {x_pos: 0, y_pos: 0};
-tutorial_score = 400;
 goal_score = _current_scene.goal_score;
-upgrade_score = 2000;
+
+// Set Spawner properties
+base_time_between_spawns = 30;
+spawn_timer = base_time_between_spawns;
+previous_spawn_point = {x_pos: 0, y_pos: 0};
+tutorial_score = 400; // make this configurable
+upgrade_score = 2000; // make this configurable
 raise_tension = true;
 
 // Spawn Point Setup
@@ -71,7 +70,7 @@ fsm.add("wave", {
 			fsm.change("level_complete");
 		}
 		else if (score >= upgrade_score) {
-			// fsm.change("rest");
+			// fsm.change("upgrade");
 		} 
 			
 		// countdown to next spawn
@@ -90,7 +89,7 @@ fsm.add("wave", {
 			
 			// get the target enemy type to spawn
 			var _chosen_spawn_point = spawn_points[irandom_range(0, array_length(spawn_points)-1)];
-			var _chosen_spawn = wave_enemy_types[irandom_range(0, array_length(wave_enemy_types)-1)];
+			var _chosen_spawn = enemy_types[irandom_range(0, array_length(enemy_types)-1)];
 			var _count_of_spawn_type = instance_number(_chosen_spawn.type);
 			
 			// if the value is not too large, spawn the enemy
@@ -129,7 +128,7 @@ fsm.add("wave", {
 	
 });
 
-fsm.add("rest", {
+fsm.add("upgrade", {
 	enter: function() {
 		upgrade_score *= 2;
 	},
@@ -161,7 +160,3 @@ fsm.add("level_complete", {
 		draw_shadow_text(room_width/2, room_height/2 + 80, "FINAL SCORE: " + string(score));
 	},
 }); 
-
-// Event Subscriptions
-subscribe(id, ENEMY_DEFEATED, function() {
-});
