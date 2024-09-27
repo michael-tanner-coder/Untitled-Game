@@ -8,6 +8,8 @@ point_value = 400;
 x_force = 0;
 y_force = 0;
 shield_sprite = spr_shield_big;
+image_xscale = 2;
+image_yscale = 2;
 
 // Shadow
 var _shadow = instance_create_layer(x,y,layer,obj_shadow);
