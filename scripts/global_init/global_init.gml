@@ -163,6 +163,14 @@ enum ORIENTATIONS {
 	HORIZONTAL = 1
 };
 
+enum OPERATIONS {
+	ADD,
+	SUBTRACT,
+	MULTIPLY,
+	DIVIDE,
+	SET,
+}
+
 // Colors
 #macro PINK $BA7BD7
 #macro BLUE $FF9B63
