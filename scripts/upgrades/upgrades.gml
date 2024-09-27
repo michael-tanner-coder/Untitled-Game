@@ -19,6 +19,46 @@ function upgrade_struct(_key="", _name="", _description="", _price=0, _sprite=un
 
 global.upgrades = [
     upgrade_struct(
+            "bigBoy", 
+            "Big Boy", 
+            "Become huge and hard to move", 
+            1000, 
+            spr_white_circle, 
+            [
+                effect_struct("player_size", 2, OPERATIONS.SET),
+            ]
+    ),
+    upgrade_struct(
+            "tinyBaby", 
+            "Little Baby", 
+            "Become teeny and light", 
+            1000, 
+            spr_white_circle, 
+            [
+                effect_struct("player_size", 0.5, OPERATIONS.SET),
+            ]
+    ),
+    upgrade_struct(
+            "fastFire", 
+            "Fast Fire", 
+            "Increase your firing rate (difficult to control)", 
+            1000, 
+            spr_white_circle, 
+            [
+                effect_struct("player_firing_rate", 0.5, OPERATIONS.MULTIPLY),
+            ]
+    ),
+    upgrade_struct(
+            "steadyFire", 
+            "Steady Fire", 
+            "Stabilize your firing rate (slow but easy to control)", 
+            1000, 
+            spr_white_circle, 
+            [
+                effect_struct("player_firing_rate", 2, OPERATIONS.MULTIPLY),
+            ]
+    ),
+    upgrade_struct(
             "lightWeight", 
             "Light Weight", 
             "Increase your movement speed but your shots have more recoil", 

@@ -19,9 +19,11 @@ upgrade_stats = {
 	player_angular_damping: global.settings.player_angular_damping,
 	player_friction: global.settings.player_friction,
 	player_recoil: global.settings.player_recoil,
-	player_lives: 3,
+	player_lives: global.settings.player_lives + 1,
 	player_shot_count: global.settings.player_shot_count,
 	player_bullet_force: global.settings.player_bullet_force,
+	player_firing_rate: global.settings.player_firing_rate,
+	player_size: global.settings.player_size,
 };
 
 // Tutorial Variables
@@ -34,13 +36,13 @@ lives = 1;
 score = 0;
 
 // Shadow
-var _shadow = instance_create_layer(x,y,layer,obj_shadow);
-_shadow.depth = depth + 1;
-_shadow.owner = self;
+shadow = instance_create_layer(x,y,layer,obj_shadow);
+shadow.depth = depth + 1;
+shadow.owner = self;
 
 // Physics Fixture
 fix = physics_fixture_create();
-physics_fixture_set_circle_shape(fix, 15);
+physics_fixture_set_circle_shape(fix, 15 * upgrade_stats.player_size);
 physics_fixture_set_density(fix, upgrade_stats.player_density);
 physics_fixture_set_collision_group(fix, 2);
 physics_fixture_set_restitution(fix, upgrade_stats.player_restitution);
@@ -48,6 +50,11 @@ physics_fixture_set_linear_damping(fix, upgrade_stats.player_linear_damping);
 physics_fixture_set_angular_damping(fix, upgrade_stats.player_angular_damping);
 physics_fixture_set_friction(fix, upgrade_stats.player_friction);
 my_fixture = physics_fixture_bind(fix, self);
+
+// Sizing
+target_size = upgrade_stats.player_size;
+image_xscale = target_size;
+image_yscale = target_size;
 
 // State Machine
 fsm = new SnowState("active");
@@ -119,14 +126,14 @@ fsm.add("active", {
 		    first_shot = false;
     
 		    // Delay between shots
-		    shot_timer = 10;
+		    shot_timer = upgrade_stats.player_firing_rate;
     
 		    // Slow down player while firing
 		    base_speed = 1;
     
 		    // Enlarge sprite for pulse animation
-		    image_xscale = 1.2;
-		    image_yscale = 1.2;
+		    image_xscale = target_size * 1.2;
+		    image_yscale = target_size * 1.2;
 	
 			// Sound Feedback
 			play_sound(snd_shoot, false);
@@ -165,8 +172,8 @@ fsm.add("active", {
 
 		// --- Visuals ---
 		// scale back to normal for pulse animation
-		image_xscale = lerp(image_xscale, 1, 0.3);
-		image_yscale = lerp(image_yscale, 1, 0.3);
+		image_xscale = lerp(image_xscale, target_size, 0.3);
+		image_yscale = lerp(image_yscale, target_size, 0.3);
 
 		phy_rotation = -1 * point_direction(x, y, mouse_x, mouse_y);
 
@@ -254,7 +261,7 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 			physics_remove_fixture(self, my_fixture);
 			physics_fixture_delete(fix);
 			fix = physics_fixture_create();
-			physics_fixture_set_circle_shape(fix, 15);
+			physics_fixture_set_circle_shape(fix, 15 * upgrade_stats.player_size);
 			physics_fixture_set_density(fix, upgrade_stats.player_density);
 			physics_fixture_set_collision_group(fix, 2);
 			physics_fixture_set_restitution(fix, upgrade_stats.player_restitution);
@@ -265,6 +272,7 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 			
 			// Update Global Game Variables
 			lives = upgrade_stats.player_lives;
+			target_size = upgrade_stats.player_size;
 			
 		END
 	}
