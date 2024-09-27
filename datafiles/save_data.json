@@ -31,7 +31,8 @@
         "player_friction": 20,
         "player_recoil": 23,
         "player_lives": 1,
-        "player_shot_count": 1
+        "player_shot_count": 1,
+        "player_bullet_force": 10
     },
     "inputs": {"up":[38.0,"w",32781.0,0.0],"down":[40.0,"s",32782.0,0.0],"jump":[32.0,32769.0],"pause":[13.0,27.0,32778.0],"skip":[13.0,32778.0,32770.0],"left":[37.0,"a",32783.0,0.0],"progress":[32.0,32769.0],"right":[39.0,"d",32784.0,0.0],"select":[13.0,32.0,32769.0]}
 }

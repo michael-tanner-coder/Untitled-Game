@@ -325,6 +325,9 @@ Input Icons by Kenney
 				["Linear Damping",		new Slider([0, 10], 1, "player_linear_damping")],		// Changes player linear damping
 				["Angular Damping",		new Slider([0, 50], 25, "player_angular_damping")],		// Changes player angular damping
 				["Friction",		new Slider([0, 80], 40, "player_friction")],		// Changes player friction 
+				["Bullet Force",		new Slider([0, 100], 10, "player_bullet_force")],		// Changes power of player's bullets
+				["Shot Count",		new Shift(["1", "2", "3", "4"], 0, "player_shot_count")],		// Changes power of player's bullets
+				["Lives",		new Shift(["1", "2", "3", "4"], 0, "player_lives")],		// Changes power of player's bullets
 				["Color",		new Shift(["Red", "Green", "Blue"], 0, "player_col")],	// Changes player color see oTest
 			]],
 	
