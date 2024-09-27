@@ -329,6 +329,7 @@ Input Icons by Kenney
 				["Bullet Force",		new Slider([0, 100], 10, "player_bullet_force")],		// Changes power of player's bullets
 				["Firing Rate",		new Slider([0, 100], 10, "player_firing_rate")],		// Changes power of player's bullets
 				["Shot Count",		new Shift(["1", "2", "3", "4"], 0, "player_shot_count")],		// Changes power of player's bullets
+				["Shot Spread Angle",		new Slider([0, 360], 30, "player_shot_spread_angle")],		// Changes player shot spread 
 				["Lives",		new Shift(["1", "2", "3", "4"], 0, "player_lives")],		// Changes power of player's bullets
 			]],
 	
