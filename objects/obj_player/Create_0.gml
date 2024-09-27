@@ -10,6 +10,7 @@ first_shot = false;
 started_shooting = false;
 i_frames = 0;
 respawn_i_frames = 120;
+base_fixture_size = 15;
 
 // Upgrade properties
 upgrade_stats = {
@@ -42,7 +43,7 @@ shadow.owner = self;
 
 // Physics Fixture
 fix = physics_fixture_create();
-physics_fixture_set_circle_shape(fix, 15 * upgrade_stats.player_size);
+physics_fixture_set_circle_shape(fix, base_fixture_size * upgrade_stats.player_size);
 physics_fixture_set_density(fix, upgrade_stats.player_density);
 physics_fixture_set_collision_group(fix, 2);
 physics_fixture_set_restitution(fix, upgrade_stats.player_restitution);
@@ -261,7 +262,7 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 			physics_remove_fixture(self, my_fixture);
 			physics_fixture_delete(fix);
 			fix = physics_fixture_create();
-			physics_fixture_set_circle_shape(fix, 15 * upgrade_stats.player_size);
+			physics_fixture_set_circle_shape(fix, base_fixture_size * upgrade_stats.player_size);
 			physics_fixture_set_density(fix, upgrade_stats.player_density);
 			physics_fixture_set_collision_group(fix, 2);
 			physics_fixture_set_restitution(fix, upgrade_stats.player_restitution);
