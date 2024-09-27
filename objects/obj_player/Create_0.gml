@@ -8,6 +8,8 @@ shot_timer = 0;
 dash_timer = 0;
 first_shot = false;
 started_shooting = false;
+i_frames = 0;
+respawn_i_frames = 120;
 
 // Upgrade properties
 upgrade_stats = {
@@ -17,7 +19,7 @@ upgrade_stats = {
 	player_angular_damping: global.settings.player_angular_damping,
 	player_friction: global.settings.player_friction,
 	player_recoil: global.settings.player_recoil,
-	player_lives: global.settings.player_lives,
+	player_lives: 3,
 	player_shot_count: global.settings.player_shot_count,
 	player_bullet_force: global.settings.player_bullet_force,
 };
@@ -177,11 +179,46 @@ fsm.add("active", {
 		if (position_meeting(x, y, obj_wall)) {
 			instance_destroy(self);
 		}
+		
+		// -- Invincibility Frames
+		if (i_frames > 0) {
+			i_frames--;
+		}
+		i_frames = clamp(i_frames, 0, respawn_i_frames);
 	},
 });
 fsm.add("idle", {
 	step: function() {},
 });
+
+// Methods
+lose_life = function() {
+	// Don't lose life it we're invincible
+	if (i_frames > 0) {
+		return;
+	}
+	
+	// VFX
+	spawn_particles(part_death, x, y);
+	audio_play_sound(snd_die, 1, false);
+	screenshake(1, 6, 0.5);
+	
+	// Check for game over
+	upgrade_stats.player_lives -= 1;
+	if (upgrade_stats.player_lives <= 0) {
+		instance_destroy(self);
+		return;
+	}
+	
+	// Reposition to center of room on death
+	phy_position_x = room_width/2;
+	phy_position_y = room_height/2;
+	x = room_width/2;
+	y = room_height/2;
+	
+	// Make player invincible for a short time
+	i_frames = respawn_i_frames;
+}
 
 // Event Subscriptions
 subscribe(id, ACTORS_DEACTIVATED, function() {fsm.change("idle")});
@@ -213,6 +250,7 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 					break;
 			}
 			
+			// Update Player Physics
 			physics_remove_fixture(self, my_fixture);
 			physics_fixture_delete(fix);
 			fix = physics_fixture_create();
@@ -224,6 +262,9 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 			physics_fixture_set_angular_damping(fix, upgrade_stats.player_angular_damping);
 			physics_fixture_set_friction(fix, upgrade_stats.player_friction);
 			my_fixture = physics_fixture_bind(fix, self);
+			
+			// Update Global Game Variables
+			lives = upgrade_stats.player_lives;
 			
 		END
 	}
