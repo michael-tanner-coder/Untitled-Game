@@ -96,6 +96,7 @@ Example usage:
 #macro FINISHED_SCENE "finished_scene"
 #macro UPDATE_TEXT "update_text"
 #macro FULLSCREEN_TOGGLED "fullscreen_toggled"
+#macro UPGRADE_SELECTED "upgrade_selected"
 
 // Flags
 #macro STARTED_GAME "started_game"
