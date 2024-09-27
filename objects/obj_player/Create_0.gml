@@ -9,6 +9,19 @@ dash_timer = 0;
 first_shot = false;
 started_shooting = false;
 
+// Upgrade properties
+upgrade_stats = {
+	player_density: global.settings.player_density,
+	player_restitution: global.settings.player_restitution,
+	player_linear_damping: global.settings.player_linear_damping,
+	player_angular_damping: global.settings.player_angular_damping,
+	player_friction: global.settings.player_friction,
+	player_recoil: global.settings.player_recoil,
+	player_lives: global.settings.player_lives,
+	player_shot_count: global.settings.player_shot_count,
+	player_bullet_force: global.settings.player_bullet_force,
+};
+
 // Tutorial Variables
 global.moved = false;
 global.shot = false;
@@ -26,12 +39,12 @@ _shadow.owner = self;
 // Physics Fixture
 fix = physics_fixture_create();
 physics_fixture_set_circle_shape(fix, 15);
-physics_fixture_set_density(fix, global.settings.player_density);
+physics_fixture_set_density(fix, upgrade_stats.player_density);
 physics_fixture_set_collision_group(fix, 2);
-physics_fixture_set_restitution(fix, global.settings.player_restitution);
-physics_fixture_set_linear_damping(fix, global.settings.player_linear_damping);
-physics_fixture_set_angular_damping(fix, global.settings.player_angular_damping);
-physics_fixture_set_friction(fix, global.settings.player_friction);
+physics_fixture_set_restitution(fix, upgrade_stats.player_restitution);
+physics_fixture_set_linear_damping(fix, upgrade_stats.player_linear_damping);
+physics_fixture_set_angular_damping(fix, upgrade_stats.player_angular_damping);
+physics_fixture_set_friction(fix, upgrade_stats.player_friction);
 my_fixture = physics_fixture_bind(fix, self);
 
 // State Machine
@@ -183,19 +196,19 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 			switch (_effect.operation) 
 			{
 				case OPERATIONS.SET:
-					global.settings[$ _effect.property] = _effect.value;
+					upgrade_stats[$ _effect.property] = _effect.value;
 					break;
 				case OPERATIONS.ADD:
-					global.settings[$ _effect.property] += _effect.value;
+					upgrade_stats[$ _effect.property] += _effect.value;
 					break;
 				case OPERATIONS.SUBTRACT:
-					global.settings[$ _effect.property] -= _effect.value;
+					upgrade_stats[$ _effect.property] -= _effect.value;
 					break;
 				case OPERATIONS.MULTIPLY:
-					global.settings[$ _effect.property] *= _effect.value;
+					upgrade_stats[$ _effect.property] *= _effect.value;
 					break;
 				case OPERATIONS.DIVIDE:
-					global.settings[$ _effect.property] /= _effect.value;
+					upgrade_stats[$ _effect.property] /= _effect.value;
 					break;
 				default:
 					break;
@@ -205,12 +218,12 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 			physics_fixture_delete(fix);
 			fix = physics_fixture_create();
 			physics_fixture_set_circle_shape(fix, 15);
-			physics_fixture_set_density(fix, global.settings.player_density);
+			physics_fixture_set_density(fix, upgrade_stats.player_density);
 			physics_fixture_set_collision_group(fix, 2);
-			physics_fixture_set_restitution(fix, global.settings.player_restitution);
-			physics_fixture_set_linear_damping(fix, global.settings.player_linear_damping);
-			physics_fixture_set_angular_damping(fix, global.settings.player_angular_damping);
-			physics_fixture_set_friction(fix, global.settings.player_friction);
+			physics_fixture_set_restitution(fix, upgrade_stats.player_restitution);
+			physics_fixture_set_linear_damping(fix, upgrade_stats.player_linear_damping);
+			physics_fixture_set_angular_damping(fix, upgrade_stats.player_angular_damping);
+			physics_fixture_set_friction(fix, upgrade_stats.player_friction);
 			my_fixture = physics_fixture_bind(fix, self);
 			
 		END
