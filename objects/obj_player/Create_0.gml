@@ -173,7 +173,6 @@ fsm.add("active", {
 			alarm_set(0, 60);
 		}
 
-
 		// --- Collision ---
 		if (position_meeting(x, y, obj_wall)) {
 			instance_destroy(self);

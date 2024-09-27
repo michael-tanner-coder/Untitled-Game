@@ -54,6 +54,7 @@ fsm.add("select_upgrade", {
         	var _card = instance_create_layer(x, y, "UI_Instances", obj_card);
         	_card.x = _start_x + ((sprite_get_width(_card.sprite_index) + _card_margin) * _i);
         	_card.y = card_section_y;
+        	_card.original_y = _card.y;
         	_section_width += sprite_get_width(_card.sprite_index) + _card_margin;
         	
         	// Upgrade data for card

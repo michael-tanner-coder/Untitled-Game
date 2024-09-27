@@ -9,3 +9,8 @@ description = "Lorem ipsum type shit";
 highlighted = false;
 
 upgrade = global.upgrades[0];
+
+target_y = 0;
+original_y = y;
+
+description_padding = 20;
