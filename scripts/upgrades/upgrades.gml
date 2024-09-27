@@ -52,7 +52,7 @@ global.upgrades = [
     ),
     upgrade_struct(
             "extraLife", 
-            "Extra Life Spread", 
+            "Extra Life", 
             "Gain 1 extra life", 
             4000, 
             spr_white_circle,
@@ -61,7 +61,7 @@ global.upgrades = [
             ]
     ),
     upgrade_struct(
-            "extraLife", 
+            "bulletStrength", 
             "Bullet Strength", 
             "Stronger bullets that hit harder but have greater recoil", 
             4000, 
