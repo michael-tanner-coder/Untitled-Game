@@ -36,8 +36,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_card_highlighted",
-    "path":"sprites/spr_card_highlighted/spr_card_highlighted.yy",
+    "name":"spr_card_normal",
+    "path":"sprites/spr_card_normal/spr_card_normal.yy",
   },
   "spriteMaskId":null,
   "visible":true,

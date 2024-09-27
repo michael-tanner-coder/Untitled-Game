@@ -7,3 +7,5 @@ sprite = spr_white_circle;
 description = "Lorem ipsum type shit";
 
 highlighted = false;
+
+upgrade = global.upgrades[0];
