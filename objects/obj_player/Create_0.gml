@@ -21,9 +21,10 @@ upgrade_stats = {
 	player_friction: global.settings.player_friction,
 	player_recoil: global.settings.player_recoil,
 	player_lives: global.settings.player_lives + 1,
-	player_shot_count: global.settings.player_shot_count,
+	player_shot_count: global.settings.player_shot_count + 1,
 	player_bullet_force: global.settings.player_bullet_force,
 	player_firing_rate: global.settings.player_firing_rate,
+	player_shot_spread_angle: global.settings.player_shot_spread_angle,
 	player_size: global.settings.player_size,
 };
 
@@ -104,19 +105,25 @@ fsm.add("active", {
 
 		if (started_shooting && _clicked && shot_timer == 0) {
 			global.shot = true;
-	
    
-		    var _shoot_direction = point_direction(x,y,mouse_x, mouse_y);
-			var _bullet = instance_create_layer(x +lengthdir_x(10, _shoot_direction)*2,y +lengthdir_y(10, _shoot_direction)*2, layer, obj_bullet);
-    
-		    // Bullet force
-		    var _x_force, _y_force;
-		    _x_force = lengthdir_x(10, _shoot_direction) * upgrade_stats.player_bullet_force * _game_speed;
-		    _y_force = lengthdir_y(10, _shoot_direction) * upgrade_stats.player_bullet_force * _game_speed;
-    
-		    with(_bullet) {
-		        physics_apply_impulse(x,y,_x_force, _y_force);
-		    }
+			var _shot_spread_angle = upgrade_stats.player_shot_spread_angle;
+			var _shot_spread_count = upgrade_stats.player_shot_count;
+			var _shoot_direction = point_direction(x,y,mouse_x, mouse_y);
+			
+			for (var _i = 0; _i < _shot_spread_count; _i++) {
+				var _bullet_angle = _shoot_direction + (_i * _shot_spread_angle) - ((_shot_spread_count - 1) * (_shot_spread_angle/2));
+				
+				var _bullet = instance_create_layer(x +lengthdir_x(10, _shoot_direction)*2,y +lengthdir_y(10, _shoot_direction)*2, layer, obj_bullet);
+	    
+			    // Bullet force
+			    var _x_force, _y_force;
+			    _x_force = lengthdir_x(10, _bullet_angle) * upgrade_stats.player_bullet_force * _game_speed;
+			    _y_force = lengthdir_y(10, _bullet_angle) * upgrade_stats.player_bullet_force * _game_speed;
+	    
+			    with(_bullet) {
+			        physics_apply_impulse(x,y,_x_force, _y_force);
+			    }
+			}
     
 		    // Recoil force
 		    var _base_recoil = first_shot ? recoil * 2 : recoil;
