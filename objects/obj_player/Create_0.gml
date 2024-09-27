@@ -174,3 +174,45 @@ fsm.add("idle", {
 // Event Subscriptions
 subscribe(id, ACTORS_DEACTIVATED, function() {fsm.change("idle")});
 subscribe(id, ACTORS_ACTIVATED, function() {fsm.change("active")});
+subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
+	var _effects = struct_get(upgrade, "effects");
+	
+	if (is_array(_effects)) {
+		FOREACH _effects ELEMENT
+			var _effect = _elem;
+			switch (_effect.operation) 
+			{
+				case OPERATIONS.SET:
+					global.settings[$ _effect.property] = _effect.value;
+					break;
+				case OPERATIONS.ADD:
+					global.settings[$ _effect.property] += _effect.value;
+					break;
+				case OPERATIONS.SUBTRACT:
+					global.settings[$ _effect.property] -= _effect.value;
+					break;
+				case OPERATIONS.MULTIPLY:
+					global.settings[$ _effect.property] *= _effect.value;
+					break;
+				case OPERATIONS.DIVIDE:
+					global.settings[$ _effect.property] /= _effect.value;
+					break;
+				default:
+					break;
+			}
+			
+			physics_remove_fixture(self, my_fixture);
+			physics_fixture_delete(fix);
+			fix = physics_fixture_create();
+			physics_fixture_set_circle_shape(fix, 15);
+			physics_fixture_set_density(fix, global.settings.player_density);
+			physics_fixture_set_collision_group(fix, 2);
+			physics_fixture_set_restitution(fix, global.settings.player_restitution);
+			physics_fixture_set_linear_damping(fix, global.settings.player_linear_damping);
+			physics_fixture_set_angular_damping(fix, global.settings.player_angular_damping);
+			physics_fixture_set_friction(fix, global.settings.player_friction);
+			my_fixture = physics_fixture_bind(fix, self);
+			
+		END
+	}
+})
