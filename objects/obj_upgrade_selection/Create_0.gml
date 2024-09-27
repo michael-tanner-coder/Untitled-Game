@@ -15,8 +15,10 @@ fsm.add("progress_to_next_upgrade", {
         
         FOREACH cards ELEMENT
         	instance_destroy(_elem);
-        	array_delete(cards, _i, 0);
         END
+
+		cards = [];
+        available_upgrades = [];
     },
     step: function() {
         if (score >= upgrade_score) {
@@ -39,16 +41,31 @@ fsm.add("select_upgrade", {
         // Pause all characters in the scene
         publish(ACTORS_DEACTIVATED);
         physics_pause_enable(true);
+        
+        // Randomly select up to 3 upgrade options
+        generate_upgrade_options();
 
 		// Spawn upgrade cards
         var _start_x = room_width/2;
         var _section_width = 0;
-        for (var _i = 0; _i < upgrade_count; _i++) {
+        for (var _i = 0; _i < array_length(available_upgrades); _i++) {
+        	
+        	// Base position for card
         	var _card = instance_create_layer(x, y, "UI_Instances", obj_card);
-        	_card.x = _start_x + ((_card.width + _card_margin) * _i);
+        	_card.x = _start_x + ((sprite_get_width(_card.sprite_index) + _card_margin) * _i);
         	_card.y = card_section_y;
-        	_section_width += _card.width + _card_margin;
+        	_section_width += sprite_get_width(_card.sprite_index) + _card_margin;
+        	
+        	// Upgrade data for card
+        	var _upgrade = available_upgrades[_i];
+        	_card.upgrade = _upgrade;
+        	_card.header = _upgrade.name;
+        	_card.description = _upgrade.description;
+        	_card.sprite = _upgrade.sprite;
+        	
+        	// Cache all cards for disposal later
         	array_push(cards, _card);
+        	
         }
         
         // Reposition cards to center the section
@@ -68,6 +85,29 @@ fsm.add("select_upgrade", {
 		banner(200, room_height/4, "SELECT AN UPGRADE", BLACK, 0.6);
 	}
 });
+
+// Methods
+generate_upgrade_options = function() {
+	for (var _i = 0; _i < upgrade_count; _i++) {
+		var _upgrade_was_already_chosen = false;
+		
+		do {
+			var _upgrade = global.upgrades[irandom_range(0, array_length(global.upgrades) - 1)];
+        	
+        	_upgrade_was_already_chosen = false;
+        	FOREACH available_upgrades ELEMENT
+        		if (_elem.key == _upgrade.key) {
+        			_upgrade_was_already_chosen = true;
+        		}
+        	END
+			
+			if (!_upgrade_was_already_chosen) {
+        		array_push(available_upgrades, _upgrade);
+			}
+		} until (_upgrade_was_already_chosen == false)
+			
+	}
+}
 
 // Event Subscriptions
 subscribe(id, UPGRADE_SELECTED, function() {fsm.change("progress_to_next_upgrade")});
