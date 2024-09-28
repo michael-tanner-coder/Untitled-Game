@@ -30,7 +30,7 @@ global.upgrades = [
     ),
     upgrade_struct(
             "tinyBaby", 
-            "Little Baby", 
+            "Tiny Baby", 
             "Become teeny and light", 
             1000, 
             spr_white_circle, 
@@ -109,6 +109,16 @@ global.upgrades = [
             [
                 effect_struct("player_bullet_force", 2, OPERATIONS.MULTIPLY),
                 effect_struct("player_recoil", 2, OPERATIONS.MULTIPLY),
+            ]
+    ),
+    upgrade_struct(
+            "bomb", 
+            "Bomb", 
+            "Right-Click to plant a ticking bomb", 
+            4000, 
+            spr_white_circle,
+            [
+                effect_struct("player_alt_fire", ABILITIES.BOMB, OPERATIONS.SET),
             ]
     ),
 ];
