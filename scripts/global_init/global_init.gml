@@ -171,6 +171,14 @@ enum OPERATIONS {
 	SET,
 }
 
+enum ABILITIES {
+	DASH,
+	BOMB,
+	WAVE,
+	TELEPORT,
+	BOUNCER,
+}
+
 // Colors
 #macro PINK $BA7BD7
 #macro BLUE $FF9B63
