@@ -11,6 +11,7 @@ started_shooting = false;
 i_frames = 0;
 respawn_i_frames = 120;
 base_fixture_size = 15;
+available_bombs = 1;
 
 // Upgrade properties
 upgrade_stats = {
@@ -26,6 +27,7 @@ upgrade_stats = {
 	player_firing_rate: global.settings.player_firing_rate,
 	player_shot_spread_angle: global.settings.player_shot_spread_angle,
 	player_size: global.settings.player_size,
+	player_alt_fire: global.settings.player_alt_fire,
 };
 
 // Tutorial Variables
@@ -72,7 +74,7 @@ fsm.add("active", {
 		var _right = keyboard_check(ord("D"));
 		var _up = keyboard_check(ord("W")) * -1;
 		var _down = keyboard_check(ord("S"));
-		var _dash = keyboard_check_pressed(vk_space) || mouse_check_button_pressed(mb_right);
+		var _alt = keyboard_check_pressed(vk_space) || mouse_check_button_pressed(mb_right);
 		var _clicked = mouse_check_button(mb_left);
 		var _click_pressed = mouse_check_button_pressed(mb_left);
 		var _click_released = mouse_check_button_released(mb_left);
@@ -163,7 +165,7 @@ fsm.add("active", {
 		shot_timer = max(0, shot_timer);
 
 		// --- Dashing ---
-		if (_dash && dash_timer == 0) {
+		if (upgrade_stats.player_alt_fire == ABILITIES.DASH && _alt && dash_timer == 0) {
 		    dash_timer = 60;
 	
 		    global.dashed = true;
@@ -176,7 +178,17 @@ fsm.add("active", {
 
 		dash_timer--;
 		dash_timer = max(0, dash_timer);
-
+		
+		// --- Bombs ---
+		if (_alt && upgrade_stats.player_alt_fire == ABILITIES.BOMB && available_bombs > 0) {
+			available_bombs--;
+			instance_create_layer(x, y, layer, obj_bomb);
+			show_debug_message("PLANTING BOMB");
+		}
+		
+		if (instance_number(obj_bomb) < 1) {
+			available_bombs = 1;
+		}
 
 		// --- Visuals ---
 		// scale back to normal for pulse animation
