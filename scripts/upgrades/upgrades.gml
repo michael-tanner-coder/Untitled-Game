@@ -21,7 +21,7 @@ global.upgrades = [
     upgrade_struct(
             "bigBoy", 
             "Big Boy", 
-            "Become huge and hard to move", 
+            "Become huge and hard to move (double your size)", 
             1000, 
             spr_white_circle, 
             [
@@ -29,9 +29,9 @@ global.upgrades = [
             ]
     ),
     upgrade_struct(
-            "tinyBaby", 
+            "tinyBaby",
             "Tiny Baby", 
-            "Become teeny and light", 
+            "Reduce your size by half", 
             1000, 
             spr_white_circle, 
             [
