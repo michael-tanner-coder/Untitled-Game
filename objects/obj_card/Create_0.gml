@@ -14,3 +14,5 @@ target_y = 0;
 original_y = y;
 
 description_padding = 20;
+
+time_until_active = 120;
