@@ -15,6 +15,6 @@ if (hit) {
 	spawn_particles(part_death, x, y);
 }
 
-publish(ENEMY_DEFEATED);
+publish(ENEMY_DEFEATED, point_value);
 
 unsubscribe_all(id);
