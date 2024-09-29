@@ -30,6 +30,9 @@ global.muted = false;
 #macro STANDARD_SPAWN_RATE 450
 #macro STANDARD_TIME_LIMIT 200
 
+// Game Time
+#macro DT delta_time/1000000
+
 // Code snippets 
 
 /*
@@ -96,6 +99,7 @@ Example usage:
 #macro FINISHED_SCENE "finished_scene"
 #macro UPDATE_TEXT "update_text"
 #macro FULLSCREEN_TOGGLED "fullscreen_toggled"
+#macro UPGRADE_SELECTED "upgrade_selected"
 
 // Flags
 #macro STARTED_GAME "started_game"
@@ -161,6 +165,22 @@ enum ORIENTATIONS {
 	VERTICAL = 0,
 	HORIZONTAL = 1
 };
+
+enum OPERATIONS {
+	ADD,
+	SUBTRACT,
+	MULTIPLY,
+	DIVIDE,
+	SET,
+}
+
+enum ABILITIES {
+	DASH,
+	BOMB,
+	WAVE,
+	TELEPORT,
+	BOUNCER,
+}
 
 // Colors
 #macro PINK $BA7BD7

@@ -318,15 +318,20 @@ Input Icons by Kenney
 			]],
 			
 			["PLAYER", [
-				["Speed",		new Slider([1, 6], 4, "player_speed")],					// Changes player speed see oTest
-				["Size",		new Slider([0.2, 2], 1, "player_size")],				// Changes player size see oTest
-				["Size",		new Slider([0.2, 2], 1, "player_size")],				// Changes player size see oTest
+				["Speed",		new Slider([0, 10], 5, "player_speed")],					// Changes player speed see oTest
+				["Size",		new Slider([0, 10], 1, "player_size")],					// Changes player speed see oTest
+				["Recoil",		new Slider([0, 100], 23, "player_recoil")],					// Changes player speed see oTest
 				["Density",		new Slider([0, 4], 1, "player_density")],				// Changes player density
 				["Restitution",		new Slider([0, 2], 0.5, "player_restitution")],				// Changes player bounciness
 				["Linear Damping",		new Slider([0, 10], 1, "player_linear_damping")],		// Changes player linear damping
 				["Angular Damping",		new Slider([0, 50], 25, "player_angular_damping")],		// Changes player angular damping
 				["Friction",		new Slider([0, 80], 40, "player_friction")],		// Changes player friction 
-				["Color",		new Shift(["Red", "Green", "Blue"], 0, "player_col")],	// Changes player color see oTest
+				["Bullet Force",		new Slider([0, 100], 10, "player_bullet_force")],		// Changes power of player's bullets
+				["Firing Rate",		new Slider([0, 100], 10, "player_firing_rate")],		// Changes power of player's bullets
+				["Shot Count",		new Shift(["1", "2", "3", "4"], 0, "player_shot_count")],		// Changes power of player's bullets
+				["Shot Spread Angle",		new Slider([0, 360], 30, "player_shot_spread_angle")],		// Changes player shot spread 
+				["Alt Fire",		new Shift(["Dash", "Bomb", "Wave", "Teleport"], 0, "player_alt_fire")],		// Changes power of player's bullets
+				["Lives",		new Shift(["1", "2", "3", "4"], 0, "player_lives")],		// Changes power of player's bullets
 			]],
 	
 			["DATA", [

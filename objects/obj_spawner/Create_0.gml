@@ -33,10 +33,6 @@ spawn_points = _temp_spawn_points;
 // State Machine
 fsm = new SnowState("wave");
 fsm.add("wave", {
-	
-	enter: function() {
-	},
-	
 	step: function() {
 		
 		// update background animation based on level progress
@@ -51,27 +47,24 @@ fsm.add("wave", {
 			layer_vspeed(_back_layer_1, _bg_speed/2);
 		}
 	
-		// raise and lower tension of the level periodically
-		var _dt = delta_time/1000000;
-		
-		if (global.tension >= 1) {
-			raise_tension = false;
+		// raise and lower tension of the level periodically after the initial wave
+		if (global.first_wave_complete) {
+			if (global.tension >= 1) {
+				raise_tension = false;
+			}
+			
+			if (global.tension <= 0) {
+				raise_tension = true;
+			}
+			
+			global.tension += (raise_tension ? 0.025 : -0.025) * DT;
 		}
-		
-		if (global.tension <= 0) {
-			raise_tension = true;
-		}
-		
-		global.tension += (raise_tension ? 0.1 : -0.1) * _dt;
 	
 		
 		// check for level progress based on score
 		if (score >= goal_score) {
 			fsm.change("level_complete");
 		}
-		else if (score >= upgrade_score) {
-			// fsm.change("upgrade");
-		} 
 			
 		// countdown to next spawn
 		var _current_enemy_count = instance_number(obj_dot);
@@ -118,31 +111,16 @@ fsm.add("wave", {
 		}
 
 	},
-	
-	draw: function() {
-		/*fillbar(room_width/2 - 100, room_height - 60, 200, 50, min((score/upgrade_score), 1), RED, PURPLE);
-		draw_set_halign(fa_center);
-		draw_shadow_text(room_width/2, room_height - 60, "PROGRESS " + string(score) + "/" + string(upgrade_score));
-		draw_shadow_text(100,100, "TENSION: " + string(global.tension));*/
-	}
-	
 });
 
-fsm.add("upgrade", {
+fsm.add("idle", {
 	enter: function() {
-		upgrade_score *= 2;
 	},
 	
 	step: function() {
-		if (input_check_pressed("select")) {
-			fsm.change("wave");
-		}
 	},
 	
 	draw: function() {
-		fillbar(room_width/2 - 100, room_height - 60, 200, 50, 1, RED, PURPLE);
-		draw_set_halign(fa_center);
-		draw_shadow_text(room_width/2, room_height - 60, "UPGRADE");
 	}
 });
 
@@ -160,3 +138,7 @@ fsm.add("level_complete", {
 		draw_shadow_text(room_width/2, room_height/2 + 80, "FINAL SCORE: " + string(score));
 	},
 }); 
+
+// Event Subscriptions
+subscribe(id, ACTORS_DEACTIVATED, function() {fsm.change("idle")});
+subscribe(id, ACTORS_ACTIVATED, function() {fsm.change("wave")});
