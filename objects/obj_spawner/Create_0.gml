@@ -48,7 +48,6 @@ fsm.add("wave", {
 		}
 	
 		// raise and lower tension of the level periodically after the initial wave
-		var _dt = delta_time/1000000;
 		if (global.first_wave_complete) {
 			if (global.tension >= 1) {
 				raise_tension = false;
@@ -58,7 +57,7 @@ fsm.add("wave", {
 				raise_tension = true;
 			}
 			
-			global.tension += (raise_tension ? 0.025 : -0.025) * _dt;
+			global.tension += (raise_tension ? 0.025 : -0.025) * DT;
 		}
 	
 		

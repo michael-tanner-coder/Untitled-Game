@@ -30,6 +30,9 @@ global.muted = false;
 #macro STANDARD_SPAWN_RATE 450
 #macro STANDARD_TIME_LIMIT 200
 
+// Game Time
+#macro DT delta_time/1000000
+
 // Code snippets 
 
 /*

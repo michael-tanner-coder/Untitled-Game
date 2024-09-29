@@ -3,11 +3,20 @@
 // TODO: check for bugs
 
 // Configuration Properties
+// upgrade parameters
 upgrade_score = 1000; // make this configurable
 available_upgrades = [];
 upgrade_count = 3;
+
+// card section
 cards = [];
+starting_card_section_y = room_height + 10;
 card_section_y = room_height/4 + 200;
+upgrade_banner_y = -1000;
+target_upgrade_banner_y = room_height/4;
+upgrade_banner_height = 200;
+
+// progress bar
 upgrade_progress_points = 0;
 progress_bar_y = 30;
 progress_bar_x = room_width/2 - 100;
@@ -60,8 +69,11 @@ fsm.add("select_upgrade", {
         	// Base position for card
         	var _card = instance_create_layer(x, y, "UI_Instances", obj_card);
         	_card.x = _start_x + ((sprite_get_width(_card.sprite_index) + _card_margin) * _i);
-        	_card.y = card_section_y;
-        	_card.original_y = _card.y;
+        	_card.y = starting_card_section_y;
+        	_card.starting_y = _card.y;
+        	_card.target_y = card_section_y;
+        	_card.resting_y = card_section_y;
+        	_card.time_until_active = 10 * _i;
         	_section_width += sprite_get_width(_card.sprite_index) + _card_margin;
         	
         	// Upgrade data for card
@@ -84,13 +96,11 @@ fsm.add("select_upgrade", {
         END
     },
     step: function() {
-        if (input_check_pressed("select")) {
-            fsm.change("progress_to_next_upgrade");
-        }
+        upgrade_banner_y = lerp(upgrade_banner_y, target_upgrade_banner_y, 0.2);
     },
     draw: function() {
     	fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, PURPLE);
-		banner(200, room_height/4, "SELECT AN UPGRADE", BLACK, 0.6);
+		banner(upgrade_banner_height, upgrade_banner_y, "SELECT AN UPGRADE", BLACK, 0.6);
 	}
 });
 

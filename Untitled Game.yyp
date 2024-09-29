@@ -221,6 +221,7 @@
   },
   "name":"Untitled Game",
   "resources":[
+    {"id":{"name":"EaseOutElastic","path":"animcurves/EaseOutElastic/EaseOutElastic.yy",},},
     {"id":{"name":"seq_player_idle_scale","path":"animcurves/seq_player_idle_scale/seq_player_idle_scale.yy",},},
     {"id":{"name":"seq_player_spike_bounce","path":"animcurves/seq_player_spike_bounce/seq_player_spike_bounce.yy",},},
     {"id":{"name":"seq_player_walk_left_leg_position","path":"animcurves/seq_player_walk_left_leg_position/seq_player_walk_left_leg_position.yy",},},
