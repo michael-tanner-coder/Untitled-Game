@@ -1,5 +1,4 @@
-// TODO: give selection UI a smoother entrance
-// TODO: put progress UI near score bar for visibility
+// TODO: give selection UI a smoother entrance (let user press button to activate??)
 // TODO: weight the randomness of upgrades
 // TODO: check for bugs
 
@@ -10,6 +9,8 @@ upgrade_count = 3;
 cards = [];
 card_section_y = room_height/4 + 200;
 upgrade_progress_points = 0;
+progress_bar_y = 30;
+progress_bar_x = room_width/2 - 100;
 
 // State Machine
 fsm = new SnowState("progress_to_next_upgrade");
@@ -32,9 +33,8 @@ fsm.add("progress_to_next_upgrade", {
         }
     },
    	draw: function() {
-		fillbar(room_width/2 - 100, room_height - 60, 200, 50, min((upgrade_progress_points/upgrade_score), 1), RED, PURPLE);
+		fillbar(progress_bar_x, progress_bar_y, 200, 25, min((upgrade_progress_points/upgrade_score), 1), RED, PURPLE);
 		draw_set_halign(fa_center);
-		draw_shadow_text(room_width/2, room_height - 60, "NEXT UPGRADE " + string(upgrade_progress_points) + "/" + string(upgrade_score));
 	}
 });
 
@@ -89,7 +89,7 @@ fsm.add("select_upgrade", {
         }
     },
     draw: function() {
-		fillbar(room_width/2 - 100, room_height - 60, 200, 50, 1, RED, PURPLE);
+    	fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, PURPLE);
 		banner(200, room_height/4, "SELECT AN UPGRADE", BLACK, 0.6);
 	}
 });
