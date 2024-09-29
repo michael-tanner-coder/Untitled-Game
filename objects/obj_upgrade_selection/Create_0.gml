@@ -1,6 +1,3 @@
-// TODO: give selection UI a smoother entrance (let user press button to activate??)
-// TODO: weight the randomness of upgrades
-// TODO: check for bugs
 
 // Configuration Properties
 // upgrade parameters
@@ -37,11 +34,14 @@ fsm.add("progress_to_next_upgrade", {
         available_upgrades = [];
     },
     step: function() {
-        if (upgrade_progress_points >= upgrade_score) {
+        if (upgrade_progress_points >= upgrade_score && keyboard_check_pressed(vk_space)) {
             fsm.change("select_upgrade");
         }
     },
    	draw: function() {
+   		if (upgrade_progress_points >= upgrade_score) {
+   			banner(50, room_height/6, "PRESS SPACEBAR TO UPGRADE", BLACK, 0.6);
+   		}
 		fillbar(progress_bar_x, progress_bar_y, 200, 25, min((upgrade_progress_points/upgrade_score), 1), RED, PURPLE);
 		draw_set_halign(fa_center);
 	}
