@@ -47,18 +47,19 @@ fsm.add("wave", {
 			layer_vspeed(_back_layer_1, _bg_speed/2);
 		}
 	
-		// raise and lower tension of the level periodically
+		// raise and lower tension of the level periodically after the initial wave
 		var _dt = delta_time/1000000;
-		
-		if (global.tension >= 1) {
-			raise_tension = false;
+		if (global.first_wave_complete) {
+			if (global.tension >= 1) {
+				raise_tension = false;
+			}
+			
+			if (global.tension <= 0) {
+				raise_tension = true;
+			}
+			
+			global.tension += (raise_tension ? 0.025 : -0.025) * _dt;
 		}
-		
-		if (global.tension <= 0) {
-			raise_tension = true;
-		}
-		
-		global.tension += (raise_tension ? 0.1 : -0.1) * _dt;
 	
 		
 		// check for level progress based on score

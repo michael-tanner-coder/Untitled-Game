@@ -1,5 +1,10 @@
+// TODO: give selection UI a smoother entrance
+// TODO: put progress UI near score bar for visibility
+// TODO: weight the randomness of upgrades
+// TODO: check for bugs
+
 // Configuration Properties
-upgrade_score = 2000; // make this configurable
+upgrade_score = 1000; // make this configurable
 available_upgrades = [];
 upgrade_count = 3;
 cards = [];
