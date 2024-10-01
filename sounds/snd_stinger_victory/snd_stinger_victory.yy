@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":12.0,
+  "duration":7.68,
   "name":"snd_stinger_victory",
   "parent":{
     "name":"Music",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_stinger_victory.wav",
+  "soundFile":"snd_stinger_victory.mp3",
   "type":0,
-  "volume":0.39,
+  "volume":1.0,
 }

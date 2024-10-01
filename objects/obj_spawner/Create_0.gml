@@ -126,7 +126,7 @@ fsm.add("idle", {
 
 fsm.add("level_complete", {
 	enter: function() {
-		
+		play_stinger(snd_stinger_victory);
 	},
 	step: function() {
 		

@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":7.68,
+  "duration":10.109375,
   "name":"snd_stinger_boss_victory",
   "parent":{
     "name":"Music",
