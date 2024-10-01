@@ -2,14 +2,14 @@
   "$GMSound":"",
   "%Name":"snd_die",
   "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+    "name":"danger",
+    "path":"audiogroups/danger",
   },
   "bitDepth":1,
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":0.356735,
+  "duration":0.522426,
   "name":"snd_die",
   "parent":{
     "name":"Sounds",
@@ -21,5 +21,5 @@
   "sampleRate":44100,
   "soundFile":"snd_die.wav",
   "type":0,
-  "volume":0.5,
+  "volume":1.0,
 }

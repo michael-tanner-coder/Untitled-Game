@@ -39,6 +39,20 @@ function ease_in_elastic(_input_value, _output_min, _output_max, _input_max) {
     
 }
 
+function ease_out_elastic(_x = 0)  {
+    var c4 = (2 * pi) / 3;
+    
+    if (_x == 0) {
+        return 0;
+    }
+    
+    if (_x == 1) {
+        return 1;
+    }
+    
+    return power(2, -10 * _x) * sin((_x * 10 - 0.75) * c4) + 1;
+}
+
 function ease_out_bounce(_input_value, _output_min, _output_max, _input_max) {
     
     argument0 /= argument3;

@@ -14,19 +14,22 @@ if (lives < 1) {
 	draw_shadow_text(room_width/2, room_height/2 + 20, "FINAL SCORE: " + string(score));
 	draw_shadow_text(room_width/2, room_height/2 + 40, "BEST SCORE: " + string(global.best_score));
 	draw_shadow_text(room_width/2, room_height/2 + 60, "RETRY: spacebar");
+	draw_shadow_text(room_width/2, room_height/2 + 80, "QUIT: escape");
 }
 
 // TUTORIAL PROMPT
-draw_set_color(c_black);
-draw_set_alpha(0.5);
-draw_rectangle(tutorial_banner_center_point, tutorial_banner_y - 20, room_width/2 + tutorial_banner_center_point, tutorial_banner_y + 120, false);
-draw_set_alpha(1);
-
-draw_set_halign(fa_left);
-draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y, "WASD: move", global.moved ? GREEN : WHITE);
-draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 20, "LEFT CLICK: shoot", global.shot ? GREEN : WHITE);
-draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 40, "SPACE or RIGHT CLICK (HOLD): move fast", global.dashed ? GREEN : WHITE);
-draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 80, "DON'T TOUCH THE WALLS!", ORANGE);
+if (show_tutorial) {
+	draw_set_color(c_black);
+	draw_set_alpha(0.5);
+	draw_rectangle(tutorial_banner_center_point, tutorial_banner_y - 20, room_width/2 + tutorial_banner_center_point, tutorial_banner_y + 120, false);
+	draw_set_alpha(1);
+	
+	draw_set_halign(fa_left);
+	draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y, "WASD: move", global.moved ? GREEN : WHITE);
+	draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 20, "LEFT CLICK: shoot", global.shot ? GREEN : WHITE);
+	draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 40, "SPACE or RIGHT CLICK (HOLD): move fast", global.dashed ? GREEN : WHITE);
+	draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 80, "DON'T TOUCH THE WALLS!", ORANGE);
+}
 
 
 

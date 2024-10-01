@@ -9,15 +9,13 @@ global.intro = false;
 global.debug = false;
 global.dev_mode = true;
 lives = global.starting_life_count;
-global.settings = {
-	screenshake_enabled: true,
-};
-
+global.settings = loadFromJson(global.save_file);
+global.tension = 0;
 global.first_wave_complete = false;
 global.muted = false;
 
 // Text
-#macro TITLE "SWAPLINGS"
+#macro TITLE "UNTITLED GAME"
 
 // Game dimensions
 #macro UNIT_SIZE 64
@@ -31,6 +29,9 @@ global.muted = false;
 // Game Rules
 #macro STANDARD_SPAWN_RATE 450
 #macro STANDARD_TIME_LIMIT 200
+
+// Game Time
+#macro DT delta_time/1000000
 
 // Code snippets 
 
@@ -97,6 +98,8 @@ Example usage:
 #macro PURCHASED_ITEM "purchased_item"
 #macro FINISHED_SCENE "finished_scene"
 #macro UPDATE_TEXT "update_text"
+#macro FULLSCREEN_TOGGLED "fullscreen_toggled"
+#macro UPGRADE_SELECTED "upgrade_selected"
 
 // Flags
 #macro STARTED_GAME "started_game"
@@ -162,6 +165,22 @@ enum ORIENTATIONS {
 	VERTICAL = 0,
 	HORIZONTAL = 1
 };
+
+enum OPERATIONS {
+	ADD,
+	SUBTRACT,
+	MULTIPLY,
+	DIVIDE,
+	SET,
+}
+
+enum ABILITIES {
+	DASH,
+	BOMB,
+	WAVE,
+	TELEPORT,
+	BOUNCER,
+}
 
 // Colors
 #macro PINK $BA7BD7

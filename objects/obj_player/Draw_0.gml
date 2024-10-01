@@ -1,13 +1,12 @@
-draw_self();
+// Flicker rendering when iframes are active
+if (i_frames % 8 == 0) {
+	draw_self();
+}
 
-if (show_shot_delay_meter) {
-	var _meter_x = x - meter_width/2;
-	var _meter_y = y + (sprite_get_height(sprite_index) - meter_height) + 8;
-	var _meter_width = _meter_x + (meter_width * (shot_timer / shot_delay_max));
-	var _full_meter_width = _meter_x + meter_width;
-	var _meter_height = _meter_y + meter_height;
-	draw_set_color(meter_color);
-	draw_rectangle(_meter_x, _meter_y, _full_meter_width, _meter_height, false);
-	draw_set_color(RED);
-	draw_rectangle(_meter_x, _meter_y, _meter_width, _meter_height, false);
+// Display remaining Lives UI
+var _lives_ui_x = 30;
+var _lives_ui_y = 80;
+var _lives_icon_margin = 10;
+for(var _i = 0; _i < upgrade_stats.player_lives; _i++) {
+	draw_sprite(sprite_index, 0, _lives_ui_x + (sprite_get_width(sprite_index) + _lives_icon_margin) * _i, _lives_ui_y);
 }

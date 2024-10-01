@@ -6,8 +6,36 @@
     "flags": {
         "started_game": false,
         "finished_tutorial": false,
-        "beat_game": false
+        "beat_game": false,
+        "needs_tutorial": true
     },
-    "settings": {},
+    "settings": {
+        "audio_master": 0.5,
+        "audio_sounds": 1,
+        "audio_music": 1,
+        "screenshake_enabled": true,
+        "flashing_enabled": true,
+        "particles_enabled": true,
+        "high_contrast_mode_enabled": true,
+        "game_speed": 1,
+        "invincible_mode_enabled": false,
+        "window_mode": 0,
+        "vsync": 0,
+        "player_speed": 5,
+        "player_size": 1,
+        "player_col": 2,
+        "player_density": 1,
+        "player_restitution": 0.5,
+        "player_linear_damping": 2,
+        "player_angular_damping": 10,
+        "player_friction": 20,
+        "player_recoil": 23,
+        "player_lives": 1,
+        "player_shot_count": 1,
+        "player_shot_spread_angle": 30,
+        "player_bullet_force": 10,
+        "player_firing_rate": 10,
+        "player_alt_fire": "dash"
+    },
     "inputs": {"up":[38.0,"w",32781.0,0.0],"down":[40.0,"s",32782.0,0.0],"jump":[32.0,32769.0],"pause":[13.0,27.0,32778.0],"skip":[13.0,32778.0,32770.0],"left":[37.0,"a",32783.0,0.0],"progress":[32.0,32769.0],"right":[39.0,"d",32784.0,0.0],"select":[13.0,32.0,32769.0]}
 }
