@@ -21,3 +21,7 @@ if (shake) {
 if (global.first_wave_complete) {
 	tutorial_banner_center_point = lerp(tutorial_banner_center_point, -2000, 0.02);
 }
+
+if (fsm.event_exists("step")) {
+	fsm.step();
+}
