@@ -74,7 +74,7 @@ fsm.add("active", {
 		var _right = keyboard_check(ord("D"));
 		var _up = keyboard_check(ord("W")) * -1;
 		var _down = keyboard_check(ord("S"));
-		var _alt = keyboard_check_pressed(vk_space) || mouse_check_button_pressed(mb_right);
+		var _alt = mouse_check_button_pressed(mb_right);
 		var _clicked = mouse_check_button(mb_left);
 		var _click_pressed = mouse_check_button_pressed(mb_left);
 		var _click_released = mouse_check_button_released(mb_left);

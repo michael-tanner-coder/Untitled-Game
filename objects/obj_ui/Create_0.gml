@@ -85,7 +85,7 @@ fsm.add("mid_level", {
 			draw_set_halign(fa_left);
 			draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y, "WASD: move", global.moved ? GREEN : WHITE);
 			draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 20, "LEFT CLICK: shoot", global.shot ? GREEN : WHITE);
-			draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 40, "SPACE or RIGHT CLICK (HOLD): move fast", global.dashed ? GREEN : WHITE);
+			draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 40, "RIGHT CLICK (HOLD): move fast", global.dashed ? GREEN : WHITE);
 			draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 80, "DON'T TOUCH THE WALLS!", ORANGE);
 		}
 	}
