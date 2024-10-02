@@ -234,6 +234,7 @@ lose_life = function() {
 	upgrade_stats.player_lives -= 1;
 	if (upgrade_stats.player_lives <= 0) {
 		instance_destroy(self);
+		publish(LOST_LEVEL);
 		return;
 	}
 	

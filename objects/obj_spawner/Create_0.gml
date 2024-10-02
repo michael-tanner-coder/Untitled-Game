@@ -63,7 +63,7 @@ fsm.add("wave", {
 		
 		// check for level progress based on score
 		if (score >= goal_score) {
-			fsm.change("level_complete");
+			publish(WON_LEVEL);
 		}
 			
 		// countdown to next spawn
@@ -132,13 +132,10 @@ fsm.add("level_complete", {
 		
 	},
 	draw: function() {
-		draw_set_halign(fa_center);
-		draw_set_valign(fa_middle);
-		draw_shadow_text(room_width/2, room_height/2, "LEVEL COMPLETE");
-		draw_shadow_text(room_width/2, room_height/2 + 80, "FINAL SCORE: " + string(score));
 	},
 }); 
 
 // Event Subscriptions
 subscribe(id, ACTORS_DEACTIVATED, function() {fsm.change("idle")});
 subscribe(id, ACTORS_ACTIVATED, function() {fsm.change("wave")});
+subscribe(id, WON_LEVEL, function() {fsm.change("level_complete")});
