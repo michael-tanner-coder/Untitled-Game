@@ -9,7 +9,7 @@ tutorial_banner_x = 0;
 tutorial_banner_center_point = global.first_wave_complete ? -2000 : 0;
 tutorial_banner_y = room_height/6;
 tutorial_text_padding_left = 40;
-show_tutorial = get_flag("needs_tutorial");
+show_tutorial = global.tutorial;
 won_level = false;
 victory_bg_x = -1 * room_width;
 target_victory_bg_x = 0;
@@ -56,7 +56,7 @@ fsm.add("start_level", {
 		victory_bg_x = lerp(victory_bg_x, room_width * 2, 0.05);
 		victory_bg_alpha = lerp(victory_bg_alpha, 0, 0.1);
 		
-		if (victory_bg_x >= room_width * 2) {
+		if (victory_bg_x >= room_width * 1.5) {
 			fsm.change("mid_level");
 		}
 	},

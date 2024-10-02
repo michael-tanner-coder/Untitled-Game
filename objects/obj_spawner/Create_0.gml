@@ -35,16 +35,23 @@ fsm = new SnowState("wave");
 fsm.add("wave", {
 	step: function() {
 		
-		// update background animation based on level progress
+		if (global.tutorial) {
+			return;
+		}
+		
 		if (score >= tutorial_score) {
+			// update background animation based on level progress
 			var _level_progress = (score/goal_score);
-			var _bg_speed = 1 + (7 * _level_progress);
+			var _bg_speed = 3 + (5 * _level_progress);
 			var _back_layer = layer_get_id("Background");
 			var _back_layer_1 = layer_get_id("Background_1");
 			layer_hspeed(_back_layer, _bg_speed);
 			layer_vspeed(_back_layer, _bg_speed);
 			layer_hspeed(_back_layer_1, _bg_speed/2);
 			layer_vspeed(_back_layer_1, _bg_speed/2);
+			
+			// turn off tutorial features once we reach an early point threshold
+			global.first_wave_complete = true;
 		}
 	
 		// raise and lower tension of the level periodically after the initial wave
@@ -78,10 +85,6 @@ fsm.add("wave", {
 		// when it's time for the next spawn, calculate the value of an enemy spawn to determine if it will fit in the room
 		if (spawn_timer <= 0) {
 			
-			// turn off tutorial features once we reach an early point threshold
-			if (score >= tutorial_score) {
-				global.first_wave_complete = true;
-			}
 			
 			// get the target enemy type to spawn
 			var _chosen_spawn_point = spawn_points[irandom_range(0, array_length(spawn_points)-1)];

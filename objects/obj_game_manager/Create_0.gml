@@ -40,7 +40,6 @@ powerup_active = false;
 global.best_score = 0;
 show_debug_message("TUTORIAL FLAG:");
 show_debug_message(get_flag("needs_tutorial"));
-global.tutorial = get_flag("needs_tutorial");
 score = 0;
 cursor_sprite = spr_reticle;
 window_set_cursor(cr_none);

@@ -13,6 +13,7 @@ global.settings = loadFromJson(global.save_file);
 global.tension = 0;
 global.first_wave_complete = false;
 global.muted = false;
+global.tutorial = get_flag("needs_tutorial");
 
 // Text
 #macro TITLE "UNTITLED GAME"
