@@ -63,7 +63,11 @@ fsm.add("wave", {
 		
 		// check for level progress based on score
 		if (score >= goal_score) {
-			publish(WON_LEVEL);
+			if (instance_number(obj_dot) <= 0) {
+				publish(WON_LEVEL);
+			}
+			
+			return;
 		}
 			
 		// countdown to next spawn
