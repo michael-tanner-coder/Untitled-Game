@@ -231,6 +231,7 @@ lose_life = function() {
 	
 	// Check for game over
 	upgrade_stats.player_lives -= 1;
+	lives = upgrade_stats.player_lives;
 	if (upgrade_stats.player_lives <= 0) {
 		instance_destroy(self);
 		publish(LOST_LEVEL);

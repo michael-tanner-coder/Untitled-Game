@@ -12,8 +12,7 @@ if (_current_scene == undefined) {
 enemy_types = _current_scene.enemy_types;
 modified_time_between_spawns = _current_scene.time_between_spawns;
 current_max_enemy_count = _current_scene.max_enemy_count;
-// goal_score = _current_scene.goal_score;
-goal_score = 500;
+goal_score = _current_scene.goal_score;
 
 // Set Spawner properties
 base_time_between_spawns = 30;

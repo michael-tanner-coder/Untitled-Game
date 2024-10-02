@@ -1,3 +1,14 @@
+
+var _current_scene = get_current_scene();
+if (_current_scene == undefined) {
+	_current_scene = {
+		goal_score: 20000,
+        time_between_spawns: 30,
+        max_enemy_count: 10,
+	};
+}
+
+
 drawn_score = score;
 shake_magnitude = 0;
 shake_time = 0;
@@ -35,6 +46,8 @@ color_blocks = [
 	PINK,
 	PERSIAN_PINK
 ]
+goal_score = _current_scene.goal_score;
+
 
 shake_text = function(_time = 0, _magnitude = 0, _fade_rate = 0) {
 	shake_time = _time;
