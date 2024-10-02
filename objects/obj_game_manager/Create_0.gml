@@ -126,7 +126,7 @@ update_key_count = function() {
     }
 
 	// increment our score (TODO: put the points value in some kind of config) 
-    score += (100 + key_bonus);
+    // score += (100 + key_bonus);
 
     // advance to the next phase
     if (collected_keys >= goal_key_count && phase <= max_phase) {
@@ -194,7 +194,7 @@ gain_life = function() {
 
 // event subscriptions
 subscribe(id, COLLECTED_KEY, update_key_count);
-subscribe(id, ENEMY_DEFEATED, enemy_defeated);
+// subscribe(id, ENEMY_DEFEATED, enemy_defeated);
 subscribe(id, LOST_LIFE, lose_life);
 subscribe(id, GAINED_EXTRA_LIFE, gain_life);
 subscribe(id, GAINED_EXTRA_TIME, function() {
