@@ -251,6 +251,7 @@ lose_life = function() {
 // Event Subscriptions
 subscribe(id, ACTORS_DEACTIVATED, function() {fsm.change("idle")});
 subscribe(id, ACTORS_ACTIVATED, function() {fsm.change("active")});
+subscribe(id, WON_LEVEL, function() {fsm.change("idle")});
 subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 	var _effects = struct_get(upgrade, "effects");
 	
@@ -300,4 +301,4 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 			
 		END
 	}
-})
+});

@@ -60,7 +60,6 @@ fsm.add("wave", {
 			global.tension += (raise_tension ? 0.025 : -0.025) * DT;
 		}
 	
-		
 		// check for level progress based on score
 		if (score >= goal_score) {
 			if (instance_number(obj_dot) <= 0) {
