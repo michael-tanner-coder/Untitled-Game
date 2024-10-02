@@ -1,10 +1,1 @@
-unsubscribe(id, COLLECTED_KEY);
-unsubscribe(id, ENEMY_DEFEATED);
-unsubscribe(id, LOST_LIFE);
-unsubscribe(id, GAINED_EXTRA_LIFE);
-unsubscribe(id, WON_LEVEL);
-unsubscribe(id, LOST_LEVEL);
-unsubscribe(id, CHARACTER_QUEUE_UPDATED);
-unsubscribe(id, GAINED_EXTRA_TIME);
-unsubscribe(id, GAINED_EXTRA_POINTS);
 unsubscribe_all(id);
