@@ -75,6 +75,7 @@ fsm.add("wave", {
 				global.settings.game_speed = lerp(global.settings.game_speed, 0.3, 0.1);
 				
 				if (global.settings.game_speed <= 0.3) {
+					play_sound(snd_tutorial_success);
 					global.settings.game_speed = 1;
 					publish(WON_LEVEL);
 					fsm.change("idle");
