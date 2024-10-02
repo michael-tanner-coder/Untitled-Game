@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"snd_stinger_victory",
+  "%Name":"snd_stinger_boss_victory",
   "audioGroupId":{
     "name":"music",
     "path":"audiogroups/music",
@@ -9,8 +9,8 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":7.68,
-  "name":"snd_stinger_victory",
+  "duration":10.109375,
+  "name":"snd_stinger_boss_victory",
   "parent":{
     "name":"Music",
     "path":"folders/Sounds/Music.yy",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_stinger_victory.mp3",
+  "soundFile":"snd_stinger_boss_victory.mp3",
   "type":0,
   "volume":1.0,
 }

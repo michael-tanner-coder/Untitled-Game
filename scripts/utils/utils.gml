@@ -37,11 +37,11 @@ function fillbar(_x = 0, _y = 0, _width = 100, _height = 50, _fill_percentage = 
 	
 	if (_outline_color != undefined) {
 		draw_set_color(_outline_color);
-		draw_rectangle(_x, _y, _x + _width, _y + _height, true);
+		draw_rectangle(_x, _y, _x + _width, _y + _height, false);
 	}
 	
 	draw_set_color(_fill_color);
-	draw_rectangle(_x + _border_size, _y + _border_size, _x + (_width * _fill_percentage) - _border_size, _y + _height - _border_size, false);
+	draw_rectangle(_x + _border_size, _y + _border_size, _x + (_width * _fill_percentage) - _border_size, _y + _height - (_border_size * 2), false);
 }
 
 function banner(_height = 100, _position = room_height/2, _content = "", _background_color = BLACK, _opacity = 1) {

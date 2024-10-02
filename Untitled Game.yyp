@@ -1145,6 +1145,7 @@
     {"id":{"name":"snd_speak_med_7","path":"sounds/snd_speak_med_7/snd_speak_med_7.yy",},},
     {"id":{"name":"snd_speak_med_8","path":"sounds/snd_speak_med_8/snd_speak_med_8.yy",},},
     {"id":{"name":"snd_speak_med_9","path":"sounds/snd_speak_med_9/snd_speak_med_9.yy",},},
+    {"id":{"name":"snd_stinger_boss_victory","path":"sounds/snd_stinger_boss_victory/snd_stinger_boss_victory.yy",},},
     {"id":{"name":"snd_stinger_character_unlock","path":"sounds/snd_stinger_character_unlock/snd_stinger_character_unlock.yy",},},
     {"id":{"name":"snd_stinger_game_over","path":"sounds/snd_stinger_game_over/snd_stinger_game_over.yy",},},
     {"id":{"name":"snd_stinger_level_start","path":"sounds/snd_stinger_level_start/snd_stinger_level_start.yy",},},

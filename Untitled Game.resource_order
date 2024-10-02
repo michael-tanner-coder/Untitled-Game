@@ -977,6 +977,7 @@
     {"name":"snd_speak_med_7","order":6,"path":"sounds/snd_speak_med_7/snd_speak_med_7.yy",},
     {"name":"snd_speak_med_8","order":7,"path":"sounds/snd_speak_med_8/snd_speak_med_8.yy",},
     {"name":"snd_speak_med_9","order":8,"path":"sounds/snd_speak_med_9/snd_speak_med_9.yy",},
+    {"name":"snd_stinger_boss_victory","order":24,"path":"sounds/snd_stinger_boss_victory/snd_stinger_boss_victory.yy",},
     {"name":"snd_stinger_character_unlock","order":18,"path":"sounds/snd_stinger_character_unlock/snd_stinger_character_unlock.yy",},
     {"name":"snd_stinger_game_over","order":17,"path":"sounds/snd_stinger_game_over/snd_stinger_game_over.yy",},
     {"name":"snd_stinger_level_start","order":15,"path":"sounds/snd_stinger_level_start/snd_stinger_level_start.yy",},

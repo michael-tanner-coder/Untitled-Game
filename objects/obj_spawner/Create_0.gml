@@ -35,16 +35,23 @@ fsm = new SnowState("wave");
 fsm.add("wave", {
 	step: function() {
 		
-		// update background animation based on level progress
+		if (global.tutorial) {
+			return;
+		}
+		
 		if (score >= tutorial_score) {
+			// update background animation based on level progress
 			var _level_progress = (score/goal_score);
-			var _bg_speed = 1 + (7 * _level_progress);
+			var _bg_speed = (3 + (5 * _level_progress)) * global.settings.game_speed;
 			var _back_layer = layer_get_id("Background");
 			var _back_layer_1 = layer_get_id("Background_1");
 			layer_hspeed(_back_layer, _bg_speed);
 			layer_vspeed(_back_layer, _bg_speed);
 			layer_hspeed(_back_layer_1, _bg_speed/2);
 			layer_vspeed(_back_layer_1, _bg_speed/2);
+			
+			// turn off tutorial features once we reach an early point threshold
+			global.first_wave_complete = true;
 		}
 	
 		// raise and lower tension of the level periodically after the initial wave
@@ -57,13 +64,25 @@ fsm.add("wave", {
 				raise_tension = true;
 			}
 			
-			global.tension += (raise_tension ? 0.025 : -0.025) * DT;
+			var _climax_multiplier = score >= (goal_score * 0.75) ? 2 : 1;
+			
+			global.tension += (raise_tension ? 0.025 * _climax_multiplier : -0.025 ) * DT;
 		}
 	
-		
 		// check for level progress based on score
 		if (score >= goal_score) {
-			fsm.change("level_complete");
+			if (instance_number(obj_dot) <= 0) {
+				global.settings.game_speed = lerp(global.settings.game_speed, 0.3, 0.1);
+				
+				if (global.settings.game_speed <= 0.3) {
+					play_sound(snd_tutorial_success);
+					global.settings.game_speed = 1;
+					publish(WON_LEVEL);
+					fsm.change("idle");
+				}
+			}
+			
+			return;
 		}
 			
 		// countdown to next spawn
@@ -75,10 +94,6 @@ fsm.add("wave", {
 		// when it's time for the next spawn, calculate the value of an enemy spawn to determine if it will fit in the room
 		if (spawn_timer <= 0) {
 			
-			// turn off tutorial features once we reach an early point threshold
-			if (score >= tutorial_score) {
-				global.first_wave_complete = true;
-			}
 			
 			// get the target enemy type to spawn
 			var _chosen_spawn_point = spawn_points[irandom_range(0, array_length(spawn_points)-1)];
@@ -126,19 +141,16 @@ fsm.add("idle", {
 
 fsm.add("level_complete", {
 	enter: function() {
-		
+		play_stinger(snd_stinger_victory);
 	},
 	step: function() {
 		
 	},
 	draw: function() {
-		draw_set_halign(fa_center);
-		draw_set_valign(fa_middle);
-		draw_shadow_text(room_width/2, room_height/2, "LEVEL COMPLETE");
-		draw_shadow_text(room_width/2, room_height/2 + 80, "FINAL SCORE: " + string(score));
 	},
 }); 
 
 // Event Subscriptions
 subscribe(id, ACTORS_DEACTIVATED, function() {fsm.change("idle")});
 subscribe(id, ACTORS_ACTIVATED, function() {fsm.change("wave")});
+subscribe(id, WON_LEVEL, function() {fsm.change("level_complete")});

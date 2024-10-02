@@ -42,7 +42,8 @@ fsm.add("progress_to_next_upgrade", {
    		if (upgrade_progress_points >= upgrade_score) {
    			banner(50, room_height/6, "PRESS SPACEBAR TO UPGRADE", BLACK, 0.6);
    		}
-		fillbar(progress_bar_x, progress_bar_y, 200, 25, min((upgrade_progress_points/upgrade_score), 1), RED, PURPLE);
+   		var _bar_bg_color = upgrade_progress_points >= upgrade_score ? WHITE : PURPLE;
+		fillbar(progress_bar_x, progress_bar_y, 200, 25, min((upgrade_progress_points/upgrade_score), 1), RED, _bar_bg_color);
 		draw_set_halign(fa_center);
 	}
 });
@@ -99,7 +100,7 @@ fsm.add("select_upgrade", {
         upgrade_banner_y = lerp(upgrade_banner_y, target_upgrade_banner_y, 0.2);
     },
     draw: function() {
-    	fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, PURPLE);
+    	fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, WHITE);
 		banner(upgrade_banner_height, upgrade_banner_y, "SELECT AN UPGRADE", BLACK, 0.6);
 	}
 });

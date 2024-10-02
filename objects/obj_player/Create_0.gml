@@ -74,7 +74,7 @@ fsm.add("active", {
 		var _right = keyboard_check(ord("D"));
 		var _up = keyboard_check(ord("W")) * -1;
 		var _down = keyboard_check(ord("S"));
-		var _alt = keyboard_check_pressed(vk_space) || mouse_check_button_pressed(mb_right);
+		var _alt = mouse_check_button_pressed(mb_right);
 		var _clicked = mouse_check_button(mb_left);
 		var _click_pressed = mouse_check_button_pressed(mb_left);
 		var _click_released = mouse_check_button_released(mb_left);
@@ -161,13 +161,12 @@ fsm.add("active", {
 		}
 
 		// countdown until we can make another shot
-		shot_timer--;
+		shot_timer -= 1 * global.settings.game_speed;
 		shot_timer = max(0, shot_timer);
 
 		// --- Dashing ---
 		if (upgrade_stats.player_alt_fire == ABILITIES.DASH && _alt && dash_timer == 0) {
 		    dash_timer = 60;
-	
 		    global.dashed = true;
 		}
 
@@ -232,8 +231,10 @@ lose_life = function() {
 	
 	// Check for game over
 	upgrade_stats.player_lives -= 1;
+	lives = upgrade_stats.player_lives;
 	if (upgrade_stats.player_lives <= 0) {
 		instance_destroy(self);
+		publish(LOST_LEVEL);
 		return;
 	}
 	
@@ -250,6 +251,7 @@ lose_life = function() {
 // Event Subscriptions
 subscribe(id, ACTORS_DEACTIVATED, function() {fsm.change("idle")});
 subscribe(id, ACTORS_ACTIVATED, function() {fsm.change("active")});
+subscribe(id, WON_LEVEL, function() {fsm.change("idle")});
 subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 	var _effects = struct_get(upgrade, "effects");
 	
@@ -299,4 +301,4 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 			
 		END
 	}
-})
+});
