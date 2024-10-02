@@ -4,11 +4,11 @@ global.input_settings = "input_save.json";
 
 // Global game state
 global.starting_life_count = 3;
+lives = global.starting_life_count;
 global.paused = false;
 global.intro = false;
 global.debug = false;
 global.dev_mode = true;
-lives = global.starting_life_count;
 global.settings = loadFromJson(global.save_file);
 global.tension = 0;
 global.first_wave_complete = false;

@@ -12,7 +12,8 @@ if (_current_scene == undefined) {
 enemy_types = _current_scene.enemy_types;
 modified_time_between_spawns = _current_scene.time_between_spawns;
 current_max_enemy_count = _current_scene.max_enemy_count;
-goal_score = _current_scene.goal_score;
+// goal_score = _current_scene.goal_score;
+goal_score = 500;
 
 // Set Spawner properties
 base_time_between_spawns = 30;
@@ -42,7 +43,7 @@ fsm.add("wave", {
 		if (score >= tutorial_score) {
 			// update background animation based on level progress
 			var _level_progress = (score/goal_score);
-			var _bg_speed = 3 + (5 * _level_progress);
+			var _bg_speed = (3 + (5 * _level_progress)) * global.settings.game_speed;
 			var _back_layer = layer_get_id("Background");
 			var _back_layer_1 = layer_get_id("Background_1");
 			layer_hspeed(_back_layer, _bg_speed);
@@ -64,13 +65,21 @@ fsm.add("wave", {
 				raise_tension = true;
 			}
 			
-			global.tension += (raise_tension ? 0.025 : -0.025) * DT;
+			var _climax_multiplier = score >= (goal_score * 0.75) ? 2 : 1;
+			
+			global.tension += (raise_tension ? 0.025 * _climax_multiplier : -0.025 ) * DT;
 		}
 	
 		// check for level progress based on score
 		if (score >= goal_score) {
 			if (instance_number(obj_dot) <= 0) {
-				publish(WON_LEVEL);
+				global.settings.game_speed = lerp(global.settings.game_speed, 0.3, 0.1);
+				
+				if (global.settings.game_speed <= 0.3) {
+					global.settings.game_speed = 1;
+					publish(WON_LEVEL);
+					fsm.change("idle");
+				}
 			}
 			
 			return;

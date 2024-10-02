@@ -161,13 +161,12 @@ fsm.add("active", {
 		}
 
 		// countdown until we can make another shot
-		shot_timer--;
+		shot_timer -= 1 * global.settings.game_speed;
 		shot_timer = max(0, shot_timer);
 
 		// --- Dashing ---
 		if (upgrade_stats.player_alt_fire == ABILITIES.DASH && _alt && dash_timer == 0) {
 		    dash_timer = 60;
-	
 		    global.dashed = true;
 		}
 
