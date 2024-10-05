@@ -1,3 +1,6 @@
+global.upgrades = [];
+global.default_unlocked_upgrades = ["fast_fire", "steady_fire", "bullet_strength"];
+
 function effect_struct(_property = "", _value = 0, _operation = OPERATIONS.SET) {
     return {
         property: _property,
@@ -17,9 +20,10 @@ function upgrade_struct(_key="", _name="", _description="", _price=0, _sprite=un
     }
 }
 
-global.upgrades = [
+function init_upgrades_collection() {
+    global.upgrades = [
     upgrade_struct(
-            "bigBoy", 
+            "big_boy", 
             "Big Boy", 
             "Become huge and hard to move (double your size)", 
             1000, 
@@ -29,7 +33,7 @@ global.upgrades = [
             ]
     ),
     upgrade_struct(
-            "tinyBaby",
+            "tiny_baby",
             "Tiny Baby", 
             "Reduce your size by half", 
             1000, 
@@ -39,7 +43,7 @@ global.upgrades = [
             ]
     ),
     upgrade_struct(
-            "fastFire", 
+            "fast_fire", 
             "Fast Fire", 
             "Increase your firing rate (difficult to control)", 
             1000, 
@@ -49,7 +53,7 @@ global.upgrades = [
             ]
     ),
     upgrade_struct(
-            "steadyFire", 
+            "steady_fire", 
             "Steady Fire", 
             "Stabilize your firing rate (slow but easy to control)", 
             1000, 
@@ -59,7 +63,7 @@ global.upgrades = [
             ]
     ),
     upgrade_struct(
-            "lightWeight", 
+            "light_weight", 
             "Light Weight", 
             "Increase your movement speed but your shots have more recoil", 
             1000, 
@@ -70,7 +74,7 @@ global.upgrades = [
             ]
     ),
     upgrade_struct(
-            "heavyWeight", 
+            "heavy_weight", 
             "Heavy Weight", 
             "Decrease your recoil but you move more slowly", 
             1000, 
@@ -81,7 +85,7 @@ global.upgrades = [
             ]
     ),
     upgrade_struct(
-            "shotSpread", 
+            "shot_spread", 
             "Shot Spread", 
             "Increase your shot count by 1", 
             1000, 
@@ -91,7 +95,7 @@ global.upgrades = [
             ]
     ),
     upgrade_struct(
-            "extraLife", 
+            "extra_life", 
             "Extra Life", 
             "Gain 1 extra life", 
             4000, 
@@ -101,7 +105,7 @@ global.upgrades = [
             ]
     ),
     upgrade_struct(
-            "bulletStrength", 
+            "bullet_strength", 
             "Bullet Strength", 
             "Stronger bullets that hit harder but have greater recoil", 
             4000, 
@@ -122,3 +126,6 @@ global.upgrades = [
             ]
     ),
 ];
+
+    return global.upgrades;
+}

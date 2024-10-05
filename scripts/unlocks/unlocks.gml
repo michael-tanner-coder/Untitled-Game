@@ -1,7 +1,5 @@
 global.unlock_map = {
-    cosmetics: global.cosmetics,
-    lab_logs: global.lab_logs,
-    powerups: global.powerup_types,
+    upgrades: init_upgrades_collection(),
 };
 
 function unlock_struct(_key = "", _category = "", _points = 0) {
@@ -16,16 +14,16 @@ global.unlock_progress = get_save_data_property("unlock_progress", 0);
 
 
 global.unlockables = [
-    unlock_struct("enemy_bonus", "powerups", 1000),
-    unlock_struct("key_bonus", "powerups", 2000),
-    unlock_struct("topHat", "cosmetics", 3000),
-    unlock_struct("life", "powerups", 5000),
-    unlock_struct("slowdown_field", "powerups", 4000),
-    unlock_struct("freeze_enemies", "powerups", 4000),
-    unlock_struct("exploding_enemies", "powerups", 2000),
-    unlock_struct("topHat", "cosmetics", 4000),
-    unlock_struct("bowlerHat", "cosmetics", 8000),
-    unlock_struct("cowboyHat", "cosmetics", 5000),
+    unlock_struct("big_boy", "upgrades", 1000),
+    unlock_struct("tiny_baby", "upgrades", 2000),
+    unlock_struct("fast_fire", "upgrades", 3000),
+    unlock_struct("steady_fire", "upgrades", 5000),
+    unlock_struct("light_weight", "upgrades", 4000),
+    unlock_struct("heavy_weight", "upgrades", 4000),
+    unlock_struct("shot_spread", "upgrades", 2000),
+    unlock_struct("bomb", "upgrades", 3000),
+    unlock_struct("bullet_strength", "upgrades", 8000),
+    unlock_struct("extra_life", "upgrades", 5000),
 ];
 
 function unlock_next_item(_score = 0) {
@@ -102,7 +100,5 @@ function is_unlocked(
 
 function reset_unlocks() {
     set_save_data_property("unlock_progress", 0);
-    set_save_data_property("cosmetics", []);
-    set_save_data_property("lab_logs", []);
-    set_save_data_property("powerups", []);
+    set_save_data_property("upgrades", []);
 }
