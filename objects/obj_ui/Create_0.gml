@@ -1,4 +1,3 @@
-
 var _current_scene = get_current_scene();
 if (_current_scene == undefined) {
 	_current_scene = {
@@ -7,7 +6,6 @@ if (_current_scene == undefined) {
         max_enemy_count: 10,
 	};
 }
-
 
 drawn_score = score;
 shake_magnitude = 0;
@@ -45,7 +43,7 @@ color_blocks = [
 	DARK_BLUE, 
 	PINK,
 	PERSIAN_PINK
-]
+];
 goal_score = _current_scene.goal_score;
 
 
@@ -122,17 +120,18 @@ fsm.add("game_over", {
 		END
 		
 		// Banner BG
+		var _banner_y = room_height/2 - 100;
 		draw_set_color(c_black);
 		draw_set_alpha(0.5);
-		draw_rectangle(0, room_height/2 - 20, room_width, room_height/2 + 120, false);
+		draw_rectangle(0, _banner_y, room_width, _banner_y + 120, false);
 		draw_set_alpha(1);
 		
 		// Banner Text
 		draw_set_color(WHITE);
-		draw_shadow_text(room_width/2, room_height/2 + 20, "FINAL SCORE: " + string(score));
-		draw_shadow_text(room_width/2, room_height/2 + 40, "BEST SCORE: " + string(global.best_score));
-		draw_shadow_text(room_width/2, room_height/2 + 60, "RETRY: spacebar");
-		draw_shadow_text(room_width/2, room_height/2 + 80, "QUIT: escape");
+		draw_shadow_text(room_width/2, _banner_y + 30, "FINAL SCORE: " + string(score));
+		draw_shadow_text(room_width/2, _banner_y + 50, "BEST SCORE: " + string(global.best_score));
+		draw_shadow_text(room_width/2, _banner_y + 70, "RETRY: spacebar");
+		draw_shadow_text(room_width/2, _banner_y + 90, "QUIT: escape");
 	}
 });
 
