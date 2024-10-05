@@ -10,12 +10,38 @@ total_points = global.unlock_progress + score;
 item_name = "";
 item_data = undefined;
 
-// TODO: add grid menu to view unlocked items of any category
+// Methods
+default_draw_behavior = function() {
+	draw_set_color(WHITE);
+	if (next_unlock == undefined) {
+		draw_text(x + sprite_get_width(outline_sprite)/2, y, "NO MORE UNLOCKS!");
+		return;
+	}
+	
+	if (is_numeric(next_unlock.required_points)) {
+		var _progress_percent = progress_points / next_unlock.required_points;
+		_progress_percent = clamp(_progress_percent, 0, 1);
+	
+		draw_set_halign(fa_center);
+		draw_set_color(WHITE);
+	
+		var _formatted_points = string_format(round(progress_points), 0, 0);
+		draw_text(x + sprite_get_width(outline_sprite)/2, y - sprite_get_height(outline_sprite) - bar_margin, _formatted_points + "/" + string(next_unlock.required_points));
+	
+		draw_sprite(spr_progress_bar_outline, 0, x, y);
+		draw_sprite_ext(spr_progress_bar_fill, 0, x + outline_size, y + outline_size, _progress_percent, 1, 0, c_white, 1);
+	
+		draw_text(x + sprite_get_width(outline_sprite) / 2, y + sprite_get_height(outline_sprite) + (bar_margin*2), "PROGRESS TO NEXT UNLOCK");
+	}
+}
 
-fsm = new SnowState("countup");
+// State Machine
+fsm = new SnowState("inactive");
 
 fsm.add("countup", {
 	enter: function() {
+		progress_points = global.unlock_progress;
+		total_points = global.unlock_progress + score;
 		next_unlock = get_next_unlock();
 		item_name = "";
 		play_sound(snd_time_counter, false);
@@ -48,6 +74,9 @@ fsm.add("countup", {
 			fsm.change("idle");
 		}
 	},
+	draw: function() {
+		default_draw_behavior();
+	}
 });
 
 fsm.add("unlock", {
@@ -72,6 +101,8 @@ fsm.add("unlock", {
 		banner_x = lerp(banner_x, 0, 0.2);
 	},
 	draw: function() {
+		default_draw_behavior();
+		
 		var _rect_x = banner_x;
 		var _rect_y = 234;
 		var _rect_width = room_width;
@@ -138,4 +169,17 @@ fsm.add("idle", {
     		restart_game();
 		}
 	},
+	draw: function() {
+		default_draw_behavior();
+	}
+});
+
+fsm.add("inactive", {
+	step: function() {},
+	draw: function() {},
+});
+
+// Event Subscriptions
+subscribe(id, LOST_LEVEL, function() {
+	fsm.change("countup");
 });
