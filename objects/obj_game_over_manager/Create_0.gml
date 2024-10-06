@@ -17,7 +17,7 @@ progress_bar_height = 50;
 default_draw_behavior = function() {
 	draw_set_color(WHITE);
 	if (next_unlock == undefined) {
-		banner(100, y, "NO MORE UNLOCKS", BLACK, 0.6);
+		banner(100, y, "NO MORE UNLOCKS", BLACK, 0.7);
 		return;
 	}
 	
@@ -28,7 +28,7 @@ default_draw_behavior = function() {
 		draw_set_halign(fa_center);
 		draw_set_color(WHITE);
 		
-		banner(200, y - 100, "", BLACK, 0.6);
+		banner(200, y - 100, "", BLACK, 0.7);
 	
 		var _formatted_points = string_format(round(progress_points), 0, 0);
 		draw_text(x + sprite_get_width(outline_sprite)/2, y - sprite_get_height(outline_sprite) - bar_margin, _formatted_points + "/" + string(next_unlock.required_points));
