@@ -16,3 +16,7 @@ if (struct_get(global.settings, "window_mode")) {
 		window_set_fullscreen(true);
 	}
 }
+
+if (keyboard_check_pressed(ord("R"))) {
+	reset_unlocks();
+}
