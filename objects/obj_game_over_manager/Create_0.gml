@@ -109,9 +109,9 @@ fsm.add("unlock", {
 		default_draw_behavior();
 		
 		var _rect_x = banner_x;
-		var _rect_y = 234;
+		var _rect_y = 0;
 		var _rect_width = room_width;
-		var _rect_height = 284*2;
+		var _rect_height = room_height;
 		
 		// banner overlay
 		draw_set_color(c_black);
@@ -119,11 +119,13 @@ fsm.add("unlock", {
 		draw_rectangle(_rect_x, _rect_y, _rect_x + _rect_width, _rect_y + _rect_height, false);
 		draw_set_alpha(1);
 		
+		draw_set_font(fnt_header);
+		
 		// header
-		draw_outlined_text(_rect_x + _rect_width/2, _rect_y + 40, "NEW UNLOCK!", PINK, fnt_header, STANDARD_OUTLINE_DISTANCE, WHITE);
+		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 40, "NEW UNLOCK!", WHITE, PURPLE)
 		
 		// item name
-		draw_outlined_text(_rect_x + _rect_width/2, _rect_y + 100, item_name, BLUE, fnt_header, STANDARD_OUTLINE_DISTANCE, WHITE);
+		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 100, item_name, BLUE, WHITE)
 		
 		// item sprite
 		var _sprite = struct_get(item_data, "sprite");
