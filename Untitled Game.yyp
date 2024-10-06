@@ -288,6 +288,7 @@
     {"id":{"name":"obj_light_shaft","path":"objects/obj_light_shaft/obj_light_shaft.yy",},},
     {"id":{"name":"obj_lighting","path":"objects/obj_lighting/obj_lighting.yy",},},
     {"id":{"name":"obj_manager_factory","path":"objects/obj_manager_factory/obj_manager_factory.yy",},},
+    {"id":{"name":"obj_money_spawner","path":"objects/obj_money_spawner/obj_money_spawner.yy",},},
     {"id":{"name":"obj_money","path":"objects/obj_money/obj_money.yy",},},
     {"id":{"name":"obj_music_emitter","path":"objects/obj_music_emitter/obj_music_emitter.yy",},},
     {"id":{"name":"obj_music","path":"objects/obj_music/obj_music.yy",},},

@@ -1,8 +1,6 @@
 
-// TODO: show upgrades in the grid menu (add to start menu page)
-
 // TODO: make each upgrade cost a certain amount of currency
-// TODO: spawn money objects around the map
+// TODO: show upgrades in the grid menu
 
 // Configuration Properties
 // upgrade parameters

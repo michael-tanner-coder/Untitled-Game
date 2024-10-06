@@ -228,6 +228,7 @@
     {"name":"obj_light_shaft","order":7,"path":"objects/obj_light_shaft/obj_light_shaft.yy",},
     {"name":"obj_lighting","order":8,"path":"objects/obj_lighting/obj_lighting.yy",},
     {"name":"obj_manager_factory","order":8,"path":"objects/obj_manager_factory/obj_manager_factory.yy",},
+    {"name":"obj_money_spawner","order":15,"path":"objects/obj_money_spawner/obj_money_spawner.yy",},
     {"name":"obj_money","order":9,"path":"objects/obj_money/obj_money.yy",},
     {"name":"obj_music_emitter","order":15,"path":"objects/obj_music_emitter/obj_music_emitter.yy",},
     {"name":"obj_music","order":13,"path":"objects/obj_music/obj_music.yy",},
