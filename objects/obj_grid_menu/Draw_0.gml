@@ -16,6 +16,14 @@ for(var _i = 0; _i < array_height_2d(items); _i++) {
         var _is_highlighted = _j == current_column && _i == current_row;
         
         if (_is_highlighted) {
+            with (obj_card) {
+                var _upgrade = _item;
+            	upgrade = _upgrade;
+            	header = _upgrade.name;
+            	description = _upgrade.description;
+            	price = _upgrade.price;
+            	sprite = _upgrade.sprite;
+            }
             draw_set_color(RED);
             draw_rectangle(_item_x - grid_item_outline_thickness/2, _item_y - grid_item_outline_thickness/2, _item_width + grid_item_outline_thickness, _item_height + grid_item_outline_thickness, false);
         }

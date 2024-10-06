@@ -14,6 +14,7 @@ upgrade = global.upgrades[0];
 // State Information
 highlighted = false;
 time_until_active = 120;
+static_card = false;
 
 // Animation
 starting_y = y; // original y position from before we start animating
@@ -51,6 +52,10 @@ fsm.add("animating", {
 
 fsm.add("inactive", {
 	step: function() {
+		if (static_card) {
+			return;
+		}
+		
 		time_until_active--;
 		if (time_until_active <= 0) {
 			fsm.change("animating");

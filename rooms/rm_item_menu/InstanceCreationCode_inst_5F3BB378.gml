@@ -1,3 +1,3 @@
-data_source = global.powerup_types;
-grid_data_category = "powerups";
+data_source = global.upgrades;
+grid_data_category = "upgrades";
 populate_grid();
