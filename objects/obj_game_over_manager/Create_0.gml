@@ -17,7 +17,7 @@ progress_bar_height = 50;
 default_draw_behavior = function() {
 	draw_set_color(WHITE);
 	if (next_unlock == undefined) {
-		draw_text(x + sprite_get_width(outline_sprite)/2, y, "NO MORE UNLOCKS!");
+		banner(100, y, "NO MORE UNLOCKS", BLACK, 0.6);
 		return;
 	}
 	
@@ -97,10 +97,13 @@ fsm.add("unlock", {
 		progress_points = 0;
 		
 		play_sound(snd_tutorial_success);
+		
+		global.unlock_modal_open = true;
 	},
 	step: function() {
 		if (input_check_pressed("select")) {
 			fsm.change("countup");
+			global.unlock_modal_open = false;
 		}
 		
 		banner_x = lerp(banner_x, 0, 0.2);

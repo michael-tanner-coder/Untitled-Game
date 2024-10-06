@@ -14,6 +14,7 @@ global.tension = 0;
 global.first_wave_complete = false;
 global.muted = false;
 global.tutorial = get_flag("needs_tutorial");
+global.unlock_modal_open = false;
 
 // Text
 #macro TITLE "UNTITLED GAME"

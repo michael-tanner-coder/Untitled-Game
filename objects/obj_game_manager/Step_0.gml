@@ -4,7 +4,7 @@ if (score > global.best_score) {
 	global.best_score = score;
 }
 
-if (lives < 1 && keyboard_check_pressed(vk_space)) {
+if (!global.unlock_modal_open && lives < 1 && input_check_pressed("select")) {
 	room_restart();
 }
 
