@@ -20,6 +20,23 @@ function upgrade_struct(_key="", _name="", _description="", _price=0, _sprite=un
     }
 }
 
+function get_upgrade_type(_key = "") {
+     if (!is_string(_key)) {
+        show_debug_message("Error: the provided key is not a string");
+        return;
+    }
+    
+    var _matching_powerup = undefined;
+    FOREACH global.upgrades ELEMENT
+        var _upgrade = _elem;
+        if (_upgrade.key == _key) {
+            _matching_upgrade =  _upgrade;
+        }
+    END
+    
+    return _matching_upgrade;
+}
+
 function init_upgrades_collection() {
     global.upgrades = [
         upgrade_struct(

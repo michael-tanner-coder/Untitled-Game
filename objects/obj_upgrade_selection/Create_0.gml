@@ -107,11 +107,14 @@ fsm.add("select_upgrade", {
 
 // Methods
 generate_upgrade_options = function() {
+	var _available_upgrades = get_save_data_property("upgrades", global.default_unlocked_upgrades);
+	
 	for (var _i = 0; _i < upgrade_count; _i++) {
 		var _upgrade_was_already_chosen = false;
 		
 		do {
-			var _upgrade = global.upgrades[irandom_range(0, array_length(global.upgrades) - 1)];
+			var _upgrade_key = _available_upgrades[irandom_range(0, array_length(_available_upgrades) - 1)];
+			var _upgrade = get_upgrade_type(_upgrade_key);
         	
         	_upgrade_was_already_chosen = false;
         	FOREACH available_upgrades ELEMENT
