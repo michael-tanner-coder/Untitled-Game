@@ -1,7 +1,7 @@
 {
   "$GMFont":"",
   "%Name":"fnt_cutscene_default",
-  "AntiAlias":1,
+  "AntiAlias":0,
   "applyKerning":0,
   "ascender":27,
   "ascenderOffset":1,

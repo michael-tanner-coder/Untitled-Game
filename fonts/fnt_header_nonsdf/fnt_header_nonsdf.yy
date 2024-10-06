@@ -1,7 +1,7 @@
 {
   "$GMFont":"",
   "%Name":"fnt_header_nonsdf",
-  "AntiAlias":1,
+  "AntiAlias":0,
   "applyKerning":0,
   "ascender":44,
   "ascenderOffset":0,
@@ -107,7 +107,7 @@
     "124":{"character":124,"h":52,"offset":0,"shift":12,"w":8,"x":180,"y":56,},
     "125":{"character":125,"h":52,"offset":0,"shift":28,"w":24,"x":154,"y":56,},
     "126":{"character":126,"h":52,"offset":0,"shift":36,"w":32,"x":372,"y":218,},
-    "9647":{"character":9647,"h":52,"offset":12,"shift":62,"w":38,"x":406,"y":218,},
+    "9647":{"character":9647,"h":52,"offset":13,"shift":62,"w":36,"x":406,"y":218,},
   },
   "hinting":0,
   "includeTTF":false,

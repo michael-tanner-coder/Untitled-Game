@@ -1,7 +1,7 @@
 {
   "$GMFont":"",
   "%Name":"fnt_paragraph",
-  "AntiAlias":1,
+  "AntiAlias":0,
   "applyKerning":0,
   "ascender":36,
   "ascenderOffset":1,
