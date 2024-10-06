@@ -29,6 +29,15 @@ function populate_grid() {
         var _col = 0;
         FOREACH data_source ELEMENT
             array_push(items[_row], _elem);
+            
+            var _x = grid_start_x + _col * (grid_item_width + grid_item_margin);
+            var _y = grid_start_y + _row * (grid_item_height + grid_item_margin);
+            
+            var _grid_block = instance_create_layer(_x, _y, layer, obj_grid_object);
+            _grid_block.data_item = _elem;
+            _grid_block.data_name = _elem.name;
+            _grid_block.data_sprite = _elem.sprite;
+            
             _col++;
             if (_col >= columns) {
                 _col = 0;
