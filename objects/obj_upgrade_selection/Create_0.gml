@@ -1,4 +1,10 @@
 
+// TODO: allow the player to pass on getting an upgrade
+// TODO: show upgrades in the grid menu (add to start menu page)
+
+// TODO: make each upgrade cost a certain amount of currency
+// TODO: spawn money objects around the map
+
 // Configuration Properties
 // upgrade parameters
 upgrade_score = 1000; // make this configurable
@@ -82,6 +88,7 @@ fsm.add("select_upgrade", {
         	_card.upgrade = _upgrade;
         	_card.header = _upgrade.name;
         	_card.description = _upgrade.description;
+        	_card.price = _upgrade.price;
         	_card.sprite = _upgrade.sprite;
         	
         	// Cache all cards for disposal later

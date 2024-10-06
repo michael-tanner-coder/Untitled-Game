@@ -8,6 +8,7 @@ header = "Card Header";
 sprite = spr_white_circle;
 description = "Lorem ipsum type shit";
 description_padding = 20;
+price = 0;
 upgrade = global.upgrades[0];
 
 // State Information
