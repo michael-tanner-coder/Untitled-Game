@@ -64,6 +64,11 @@ fsm.add("countup", {
 			progress_points = _target_points;
 		}
 	
+		// restart level if we have completed the progress animation
+		if (input_check_pressed("select") && progress_points == _target_points) {
+			room_restart();
+		}
+		
 		// skip progress bar animation
 		if (input_check_pressed("select")) {
 			progress_points = _target_points;
@@ -173,10 +178,11 @@ fsm.add("idle", {
 	    	reset_game_state();
 	    	quit_to_menu();
 		}
-			
+		
 		if (input_check_pressed("select")) {
-			reset_game_state();
-    		restart_game();
+			// reset_game_state();
+			// restart_game();
+			room_restart();
 		}
 	},
 	draw: function() {
