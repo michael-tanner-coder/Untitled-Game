@@ -1,5 +1,4 @@
 
-// TODO: allow the player to pass on getting an upgrade
 // TODO: show upgrades in the grid menu (add to start menu page)
 
 // TODO: make each upgrade cost a certain amount of currency
@@ -105,10 +104,15 @@ fsm.add("select_upgrade", {
     },
     step: function() {
         upgrade_banner_y = lerp(upgrade_banner_y, target_upgrade_banner_y, 0.2);
+        
+        if (input_check_pressed("select")) {
+        	fsm.change("progress_to_next_upgrade");
+        }
     },
     draw: function() {
     	fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, WHITE);
 		banner(upgrade_banner_height, upgrade_banner_y, "SELECT AN UPGRADE", BLACK, 0.6);
+		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.75), "(press SPACE to skip the upgrade)")
 	}
 });
 
