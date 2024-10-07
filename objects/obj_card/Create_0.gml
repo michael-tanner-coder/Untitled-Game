@@ -8,11 +8,13 @@ header = "Card Header";
 sprite = spr_white_circle;
 description = "Lorem ipsum type shit";
 description_padding = 20;
+price = 0;
 upgrade = global.upgrades[0];
 
 // State Information
 highlighted = false;
 time_until_active = 120;
+static_card = false;
 
 // Animation
 starting_y = y; // original y position from before we start animating
@@ -50,6 +52,10 @@ fsm.add("animating", {
 
 fsm.add("inactive", {
 	step: function() {
+		if (static_card) {
+			return;
+		}
+		
 		time_until_active--;
 		if (time_until_active <= 0) {
 			fsm.change("animating");
@@ -69,8 +75,12 @@ fsm.add("active", {
 			y = lerp(y, resting_y, 0.08);
 		}
 	
-		if (highlighted && mouse_check_button_pressed(mb_left)) {
+		if (highlighted && mouse_check_button_pressed(mb_left) && global.currency >= price) {
+			global.currency -= price;
 			publish(UPGRADE_SELECTED, upgrade);
+		}
+		else {
+			play_sound(snd_button_back_alt);
 		}
 	}
 });

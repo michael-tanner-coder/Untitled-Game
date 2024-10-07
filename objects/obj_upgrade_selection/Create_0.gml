@@ -1,3 +1,4 @@
+// TODO: show upgrades in the grid menu
 
 // Configuration Properties
 // upgrade parameters
@@ -82,6 +83,7 @@ fsm.add("select_upgrade", {
         	_card.upgrade = _upgrade;
         	_card.header = _upgrade.name;
         	_card.description = _upgrade.description;
+        	_card.price = _upgrade.price;
         	_card.sprite = _upgrade.sprite;
         	
         	// Cache all cards for disposal later
@@ -98,20 +100,28 @@ fsm.add("select_upgrade", {
     },
     step: function() {
         upgrade_banner_y = lerp(upgrade_banner_y, target_upgrade_banner_y, 0.2);
+        
+        if (input_check_pressed("select")) {
+        	fsm.change("progress_to_next_upgrade");
+        }
     },
     draw: function() {
     	fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, WHITE);
 		banner(upgrade_banner_height, upgrade_banner_y, "SELECT AN UPGRADE", BLACK, 0.6);
+		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.75), "(press SPACE to skip the upgrade)")
 	}
 });
 
 // Methods
 generate_upgrade_options = function() {
+	var _available_upgrades = get_save_data_property("upgrades", global.default_unlocked_upgrades);
+	
 	for (var _i = 0; _i < upgrade_count; _i++) {
 		var _upgrade_was_already_chosen = false;
 		
 		do {
-			var _upgrade = global.upgrades[irandom_range(0, array_length(global.upgrades) - 1)];
+			var _upgrade_key = _available_upgrades[irandom_range(0, array_length(_available_upgrades) - 1)];
+			var _upgrade = get_upgrade_type(_upgrade_key);
         	
         	_upgrade_was_already_chosen = false;
         	FOREACH available_upgrades ELEMENT

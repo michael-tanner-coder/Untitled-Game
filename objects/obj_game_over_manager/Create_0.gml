@@ -10,12 +10,43 @@ total_points = global.unlock_progress + score;
 item_name = "";
 item_data = undefined;
 
-// TODO: add grid menu to view unlocked items of any category
+progress_bar_width = 400;
+progress_bar_height = 50;
 
-fsm = new SnowState("countup");
+// Methods
+default_draw_behavior = function() {
+	draw_set_color(WHITE);
+	if (next_unlock == undefined) {
+		banner(100, y, "NO MORE UNLOCKS", BLACK, 0.7);
+		return;
+	}
+	
+	if (is_numeric(next_unlock.required_points)) {
+		var _progress_percent = progress_points / next_unlock.required_points;
+		_progress_percent = clamp(_progress_percent, 0, 1);
+	
+		draw_set_halign(fa_center);
+		draw_set_color(WHITE);
+		
+		banner(200, y - 100, "", BLACK, 0.7);
+	
+		var _formatted_points = string_format(round(progress_points), 0, 0);
+		draw_text(x + sprite_get_width(outline_sprite)/2, y - sprite_get_height(outline_sprite) - bar_margin, _formatted_points + "/" + string(next_unlock.required_points));
+	
+		fillbar(room_width/2 - progress_bar_width/2, y, progress_bar_width, progress_bar_height, _progress_percent, RED, WHITE);
+	
+		draw_set_color(WHITE);
+		draw_text(x + sprite_get_width(outline_sprite) / 2, y + sprite_get_height(outline_sprite) + (bar_margin*2), "PROGRESS TO NEXT UNLOCK");
+	}
+}
+
+// State Machine
+fsm = new SnowState("inactive");
 
 fsm.add("countup", {
 	enter: function() {
+		progress_points = global.unlock_progress;
+		total_points = global.unlock_progress + score;
 		next_unlock = get_next_unlock();
 		item_name = "";
 		play_sound(snd_time_counter, false);
@@ -33,6 +64,11 @@ fsm.add("countup", {
 			progress_points = _target_points;
 		}
 	
+		// restart level if we have completed the progress animation
+		if (input_check_pressed("select") && progress_points == _target_points) {
+			room_restart();
+		}
+		
 		// skip progress bar animation
 		if (input_check_pressed("select")) {
 			progress_points = _target_points;
@@ -48,6 +84,9 @@ fsm.add("countup", {
 			fsm.change("idle");
 		}
 	},
+	draw: function() {
+		default_draw_behavior();
+	}
 });
 
 fsm.add("unlock", {
@@ -63,19 +102,24 @@ fsm.add("unlock", {
 		progress_points = 0;
 		
 		play_sound(snd_tutorial_success);
+		
+		global.unlock_modal_open = true;
 	},
 	step: function() {
 		if (input_check_pressed("select")) {
 			fsm.change("countup");
+			global.unlock_modal_open = false;
 		}
 		
 		banner_x = lerp(banner_x, 0, 0.2);
 	},
 	draw: function() {
+		default_draw_behavior();
+		
 		var _rect_x = banner_x;
-		var _rect_y = 234;
+		var _rect_y = 0;
 		var _rect_width = room_width;
-		var _rect_height = 284*2;
+		var _rect_height = room_height;
 		
 		// banner overlay
 		draw_set_color(c_black);
@@ -83,11 +127,13 @@ fsm.add("unlock", {
 		draw_rectangle(_rect_x, _rect_y, _rect_x + _rect_width, _rect_y + _rect_height, false);
 		draw_set_alpha(1);
 		
+		draw_set_font(fnt_header);
+		
 		// header
-		draw_outlined_text(_rect_x + _rect_width/2, _rect_y + 40, "NEW UNLOCK!", PINK, fnt_header, STANDARD_OUTLINE_DISTANCE, WHITE);
+		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 40, "NEW UNLOCK!", WHITE, PURPLE)
 		
 		// item name
-		draw_outlined_text(_rect_x + _rect_width/2, _rect_y + 100, item_name, BLUE, fnt_header, STANDARD_OUTLINE_DISTANCE, WHITE);
+		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 100, item_name, BLUE, WHITE)
 		
 		// item sprite
 		var _sprite = struct_get(item_data, "sprite");
@@ -132,10 +178,24 @@ fsm.add("idle", {
 	    	reset_game_state();
 	    	quit_to_menu();
 		}
-			
+		
 		if (input_check_pressed("select")) {
-			reset_game_state();
-    		restart_game();
+			// reset_game_state();
+			// restart_game();
+			room_restart();
 		}
 	},
+	draw: function() {
+		default_draw_behavior();
+	}
+});
+
+fsm.add("inactive", {
+	step: function() {},
+	draw: function() {},
+});
+
+// Event Subscriptions
+subscribe(id, LOST_LEVEL, function() {
+	fsm.change("countup");
 });

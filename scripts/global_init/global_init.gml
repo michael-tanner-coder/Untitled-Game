@@ -14,6 +14,8 @@ global.tension = 0;
 global.first_wave_complete = false;
 global.muted = false;
 global.tutorial = get_flag("needs_tutorial");
+global.unlock_modal_open = false;
+global.currency = 0;
 
 // Text
 #macro TITLE "UNTITLED GAME"
@@ -101,6 +103,7 @@ Example usage:
 #macro UPDATE_TEXT "update_text"
 #macro FULLSCREEN_TOGGLED "fullscreen_toggled"
 #macro UPGRADE_SELECTED "upgrade_selected"
+#macro MENU_ITEM_HIGHLIGHTED "menu_item_highlighted"
 
 // Flags
 #macro STARTED_GAME "started_game"

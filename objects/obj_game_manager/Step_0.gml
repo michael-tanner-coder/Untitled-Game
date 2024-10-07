@@ -4,10 +4,6 @@ if (score > global.best_score) {
 	global.best_score = score;
 }
 
-if (lives < 1 && keyboard_check_pressed(vk_space)) {
-	room_restart();
-}
-
 if (struct_get(global.settings, "window_mode")) {
 	if (global.settings.window_mode == "Windowed") {
 		window_set_fullscreen(false);
@@ -15,4 +11,8 @@ if (struct_get(global.settings, "window_mode")) {
 	else {
 		window_set_fullscreen(true);
 	}
+}
+
+if (keyboard_check_pressed(ord("R"))) {
+	reset_unlocks();
 }

@@ -12,6 +12,7 @@ i_frames = 0;
 respawn_i_frames = 120;
 base_fixture_size = 15;
 available_bombs = 1;
+global.currency = 0;
 
 // Upgrade properties
 upgrade_stats = {

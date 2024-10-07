@@ -1,7 +1,7 @@
 {
   "$GMFont":"",
   "%Name":"fnt_tip",
-  "AntiAlias":1,
+  "AntiAlias":0,
   "applyKerning":0,
   "ascender":18,
   "ascenderOffset":1,
