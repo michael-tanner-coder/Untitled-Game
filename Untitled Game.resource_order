@@ -1272,6 +1272,7 @@
     {"name":"spr_progress_bar_fill","order":18,"path":"sprites/spr_progress_bar_fill/spr_progress_bar_fill.yy",},
     {"name":"spr_progress_bar_outline","order":17,"path":"sprites/spr_progress_bar_outline/spr_progress_bar_outline.yy",},
     {"name":"spr_quake_force","order":27,"path":"sprites/spr_quake_force/spr_quake_force.yy",},
+    {"name":"spr_question_mark","order":25,"path":"sprites/spr_question_mark/spr_question_mark.yy",},
     {"name":"spr_reticle","order":22,"path":"sprites/spr_reticle/spr_reticle.yy",},
     {"name":"spr_rounded_box_short","order":13,"path":"sprites/spr_rounded_box_short/spr_rounded_box_short.yy",},
     {"name":"spr_rounded_box","order":5,"path":"sprites/spr_rounded_box/spr_rounded_box.yy",},

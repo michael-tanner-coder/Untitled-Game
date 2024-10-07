@@ -1,5 +1,3 @@
-
-// TODO: make each upgrade cost a certain amount of currency
 // TODO: show upgrades in the grid menu
 
 // Configuration Properties

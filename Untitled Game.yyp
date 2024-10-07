@@ -1460,6 +1460,7 @@
     {"id":{"name":"spr_progress_bar_fill","path":"sprites/spr_progress_bar_fill/spr_progress_bar_fill.yy",},},
     {"id":{"name":"spr_progress_bar_outline","path":"sprites/spr_progress_bar_outline/spr_progress_bar_outline.yy",},},
     {"id":{"name":"spr_quake_force","path":"sprites/spr_quake_force/spr_quake_force.yy",},},
+    {"id":{"name":"spr_question_mark","path":"sprites/spr_question_mark/spr_question_mark.yy",},},
     {"id":{"name":"spr_reticle","path":"sprites/spr_reticle/spr_reticle.yy",},},
     {"id":{"name":"spr_rounded_box_short","path":"sprites/spr_rounded_box_short/spr_rounded_box_short.yy",},},
     {"id":{"name":"spr_rounded_box","path":"sprites/spr_rounded_box/spr_rounded_box.yy",},},

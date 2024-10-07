@@ -76,8 +76,8 @@ fsm.add("active", {
 		}
 	
 		if (highlighted && mouse_check_button_pressed(mb_left) && global.currency >= price) {
-			publish(UPGRADE_SELECTED, upgrade);
 			global.currency -= price;
+			publish(UPGRADE_SELECTED, upgrade);
 		}
 		else {
 			play_sound(snd_button_back_alt);

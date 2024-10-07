@@ -38,6 +38,18 @@ function populate_grid() {
             _grid_block.data_name = _elem.name;
             _grid_block.data_sprite = _elem.sprite;
             
+            if (!is_unlocked({key: _elem.key, category: "upgrades"})) {
+                var _data_item = {
+                    name: "???",
+                    description: "[HAVE NOT YET UNLOCKED THIS UPGRADE]",
+                    price: 0,
+                    sprite: spr_question_mark,
+                };
+                _grid_block.data_item = _data_item;
+                _grid_block.data_sprite = spr_question_mark;
+                _grid_block.data_name = "???";
+            }
+            
             _col++;
             if (_col >= columns) {
                 _col = 0;

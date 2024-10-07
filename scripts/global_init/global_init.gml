@@ -103,6 +103,7 @@ Example usage:
 #macro UPDATE_TEXT "update_text"
 #macro FULLSCREEN_TOGGLED "fullscreen_toggled"
 #macro UPGRADE_SELECTED "upgrade_selected"
+#macro MENU_ITEM_HIGHLIGHTED "menu_item_highlighted"
 
 // Flags
 #macro STARTED_GAME "started_game"
