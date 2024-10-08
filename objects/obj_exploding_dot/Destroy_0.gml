@@ -17,6 +17,8 @@ if (hit) {
 	spawn_particles(part_death, x, y);
 }
 
+
+/*
 var _shot_spread_angle = 36;
 var _shot_spread_count = 10;
 var _shoot_direction = 0;
@@ -34,7 +36,11 @@ for (var _i = 0; _i < _shot_spread_count; _i++) {
     with(_bullet) {
         physics_apply_impulse(x,y,_x_force, _y_force);
     }
-}
+}*/
+var _first_beam = instance_create_layer(x, y, layer, obj_laser);
+var _second_beam = instance_create_layer(x, y, layer, obj_laser);
+_first_beam.phy_rotation = phy_rotation;
+_second_beam.phy_rotation = phy_rotation + 90;
 
 publish(ENEMY_DEFEATED, round(point_value));
 

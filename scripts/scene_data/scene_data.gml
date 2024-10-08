@@ -13,7 +13,7 @@ global.scene_queue = [
         max_enemy_count: 10,
         enemy_types: [
             {
-                type: obj_exploding_dot,
+                type: obj_dot,
                 points: 0,
                 limit: 10,
             },
@@ -25,6 +25,11 @@ global.scene_queue = [
             {
                 type: obj_growing_dot,
                 points: 2500,
+                limit: 2,
+            },
+            {
+                type: obj_exploding_dot,
+                points: 3500,
                 limit: 2,
             }
         ],
