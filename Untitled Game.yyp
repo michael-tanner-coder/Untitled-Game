@@ -259,6 +259,7 @@
     {"id":{"name":"obj_big_dot","path":"objects/obj_big_dot/obj_big_dot.yy",},},
     {"id":{"name":"obj_blank","path":"objects/obj_blank/obj_blank.yy",},},
     {"id":{"name":"obj_bomb","path":"objects/obj_bomb/obj_bomb.yy",},},
+    {"id":{"name":"obj_bouncing_dot","path":"objects/obj_bouncing_dot/obj_bouncing_dot.yy",},},
     {"id":{"name":"obj_bullet","path":"objects/obj_bullet/obj_bullet.yy",},},
     {"id":{"name":"obj_camera_effects","path":"objects/obj_camera_effects/obj_camera_effects.yy",},},
     {"id":{"name":"obj_card","path":"objects/obj_card/obj_card.yy",},},

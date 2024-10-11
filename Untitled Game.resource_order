@@ -204,6 +204,7 @@
     {"name":"obj_big_dot","order":2,"path":"objects/obj_big_dot/obj_big_dot.yy",},
     {"name":"obj_blank","order":16,"path":"objects/obj_blank/obj_blank.yy",},
     {"name":"obj_bomb","order":8,"path":"objects/obj_bomb/obj_bomb.yy",},
+    {"name":"obj_bouncing_dot","order":5,"path":"objects/obj_bouncing_dot/obj_bouncing_dot.yy",},
     {"name":"obj_bullet","order":6,"path":"objects/obj_bullet/obj_bullet.yy",},
     {"name":"obj_card","order":16,"path":"objects/obj_card/obj_card.yy",},
     {"name":"obj_character_unlock_transition_manager","order":2,"path":"objects/obj_character_unlock_transition_manager/obj_character_unlock_transition_manager.yy",},
