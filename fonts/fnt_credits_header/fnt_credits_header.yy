@@ -1,6 +1,6 @@
 {
   "$GMFont":"",
-  "%Name":"fnt_header",
+  "%Name":"fnt_credits_header",
   "AntiAlias":0,
   "applyKerning":0,
   "ascender":29,
@@ -1810,7 +1810,7 @@
   "last":0,
   "lineHeight":32,
   "maintainGms1Font":false,
-  "name":"fnt_header",
+  "name":"fnt_credits_header",
   "parent":{
     "name":"Fonts",
     "path":"folders/Fonts.yy",
