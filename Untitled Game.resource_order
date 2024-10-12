@@ -182,6 +182,8 @@
     {"name":"SineWave","order":1,"path":"animcurves/SineWave/SineWave.yy",},
     {"name":"GMLive_fallback","order":1,"path":"extensions/GMLive_fallback/GMLive_fallback.yy",},
     {"name":"fnt_countdown","order":3,"path":"fonts/fnt_countdown/fnt_countdown.yy",},
+    {"name":"fnt_credits_header","order":7,"path":"fonts/fnt_credits_header/fnt_credits_header.yy",},
+    {"name":"fnt_credits","order":8,"path":"fonts/fnt_credits/fnt_credits.yy",},
     {"name":"fnt_cutscene_default","order":4,"path":"fonts/fnt_cutscene_default/fnt_cutscene_default.yy",},
     {"name":"fnt_default","order":6,"path":"fonts/fnt_default/fnt_default.yy",},
     {"name":"fnt_header_nonsdf","order":5,"path":"fonts/fnt_header_nonsdf/fnt_header_nonsdf.yy",},

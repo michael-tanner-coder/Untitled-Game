@@ -232,6 +232,8 @@
     {"id":{"name":"UI_text_scale_bounce","path":"animcurves/UI_text_scale_bounce/UI_text_scale_bounce.yy",},},
     {"id":{"name":"GMLive_fallback","path":"extensions/GMLive_fallback/GMLive_fallback.yy",},},
     {"id":{"name":"fnt_countdown","path":"fonts/fnt_countdown/fnt_countdown.yy",},},
+    {"id":{"name":"fnt_credits_header","path":"fonts/fnt_credits_header/fnt_credits_header.yy",},},
+    {"id":{"name":"fnt_credits","path":"fonts/fnt_credits/fnt_credits.yy",},},
     {"id":{"name":"fnt_cutscene_default","path":"fonts/fnt_cutscene_default/fnt_cutscene_default.yy",},},
     {"id":{"name":"fnt_default","path":"fonts/fnt_default/fnt_default.yy",},},
     {"id":{"name":"fnt_header_nonsdf","path":"fonts/fnt_header_nonsdf/fnt_header_nonsdf.yy",},},
