@@ -300,6 +300,7 @@
     {"id":{"name":"obj_muzzle_flash","path":"objects/obj_muzzle_flash/obj_muzzle_flash.yy",},},
     {"id":{"name":"obj_particle_emitter","path":"objects/obj_particle_emitter/obj_particle_emitter.yy",},},
     {"id":{"name":"obj_pathfinding_grid","path":"objects/obj_pathfinding_grid/obj_pathfinding_grid.yy",},},
+    {"id":{"name":"obj_physics_text","path":"objects/obj_physics_text/obj_physics_text.yy",},},
     {"id":{"name":"obj_pillar_box","path":"objects/obj_pillar_box/obj_pillar_box.yy",},},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
     {"id":{"name":"obj_polyglot","path":"objects/obj_polyglot/obj_polyglot.yy",},},
@@ -363,6 +364,7 @@
     {"id":{"name":"rm_room_base","path":"rooms/rm_room_base/rm_room_base.yy",},},
     {"id":{"name":"rm_shop","path":"rooms/rm_shop/rm_shop.yy",},},
     {"id":{"name":"rm_tiles","path":"rooms/rm_tiles/rm_tiles.yy",},},
+    {"id":{"name":"rm_victory","path":"rooms/rm_victory/rm_victory.yy",},},
     {"id":{"name":"__input_axis_is_directional","path":"scripts/__input_axis_is_directional/__input_axis_is_directional.yy",},},
     {"id":{"name":"__input_binding_get_label","path":"scripts/__input_binding_get_label/__input_binding_get_label.yy",},},
     {"id":{"name":"__input_class_binding","path":"scripts/__input_class_binding/__input_class_binding.yy",},},
@@ -1534,6 +1536,7 @@
     {"roomId":{"name":"rm_combat_test_2","path":"rooms/rm_combat_test_2/rm_combat_test_2.yy",},},
     {"roomId":{"name":"rm_combat_test_3","path":"rooms/rm_combat_test_3/rm_combat_test_3.yy",},},
     {"roomId":{"name":"rm_combat_test_4","path":"rooms/rm_combat_test_4/rm_combat_test_4.yy",},},
+    {"roomId":{"name":"rm_victory","path":"rooms/rm_victory/rm_victory.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

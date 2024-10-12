@@ -122,7 +122,11 @@ global.scene_queue = [
         ],
     },
     {
-        key: "outro",
-        map: rm_outro,
+        key: "victory",
+        map: rm_victory,
+        goal_score: 10000000,
+        time_between_spawns: 30,
+        max_enemy_count: 10,
+        enemy_types: [],
     },
 ];
