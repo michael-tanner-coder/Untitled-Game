@@ -1530,10 +1530,10 @@
     {"roomId":{"name":"rm_shop","path":"rooms/rm_shop/rm_shop.yy",},},
     {"roomId":{"name":"rm_level_transition","path":"rooms/rm_level_transition/rm_level_transition.yy",},},
     {"roomId":{"name":"rm_blank","path":"rooms/rm_blank/rm_blank.yy",},},
+    {"roomId":{"name":"rm_item_menu","path":"rooms/rm_item_menu/rm_item_menu.yy",},},
     {"roomId":{"name":"rm_combat_test_2","path":"rooms/rm_combat_test_2/rm_combat_test_2.yy",},},
     {"roomId":{"name":"rm_combat_test_3","path":"rooms/rm_combat_test_3/rm_combat_test_3.yy",},},
     {"roomId":{"name":"rm_combat_test_4","path":"rooms/rm_combat_test_4/rm_combat_test_4.yy",},},
-    {"roomId":{"name":"rm_item_menu","path":"rooms/rm_item_menu/rm_item_menu.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
