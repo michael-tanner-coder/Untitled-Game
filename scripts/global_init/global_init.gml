@@ -76,6 +76,7 @@ Example usage:
 #macro FLIPPED_ALL_ENEMIES "flip_all_enemies"
 #macro LEVEL_ENDED "end_level"
 #macro WON_LEVEL "win_level"
+#macro WON_GAME "win_game"
 #macro LOST_LEVEL "lose_level"
 #macro ACTORS_DEACTIVATED "deactivate_all_actors"
 #macro ACTORS_ACTIVATED "activate_all_actors"

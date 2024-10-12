@@ -1,5 +1,4 @@
 time_between_spawns--;
-	
 
 if (time_between_spawns <= 0 && current_line <= array_length(credits) - 1) {
 	var _credit_struct = credits[current_line];
@@ -23,4 +22,15 @@ if (time_between_spawns <= 0 && current_line <= array_length(credits) - 1) {
 	}
 	
 	current_line++;
+}
+
+if (!sequence_finished && instance_number(obj_physics_text) == 0 && current_line > array_length(credits) - 1) {
+	global.settings.game_speed = lerp(global.settings.game_speed, 0.3, 0.1);
+	
+	if (global.settings.game_speed <= 0.3) {
+		play_sound(snd_tutorial_success);
+		global.settings.game_speed = 1;
+		publish(WON_GAME);
+		sequence_finished = true;
+	}
 }

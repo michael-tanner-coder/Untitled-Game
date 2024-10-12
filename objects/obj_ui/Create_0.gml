@@ -171,6 +171,42 @@ fsm.add("level_complete", {
 	
 });
 
+fsm.add("game_complete", {
+	enter: function() {
+		target_victory_bg_x = 0;
+		victory_bg_alpha = 0;
+		target_victory_bg_alpha = 0.7;
+	},
+	
+	step: function() {
+		victory_bg_x = lerp(victory_bg_x, target_victory_bg_x, 0.05);
+		victory_bg_alpha = lerp(victory_bg_alpha, target_victory_bg_alpha, 0.1);
+		
+		if (input_check_pressed("select")) {
+			quit_to_menu();
+		}
+	},
+	
+	draw: function() {
+		// Color background
+		FOREACH color_blocks ELEMENT
+			var _block_width = room_width + (color_block_offset * array_length(color_blocks));
+			var _block_height = room_height / array_length(color_blocks);
+			var _block_x = victory_bg_x - color_block_offset * _i;
+			var _block_y = _i * _block_height;
+			draw_set_color(_elem);
+			draw_rectangle(_block_x, _block_y, _block_x + _block_width, _block_y + _block_height, false);	
+		END
+		
+		// Text banners
+		banner(100, victory_banner_y, "VICTORY ACHIEVED", BLACK, victory_bg_alpha);
+		banner(100, victory_banner_y + 120, "FINAL SCORE: " + string(score), BLACK, victory_bg_alpha);
+		banner(100, victory_banner_y + 240, "PRESS SPACE TO CONTINUE", BLACK, victory_bg_alpha);
+	},
+	
+});
+
 // Event Subscriptions
 subscribe(id, WON_LEVEL, function() {fsm.change("level_complete")});
+subscribe(id, WON_GAME, function() {fsm.change("game_complete")});
 subscribe(id, LOST_LEVEL, function() {fsm.change("game_over")});

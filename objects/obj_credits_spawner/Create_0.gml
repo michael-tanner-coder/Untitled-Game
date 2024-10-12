@@ -81,10 +81,12 @@ credits = [
 		text: "Thanks for playing!",
 		time_before_next_spawn: 100,
 		font: fnt_header,
-		text_health: 50,
+		text_health: 30,
 	},
 ];
 
 current_line = 0;
 max_time_between_spawns = 120;
 time_between_spawns = max_time_between_spawns;
+
+sequence_finished = false;
