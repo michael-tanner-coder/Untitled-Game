@@ -209,6 +209,7 @@
     {"name":"obj_card","order":16,"path":"objects/obj_card/obj_card.yy",},
     {"name":"obj_character_unlock_transition_manager","order":2,"path":"objects/obj_character_unlock_transition_manager/obj_character_unlock_transition_manager.yy",},
     {"name":"obj_collider","order":3,"path":"objects/obj_collider/obj_collider.yy",},
+    {"name":"obj_credits_spawner","order":16,"path":"objects/obj_credits_spawner/obj_credits_spawner.yy",},
     {"name":"obj_crowd_member","order":13,"path":"objects/obj_crowd_member/obj_crowd_member.yy",},
     {"name":"obj_destroy_force","order":11,"path":"objects/obj_destroy_force/obj_destroy_force.yy",},
     {"name":"obj_dot","order":1,"path":"objects/obj_dot/obj_dot.yy",},

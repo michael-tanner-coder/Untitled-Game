@@ -2,6 +2,7 @@ text="MADE BY MICHAEL MONTY";
 font = fnt_default;
 hit = false;
 hit_timer = 0;
+text_alpha = 0;
 
 // Physics Fixture
 remove_previous_fixture = function() {

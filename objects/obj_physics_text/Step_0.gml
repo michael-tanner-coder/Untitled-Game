@@ -5,3 +5,5 @@ if (hit_timer > 0) {
 if (hit_timer <= 0) {
     hit = false;
 }
+
+text_alpha = lerp(text_alpha, 1, 0.02);

@@ -267,6 +267,7 @@
     {"id":{"name":"obj_character_unlock_transition_manager","path":"objects/obj_character_unlock_transition_manager/obj_character_unlock_transition_manager.yy",},},
     {"id":{"name":"obj_collider","path":"objects/obj_collider/obj_collider.yy",},},
     {"id":{"name":"obj_crawlie","path":"objects/obj_crawlie/obj_crawlie.yy",},},
+    {"id":{"name":"obj_credits_spawner","path":"objects/obj_credits_spawner/obj_credits_spawner.yy",},},
     {"id":{"name":"obj_crowd_member","path":"objects/obj_crowd_member/obj_crowd_member.yy",},},
     {"id":{"name":"obj_destroy_force","path":"objects/obj_destroy_force/obj_destroy_force.yy",},},
     {"id":{"name":"obj_dot","path":"objects/obj_dot/obj_dot.yy",},},
