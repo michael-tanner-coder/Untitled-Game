@@ -16,6 +16,10 @@ if (keyboard_check_pressed(ord("U"))) {
     reset_unlocks();
 }
 
+if (keyboard_check_pressed(ord("Q"))) {
+    go_to_next_scene();
+}
+
 if (keyboard_check_pressed(ord("E"))) {
     publish("win_level");
 }
