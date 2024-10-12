@@ -1,0 +1,1 @@
+global.settings.invincible_mode_enabled = true;

@@ -76,6 +76,7 @@ Example usage:
 #macro FLIPPED_ALL_ENEMIES "flip_all_enemies"
 #macro LEVEL_ENDED "end_level"
 #macro WON_LEVEL "win_level"
+#macro WON_GAME "win_game"
 #macro LOST_LEVEL "lose_level"
 #macro ACTORS_DEACTIVATED "deactivate_all_actors"
 #macro ACTORS_ACTIVATED "activate_all_actors"
@@ -191,14 +192,14 @@ enum ABILITIES {
 #macro PERSIAN_PINK $C889F8 
 #macro BLUE $FF9B63
 #macro DARK_BLUE $2C1E19
-#macro YELLOW $75CDFF
 #macro BLACK $342022
 #macro WHITE $F8F8E8
 #macro PURPLE $884848
 #macro GREEN $68BD48
 #macro WILD_RICE $88E8D8
-#macro RED $78878E6
-#macro ORANGE $88B8F8
+#macro YELLOW $88B8F8
+#macro ORANGE $898EF8
+#macro RED $7868E8
 #macro PERANO $F8B8A8
 #macro PORTAGE $84F884
 #macro EAST_BAY $884848
