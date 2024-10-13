@@ -1,2 +1,2 @@
 /// @description change room
-room_goto(rm_main_menu);
+room_goto(rm_level_generation);
