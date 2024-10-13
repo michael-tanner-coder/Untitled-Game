@@ -22,14 +22,6 @@ tutorial_score = 400; // make this configurable
 upgrade_score = 2000; // make this configurable
 raise_tension = true;
 
-// Spawn Point Setup
-var _temp_spawn_points = [];
-with(obj_dot) {
-    array_push(_temp_spawn_points, {x_pos: x, y_pos: y});
-    instance_destroy(self);
-}
-spawn_points = _temp_spawn_points;
-
 // State Machine
 fsm = new SnowState("wave");
 fsm.add("wave", {
@@ -92,11 +84,12 @@ fsm.add("wave", {
 		}
 	
 		// when it's time for the next spawn, calculate the value of an enemy spawn to determine if it will fit in the room
-		if (spawn_timer <= 0) {
+		if (spawn_timer <= 0 && is_array(struct_get(global.current_layout, "enemy_spawn_points"))) {
 			
 			
 			// get the target enemy type to spawn
-			var _chosen_spawn_point = spawn_points[irandom_range(0, array_length(spawn_points)-1)];
+			var _spawn_points = global.current_layout.enemy_spawn_points;
+			var _chosen_spawn_point = _spawn_points[irandom_range(0, array_length(_spawn_points)-1)];
 			var _chosen_spawn = enemy_types[irandom_range(0, array_length(enemy_types)-1)];
 			var _count_of_spawn_type = instance_number(_chosen_spawn.type);
 			

@@ -58,16 +58,26 @@ function spawn_level_layout(_layout = {}) {
         show_debug_message("Blocks is not an array")
     }
     
-    if (is_array(_layout.spawn_points)) {
-        FOREACH _layout.spawn_points ELEMENT
-            instance_create_layer(_elem.x_pos, _elem.y_pos, layer, obj_dot);
-        END
-    }
+   with(obj_dot) {
+       instance_destroy(self);
+   }
+   
+   with (obj_money) {
+       instance_destroy(self);
+   }
 }
 
 function destroy_level_layout() {
     with(obj_wall) {
         instance_destroy(self);
+    }
+    
+    with(obj_dot) {
+       instance_destroy(self);
+    }
+   
+    with (obj_money) {
+       instance_destroy(self);
     }
 }
 

@@ -17,7 +17,8 @@ var _current_level_struct = {
 var _current_layout_struct = {
     key: "",
     blocks: [],
-    spawn_points: [],
+    enemy_spawn_points: [],
+    money_spawn_points: [],
 };
 
 var _key = room_get_name(room);
@@ -25,6 +26,20 @@ show_debug_message(_key);
 
 with (obj_wall) {
     array_push(_current_layout_struct.blocks, {
+        x_pos: x,
+        y_pos: y,
+    });
+}
+
+with (obj_dot) {
+    array_push(_current_layout_struct.enemy_spawn_points, {
+        x_pos: x,
+        y_pos: y,
+    });
+}
+
+with (obj_money) {
+    array_push(_current_layout_struct.money_spawn_points, {
         x_pos: x,
         y_pos: y,
     });
