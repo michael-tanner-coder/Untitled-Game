@@ -1097,6 +1097,8 @@
     {"name":"sInpMouseMiddle","order":15,"path":"sprites/sInpMouseMiddle/sInpMouseMiddle.yy",},
     {"name":"sInpMouseRight","order":16,"path":"sprites/sInpMouseRight/sInpMouseRight.yy",},
     {"name":"spr_area_transition","order":1,"path":"sprites/spr_area_transition/spr_area_transition.yy",},
+    {"name":"spr_arena_1_floor_tileset","order":37,"path":"sprites/spr_arena_1_floor_tileset/spr_arena_1_floor_tileset.yy",},
+    {"name":"spr_arena_1_tileset","order":36,"path":"sprites/spr_arena_1_tileset/spr_arena_1_tileset.yy",},
     {"name":"spr_back_pipe_layer","order":8,"path":"sprites/spr_back_pipe_layer/spr_back_pipe_layer.yy",},
     {"name":"spr_beam_inner","order":9,"path":"sprites/spr_beam_inner/spr_beam_inner.yy",},
     {"name":"spr_beam_outer","order":10,"path":"sprites/spr_beam_outer/spr_beam_outer.yy",},
@@ -1321,5 +1323,6 @@
     {"name":"spr_underlay","order":16,"path":"sprites/spr_underlay/spr_underlay.yy",},
     {"name":"spr_white_circle","order":9,"path":"sprites/spr_white_circle/spr_white_circle.yy",},
     {"name":"spr_white_dot","order":36,"path":"sprites/spr_white_dot/spr_white_dot.yy",},
+    {"name":"ts_arena_1_floor","order":1,"path":"tilesets/ts_arena_1_floor/ts_arena_1_floor.yy",},
   ],
 }
