@@ -147,7 +147,6 @@ fsm.add("level_complete", {
 		victory_bg_alpha = lerp(victory_bg_alpha, target_victory_bg_alpha, 0.1);
 		
 		if (input_check_pressed("select")) {
-			// room_restart();
 			go_to_next_scene();
 		}
 	},
