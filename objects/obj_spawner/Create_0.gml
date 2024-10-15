@@ -70,6 +70,7 @@ fsm.add("wave", {
 			}
 			
 			instance_create_layer(obj_boss_spawn_point.x, obj_boss_spawn_point.y, layer, boss_type);
+			screenshake(4, 10, 0.5);
 			fsm.change("idle");
 			
 			return;
