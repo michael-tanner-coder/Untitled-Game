@@ -5,6 +5,7 @@ if (_current_scene == undefined) {
 		goal_score: 20000,
         time_between_spawns: 30,
         max_enemy_count: 10,
+        boss: obj_boss_test,
 	};
 }
 
@@ -13,6 +14,7 @@ enemy_types = _current_scene.enemy_types;
 modified_time_between_spawns = _current_scene.time_between_spawns;
 current_max_enemy_count = _current_scene.max_enemy_count;
 goal_score = _current_scene.goal_score;
+boss_type = _current_scene.boss;
 
 // Set Spawner properties
 base_time_between_spawns = 30;
@@ -61,18 +63,14 @@ fsm.add("wave", {
 			global.tension += (raise_tension ? 0.025 * _climax_multiplier : -0.025 ) * DT;
 		}
 	
-		// check for level progress based on score
-		if (score >= goal_score) {
-			if (instance_number(obj_dot) <= 0) {
-				global.settings.game_speed = lerp(global.settings.game_speed, 0.3, 0.1);
-				
-				if (global.settings.game_speed <= 0.3) {
-					play_sound(snd_tutorial_success);
-					global.settings.game_speed = 1;
-					publish(WON_LEVEL);
-					fsm.change("idle");
-				}
+		// check if we should spawn the boss
+		if (score >= goal_score && boss_type != undefined && instance_number(boss_type) < 1) {
+			with(obj_dot) {
+				instance_destroy(self);
 			}
+			
+			instance_create_layer(obj_boss_spawn_point.x, obj_boss_spawn_point.y, layer, boss_type);
+			fsm.change("idle");
 			
 			return;
 		}
@@ -121,6 +119,18 @@ fsm.add("wave", {
 	},
 });
 
+fsm.add("boss_defeated", {
+	step: function() {
+		global.settings.game_speed = lerp(global.settings.game_speed, 0.3, 0.1);
+		
+		if (global.settings.game_speed <= 0.3) {
+			play_sound(snd_tutorial_success);
+			global.settings.game_speed = 1;
+			publish(WON_LEVEL);
+		}
+	}
+});
+
 fsm.add("idle", {
 	enter: function() {
 	},
@@ -137,7 +147,6 @@ fsm.add("level_complete", {
 		play_stinger(snd_stinger_victory);
 	},
 	step: function() {
-		
 	},
 	draw: function() {
 	},
@@ -147,3 +156,4 @@ fsm.add("level_complete", {
 subscribe(id, ACTORS_DEACTIVATED, function() {fsm.change("idle")});
 subscribe(id, ACTORS_ACTIVATED, function() {fsm.change("wave")});
 subscribe(id, WON_LEVEL, function() {fsm.change("level_complete")});
+subscribe(id, DEFEATED_BOSS, function() {fsm.change("boss_defeated")})

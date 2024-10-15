@@ -69,6 +69,8 @@ Example usage:
 #macro DISABLED_KEY_SPAWNING "disabled_key_spawning"
 #macro ENABLED_ENEMY_SPAWNING "enabled_enemy_spawning"
 #macro DISABLED_ENEMY_SPAWNING "disabled_enemy_spawning"
+#macro SPAWNED_BOSS "spawned_boss"
+#macro DEFEATED_BOSS "defeated_boss"
 #macro SPAWN_ONLY_KEY_ENEMIES "spawn_only_key_enemies"
 #macro SPAWN_NO_KEY_ENEMIES "spawn_no_key_enemies"
 #macro RESET_KEY_ENEMY_SPAWN_CHANCE "reset_key_enemy_spawn_chance"

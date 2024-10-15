@@ -84,6 +84,7 @@
     {"name":"inst_5E673EED","path":"rooms/rm_combat_test/rm_combat_test.yy",},
     {"name":"inst_68F84C77","path":"rooms/rm_combat_test/rm_combat_test.yy",},
     {"name":"inst_33117732","path":"rooms/rm_combat_test/rm_combat_test.yy",},
+    {"name":"inst_361CD12E","path":"rooms/rm_combat_test/rm_combat_test.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -177,6 +178,7 @@
         {"$GMRInstance":"","%Name":"inst_3916FA95","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_3916FA95","objectId":{"name":"obj_upgrade_selection","path":"objects/obj_upgrade_selection/obj_upgrade_selection.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":640.0,"y":224.0,},
         {"$GMRInstance":"","%Name":"inst_6A2711D4","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_6A2711D4","objectId":{"name":"obj_game_over_manager","path":"objects/obj_game_over_manager/obj_game_over_manager.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":320.0,"y":512.0,},
         {"$GMRInstance":"","%Name":"inst_68F84C77","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_68F84C77","objectId":{"name":"obj_scene_test","path":"objects/obj_scene_test/obj_scene_test.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":672.0,"y":320.0,},
+        {"$GMRInstance":"","%Name":"inst_361CD12E","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_361CD12E","objectId":{"name":"obj_boss_spawn_point","path":"objects/obj_boss_spawn_point/obj_boss_spawn_point.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":672.0,"y":96.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"Floor_Tiles","depth":299,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Floor_Tiles","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":24,"SerialiseWidth":43,"TileCompressedData":[
           -94,-2147483648,-25,1,1,2,-17,-2147483648,1,10,-24,11,1,12,-17,-2147483648,1,10,-24,11,1,12,-17,-2147483648,
