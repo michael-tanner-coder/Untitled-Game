@@ -81,7 +81,7 @@ fsm.add("active", {
 		}
 	},
 	draw: function() {
-		draw_8_direction_movement(spr_basic_enemy_sheet, frame_width, frame_height, anim_length);
+		draw_8_direction_movement(spr_basic_enemy_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width/2, frame_height/2);
 	},
 });
 fsm.add("idle", {
