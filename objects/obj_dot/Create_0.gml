@@ -81,29 +81,7 @@ fsm.add("active", {
 		}
 	},
 	draw: function() {
-		var _movement_direction = -point_direction(0, 0, phy_speed_x, phy_speed_y);
-		y_frame = (_movement_direction / 45) * -1;
-		x_frame += anim_speed / room_speed;
-		x_frame = loop_clamp(x_frame, 0, anim_length);
-		
-		// halt animation when physics speed is zero
-		anim_speed = floor(phy_speed) * base_anim_speed;
-		
-		// draw piece of sprite sheet
-		draw_sprite_part_ext(
-			spr_basic_enemy_sheet,
-			0,
-			floor(x_frame) * frame_width,
-			floor(y_frame) * frame_height,
-			frame_width,
-			frame_height,
-			x,
-			y,
-			image_xscale,
-			image_yscale, 
-			c_white,
-			1,
-		);	
+		draw_8_direction_movement(spr_basic_enemy_sheet, frame_width, frame_height, anim_length);
 	},
 });
 fsm.add("idle", {

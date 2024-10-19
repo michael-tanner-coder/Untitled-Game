@@ -1,5 +1,15 @@
 // Goals:
 // 1. Fix UI display + resolution bugs
+// -- dash sprite
+// -- shield sprites
+// -- top bar for HUD sprites
+// -- resize upgrade cards
+// -- relayer upgrade cards
+// -- smaller font
+// -- resize upgrades menu 
+// -- reposition spawn points 
+// -- rebuild alt level layouts 
+
 // 2. Build level select menu
 // 3. Build character select menu
 
@@ -191,7 +201,6 @@ fsm.add("active", {
 
 		if (dash_timer > 0) {
 		    base_speed = 2 * max_speed * _game_speed;
-			leave_trail();
 		}
 
 		dash_timer--;
@@ -230,31 +239,7 @@ fsm.add("active", {
 		i_frames = clamp(i_frames, 0, respawn_i_frames);
 	},
 	draw: function() {
-		
-		// get animation direction
-		var _movement_direction = -point_direction(0, 0, phy_speed_x, phy_speed_y);
-		y_frame = (_movement_direction / 45) * -1;
-		x_frame += anim_speed / room_speed;
-		x_frame = loop_clamp(x_frame, 0, anim_length);
-		
-		// halt animation when physics speed is zero
-		anim_speed = floor(phy_speed) * base_anim_speed;
-		
-		// draw piece of sprite sheet
-		draw_sprite_part_ext(
-			spr_player_sheet,
-			0,
-			floor(x_frame) * frame_width,
-			floor(y_frame) * frame_height,
-			frame_width,
-			frame_height,
-			x,
-			y,
-			image_xscale,
-			image_yscale, 
-			c_white,
-			1,
-		);
+		draw_8_direction_movement(dash_timer > 0 ? spr_player_sheet_dash : spr_player_sheet, frame_width, frame_height, anim_length);
 	},
 });
 fsm.add("idle", {

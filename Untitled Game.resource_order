@@ -1229,6 +1229,7 @@
     {"name":"spr_player_normal_right_leg","order":6,"path":"sprites/spr_player_normal_right_leg/spr_player_normal_right_leg.yy",},
     {"name":"spr_player_normal_walk","order":2,"path":"sprites/spr_player_normal_walk/spr_player_normal_walk.yy",},
     {"name":"spr_player_normal","order":8,"path":"sprites/spr_player_normal/spr_player_normal.yy",},
+    {"name":"spr_player_sheet_dash","order":17,"path":"sprites/spr_player_sheet_dash/spr_player_sheet_dash.yy",},
     {"name":"spr_player_sheet","order":15,"path":"sprites/spr_player_sheet/spr_player_sheet.yy",},
     {"name":"spr_player_small_body","order":6,"path":"sprites/spr_player_small_body/spr_player_small_body.yy",},
     {"name":"spr_player_small_crotch","order":8,"path":"sprites/spr_player_small_crotch/spr_player_small_crotch.yy",},

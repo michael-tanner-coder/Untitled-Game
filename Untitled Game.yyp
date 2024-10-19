@@ -1414,6 +1414,7 @@
     {"id":{"name":"spr_player_normal_right_leg","path":"sprites/spr_player_normal_right_leg/spr_player_normal_right_leg.yy",},},
     {"id":{"name":"spr_player_normal_walk","path":"sprites/spr_player_normal_walk/spr_player_normal_walk.yy",},},
     {"id":{"name":"spr_player_normal","path":"sprites/spr_player_normal/spr_player_normal.yy",},},
+    {"id":{"name":"spr_player_sheet_dash","path":"sprites/spr_player_sheet_dash/spr_player_sheet_dash.yy",},},
     {"id":{"name":"spr_player_sheet","path":"sprites/spr_player_sheet/spr_player_sheet.yy",},},
     {"id":{"name":"spr_player_small_body","path":"sprites/spr_player_small_body/spr_player_small_body.yy",},},
     {"id":{"name":"spr_player_small_crotch","path":"sprites/spr_player_small_crotch/spr_player_small_crotch.yy",},},
