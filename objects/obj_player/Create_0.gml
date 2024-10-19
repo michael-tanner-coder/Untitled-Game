@@ -2,12 +2,10 @@
 // 1. Fix UI display + resolution bugs
 // -- dash sprite
 // -- shield sprites
-// -- top bar for HUD sprites
 // -- resize upgrade cards
 // -- relayer upgrade cards
 // -- smaller font
 // -- resize upgrades menu 
-// -- reposition spawn points 
 // -- rebuild alt level layouts 
 
 // 2. Build level select menu
