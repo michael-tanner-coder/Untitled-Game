@@ -1,3 +1,8 @@
+// Goals:
+// 1. Fix UI display + resolution bugs
+// 2. Build level select menu
+// 3. Build character select menu
+
 // Base Player Properties
 x_force = 0;
 y_force = 0;
@@ -61,6 +66,20 @@ target_size = upgrade_stats.player_size;
 image_xscale = target_size;
 image_yscale = target_size;
 
+// Animation
+anim_start = 0;
+anim_current = 0;
+anim_end = 0;
+anim_length = 8;
+base_anim_speed = 2;
+anim_speed = base_anim_speed;
+x_frame = 0;
+y_frame = 0;
+x_offset = 0;
+y_offset = 0;
+frame_width = 24;
+frame_height = 27;
+
 // State Machine
 fsm = new SnowState("active");
 
@@ -98,7 +117,6 @@ fsm.add("active", {
 
 		// get base force from user input
 		physics_apply_impulse(x,y, x_force, y_force);
-
 
 		// --- Shooting ---
 		if (_click_pressed) {
@@ -195,8 +213,6 @@ fsm.add("active", {
 		image_xscale = lerp(image_xscale, target_size, 0.3);
 		image_yscale = lerp(image_yscale, target_size, 0.3);
 
-		phy_rotation = -1 * point_direction(x, y, mouse_x, mouse_y);
-
 		// remove tutorial prompts when the player has moved and shot for the first time
 		if (global.moved && global.shot && global.dashed && alarm_get(0) == -1) {
 			alarm_set(0, 60);
@@ -213,9 +229,39 @@ fsm.add("active", {
 		}
 		i_frames = clamp(i_frames, 0, respawn_i_frames);
 	},
+	draw: function() {
+		
+		// get animation direction
+		var _movement_direction = -point_direction(0, 0, phy_speed_x, phy_speed_y);
+		y_frame = (_movement_direction / 45) * -1;
+		x_frame += anim_speed / room_speed;
+		x_frame = loop_clamp(x_frame, 0, anim_length);
+		
+		// halt animation when physics speed is zero
+		anim_speed = floor(phy_speed) * base_anim_speed;
+		
+		// draw piece of sprite sheet
+		draw_sprite_part_ext(
+			spr_player_sheet,
+			0,
+			floor(x_frame) * frame_width,
+			floor(y_frame) * frame_height,
+			frame_width,
+			frame_height,
+			x,
+			y,
+			image_xscale,
+			image_yscale, 
+			c_white,
+			1,
+		);
+	},
 });
 fsm.add("idle", {
 	step: function() {},
+	draw: function() {
+		draw_self();
+	},
 });
 
 // Methods

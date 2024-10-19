@@ -12,7 +12,7 @@ global.scene_queue = [
     },
     {
         key: "level",
-        map: rm_combat_test,
+        map: rm_combat_test_small,
         goal_score: 1000,
         time_between_spawns: 30,
         max_enemy_count: 10,

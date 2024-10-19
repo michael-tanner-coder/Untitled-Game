@@ -1,5 +1,5 @@
 global.level_rooms = [
-    rm_combat_test,
+    rm_combat_test_small,
     rm_combat_test_2,
     rm_combat_test_3,
     rm_combat_test_4,
@@ -32,7 +32,7 @@ function compile_level_layouts() {
         var _key = room_get_name(room);
         show_debug_message(_key);
         
-        with (obj_wall) {
+        with (obj_spike_block) {
             array_push(_current_layout_struct.blocks, {
                 x_pos: x,
                 y_pos: y,
@@ -51,7 +51,7 @@ function compile_level_layouts() {
 function spawn_level_layout(_layout = {}) {
     if (is_array(_layout.blocks)) {
         FOREACH _layout.blocks ELEMENT
-            instance_create_layer(_elem.x_pos, _elem.y_pos, layer, obj_wall);
+            instance_create_layer(_elem.x_pos, _elem.y_pos, layer, obj_spike_block);
         END
     }
     else {
@@ -68,7 +68,7 @@ function spawn_level_layout(_layout = {}) {
 }
 
 function destroy_level_layout() {
-    with(obj_wall) {
+    with(obj_spike_block) {
         instance_destroy(self);
     }
     

@@ -10,6 +10,20 @@ x_force = 0;
 y_force = 0;
 shield_sprite = spr_shield;
 
+// Animation
+anim_start = 0;
+anim_current = 0;
+anim_end = 0;
+anim_length = 8;
+base_anim_speed = 2;
+anim_speed = base_anim_speed;
+x_frame = 0;
+y_frame = 0;
+x_offset = 0;
+y_offset = 0;
+frame_width = 24;
+frame_height = 27;
+
 // Shadow
 var _shadow = instance_create_layer(x,y,layer,obj_shadow);
 _shadow.depth = depth + 1;
@@ -66,9 +80,37 @@ fsm.add("active", {
 		    sprite_index = spr_dot;
 		}
 	},
+	draw: function() {
+		var _movement_direction = -point_direction(0, 0, phy_speed_x, phy_speed_y);
+		y_frame = (_movement_direction / 45) * -1;
+		x_frame += anim_speed / room_speed;
+		x_frame = loop_clamp(x_frame, 0, anim_length);
+		
+		// halt animation when physics speed is zero
+		anim_speed = floor(phy_speed) * base_anim_speed;
+		
+		// draw piece of sprite sheet
+		draw_sprite_part_ext(
+			spr_basic_enemy_sheet,
+			0,
+			floor(x_frame) * frame_width,
+			floor(y_frame) * frame_height,
+			frame_width,
+			frame_height,
+			x,
+			y,
+			image_xscale,
+			image_yscale, 
+			c_white,
+			1,
+		);	
+	},
 });
 fsm.add("idle", {
 	step: function() {},
+	draw: function() {
+		draw_self();
+	},
 });
 
 // Event Subscriptions

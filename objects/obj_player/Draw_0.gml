@@ -1,4 +1,7 @@
-draw_self();
+// draw_self();
+if (fsm.event_exists("draw")) {
+	fsm.draw();
+}
 
 // Flicker rendering when iframes are active
 if (i_frames % 8 != 0) {
