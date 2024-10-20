@@ -28,6 +28,8 @@ global.currency = 0;
 #macro TARGET_RESOLUTION_H 1080
 
 #macro VIEW view_camera[0]
+#macro VIEW_WIDTH camera_get_view_width(VIEW)
+#macro VIEW_HEIGHT camera_get_view_height(VIEW)
 
 // Game Rules
 #macro STANDARD_SPAWN_RATE 450

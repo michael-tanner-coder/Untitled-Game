@@ -16,26 +16,27 @@ shake_x_offset = 0;
 shake_y_offset = 0;
 tutorial_banner_x = 0;
 tutorial_banner_center_point = global.first_wave_complete ? -2000 : 0;
-tutorial_banner_y = room_height/6;
+tutorial_banner_y = VIEW_HEIGHT/6;
 tutorial_text_padding_left = 40;
 show_tutorial = global.tutorial;
 won_level = false;
-victory_bg_x = -1 * room_width;
+
+victory_bg_y = 64;
+victory_bg_x = -1 * VIEW_WIDTH;
 target_victory_bg_x = 0;
 victory_bg_alpha = 0;
 target_victory_bg_alpha = 0.7;
-victory_banner_y = (room_height/2) - 120;
+victory_banner_y = (VIEW_HEIGHT/2) - 120;
+
 color_block_offset = 32;
 color_blocks = [
 	YELLOW,
 	ORANGE,
 	RED, 
 	PURPLE,
-	BLACK,
 	SMALT_BLUE,
 	GREEN,
 	WILD_RICE,
-	WHITE,
 	PERANO,
 	PORTAGE,
 	EAST_BAY,
@@ -44,6 +45,7 @@ color_blocks = [
 	PINK,
 	PERSIAN_PINK
 ];
+
 goal_score = _current_scene.goal_score;
 
 
@@ -64,10 +66,10 @@ fsm.add("start_level", {
 	},
 	
 	step: function() {
-		victory_bg_x = lerp(victory_bg_x, room_width * 2, 0.05);
+		victory_bg_x = lerp(victory_bg_x, VIEW_WIDTH * 2, 0.05);
 		victory_bg_alpha = lerp(victory_bg_alpha, 0, 0.1);
 		
-		if (victory_bg_x >= room_width * 1.5) {
+		if (victory_bg_x >= VIEW_WIDTH * 1.5) {
 			fsm.change("mid_level");
 		}
 	},
@@ -75,10 +77,10 @@ fsm.add("start_level", {
 	draw: function() {
 		// Color background
 		FOREACH color_blocks ELEMENT
-			var _block_width = room_width + (color_block_offset * array_length(color_blocks));
-			var _block_height = room_height / array_length(color_blocks);
+			var _block_width = VIEW_WIDTH + (color_block_offset * array_length(color_blocks));
+			var _block_height = VIEW_HEIGHT / array_length(color_blocks);
 			var _block_x = victory_bg_x - color_block_offset * _i;
-			var _block_y = _i * _block_height;
+			var _block_y = victory_bg_y + (_i * _block_height);
 			draw_set_color(_elem);
 			draw_rectangle(_block_x, _block_y, _block_x + _block_width, _block_y + _block_height, false);	
 		END
@@ -90,7 +92,7 @@ fsm.add("mid_level", {
 		if (show_tutorial) {
 			draw_set_color(c_black);
 			draw_set_alpha(0.5);
-			draw_rectangle(tutorial_banner_center_point, tutorial_banner_y - 20, room_width/2 + tutorial_banner_center_point, tutorial_banner_y + 120, false);
+			draw_rectangle(tutorial_banner_center_point, tutorial_banner_y - 20, VIEW_WIDTH/2 + tutorial_banner_center_point, tutorial_banner_y + 120, false);
 			draw_set_alpha(1);
 	
 			draw_set_halign(fa_left);
@@ -111,27 +113,21 @@ fsm.add("game_over", {
 	draw: function() {
 		// Color background
 		FOREACH color_blocks ELEMENT
-			var _block_width = room_width + (color_block_offset * array_length(color_blocks));
-			var _block_height = room_height / array_length(color_blocks);
-			var _block_x = victory_bg_x - color_block_offset * _i;
-			var _block_y = _i * _block_height;
+			var _block_width = VIEW_WIDTH + (color_block_offset * array_length(color_blocks));
+			var _block_height = VIEW_HEIGHT / array_length(color_blocks);
+			var _block_x = ceil(victory_bg_x - color_block_offset * _i);
+			var _block_y = victory_bg_y + (_i * _block_height);
 			draw_set_color(_elem);
 			draw_rectangle(_block_x, _block_y, _block_x + _block_width, _block_y + _block_height, false);	
 		END
 		
-		// Banner BG
-		var _banner_y = room_height/2 - 100;
-		draw_set_color(c_black);
-		draw_set_alpha(0.5);
-		draw_rectangle(0, _banner_y, room_width, _banner_y + 120, false);
-		draw_set_alpha(1);
-		
 		// Banner Text
+		var _banner_y = VIEW_WIDTH/2 - 100;
 		draw_set_color(WHITE);
-		draw_shadow_text(room_width/2, _banner_y + 30, "FINAL SCORE: " + string(score));
-		draw_shadow_text(room_width/2, _banner_y + 50, "BEST SCORE: " + string(global.best_score));
-		draw_shadow_text(room_width/2, _banner_y + 70, "RETRY: spacebar");
-		draw_shadow_text(room_width/2, _banner_y + 90, "QUIT: escape");
+		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 30, "FINAL SCORE: " + string(score));
+		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 50, "BEST SCORE: " + string(global.best_score));
+		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 70, "RETRY: spacebar");
+		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 90, "QUIT: escape");
 	}
 });
 
@@ -154,10 +150,10 @@ fsm.add("level_complete", {
 	draw: function() {
 		// Color background
 		FOREACH color_blocks ELEMENT
-			var _block_width = room_width + (color_block_offset * array_length(color_blocks));
-			var _block_height = room_height / array_length(color_blocks);
+			var _block_width = VIEW_WIDTH + (color_block_offset * array_length(color_blocks));
+			var _block_height = VIEW_HEIGHT / array_length(color_blocks);
 			var _block_x = victory_bg_x - color_block_offset * _i;
-			var _block_y = _i * _block_height;
+			var _block_y = victory_bg_y + (_i * _block_height);
 			draw_set_color(_elem);
 			draw_rectangle(_block_x, _block_y, _block_x + _block_width, _block_y + _block_height, false);	
 		END
@@ -189,10 +185,10 @@ fsm.add("game_complete", {
 	draw: function() {
 		// Color background
 		FOREACH color_blocks ELEMENT
-			var _block_width = room_width + (color_block_offset * array_length(color_blocks));
-			var _block_height = room_height / array_length(color_blocks);
+			var _block_width = VIEW_WIDTH + (color_block_offset * array_length(color_blocks));
+			var _block_height = VIEW_HEIGHT / array_length(color_blocks);
 			var _block_x = victory_bg_x - color_block_offset * _i;
-			var _block_y = _i * _block_height;
+			var _block_y = victory_bg_y + (_i * _block_height);
 			draw_set_color(_elem);
 			draw_rectangle(_block_x, _block_y, _block_x + _block_width, _block_y + _block_height, false);	
 		END
