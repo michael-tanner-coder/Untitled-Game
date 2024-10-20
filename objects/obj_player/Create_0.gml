@@ -1,7 +1,8 @@
 // Goals:
 // 1. Fix UI display + resolution bugs
 // -- dash sprite
-// -- fix UI layering
+// -- fix transition animation
+// -- realign HUD elements
 // -- resize characters (50% larger)
 
 // 2. Build level select menu
