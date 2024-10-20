@@ -65,7 +65,7 @@ physics_fixture_set_friction(fix, upgrade_stats.player_friction);
 my_fixture = physics_fixture_bind(fix, self);
 
 // Sizing
-target_size = upgrade_stats.player_size;
+target_size = 2;
 image_xscale = target_size;
 image_yscale = target_size;
 
@@ -232,7 +232,10 @@ fsm.add("active", {
 		i_frames = clamp(i_frames, 0, respawn_i_frames);
 	},
 	draw: function() {
-		draw_8_direction_movement(dash_timer > 0 ? spr_player_sheet_dash : spr_player_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width/2, frame_height/2);
+		draw_set_color(RED);
+		draw_8_direction_movement(dash_timer > 0 ? spr_player_sheet_dash : spr_player_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
+		physics_draw_debug();
+		
 	},
 });
 fsm.add("idle", {
