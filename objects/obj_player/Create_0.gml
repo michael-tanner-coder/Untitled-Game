@@ -1,7 +1,8 @@
 // Goals:
 // 1. Fix UI display + resolution bugs
 // -- dash sprite
-// -- resize upgrades menu
+// -- fix UI layering
+// -- resize characters (50% larger)
 
 // 2. Build level select menu
 // 3. Build character select menu
@@ -232,7 +233,7 @@ fsm.add("active", {
 		i_frames = clamp(i_frames, 0, respawn_i_frames);
 	},
 	draw: function() {
-		draw_8_direction_movement(dash_timer > 0 ? spr_player_sheet_dash : spr_player_sheet, frame_width, frame_height, anim_length);
+		draw_8_direction_movement(dash_timer > 0 ? spr_player_sheet_dash : spr_player_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width/2, frame_height/2);
 	},
 });
 fsm.add("idle", {
