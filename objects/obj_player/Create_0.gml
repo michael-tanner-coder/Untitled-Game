@@ -1,7 +1,6 @@
 // Goals:
 // 1. Fix UI display + resolution bugs
 // -- dash sprite
-// -- shield sprites
 // -- resize upgrade cards
 // -- relayer upgrade cards
 // -- smaller font
