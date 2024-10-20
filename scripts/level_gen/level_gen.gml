@@ -1,8 +1,8 @@
 global.level_rooms = [
     rm_combat_test_small,
-    rm_combat_test_2,
-    rm_combat_test_3,
-    rm_combat_test_4,
+    rm_combat_test_small_2,
+    rm_combat_test_small_3,
+    rm_combat_test_small_4,
 ];
 global.level_layouts = [];
 global.level_gen_index = 0;

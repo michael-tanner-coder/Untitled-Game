@@ -4,8 +4,7 @@
 // -- resize upgrade cards
 // -- relayer upgrade cards
 // -- smaller font
-// -- resize upgrades menu 
-// -- rebuild alt level layouts 
+// -- resize upgrades menu
 
 // 2. Build level select menu
 // 3. Build character select menu
