@@ -1,9 +1,6 @@
 // Goals:
 // 1. Fix UI display + resolution bugs
 // -- dash sprite
-// -- resize upgrade cards
-// -- relayer upgrade cards
-// -- smaller font
 // -- resize upgrades menu
 
 // 2. Build level select menu

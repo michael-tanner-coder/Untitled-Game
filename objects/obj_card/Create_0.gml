@@ -1,13 +1,15 @@
 // Base Styles
-width = 300;
-height = 600;
+width = 150;
+height = 300;
 color = BLUE;
 
 // Card Content
 header = "Card Header";
+header_font = fnt_medium;
 sprite = spr_white_circle;
 description = "Lorem ipsum type shit";
-description_padding = 20;
+description_font = fnt_small;
+description_padding = 10;
 price = 0;
 upgrade = global.upgrades[0];
 
