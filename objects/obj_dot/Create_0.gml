@@ -15,14 +15,14 @@ anim_start = 0;
 anim_current = 0;
 anim_end = 0;
 anim_length = 8;
-base_anim_speed = 2;
+base_anim_speed = 4;
 anim_speed = base_anim_speed;
 x_frame = 0;
 y_frame = 0;
 x_offset = 0;
 y_offset = 0;
-frame_width = 24;
-frame_height = 27;
+frame_width = 32;
+frame_height = 32;
 
 image_xscale = 2;
 image_yscale = 2;
@@ -86,7 +86,7 @@ fsm.add("active", {
 	draw: function() {
 		draw_8_direction_movement(spr_basic_enemy_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
 		draw_set_color(BLUE);
-		physics_draw_debug();
+		// physics_draw_debug();
 	},
 });
 fsm.add("idle", {
