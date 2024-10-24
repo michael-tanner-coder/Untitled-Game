@@ -1334,6 +1334,7 @@
     {"name":"spr_tracker_angry","order":16,"path":"sprites/spr_tracker_angry/spr_tracker_angry.yy",},
     {"name":"spr_tracker_shiny","order":26,"path":"sprites/spr_tracker_shiny/spr_tracker_shiny.yy",},
     {"name":"spr_tracker","order":8,"path":"sprites/spr_tracker/spr_tracker.yy",},
+    {"name":"spr_trail_circle","order":40,"path":"sprites/spr_trail_circle/spr_trail_circle.yy",},
     {"name":"spr_trail","order":3,"path":"sprites/spr_trail/spr_trail.yy",},
     {"name":"spr_tutorial_prompt","order":2,"path":"sprites/spr_tutorial_prompt/spr_tutorial_prompt.yy",},
     {"name":"spr_underlay","order":16,"path":"sprites/spr_underlay/spr_underlay.yy",},

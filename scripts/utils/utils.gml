@@ -25,7 +25,7 @@ function draw_8_direction_movement(sprite_sheet, frame_w, frame_h, animation_len
 	);
 }
 
-function leave_trail(_color = c_white) {
+function leave_trail(_color = c_white, _sprite = undefined) {
 	/*if (x_force == 0 && y_force == 0) {
 		return;
 	}*/
@@ -46,6 +46,9 @@ function leave_trail(_color = c_white) {
 		//image_xscale =_target_xscale;
 		//image_yscale =_target_yscale;
 		sprite_index = other.sprite_index;
+		if (_sprite != undefined) {
+			sprite_index = _sprite;
+		}
 		image_blend = _color;
 		image_alpha = 0.5;
 		image_angle = other.image_angle;

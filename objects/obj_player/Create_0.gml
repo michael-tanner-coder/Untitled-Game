@@ -141,8 +141,8 @@ fsm.add("active", {
 	    
 			    // Bullet force
 			    var _x_force, _y_force;
-			    _x_force = lengthdir_x(10, _bullet_angle) * upgrade_stats.player_bullet_force * _game_speed;
-			    _y_force = lengthdir_y(10, _bullet_angle) * upgrade_stats.player_bullet_force * _game_speed;
+			    _x_force = lengthdir_x(7, _bullet_angle) * upgrade_stats.player_bullet_force * _game_speed;
+			    _y_force = lengthdir_y(7, _bullet_angle) * upgrade_stats.player_bullet_force * _game_speed;
 	    
 			    with(_bullet) {
 			        physics_apply_impulse(x,y,_x_force, _y_force);

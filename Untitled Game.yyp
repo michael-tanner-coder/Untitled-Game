@@ -1526,6 +1526,7 @@
     {"id":{"name":"spr_tracker_angry","path":"sprites/spr_tracker_angry/spr_tracker_angry.yy",},},
     {"id":{"name":"spr_tracker_shiny","path":"sprites/spr_tracker_shiny/spr_tracker_shiny.yy",},},
     {"id":{"name":"spr_tracker","path":"sprites/spr_tracker/spr_tracker.yy",},},
+    {"id":{"name":"spr_trail_circle","path":"sprites/spr_trail_circle/spr_trail_circle.yy",},},
     {"id":{"name":"spr_trail","path":"sprites/spr_trail/spr_trail.yy",},},
     {"id":{"name":"spr_tutorial_prompt","path":"sprites/spr_tutorial_prompt/spr_tutorial_prompt.yy",},},
     {"id":{"name":"spr_underlay","path":"sprites/spr_underlay/spr_underlay.yy",},},
