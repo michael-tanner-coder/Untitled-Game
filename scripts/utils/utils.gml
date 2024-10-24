@@ -1,7 +1,7 @@
 function draw_8_direction_movement(sprite_sheet, frame_w, frame_h, animation_length, alpha = 1, color = c_white, x_offset = 0, y_offset = 0) {
 	// get animation direction
 	var _movement_direction = -point_direction(0, 0, phy_speed_x, phy_speed_y);
-	y_frame = 0;
+	y_frame = (_movement_direction / 45) * -1;;
 	x_frame += anim_speed / room_speed;
 	x_frame = loop_clamp(x_frame, 0, animation_length);
 	
