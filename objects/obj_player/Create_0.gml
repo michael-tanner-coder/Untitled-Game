@@ -194,6 +194,7 @@ fsm.add("active", {
 
 		if (dash_timer > 0) {
 		    base_speed = 2 * max_speed * _game_speed;
+		    leave_trail(c_white, spr_trail_circle);
 		}
 
 		dash_timer--;
