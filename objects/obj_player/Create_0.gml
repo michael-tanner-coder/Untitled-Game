@@ -74,14 +74,14 @@ anim_start = 0;
 anim_current = 0;
 anim_end = 0;
 anim_length = 8;
-base_anim_speed = 2;
+base_anim_speed = 8;
 anim_speed = base_anim_speed;
 x_frame = 0;
 y_frame = 0;
 x_offset = 0;
 y_offset = 0;
-frame_width = 24;
-frame_height = 27;
+frame_width = 32;
+frame_height = 32;
 
 // State Machine
 fsm = new SnowState("active");
@@ -234,8 +234,7 @@ fsm.add("active", {
 	draw: function() {
 		draw_set_color(RED);
 		draw_8_direction_movement(dash_timer > 0 ? spr_player_sheet_dash : spr_player_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
-		physics_draw_debug();
-		
+		// physics_draw_debug();
 	},
 });
 fsm.add("idle", {

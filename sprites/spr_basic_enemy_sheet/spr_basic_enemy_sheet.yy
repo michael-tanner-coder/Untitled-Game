@@ -2,7 +2,7 @@
   "$GMSprite":"",
   "%Name":"spr_basic_enemy_sheet",
   "bboxMode":0,
-  "bbox_bottom":25,
+  "bbox_bottom":249,
   "bbox_left":6,
   "bbox_right":280,
   "bbox_top":6,
@@ -12,14 +12,14 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"f51ed641-e34f-4791-b19f-0cdf4817e833","name":"f51ed641-e34f-4791-b19f-0cdf4817e833","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"8e765ecd-9b0a-46c8-a652-98c23e5d54d7","name":"8e765ecd-9b0a-46c8-a652-98c23e5d54d7","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
-  "height":32,
+  "height":256,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"a347ef5b-4cc3-4e6c-a712-6a72cd8a95b8","blendMode":0,"displayName":"default","isLocked":false,"name":"a347ef5b-4cc3-4e6c-a712-6a72cd8a95b8","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"5d747263-7c74-4565-9ba6-e84de8d8ece2","blendMode":0,"displayName":"default","isLocked":false,"name":"5d747263-7c74-4565-9ba6-e84de8d8ece2","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_basic_enemy_sheet",
   "nineSlice":null,
@@ -69,8 +69,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"f51ed641-e34f-4791-b19f-0cdf4817e833","path":"sprites/spr_basic_enemy_sheet/spr_basic_enemy_sheet.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"80f25604-aed5-47ba-afca-22fd3dbaaa2d","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"8e765ecd-9b0a-46c8-a652-98c23e5d54d7","path":"sprites/spr_basic_enemy_sheet/spr_basic_enemy_sheet.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"d9533a43-2079-4ca1-8362-1e9d6632e047","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,
