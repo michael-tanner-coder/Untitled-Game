@@ -9,6 +9,20 @@ x_force = 0;
 y_force = 0;
 shield_sprite = spr_shield_big;
 
+// Animation
+anim_start = 0;
+anim_current = 0;
+anim_end = 0;
+anim_length = 8;
+base_anim_speed = 8;
+anim_speed = base_anim_speed;
+x_frame = 0;
+y_frame = 0;
+x_offset = 0;
+y_offset = 0;
+frame_width = 32;
+frame_height = 32;
+
 // Shadow
 var _shadow = instance_create_layer(x,y,layer,obj_shadow);
 _shadow.depth = depth + 1;

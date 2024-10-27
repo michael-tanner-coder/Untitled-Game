@@ -10,6 +10,20 @@ x_force = 0;
 y_force = 0;
 shield_sprite = spr_shield;
 
+// Animation
+anim_start = 0;
+anim_current = 0;
+anim_end = 0;
+anim_length = 8;
+base_anim_speed = 8;
+anim_speed = base_anim_speed;
+x_frame = 0;
+y_frame = 0;
+x_offset = 0;
+y_offset = 0;
+frame_width = 32;
+frame_height = 32;
+
 // Physics fixture
 fix = physics_fixture_create();
 physics_fixture_set_circle_shape(fix, 16);
