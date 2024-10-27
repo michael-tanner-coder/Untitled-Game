@@ -65,6 +65,8 @@ function spawn_level_layout(_layout = {}) {
    with (obj_money) {
        instance_destroy(self);
    }
+   
+   publish(LEVEL_RESET);
 }
 
 function destroy_level_layout() {

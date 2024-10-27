@@ -1,5 +1,3 @@
-// TODO: show upgrades in the grid menu
-
 // Configuration Properties
 // upgrade parameters
 upgrade_score = 1000; // make this configurable
@@ -33,6 +31,7 @@ fsm.add("progress_to_next_upgrade", {
 
 		cards = [];
         available_upgrades = [];
+        upgrade_progress_points = 0;
     },
     step: function() {
         if (upgrade_progress_points >= upgrade_score && keyboard_check_pressed(vk_space)) {
@@ -142,4 +141,7 @@ generate_upgrade_options = function() {
 subscribe(id, UPGRADE_SELECTED, function() {fsm.change("progress_to_next_upgrade")});
 subscribe(id, ENEMY_DEFEATED, function(_points = 0) {
 	upgrade_progress_points += _points;
+});
+subscribe(id, LEVEL_RESET, function() {
+	upgrade_progress_points = 0;
 })

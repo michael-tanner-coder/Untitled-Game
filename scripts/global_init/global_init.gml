@@ -84,6 +84,7 @@ Example usage:
 #macro DESTROYED_ALL_ENEMIES "destory_all_enemies"
 #macro FLIPPED_ALL_ENEMIES "flip_all_enemies"
 #macro LEVEL_ENDED "end_level"
+#macro LEVEL_RESET "reset_level"
 #macro WON_LEVEL "win_level"
 #macro WON_GAME "win_game"
 #macro LOST_LEVEL "lose_level"
