@@ -25,11 +25,11 @@ if (time_between_spawns <= 0 && current_line <= array_length(credits) - 1) {
 }
 
 if (!sequence_finished && instance_number(obj_physics_text) == 0 && current_line > array_length(credits) - 1) {
-	global.settings.game_speed = lerp(global.settings.game_speed, 0.3, 0.1);
+	global.temp_game_speed = lerp(global.temp_game_speed, 0.3, 0.1);
 	
-	if (global.settings.game_speed <= 0.3) {
+	if (global.temp_game_speed <= 0.3) {
 		play_sound(snd_tutorial_success);
-		global.settings.game_speed = 1;
+		global.temp_game_speed = 1;
 		publish(WON_GAME);
 		sequence_finished = true;
 	}

@@ -1,4 +1,4 @@
-var _game_speed = global.settings.game_speed;
+var _game_speed = get_global_game_speed();
 
 if (lives < 1) {
 	return;

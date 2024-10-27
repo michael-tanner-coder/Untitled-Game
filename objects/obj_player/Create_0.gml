@@ -1,6 +1,5 @@
 // Goals:
 // 1. Fix UI display of upgrades menu
-// 5. Prevent slow-mo from affecting next level
 // 6. Reset game parameters back to normal (goal count, enemy types, etc)
 
 // Base Player Properties
@@ -87,7 +86,7 @@ fsm.add("active", {
 	step: function() {
 		
 		// --- Settings ---
-		var _game_speed = global.settings.game_speed;
+		var _game_speed = get_global_game_speed();
 		
 		// --- Inputs ---
 		var _left = keyboard_check(ord("A")) * -1;
@@ -180,7 +179,7 @@ fsm.add("active", {
 		}
 
 		// countdown until we can make another shot
-		shot_timer -= 1 * global.settings.game_speed;
+		shot_timer -= 1 * get_global_game_speed();
 		shot_timer = max(0, shot_timer);
 
 		// --- Dashing ---

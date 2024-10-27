@@ -36,7 +36,7 @@ fsm.add("wave", {
 		if (score >= tutorial_score) {
 			// update background animation based on level progress
 			var _level_progress = (score/goal_score);
-			var _bg_speed = (3 + (5 * _level_progress)) * global.settings.game_speed;
+			var _bg_speed = (3 + (5 * _level_progress)) * get_global_game_speed();
 			var _back_layer = layer_get_id("Background");
 			var _back_layer_1 = layer_get_id("Background_1");
 			layer_hspeed(_back_layer, _bg_speed);
@@ -122,11 +122,11 @@ fsm.add("wave", {
 
 fsm.add("boss_defeated", {
 	step: function() {
-		global.settings.game_speed = lerp(global.settings.game_speed, 0.3, 0.1);
+		global.temp_game_speed = lerp(global.temp_game_speed, 0.3, 0.1);
 		
-		if (global.settings.game_speed <= 0.3) {
+		if (global.temp_game_speed <= 0.3) {
 			play_sound(snd_tutorial_success);
-			global.settings.game_speed = 1;
+			global.temp_game_speed = 1;
 			publish(WON_LEVEL);
 		}
 	}

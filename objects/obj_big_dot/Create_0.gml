@@ -20,7 +20,7 @@ fsm = new SnowState("active");
 
 fsm.add("active", {
 	step: function() {
-		var _game_speed = global.settings.game_speed;
+		var _game_speed = get_global_game_speed();
 
 		// Follow player if we're not hit
 		var _target = undefined;
