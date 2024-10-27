@@ -77,12 +77,14 @@ fsm.add("active", {
 			y = lerp(y, resting_y, 0.08);
 		}
 	
-		if (highlighted && mouse_check_button_pressed(mb_left) && global.currency >= price) {
-			global.currency -= price;
-			publish(UPGRADE_SELECTED, upgrade);
-		}
-		else {
-			play_sound(snd_button_back_alt);
+		if (highlighted && mouse_check_button_pressed(mb_left)) {
+			if (global.currency >= price) {
+				global.currency -= price;
+				publish(UPGRADE_SELECTED, upgrade);
+			}
+			else {
+				play_sound(snd_button_back_alt);
+			}
 		}
 	}
 });

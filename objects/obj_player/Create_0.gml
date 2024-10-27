@@ -1,6 +1,5 @@
 // Goals:
 // 1. Fix UI display of upgrades menu
-// 3. Fix sound bug when upgrade selection is active
 // 5. Prevent slow-mo from affecting next level
 // 6. Reset game parameters back to normal (goal count, enemy types, etc)
 
