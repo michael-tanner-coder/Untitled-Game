@@ -1,7 +1,6 @@
 // Goals:
 // 1. Fix UI display of upgrades menu
 // 3. Fix sound bug when upgrade selection is active
-// 4. Fix sprite display when characters are in an inactive state
 // 5. Prevent slow-mo from affecting next level
 // 6. Reset game parameters back to normal (goal count, enemy types, etc)
 
@@ -232,15 +231,24 @@ fsm.add("active", {
 		i_frames = clamp(i_frames, 0, respawn_i_frames);
 	},
 	draw: function() {
-		draw_set_color(RED);
 		draw_8_direction_movement(dash_timer > 0 ? spr_player_sheet_dash : spr_player_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
-		// physics_draw_debug();
+	
+		if (global.debug) {
+			draw_set_color(RED);
+			physics_draw_debug();
+		}
 	},
 });
+
 fsm.add("idle", {
 	step: function() {},
 	draw: function() {
-		draw_self();
+		draw_8_direction_movement(dash_timer > 0 ? spr_player_sheet_dash : spr_player_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
+
+		if (global.debug) {
+			draw_set_color(RED);
+			physics_draw_debug();
+		}
 	},
 });
 

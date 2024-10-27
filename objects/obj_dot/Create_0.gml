@@ -86,13 +86,20 @@ fsm.add("active", {
 	draw: function() {
 		draw_8_direction_movement(spr_basic_enemy_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
 		draw_set_color(BLUE);
-		// physics_draw_debug();
+		if (global.debug) {
+			draw_set_color(BLUE);
+			physics_draw_debug();
+		}
 	},
 });
 fsm.add("idle", {
 	step: function() {},
 	draw: function() {
-		draw_self();
+		draw_8_direction_movement(spr_basic_enemy_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
+		if (global.debug) {
+			draw_set_color(BLUE);
+			physics_draw_debug();
+		}
 	},
 });
 
