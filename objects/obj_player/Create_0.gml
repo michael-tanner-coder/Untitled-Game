@@ -1,10 +1,9 @@
 // Goals:
-// 1. Fix UI display + resolution bugs
-// -- dash sprite
-// -- resize characters (50% larger)
-
-// 2. Build level select menu
-// 3. Build character select menu
+// 1. Fix UI display of upgrades menu
+// 3. Fix sound bug when upgrade selection is active
+// 4. Fix sprite display when characters are in an inactive state
+// 5. Prevent slow-mo from affecting next level
+// 6. Reset game parameters back to normal (goal count, enemy types, etc)
 
 // Base Player Properties
 x_force = 0;
