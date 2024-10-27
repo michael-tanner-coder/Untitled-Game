@@ -13,7 +13,7 @@ global.scene_queue = [
     {
         key: "level",
         map: rm_combat_test_small,
-        goal_score: 1000,
+        goal_score: 20000,
         time_between_spawns: 30,
         max_enemy_count: 10,
         enemy_types: [
@@ -43,7 +43,7 @@ global.scene_queue = [
     {
         key: "level_2",
         map: rm_combat_test_small,
-        goal_score: 1000,
+        goal_score: 40000,
         time_between_spawns: 30,
         max_enemy_count: 10,
         enemy_types: [
@@ -73,7 +73,7 @@ global.scene_queue = [
     {
         key: "level_3",
         map: rm_combat_test_small,
-        goal_score: 1000,
+        goal_score: 80000,
         time_between_spawns: 30,
         max_enemy_count: 10,
         enemy_types: [
@@ -103,7 +103,7 @@ global.scene_queue = [
     {
         key: "level_4",
         map: rm_combat_test_small,
-        goal_score: 1000,
+        goal_score: 160000,
         time_between_spawns: 30,
         max_enemy_count: 10,
         enemy_types: [

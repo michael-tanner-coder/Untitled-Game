@@ -1,6 +1,6 @@
 // Goals:
-// 1. Fix UI display of upgrades menu
-// 6. Reset game parameters back to normal (goal count, enemy types, etc)
+// 1. increase base size of character sprites
+// 2. Fix UI display of upgrades menu
 
 // Base Player Properties
 x_force = 0;
