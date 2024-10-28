@@ -1126,6 +1126,7 @@
     {"id":{"name":"snd_level_start_2","path":"sounds/snd_level_start_2/snd_level_start_2.yy",},},
     {"id":{"name":"snd_level_start_3","path":"sounds/snd_level_start_3/snd_level_start_3.yy",},},
     {"id":{"name":"snd_level_start_go","path":"sounds/snd_level_start_go/snd_level_start_go.yy",},},
+    {"id":{"name":"snd_music_boss_1","path":"sounds/snd_music_boss_1/snd_music_boss_1.yy",},},
     {"id":{"name":"snd_music_boss_layer_1","path":"sounds/snd_music_boss_layer_1/snd_music_boss_layer_1.yy",},},
     {"id":{"name":"snd_music_boss_layer_2","path":"sounds/snd_music_boss_layer_2/snd_music_boss_layer_2.yy",},},
     {"id":{"name":"snd_music_boss_layer_3","path":"sounds/snd_music_boss_layer_3/snd_music_boss_layer_3.yy",},},

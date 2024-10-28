@@ -962,6 +962,7 @@
     {"name":"snd_level_start_2","order":8,"path":"sounds/snd_level_start_2/snd_level_start_2.yy",},
     {"name":"snd_level_start_3","order":9,"path":"sounds/snd_level_start_3/snd_level_start_3.yy",},
     {"name":"snd_level_start_go","order":10,"path":"sounds/snd_level_start_go/snd_level_start_go.yy",},
+    {"name":"snd_music_boss_1","order":25,"path":"sounds/snd_music_boss_1/snd_music_boss_1.yy",},
     {"name":"snd_music_boss_layer_1","order":11,"path":"sounds/snd_music_boss_layer_1/snd_music_boss_layer_1.yy",},
     {"name":"snd_music_boss_layer_2","order":12,"path":"sounds/snd_music_boss_layer_2/snd_music_boss_layer_2.yy",},
     {"name":"snd_music_boss_layer_3","order":13,"path":"sounds/snd_music_boss_layer_3/snd_music_boss_layer_3.yy",},
