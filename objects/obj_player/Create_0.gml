@@ -1,6 +1,5 @@
 // Goals:
-// 1. increase base size of character sprites
-// 2. Fix UI display of upgrades menu
+// 1. Fix UI display of upgrades menu
 
 // Base Player Properties
 x_force = 0;

@@ -120,7 +120,7 @@ fsm.add("active", {
 	},
 	
 	draw: function() {
-		draw_8_direction_movement(hit ? hit_spritesheet : rolling_spritesheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
+		draw_8_direction_movement(hit ? hit_spritesheet : rolling_spritesheet, frame_width, frame_height, anim_length, image_alpha, image_blend, (frame_width * image_xscale)/2, (frame_height * image_yscale)/2);
 		
 		if (global.debug) {
 			draw_set_color(BLUE);
@@ -131,7 +131,7 @@ fsm.add("active", {
 fsm.add("idle", {
 	step: function() {},
 	draw: function() {
-		draw_8_direction_movement(hit ? hit_spritesheet : rolling_spritesheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
+		draw_8_direction_movement(hit ? hit_spritesheet : rolling_spritesheet, frame_width, frame_height, anim_length, image_alpha, image_blend, (frame_width * image_xscale)/2, (frame_height * image_yscale)/2);
 		
 		if (global.debug) {
 			draw_set_color(BLUE);
