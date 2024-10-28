@@ -1,4 +1,31 @@
-function leave_trail(_color = c_white) {
+function draw_8_direction_movement(sprite_sheet, frame_w, frame_h, animation_length, alpha = 1, color = c_white, x_offset = 0, y_offset = 0) {
+	// get animation direction
+	var _movement_direction = -point_direction(0, 0, phy_speed_x, phy_speed_y);
+	y_frame = (_movement_direction / 45) * -1;;
+	x_frame += anim_speed / room_speed;
+	x_frame = loop_clamp(x_frame, 0, animation_length);
+	
+	// halt animation when physics speed is zero
+	anim_speed = floor(phy_speed) * base_anim_speed;
+	
+	// draw piece of sprite sheet
+	draw_sprite_part_ext(
+		sprite_sheet,
+		0,
+		floor(x_frame) * frame_w,
+		floor(y_frame) * frame_h,
+		frame_w,
+		frame_h,
+		floor(x - x_offset),
+		floor(y - y_offset),
+		image_xscale,
+		image_yscale, 
+		color,
+		alpha,
+	);
+}
+
+function leave_trail(_color = c_white, _sprite = undefined) {
 	/*if (x_force == 0 && y_force == 0) {
 		return;
 	}*/
@@ -19,6 +46,9 @@ function leave_trail(_color = c_white) {
 		//image_xscale =_target_xscale;
 		//image_yscale =_target_yscale;
 		sprite_index = other.sprite_index;
+		if (_sprite != undefined) {
+			sprite_index = _sprite;
+		}
 		image_blend = _color;
 		image_alpha = 0.5;
 		image_angle = other.image_angle;

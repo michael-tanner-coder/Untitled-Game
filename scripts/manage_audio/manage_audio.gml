@@ -148,6 +148,9 @@ function play_sound(_sound, _loop = false, _pitch = 1) {
 	var _sound_name = audio_get_name(_sound);
 	var _priority = global.audio_group_priority_struct[$ _group_name];
 	
+	show_debug_message("SOUND NAME");
+	show_debug_message(_sound_name);
+	
 	// prevent overlapping sounds of the same asset at the same time
 	var _voices_array = struct_get(global.sound_registry, _sound_name);
 	if (is_array(_voices_array) && array_length(_voices_array) > 0) {

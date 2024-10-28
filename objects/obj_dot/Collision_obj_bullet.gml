@@ -1,4 +1,4 @@
-var _game_speed = global.settings.game_speed;
+var _game_speed = get_global_game_speed();
 	
 // Track hit state for scoring
 if (!hit) {

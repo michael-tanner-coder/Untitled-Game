@@ -1,13 +1,15 @@
 // Base Styles
-width = 300;
-height = 600;
+width = 150;
+height = 300;
 color = BLUE;
 
 // Card Content
 header = "Card Header";
+header_font = fnt_medium;
 sprite = spr_white_circle;
 description = "Lorem ipsum type shit";
-description_padding = 20;
+description_font = fnt_small;
+description_padding = 10;
 price = 0;
 upgrade = global.upgrades[0];
 
@@ -75,12 +77,14 @@ fsm.add("active", {
 			y = lerp(y, resting_y, 0.08);
 		}
 	
-		if (highlighted && mouse_check_button_pressed(mb_left) && global.currency >= price) {
-			global.currency -= price;
-			publish(UPGRADE_SELECTED, upgrade);
-		}
-		else {
-			play_sound(snd_button_back_alt);
+		if (highlighted && mouse_check_button_pressed(mb_left)) {
+			if (global.currency >= price) {
+				global.currency -= price;
+				publish(UPGRADE_SELECTED, upgrade);
+			}
+			else {
+				play_sound(snd_button_back_alt);
+			}
 		}
 	}
 });

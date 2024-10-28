@@ -15,9 +15,9 @@ grid_data_category = "powerups";
 items[0] = [];
 
 // grid item dimensions/spacing
-grid_item_width = 200;
-grid_item_height = 200;
-grid_item_margin = 70;
+grid_item_width = 100;
+grid_item_height = 100;
+grid_item_margin = 10;
 grid_item_outline_thickness = 6;
 
 area_height = (grid_item_height + grid_item_margin) * 3;

@@ -57,9 +57,23 @@ physics_fixture_set_friction(fix, upgrade_stats.player_friction);
 my_fixture = physics_fixture_bind(fix, self);
 
 // Sizing
-target_size = upgrade_stats.player_size;
+target_size = 2;
 image_xscale = target_size;
 image_yscale = target_size;
+
+// Animation
+anim_start = 0;
+anim_current = 0;
+anim_end = 0;
+anim_length = 8;
+base_anim_speed = 8;
+anim_speed = base_anim_speed;
+x_frame = 0;
+y_frame = 0;
+x_offset = 0;
+y_offset = 0;
+frame_width = 32;
+frame_height = 32;
 
 // State Machine
 fsm = new SnowState("active");
@@ -68,7 +82,7 @@ fsm.add("active", {
 	step: function() {
 		
 		// --- Settings ---
-		var _game_speed = global.settings.game_speed;
+		var _game_speed = get_global_game_speed();
 		
 		// --- Inputs ---
 		var _left = keyboard_check(ord("A")) * -1;
@@ -99,7 +113,6 @@ fsm.add("active", {
 		// get base force from user input
 		physics_apply_impulse(x,y, x_force, y_force);
 
-
 		// --- Shooting ---
 		if (_click_pressed) {
 			first_shot = true;	
@@ -120,8 +133,8 @@ fsm.add("active", {
 	    
 			    // Bullet force
 			    var _x_force, _y_force;
-			    _x_force = lengthdir_x(10, _bullet_angle) * upgrade_stats.player_bullet_force * _game_speed;
-			    _y_force = lengthdir_y(10, _bullet_angle) * upgrade_stats.player_bullet_force * _game_speed;
+			    _x_force = lengthdir_x(7, _bullet_angle) * upgrade_stats.player_bullet_force * _game_speed;
+			    _y_force = lengthdir_y(7, _bullet_angle) * upgrade_stats.player_bullet_force * _game_speed;
 	    
 			    with(_bullet) {
 			        physics_apply_impulse(x,y,_x_force, _y_force);
@@ -162,7 +175,7 @@ fsm.add("active", {
 		}
 
 		// countdown until we can make another shot
-		shot_timer -= 1 * global.settings.game_speed;
+		shot_timer -= 1 * get_global_game_speed();
 		shot_timer = max(0, shot_timer);
 
 		// --- Dashing ---
@@ -173,7 +186,7 @@ fsm.add("active", {
 
 		if (dash_timer > 0) {
 		    base_speed = 2 * max_speed * _game_speed;
-			leave_trail();
+		    leave_trail(c_white, spr_trail_circle);
 		}
 
 		dash_timer--;
@@ -195,8 +208,6 @@ fsm.add("active", {
 		image_xscale = lerp(image_xscale, target_size, 0.3);
 		image_yscale = lerp(image_yscale, target_size, 0.3);
 
-		phy_rotation = -1 * point_direction(x, y, mouse_x, mouse_y);
-
 		// remove tutorial prompts when the player has moved and shot for the first time
 		if (global.moved && global.shot && global.dashed && alarm_get(0) == -1) {
 			alarm_set(0, 60);
@@ -213,9 +224,26 @@ fsm.add("active", {
 		}
 		i_frames = clamp(i_frames, 0, respawn_i_frames);
 	},
+	draw: function() {
+		draw_8_direction_movement(dash_timer > 0 ? spr_player_sheet_dash : spr_player_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
+	
+		if (global.debug) {
+			draw_set_color(RED);
+			physics_draw_debug();
+		}
+	},
 });
+
 fsm.add("idle", {
 	step: function() {},
+	draw: function() {
+		draw_8_direction_movement(dash_timer > 0 ? spr_player_sheet_dash : spr_player_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
+
+		if (global.debug) {
+			draw_set_color(RED);
+			physics_draw_debug();
+		}
+	},
 });
 
 // Methods
@@ -295,7 +323,7 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 			
 			// Update Global Game Variables
 			lives = upgrade_stats.player_lives;
-			target_size = upgrade_stats.player_size;
+			target_size = 2 * upgrade_stats.player_size;
 			
 			// Make the player temporarily invincible to give them time to readjust when returning to normal gameplay
 			i_frames = respawn_i_frames;

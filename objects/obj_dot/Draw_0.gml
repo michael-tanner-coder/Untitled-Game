@@ -1,5 +1,10 @@
-draw_self();
+if (fsm.event_exists("draw")) {
+	fsm.draw();
+}
+else {
+	draw_self();
+}
 
 if (!hit) {
-	draw_sprite_ext(shield_sprite, 0, x, y, image_xscale, image_yscale, 0, WHITE, 0.8);
+	// draw_sprite_ext(shield_sprite, 0, x, y, image_xscale, image_yscale, 0, WHITE, 0.8);
 }

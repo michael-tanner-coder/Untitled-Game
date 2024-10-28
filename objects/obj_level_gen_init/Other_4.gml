@@ -24,7 +24,7 @@ var _current_layout_struct = {
 var _key = room_get_name(room);
 show_debug_message(_key);
 
-with (obj_wall) {
+with (obj_spike_block) {
     array_push(_current_layout_struct.blocks, {
         x_pos: x,
         y_pos: y,

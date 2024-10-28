@@ -10,6 +10,20 @@ x_force = 0;
 y_force = 0;
 shield_sprite = spr_shield;
 
+// Animation
+anim_start = 0;
+anim_current = 0;
+anim_end = 0;
+anim_length = 8;
+base_anim_speed = 8;
+anim_speed = base_anim_speed;
+x_frame = 0;
+y_frame = 0;
+x_offset = 0;
+y_offset = 0;
+frame_width = 32;
+frame_height = 32;
+
 // Physics fixture
 fix = physics_fixture_create();
 physics_fixture_set_circle_shape(fix, 16);
@@ -31,7 +45,7 @@ fsm = new SnowState("active");
 
 fsm.add("active", {
 	step: function() {
-		var _game_speed = global.settings.game_speed;
+		var _game_speed = get_global_game_speed();
 		
 		// Follow player if we're not hit
 		var _target = undefined;
@@ -104,9 +118,25 @@ fsm.add("active", {
 			instance_destroy(self);
 		}
 	},
+	draw: function() {
+		draw_8_direction_movement(spr_basic_enemy_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
+		
+		if (global.debug) {
+			draw_set_color(BLUE);
+			physics_draw_debug();
+		}
+	}
 });
 fsm.add("idle", {
 	step: function() {},
+	draw: function() {
+		draw_8_direction_movement(spr_basic_enemy_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
+		
+		if (global.debug) {
+			draw_set_color(BLUE);
+			physics_draw_debug();
+		}
+	}
 });
 
 // Event Subscriptions

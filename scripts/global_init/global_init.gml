@@ -16,6 +16,11 @@ global.muted = false;
 global.tutorial = get_flag("needs_tutorial");
 global.unlock_modal_open = false;
 global.currency = 0;
+global.temp_game_speed = 1;
+
+function get_global_game_speed() {
+	return global.settings.game_speed * global.temp_game_speed;
+}
 
 // Text
 #macro TITLE "UNTITLED GAME"
@@ -28,6 +33,8 @@ global.currency = 0;
 #macro TARGET_RESOLUTION_H 1080
 
 #macro VIEW view_camera[0]
+#macro VIEW_WIDTH camera_get_view_width(VIEW)
+#macro VIEW_HEIGHT camera_get_view_height(VIEW)
 
 // Game Rules
 #macro STANDARD_SPAWN_RATE 450
@@ -77,6 +84,7 @@ Example usage:
 #macro DESTROYED_ALL_ENEMIES "destory_all_enemies"
 #macro FLIPPED_ALL_ENEMIES "flip_all_enemies"
 #macro LEVEL_ENDED "end_level"
+#macro LEVEL_RESET "reset_level"
 #macro WON_LEVEL "win_level"
 #macro WON_GAME "win_game"
 #macro LOST_LEVEL "lose_level"
