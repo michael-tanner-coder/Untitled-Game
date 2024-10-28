@@ -22,12 +22,16 @@ x_offset = 0;
 y_offset = 0;
 frame_width = 32;
 frame_height = 32;
+rolling_spritesheet = spr_big_enemy_sheet;
+hit_spritesheet = spr_hit_enemy_sheet;
+image_xscale = 4;
+image_yscale = 4;
 
-// Shadow
-var _shadow = instance_create_layer(x,y,layer,obj_shadow);
-_shadow.depth = depth + 1;
-_shadow.owner = self;
-_shadow.sprite_index = spr_shadow_big;
+// // Shadow
+// var _shadow = instance_create_layer(x,y,layer,obj_shadow);
+// _shadow.depth = depth + 1;
+// _shadow.owner = self;
+// _shadow.sprite_index = spr_shadow_big;
 
 // State Machine
 fsm = new SnowState("active");
@@ -78,8 +82,7 @@ fsm.add("active", {
 		}
 	},
 	draw: function() {
-		draw_8_direction_movement(spr_basic_enemy_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
-		
+		draw_8_direction_movement(hit ? hit_spritesheet : rolling_spritesheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
 		if (global.debug) {
 			draw_set_color(BLUE);
 			physics_draw_debug();
@@ -90,8 +93,7 @@ fsm.add("idle", {
 	step: function() {
 	},
 	draw: function() {
-		draw_8_direction_movement(spr_basic_enemy_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
-		
+		draw_8_direction_movement(hit ? hit_spritesheet : rolling_spritesheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
 		if (global.debug) {
 			draw_set_color(BLUE);
 			physics_draw_debug();

@@ -24,19 +24,14 @@ global.scene_queue = [
             },
             {
                 type: obj_big_dot,
-                points: 1500,
+                points: 0,
                 limit: 3,
             },
             {
                 type: obj_growing_dot,
-                points: 2500,
+                points: 0,
                 limit: 2,
             },
-            {
-                type: obj_exploding_dot,
-                points: 3500,
-                limit: 2,
-            }
         ],
         boss: obj_boss_test,
     },
