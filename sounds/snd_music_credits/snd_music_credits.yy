@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":98.94737,
+  "duration":107.57431,
   "name":"snd_music_credits",
   "parent":{
     "name":"Music",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_music_credits.wav",
+  "soundFile":"snd_music_credits.ogg",
   "type":0,
-  "volume":0.39,
+  "volume":1.0,
 }
