@@ -8,6 +8,7 @@ global.scene_queue = [
         time_between_spawns: 30,
         max_enemy_count: 10,
         enemy_types: [],
+        boss: obj_boss_test,
     },
     {
         key: "level",
@@ -37,6 +38,7 @@ global.scene_queue = [
                 limit: 2,
             }
         ],
+        boss: obj_boss_test,
     },
     {
         key: "level_2",
@@ -66,6 +68,7 @@ global.scene_queue = [
                 limit: 2,
             }
         ],
+        boss: obj_boss_test,
     },
     {
         key: "level_3",
@@ -95,6 +98,7 @@ global.scene_queue = [
                 limit: 2,
             }
         ],
+        boss: obj_boss_test,
     },
     {
         key: "level_4",
@@ -124,6 +128,7 @@ global.scene_queue = [
                 limit: 2,
             }
         ],
+        boss: obj_boss_test,
     },
     {
         key: "victory",
@@ -132,5 +137,6 @@ global.scene_queue = [
         time_between_spawns: 30,
         max_enemy_count: 10,
         enemy_types: [],
+        boss: undefined,
     },
 ];
