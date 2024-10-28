@@ -326,7 +326,7 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 			
 			// Update Global Game Variables
 			lives = upgrade_stats.player_lives;
-			target_size = upgrade_stats.player_size;
+			target_size = 2 * upgrade_stats.player_size;
 			
 			// Make the player temporarily invincible to give them time to readjust when returning to normal gameplay
 			i_frames = respawn_i_frames;
