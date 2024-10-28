@@ -1,6 +1,3 @@
-// Goals:
-// 1. Fix UI display of upgrades menu
-
 // Base Player Properties
 x_force = 0;
 y_force = 0;
