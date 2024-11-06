@@ -1127,6 +1127,8 @@
     {"name":"spr_boss","order":6,"path":"sprites/spr_boss/spr_boss.yy",},
     {"name":"spr_bowler_hat_large","order":3,"path":"sprites/spr_bowler_hat_large/spr_bowler_hat_large.yy",},
     {"name":"spr_box","order":6,"path":"sprites/spr_box/spr_box.yy",},
+    {"name":"spr_bullet_large","order":42,"path":"sprites/spr_bullet_large/spr_bullet_large.yy",},
+    {"name":"spr_bullet_medium","order":41,"path":"sprites/spr_bullet_medium/spr_bullet_medium.yy",},
     {"name":"spr_bullet","order":29,"path":"sprites/spr_bullet/spr_bullet.yy",},
     {"name":"spr_bumper","order":39,"path":"sprites/spr_bumper/spr_bumper.yy",},
     {"name":"spr_bunny","order":1,"path":"sprites/spr_bunny/spr_bunny.yy",},

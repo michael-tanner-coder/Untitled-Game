@@ -1302,6 +1302,8 @@
     {"id":{"name":"spr_bowler_hat_large","path":"sprites/spr_bowler_hat_large/spr_bowler_hat_large.yy",},},
     {"id":{"name":"spr_bowler_hat","path":"sprites/spr_bowler_hat/spr_bowler_hat.yy",},},
     {"id":{"name":"spr_box","path":"sprites/spr_box/spr_box.yy",},},
+    {"id":{"name":"spr_bullet_large","path":"sprites/spr_bullet_large/spr_bullet_large.yy",},},
+    {"id":{"name":"spr_bullet_medium","path":"sprites/spr_bullet_medium/spr_bullet_medium.yy",},},
     {"id":{"name":"spr_bullet","path":"sprites/spr_bullet/spr_bullet.yy",},},
     {"id":{"name":"spr_bumper","path":"sprites/spr_bumper/spr_bumper.yy",},},
     {"id":{"name":"spr_bunny","path":"sprites/spr_bunny/spr_bunny.yy",},},
