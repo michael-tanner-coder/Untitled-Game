@@ -1112,6 +1112,7 @@
     {"name":"sInpMouseLeft","order":14,"path":"sprites/sInpMouseLeft/sInpMouseLeft.yy",},
     {"name":"sInpMouseMiddle","order":15,"path":"sprites/sInpMouseMiddle/sInpMouseMiddle.yy",},
     {"name":"sInpMouseRight","order":16,"path":"sprites/sInpMouseRight/sInpMouseRight.yy",},
+    {"name":"spr_aiming","order":43,"path":"sprites/spr_aiming/spr_aiming.yy",},
     {"name":"spr_area_transition","order":1,"path":"sprites/spr_area_transition/spr_area_transition.yy",},
     {"name":"spr_arena_1_floor_tileset","order":37,"path":"sprites/spr_arena_1_floor_tileset/spr_arena_1_floor_tileset.yy",},
     {"name":"spr_arena_1_tileset","order":36,"path":"sprites/spr_arena_1_tileset/spr_arena_1_tileset.yy",},

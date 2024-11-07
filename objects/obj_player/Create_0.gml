@@ -231,6 +231,11 @@ fsm.add("active", {
 			draw_set_color(RED);
 			physics_draw_debug();
 		}
+		
+		var _aim_direction = point_direction(x,y,mouse_x, mouse_y);
+		var _aim_x = lengthdir_x(1, _aim_direction) * 32;
+		var _aim_y = lengthdir_y(1, _aim_direction) * 32;
+		draw_sprite_ext(spr_aiming, 0, x + _aim_x, y + _aim_y, 1, 1, _aim_direction - 90, c_white,1);
 	},
 });
 

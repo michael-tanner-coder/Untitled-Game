@@ -1286,6 +1286,7 @@
     {"id":{"name":"sInpMouseLeft","path":"sprites/sInpMouseLeft/sInpMouseLeft.yy",},},
     {"id":{"name":"sInpMouseMiddle","path":"sprites/sInpMouseMiddle/sInpMouseMiddle.yy",},},
     {"id":{"name":"sInpMouseRight","path":"sprites/sInpMouseRight/sInpMouseRight.yy",},},
+    {"id":{"name":"spr_aiming","path":"sprites/spr_aiming/spr_aiming.yy",},},
     {"id":{"name":"spr_area_transition","path":"sprites/spr_area_transition/spr_area_transition.yy",},},
     {"id":{"name":"spr_arena_1_floor_tileset","path":"sprites/spr_arena_1_floor_tileset/spr_arena_1_floor_tileset.yy",},},
     {"id":{"name":"spr_arena_1_tileset","path":"sprites/spr_arena_1_tileset/spr_arena_1_tileset.yy",},},
