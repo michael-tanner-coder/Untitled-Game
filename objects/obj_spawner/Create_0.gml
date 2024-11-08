@@ -62,9 +62,9 @@ fsm.add("wave", {
 			
 			global.tension += (raise_tension ? 0.025 * _climax_multiplier : -0.025 ) * DT;
 		}
-	
+		
 		// check if we should spawn the boss
-		if (score >= goal_score && boss_type != undefined && instance_number(boss_type) < 1) {
+		if ((score >= goal_score && boss_type != undefined && instance_number(boss_type) < 1) || (global.dev_mode && input_check("spawn_boss"))) {
 			with(obj_dot) {
 				instance_destroy(self);
 			}
@@ -137,6 +137,13 @@ fsm.add("idle", {
 	},
 	
 	step: function() {
+		// dev tool to auto-defeat boss
+		if (global.dev_mode && instance_number(boss_type) > 0 && input_check("kill_boss")) {
+			with(boss_type) {
+				instance_destroy(self);
+			}
+		}
+
 	},
 	
 	draw: function() {

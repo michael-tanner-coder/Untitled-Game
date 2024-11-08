@@ -4,7 +4,7 @@ if (!global.dev_mode) {
 }
 
 
-if (keyboard_check_pressed(ord("K"))) {
+if (input_check("toggle_debug")) {
     global.debug = !global.debug;
 }
 
