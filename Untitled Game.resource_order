@@ -100,6 +100,7 @@
     {"name":"Math","order":15,"path":"folders/Scripts/Math.yy",},
     {"name":"Essentials","order":1,"path":"folders/Scripts/Menu System/Essentials.yy",},
     {"name":"JSON","order":2,"path":"folders/Scripts/Menu System/JSON.yy",},
+    {"name":"Physics","order":16,"path":"folders/Scripts/Physics.yy",},
     {"name":"PubSub","order":2,"path":"folders/Scripts/PubSub.yy",},
     {"name":"Save Data","order":9,"path":"folders/Scripts/Save Data.yy",},
     {"name":"Scenes","order":12,"path":"folders/Scripts/Scenes.yy",},

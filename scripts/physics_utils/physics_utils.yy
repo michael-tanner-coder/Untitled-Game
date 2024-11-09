@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"physics_utils",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"physics_utils",
+  "parent":{
+    "name":"Physics",
+    "path":"folders/Scripts/Physics.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

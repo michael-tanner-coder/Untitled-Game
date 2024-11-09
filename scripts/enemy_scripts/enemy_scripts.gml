@@ -36,52 +36,7 @@ function standard_enemy_create_event() {
     
     fsm.add("active", {
     	step: function() {
-    		
-    		// Settings
-    		var _game_speed = get_global_game_speed();
-    				
-    		// Follow player if we're not hit
-    		var _target = undefined;
-    		
-    		with(obj_player) {
-    		    _target = self;
-    		}
-    		
-    		if (_target && !hit) {
-    			show_debug_message("FOUND TARGET");
-    		    var _target_direction = point_direction(x,y,_target.x, _target.y);
-    		    var _target_distance = distance_to_point(_target.x, _target.y);
-    		    
-    		    var _magnitude = movement_magnitude;
-    		    var _x_force, _y_force;
-    		    _x_force = lengthdir_x(5, _target_direction) * _magnitude * _game_speed;
-    		    _y_force = lengthdir_y(5, _target_direction) * _magnitude * _game_speed;
-    		    
-    		    physics_apply_force(x, y, _x_force, _y_force);
-    		    
-    			x_force = _x_force;
-    			y_force = _y_force;
-    		    
-    			phy_rotation = -1 * _target_direction;
-    		}
-    		
-    		// If we're hit by a bullet, count down until recovery
-    		hit_timer -= 1 * _game_speed;
-    		hit_timer = max(0, hit_timer);
-    		if (hit_timer <= 0) {
-    		    hit = false;
-    		}
-    		
-    		// Update sprite
-    		if (hit) {
-    			x_force = 0;
-    			y_force = 0;
-    		}
-    		
-        	// Collision
-    		if (position_meeting(x, y, obj_wall)) {
-    			instance_destroy(self);
-    		}
+			standard_enemy_step_event();    		
     	},
     	draw: function() {
     		draw_8_direction_movement(hit ? hit_spritesheet : rolling_spritesheet, frame_width, frame_height, anim_length, image_alpha, image_blend, x_offset, y_offset);
@@ -108,7 +63,53 @@ function standard_enemy_create_event() {
     subscribe(id, ACTORS_ACTIVATED, function() {fsm.change("active")});
 }
 
-function standard_enemy_step_event() {}
+function standard_enemy_step_event() {
+	// Settings
+	var _game_speed = get_global_game_speed();
+			
+	// Follow player if we're not hit
+	var _target = undefined;
+	
+	with(obj_player) {
+	    _target = self;
+	}
+	
+	if (_target && !hit) {
+		show_debug_message("FOUND TARGET");
+	    var _target_direction = point_direction(x,y,_target.x, _target.y);
+	    var _target_distance = distance_to_point(_target.x, _target.y);
+	    
+	    var _magnitude = movement_magnitude;
+	    var _x_force, _y_force;
+	    _x_force = lengthdir_x(5, _target_direction) * _magnitude * _game_speed;
+	    _y_force = lengthdir_y(5, _target_direction) * _magnitude * _game_speed;
+	    
+	    physics_apply_force(x, y, _x_force, _y_force);
+	    
+		x_force = _x_force;
+		y_force = _y_force;
+	    
+		phy_rotation = -1 * _target_direction;
+	}
+	
+	// If we're hit by a bullet, count down until recovery
+	hit_timer -= 1 * _game_speed;
+	hit_timer = max(0, hit_timer);
+	if (hit_timer <= 0) {
+	    hit = false;
+	}
+	
+	// Update sprite
+	if (hit) {
+		x_force = 0;
+		y_force = 0;
+	}
+	
+	// Collision
+	if (position_meeting(x, y, obj_wall)) {
+		instance_destroy(self);
+	}
+}
 
 function standard_enemy_draw_event() {
     
@@ -122,10 +123,10 @@ function standard_enemy_destroy_event() {
     if (hit) {
     	score += point_value;
     	var _score_text = instance_create_layer(x,y,layer, obj_float_text);
-    	_score_text.text = "+" + string(point_value);
+    	_score_text.text = "+" + string(round(point_value));
     	play_sound(snd_points, false);
     	with(obj_ui) {
-    		shake_text(1, 4, 0.5);
+    		shake_text(1, round(other.point_value/100), 0.5);
     	}
     	
     	spawn_particles(part_death, x, y);
