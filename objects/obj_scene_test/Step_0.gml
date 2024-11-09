@@ -4,7 +4,7 @@ if (!global.dev_mode) {
 }
 
 
-if (input_check("toggle_debug")) {
+if (input_check_pressed("toggle_debug")) {
     global.debug = !global.debug;
 }
 
