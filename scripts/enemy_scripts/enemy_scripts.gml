@@ -39,22 +39,14 @@ function standard_enemy_create_event() {
 			standard_enemy_step_event();    		
     	},
     	draw: function() {
-    		draw_8_direction_movement(hit ? hit_spritesheet : rolling_spritesheet, frame_width, frame_height, anim_length, image_alpha, image_blend, x_offset, y_offset);
-    		draw_set_color(BLUE);
-    		if (global.debug) {
-    			draw_set_color(BLUE);
-    			physics_draw_debug();
-    		}
+    		standard_enemy_draw_event();
     	},
     });
+    
     fsm.add("idle", {
     	step: function() {},
     	draw: function() {
-    		draw_8_direction_movement(hit ? hit_spritesheet : rolling_spritesheet, frame_width, frame_height, anim_length, image_alpha, image_blend, x_offset, y_offset);
-    		if (global.debug) {
-    			draw_set_color(BLUE);
-    			physics_draw_debug();
-    		}
+    		standard_enemy_draw_event();
     	},
     });
 
@@ -112,7 +104,12 @@ function standard_enemy_step_event() {
 }
 
 function standard_enemy_draw_event() {
-    
+	draw_8_direction_movement(hit ? hit_spritesheet : rolling_spritesheet, frame_width, frame_height, anim_length, image_alpha, image_blend, x_offset, y_offset);
+	draw_set_color(BLUE);
+	if (global.debug) {
+		draw_set_color(BLUE);
+		physics_draw_debug();
+	}
 }
 
 function standard_enemy_destroy_event() {
