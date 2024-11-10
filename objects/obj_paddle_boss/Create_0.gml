@@ -5,6 +5,8 @@ image_yscale = 8;
 x_offset = 32 * 4;
 y_offset = 32 * 4;
 paddle = undefined;
+movement_magnitude = 400;
+base_stun_time = 40;
 
 fsm.add("active", {
     enter: function() {
@@ -18,9 +20,6 @@ fsm.add("active", {
     draw: function() {
         // standard_enemy_draw_event();
 	    draw_set_color(BLUE);
-		if (global.debug) {
-			draw_set_color(BLUE);
-			physics_draw_debug();
-		}
+		physics_draw_debug();
     }
 })
