@@ -12,6 +12,7 @@ function standard_enemy_create_event() {
     y_force = 0;
     shield_sprite = spr_shield;
     movement_magnitude = 10;
+    base_stun_time = 80;
     
     // Animation properties
     anim_start = 0;
@@ -142,7 +143,7 @@ function standard_enemy_bullet_collision() {
     	spawn_particles(part_shoot, x, y);
     }
     hit = true;
-    hit_timer = 80;
+    hit_timer = base_stun_time;
     
     // Force
     var _collision_direction = point_direction(x,y,other.x, other.y);
