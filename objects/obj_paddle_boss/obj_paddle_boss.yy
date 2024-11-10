@@ -37,8 +37,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_exploding_dot",
-    "path":"sprites/spr_exploding_dot/spr_exploding_dot.yy",
+    "name":"spr_paddle_boss",
+    "path":"sprites/spr_paddle_boss/spr_paddle_boss.yy",
   },
   "spriteMaskId":null,
   "visible":true,

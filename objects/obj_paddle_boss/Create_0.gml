@@ -1,7 +1,7 @@
 standard_enemy_create_event();
 
-image_xscale = 8;
-image_yscale = 8;
+image_xscale = 2;
+image_yscale = 2;
 x_offset = 32 * 4;
 y_offset = 32 * 4;
 paddle = undefined;
@@ -19,7 +19,10 @@ fsm.add("active", {
     },
     draw: function() {
         // standard_enemy_draw_event();
-	    draw_set_color(hit ? RED : BLUE);
-		physics_draw_debug();
+        draw_self();
+        if (global.debug) {
+	    	draw_set_color(hit ? RED : BLUE);
+			physics_draw_debug();
+        }
     }
 })

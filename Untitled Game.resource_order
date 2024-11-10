@@ -1212,6 +1212,7 @@
     {"name":"spr_logo","order":11,"path":"sprites/spr_logo/spr_logo.yy",},
     {"name":"spr_mid_pipe_layer","order":9,"path":"sprites/spr_mid_pipe_layer/spr_mid_pipe_layer.yy",},
     {"name":"spr_money","order":33,"path":"sprites/spr_money/spr_money.yy",},
+    {"name":"spr_paddle_boss","order":21,"path":"sprites/spr_paddle_boss/spr_paddle_boss.yy",},
     {"name":"spr_paddle","order":44,"path":"sprites/spr_paddle/spr_paddle.yy",},
     {"name":"spr_particle","order":7,"path":"sprites/spr_particle/spr_particle.yy",},
     {"name":"spr_pillar_box","order":4,"path":"sprites/spr_pillar_box/spr_pillar_box.yy",},

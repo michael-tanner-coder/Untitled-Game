@@ -1394,6 +1394,7 @@
     {"id":{"name":"spr_logo","path":"sprites/spr_logo/spr_logo.yy",},},
     {"id":{"name":"spr_mid_pipe_layer","path":"sprites/spr_mid_pipe_layer/spr_mid_pipe_layer.yy",},},
     {"id":{"name":"spr_money","path":"sprites/spr_money/spr_money.yy",},},
+    {"id":{"name":"spr_paddle_boss","path":"sprites/spr_paddle_boss/spr_paddle_boss.yy",},},
     {"id":{"name":"spr_paddle","path":"sprites/spr_paddle/spr_paddle.yy",},},
     {"id":{"name":"spr_particle","path":"sprites/spr_particle/spr_particle.yy",},},
     {"id":{"name":"spr_pillar_box","path":"sprites/spr_pillar_box/spr_pillar_box.yy",},},
