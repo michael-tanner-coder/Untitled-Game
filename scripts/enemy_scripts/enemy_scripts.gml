@@ -97,11 +97,6 @@ function standard_enemy_step_event() {
 		x_force = 0;
 		y_force = 0;
 	}
-	
-	// Collision
-	if (position_meeting(x, y, obj_wall)) {
-		instance_destroy(self);
-	}
 }
 
 function standard_enemy_draw_event() {
@@ -114,6 +109,7 @@ function standard_enemy_draw_event() {
 }
 
 function standard_enemy_destroy_event() {
+	// don't destroy enemies if we have gotten a game over 
     if (lives < 1) {
 	    return;
     }
