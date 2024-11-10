@@ -33,7 +33,7 @@ global.scene_queue = [
                 limit: 2,
             },
         ],
-        boss: obj_boss_test,
+        boss: obj_paddle_boss,
     },
     {
         key: "level_2",
