@@ -1,7 +1,6 @@
 // BOSS
 // TODO: fix collision groups so that enemies can still bounce off walls but paddles phase through them
 // TODO: make sprite for boss and paddle
-// TODO: give boss lives
 
 // TEST PREP
 // TODO: tune existing upgrades + add new ones
