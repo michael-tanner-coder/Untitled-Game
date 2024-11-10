@@ -322,7 +322,7 @@ Input Icons by Kenney
 				["Size",		new Slider([0, 10], 1, "player_size")],					// Changes player speed see oTest
 				["Recoil",		new Slider([0, 100], 23, "player_recoil")],					// Changes player speed see oTest
 				["Density",		new Slider([0, 4], 1, "player_density")],				// Changes player density
-				["Restitution",		new Slider([0, 2], 0.5, "player_restitution")],				// Changes player bounciness
+				["Restitution",		new Slider([0, 5], 0.5, "player_restitution")],				// Changes player bounciness
 				["Linear Damping",		new Slider([0, 10], 1, "player_linear_damping")],		// Changes player linear damping
 				["Angular Damping",		new Slider([0, 50], 25, "player_angular_damping")],		// Changes player angular damping
 				["Friction",		new Slider([0, 80], 40, "player_friction")],		// Changes player friction 
