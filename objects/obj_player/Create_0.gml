@@ -1,5 +1,4 @@
 // BOSS
-// TODO: fix collision groups so that enemies can still bounce off walls but paddles phase through them
 // TODO: make sprite for boss and paddle
 
 // TEST PREP
@@ -68,7 +67,7 @@ shadow.owner = self;
 fix = physics_fixture_create();
 physics_fixture_set_circle_shape(fix, base_fixture_size * upgrade_stats.player_size);
 physics_fixture_set_density(fix, upgrade_stats.player_density);
-physics_fixture_set_collision_group(fix, 2);
+physics_fixture_set_collision_group(fix, 1);
 physics_fixture_set_restitution(fix, upgrade_stats.player_restitution);
 physics_fixture_set_linear_damping(fix, upgrade_stats.player_linear_damping);
 physics_fixture_set_angular_damping(fix, upgrade_stats.player_angular_damping);
@@ -338,7 +337,7 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 			fix = physics_fixture_create();
 			physics_fixture_set_circle_shape(fix, base_fixture_size * upgrade_stats.player_size);
 			physics_fixture_set_density(fix, upgrade_stats.player_density);
-			physics_fixture_set_collision_group(fix, 2);
+			physics_fixture_set_collision_group(fix, 1);
 			physics_fixture_set_restitution(fix, upgrade_stats.player_restitution);
 			physics_fixture_set_linear_damping(fix, upgrade_stats.player_linear_damping);
 			physics_fixture_set_angular_damping(fix, upgrade_stats.player_angular_damping);
