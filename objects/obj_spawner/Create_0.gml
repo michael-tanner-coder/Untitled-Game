@@ -28,6 +28,7 @@ raise_tension = true;
 fsm = new SnowState("wave");
 fsm.add("wave", {
 	step: function() {
+		var _boss_active = instance_number(boss_type) > 0;
 		
 		if (global.tutorial) {
 			return;
@@ -49,7 +50,7 @@ fsm.add("wave", {
 		}
 	
 		// raise and lower tension of the level periodically after the initial wave
-		if (global.first_wave_complete) {
+		if (global.first_wave_complete || _boss_active) {
 			if (global.tension >= 1) {
 				raise_tension = false;
 			}
@@ -64,16 +65,13 @@ fsm.add("wave", {
 		}
 		
 		// check if we should spawn the boss
-		if ((score >= goal_score && boss_type != undefined && instance_number(boss_type) < 1) || (global.dev_mode && input_check("spawn_boss"))) {
+		if ((score >= goal_score && boss_type != undefined && instance_number(boss_type) < 1) || (global.dev_mode && input_check_pressed("spawn_boss"))) {
 			with(obj_dot) {
 				instance_destroy(self);
 			}
 			
 			instance_create_layer(obj_boss_spawn_point.x, obj_boss_spawn_point.y, layer, boss_type);
 			screenshake(4, 10, 0.5);
-			fsm.change("idle");
-			
-			return;
 		}
 			
 		// countdown to next spawn
@@ -84,7 +82,6 @@ fsm.add("wave", {
 	
 		// when it's time for the next spawn, calculate the value of an enemy spawn to determine if it will fit in the room
 		if (spawn_timer <= 0 && is_array(struct_get(global.current_layout, "enemy_spawn_points"))) {
-			
 			
 			// get the target enemy type to spawn
 			var _spawn_points = global.current_layout.enemy_spawn_points;
@@ -109,11 +106,11 @@ fsm.add("wave", {
 		}
 		
 		// update max enemy count based on progress into the wave
-		current_max_enemy_count = 1 + ceil(9 * global.tension);
+		current_max_enemy_count = 1 + ceil(_boss_active ? 4 : 9 * global.tension);
 		current_max_enemy_count = clamp(current_max_enemy_count, 1, 10);
 		
 		// keep spawn count low when player is first learning
-		if (!global.first_wave_complete) {
+		if (!global.first_wave_complete && !_boss_active) {
 			current_max_enemy_count = 1;
 		}
 
@@ -146,18 +143,15 @@ fsm.add("idle", {
 
 	},
 	
-	draw: function() {
-	}
+	draw: function() {}
 });
 
 fsm.add("level_complete", {
 	enter: function() {
 		play_stinger(snd_stinger_victory);
 	},
-	step: function() {
-	},
-	draw: function() {
-	},
+	step: function() {},
+	draw: function() {},
 }); 
 
 // Event Subscriptions

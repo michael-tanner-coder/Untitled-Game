@@ -1,6 +1,4 @@
 // BOSS
-// TODO: set max velocity to prevent bouncing from getting out of control
-// TODO: allow small enemies to spawn with the  boss
 // TODO: fix collision groups so that enemies can still bounce off walls but paddles phase through them
 // TODO: make sprite for boss and paddle
 // TODO: give boss lives
