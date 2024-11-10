@@ -19,7 +19,7 @@ fsm.add("active", {
     },
     draw: function() {
         // standard_enemy_draw_event();
-	    draw_set_color(BLUE);
+	    draw_set_color(hit ? RED : BLUE);
 		physics_draw_debug();
     }
 })
