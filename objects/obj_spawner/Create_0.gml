@@ -24,6 +24,8 @@ tutorial_score = 400; // make this configurable
 upgrade_score = 2000; // make this configurable
 raise_tension = true;
 
+global.boss_lives = 3;
+
 // State Machine
 fsm = new SnowState("wave");
 fsm.add("wave", {

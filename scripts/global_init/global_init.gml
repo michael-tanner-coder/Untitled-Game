@@ -17,6 +17,7 @@ global.tutorial = get_flag("needs_tutorial");
 global.unlock_modal_open = false;
 global.currency = 0;
 global.temp_game_speed = 1;
+global.boss_lives = 3;
 
 function get_global_game_speed() {
 	return global.settings.game_speed * global.temp_game_speed;
