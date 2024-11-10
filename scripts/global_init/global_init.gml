@@ -39,6 +39,7 @@ function get_global_game_speed() {
 // Game Rules
 #macro STANDARD_SPAWN_RATE 450
 #macro STANDARD_TIME_LIMIT 200
+#macro MAX_PHYSICS_SPEED 500
 
 // Game Time
 #macro DT delta_time/1000000
