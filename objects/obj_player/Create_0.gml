@@ -1,3 +1,25 @@
+// BOSS
+// TODO: set max velocity to prevent bouncing from getting out of control
+// TODO: allow small enemies to spawn with the  boss
+// TODO: fix collision groups so that enemies can still bounce off walls but paddles phase through them
+// TODO: make sprite for boss and paddle
+// TODO: give boss lives
+
+// TEST PREP
+// TODO: tune existing upgrades + add new ones
+// TODO: turn off certain menu features when not in dev mode
+// TODO: loop game after arena 1
+
+// POLISH
+// TODO: animation + hitbox update for coins
+// TODO: add shields back to enemies (make them readable)
+// TODO: add bounce sound effect
+// TODO: scale hitboxes on all enemies
+// TODO: make sprite for exploding enemy
+// TODO: animate flags
+// TODO: slime trail + particles
+// TODO: 9-sliced sprite for upgrade cards
+
 // Base Player Properties
 x_force = 0;
 y_force = 0;
