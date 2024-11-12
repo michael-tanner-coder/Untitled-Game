@@ -144,7 +144,7 @@ fsm.add("level_complete", {
 		
 		if (input_check_pressed("select")) {
 			global.temp_game_speed = 1;
-			go_to_next_scene();
+			quit_to_menu();
 		}
 	},
 	

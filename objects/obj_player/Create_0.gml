@@ -4,7 +4,6 @@
 // TEST PREP
 // TODO: tune existing upgrades + add new ones
 // TODO: turn off certain menu features when not in dev mode
-// TODO: loop game after arena 1
 
 // POLISH
 // TODO: animation + hitbox update for coins
