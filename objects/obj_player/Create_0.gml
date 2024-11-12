@@ -5,6 +5,7 @@
 // TODO: tune existing upgrades + add new ones
 
 // POLISH
+// TODO: placeholder title screen art + logo
 // TODO: animation + hitbox update for coins
 // TODO: add shields back to enemies (make them readable)
 // TODO: add bounce sound effect
