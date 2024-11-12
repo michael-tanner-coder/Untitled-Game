@@ -59,9 +59,6 @@ Example usage:
     var _elem = _get_list[_i];
 #macro END }
 
-#macro NOTHING
-
-
 // Sound Macros
 #macro DUPLICATE_SOUND_TOLERANCE 0.1
 
