@@ -3,7 +3,6 @@
 
 // TEST PREP
 // TODO: tune existing upgrades + add new ones
-// TODO: turn off certain menu features when not in dev mode
 
 // POLISH
 // TODO: animation + hitbox update for coins
