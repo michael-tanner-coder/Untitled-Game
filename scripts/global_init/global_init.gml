@@ -197,6 +197,12 @@ enum ABILITIES {
 	WAVE,
 	TELEPORT,
 	BOUNCER,
+	BREAK,
+	CHARGE,
+	GRAB,
+	PULL,
+	SLAPPER,
+	TETHER,
 }
 
 // Colors
