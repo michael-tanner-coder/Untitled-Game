@@ -92,7 +92,7 @@ function init_upgrades_collection() {
         ),
         upgrade_struct(
                 "heavy_weight", 
-                "Heavy Weight", 
+                "Slow Your Roll", 
                 "Decrease your recoil but you move more slowly", 
                 1000, 
                 spr_white_circle, 
