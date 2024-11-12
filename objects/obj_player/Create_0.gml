@@ -2,6 +2,7 @@
 // TODO: make sprite for boss and paddle
 
 // TEST PREP
+// TODO: fix tutorial UI code
 // TODO: tune existing upgrades + add new ones
 
 // POLISH
@@ -9,6 +10,7 @@
 // TODO: animation + hitbox update for coins
 // TODO: add shields back to enemies (make them readable)
 // TODO: add bounce sound effect
+// TODO: add bomb sprite
 // TODO: scale hitboxes on all enemies
 // TODO: make sprite for exploding enemy
 // TODO: animate flags

@@ -109,6 +109,7 @@ function init_upgrades_collection() {
                 spr_white_circle, 
                 [
                     effect_struct("player_shot_count", 1, OPERATIONS.ADD),
+                    effect_struct("player_bullet_force", 0.80, OPERATIONS.MULTIPLY),
                 ]
         ),
         upgrade_struct(
