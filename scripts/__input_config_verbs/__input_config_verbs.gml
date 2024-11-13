@@ -37,6 +37,9 @@ function __input_config_verbs()
             next_scene: [input_binding_key("D")],
             prev_scene: [input_binding_key("A")],
             switch_character: [input_binding_key("S")],
+            spawn_boss: [input_binding_key("B")],
+            kill_boss: [input_binding_key("K")],
+            toggle_debug: [input_binding_key("T")],
             
         },
         

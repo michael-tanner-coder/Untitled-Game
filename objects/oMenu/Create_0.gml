@@ -316,23 +316,6 @@ Input Icons by Kenney
 				["Game Speed",		new Slider([0, 1], 1, "game_speed")],				// Remove non-essential particle effects 
 				["Invincible Mode",	new Toggle(false,	"invincible_mode_enabled")],						// Toggle off screenshaking effects
 			]],
-			
-			["PLAYER", [
-				["Speed",		new Slider([0, 10], 5, "player_speed")],					// Changes player speed see oTest
-				["Size",		new Slider([0, 10], 1, "player_size")],					// Changes player speed see oTest
-				["Recoil",		new Slider([0, 100], 23, "player_recoil")],					// Changes player speed see oTest
-				["Density",		new Slider([0, 4], 1, "player_density")],				// Changes player density
-				["Restitution",		new Slider([0, 2], 0.5, "player_restitution")],				// Changes player bounciness
-				["Linear Damping",		new Slider([0, 10], 1, "player_linear_damping")],		// Changes player linear damping
-				["Angular Damping",		new Slider([0, 50], 25, "player_angular_damping")],		// Changes player angular damping
-				["Friction",		new Slider([0, 80], 40, "player_friction")],		// Changes player friction 
-				["Bullet Force",		new Slider([0, 100], 10, "player_bullet_force")],		// Changes power of player's bullets
-				["Firing Rate",		new Slider([0, 100], 10, "player_firing_rate")],		// Changes power of player's bullets
-				["Shot Count",		new Shift(["1", "2", "3", "4"], 0, "player_shot_count")],		// Changes power of player's bullets
-				["Shot Spread Angle",		new Slider([0, 360], 30, "player_shot_spread_angle")],		// Changes player shot spread 
-				["Alt Fire",		new Shift(["Dash", "Bomb", "Wave", "Teleport"], 0, "player_alt_fire")],		// Changes power of player's bullets
-				["Lives",		new Shift(["1", "2", "3", "4"], 0, "player_lives")],		// Changes power of player's bullets
-			]],
 	
 			["DATA", [
 				["DELETE ALL PROGRESS?",	[
@@ -341,12 +324,13 @@ Input Icons by Kenney
 					})],
 					
 					["YES (CANNOT BE UNDONE)", new ScriptRunner(function() {
+						reset_unlocks();
 						show_debug_message("deleting data");
 					})]
 				]],
 			]],
 		
-			["CONTROLS", new Controls(global.input_system, "input_save.json", true, ["right", "left", "up", "down"])] // Changes player controls
+			["CONTROLS", new Controls(global.input_system, "input_save.json", true, ["right", "left", "up", "down"])], // Changes player controls
 		]],
 		
 		["UPGRADES", new ScriptRunner(function() { 
@@ -364,8 +348,33 @@ Input Icons by Kenney
 		})]
 	];
 
+	// Settings only available to dev mode
+	if (global.dev_mode) {
+		var _player_settings_menu = [
+			"PLAYER", [
+				["Speed",		new Slider([0, 10], 5, "player_speed")],										// Changes player speed
+				["Size",		new Slider([0, 10], 1, "player_size")],											// Changes player sprite and hitbox size
+				["Recoil",		new Slider([0, 100], 23, "player_recoil")],										// Changes how much player's shots will kick back
+				["Density",		new Slider([0, 4], 1, "player_density")],										// Changes player density
+				["Restitution",		new Slider([0, 5], 0.5, "player_restitution")],								// Changes player bounciness
+				["Linear Damping",		new Slider([0, 10], 1, "player_linear_damping")],						// Changes player linear damping
+				["Angular Damping",		new Slider([0, 50], 25, "player_angular_damping")],						// Changes player angular damping
+				["Friction",		new Slider([0, 80], 40, "player_friction")],								// Changes player friction 
+				["Bullet Force",		new Slider([0, 100], 10, "player_bullet_force")],						// Changes power of player's bullets
+				["Firing Rate",		new Slider([0, 100], 10, "player_firing_rate")],							// Changes speed at which player fires bullets
+				["Shot Count",		new Shift(["1", "2", "3", "4"], 0, "player_shot_count")],					// Changes number of simultaneous player's bullets
+				["Shot Spread Angle",		new Slider([0, 360], 30, "player_shot_spread_angle")],				// Changes angle of separation between player's shots spread 
+				["Alt Fire",		new Shift(["Dash", "Bomb", "Wave", "Teleport"], 0, "player_alt_fire")],		// Changes power of player's alt fire ability
+				["Lives",		new Shift(["1", "2", "3", "4"], 0, "player_lives")],							// Changes power of player's life count
+		]];
 
-	
+		FOREACH menu ELEMENT
+			var _submenu_array = _elem;
+			if (_submenu_array[0] == "SETTINGS") {
+				array_push(_submenu_array[1], _player_settings_menu)
+			}
+		END
+	}
 	
 	enum e_menu_presets {
 		title_screen,

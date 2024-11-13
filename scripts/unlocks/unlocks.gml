@@ -14,16 +14,15 @@ global.unlock_progress = get_save_data_property("unlock_progress", 0);
 
 
 global.unlockables = [
-    unlock_struct("big_boy", "upgrades", 1000),
-    unlock_struct("tiny_baby", "upgrades", 2000),
-    unlock_struct("fast_fire", "upgrades", 3000),
-    unlock_struct("steady_fire", "upgrades", 5000),
-    unlock_struct("light_weight", "upgrades", 4000),
-    unlock_struct("heavy_weight", "upgrades", 4000),
-    unlock_struct("shot_spread", "upgrades", 2000),
-    unlock_struct("bomb", "upgrades", 3000),
-    unlock_struct("bullet_strength", "upgrades", 8000),
-    unlock_struct("extra_life", "upgrades", 5000),
+    unlock_struct("big_boy", "upgrades", 4000),
+    unlock_struct("fast_fire", "upgrades", 8000),
+    unlock_struct("steady_fire", "upgrades", 10000),
+    unlock_struct("light_weight", "upgrades", 12000),
+    unlock_struct("heavy_weight", "upgrades", 16000),
+    unlock_struct("shot_spread", "upgrades", 18000),
+    unlock_struct("shot_focus", "upgrades", 19000),
+    unlock_struct("bullet_strength", "upgrades", 20000),
+    unlock_struct("extra_life", "upgrades", 22000),
 ];
 
 function unlock_next_item(_score = 0) {

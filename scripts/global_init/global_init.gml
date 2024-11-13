@@ -17,6 +17,7 @@ global.tutorial = get_flag("needs_tutorial");
 global.unlock_modal_open = false;
 global.currency = 0;
 global.temp_game_speed = 1;
+global.boss_lives = 3;
 
 function get_global_game_speed() {
 	return global.settings.game_speed * global.temp_game_speed;
@@ -39,6 +40,7 @@ function get_global_game_speed() {
 // Game Rules
 #macro STANDARD_SPAWN_RATE 450
 #macro STANDARD_TIME_LIMIT 200
+#macro MAX_PHYSICS_SPEED 500
 
 // Game Time
 #macro DT delta_time/1000000
@@ -195,6 +197,12 @@ enum ABILITIES {
 	WAVE,
 	TELEPORT,
 	BOUNCER,
+	BREAK,
+	CHARGE,
+	GRAB,
+	PULL,
+	SLAPPER,
+	TETHER,
 }
 
 // Colors

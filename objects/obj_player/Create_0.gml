@@ -1,3 +1,21 @@
+// BOSS
+// TODO: make sprite for boss and paddle
+
+// TEST PREP
+// TODO: tune existing upgrades + add new ones
+
+// POLISH
+// TODO: placeholder title screen art + logo
+// TODO: animation + hitbox update for coins
+// TODO: add shields back to enemies (make them readable)
+// TODO: add bounce sound effect
+// TODO: add bomb sprite
+// TODO: scale hitboxes on all enemies
+// TODO: make sprite for exploding enemy
+// TODO: animate flags
+// TODO: slime trail + particles
+// TODO: 9-sliced sprite for upgrade cards
+
 // Base Player Properties
 x_force = 0;
 y_force = 0;
@@ -49,7 +67,7 @@ shadow.owner = self;
 fix = physics_fixture_create();
 physics_fixture_set_circle_shape(fix, base_fixture_size * upgrade_stats.player_size);
 physics_fixture_set_density(fix, upgrade_stats.player_density);
-physics_fixture_set_collision_group(fix, 2);
+physics_fixture_set_collision_group(fix, 1);
 physics_fixture_set_restitution(fix, upgrade_stats.player_restitution);
 physics_fixture_set_linear_damping(fix, upgrade_stats.player_linear_damping);
 physics_fixture_set_angular_damping(fix, upgrade_stats.player_angular_damping);
@@ -319,7 +337,7 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 			fix = physics_fixture_create();
 			physics_fixture_set_circle_shape(fix, base_fixture_size * upgrade_stats.player_size);
 			physics_fixture_set_density(fix, upgrade_stats.player_density);
-			physics_fixture_set_collision_group(fix, 2);
+			physics_fixture_set_collision_group(fix, 1);
 			physics_fixture_set_restitution(fix, upgrade_stats.player_restitution);
 			physics_fixture_set_linear_damping(fix, upgrade_stats.player_linear_damping);
 			physics_fixture_set_angular_damping(fix, upgrade_stats.player_angular_damping);

@@ -14,7 +14,7 @@
   "name":"enemy_spawn",
   "parent":{
     "name":"Particle Systems",
-    "path":"folders/Particle Systems.yy",
+    "path":"folders/Paths/Particle Systems.yy",
   },
   "resourceType":"GMParticleSystem",
   "resourceVersion":"2.0",

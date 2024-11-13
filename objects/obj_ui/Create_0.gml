@@ -92,7 +92,7 @@ fsm.add("mid_level", {
 		if (show_tutorial) {
 			draw_set_color(c_black);
 			draw_set_alpha(0.5);
-			draw_rectangle(tutorial_banner_center_point, tutorial_banner_y - 20, VIEW_WIDTH/2 + tutorial_banner_center_point, tutorial_banner_y + 120, false);
+			draw_rectangle(tutorial_banner_center_point, tutorial_banner_y - 20, VIEW_WIDTH + tutorial_banner_center_point, tutorial_banner_y + 120, false);
 			draw_set_alpha(1);
 	
 			draw_set_halign(fa_left);
@@ -124,10 +124,10 @@ fsm.add("game_over", {
 		// Banner Text
 		var _banner_y = VIEW_WIDTH/2 - 100;
 		draw_set_color(WHITE);
-		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 30, "FINAL SCORE: " + string(score));
-		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 50, "BEST SCORE: " + string(global.best_score));
-		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 70, "RETRY: spacebar");
-		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 90, "QUIT: escape");
+		draw_shadow_text(VIEW_WIDTH/2, _banner_y - 60, "FINAL SCORE: " + string(score));
+		draw_shadow_text(VIEW_WIDTH/2, _banner_y - 30, "BEST SCORE: " + string(global.best_score));
+		draw_shadow_text(VIEW_WIDTH/2, _banner_y, "RETRY: spacebar");
+		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 30, "QUIT: escape");
 	}
 });
 
@@ -144,7 +144,7 @@ fsm.add("level_complete", {
 		
 		if (input_check_pressed("select")) {
 			global.temp_game_speed = 1;
-			go_to_next_scene();
+			quit_to_menu();
 		}
 	},
 	
