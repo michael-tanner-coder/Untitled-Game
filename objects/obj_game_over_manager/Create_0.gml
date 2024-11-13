@@ -100,6 +100,7 @@ fsm.add("unlock", {
 		// reset target points for next time we go to the countup state
 		total_points -= progress_points;
 		progress_points = 0;
+		global.unlock_progress = 0;
 		
 		play_sound(snd_tutorial_success);
 		

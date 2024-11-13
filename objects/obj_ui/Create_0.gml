@@ -124,10 +124,10 @@ fsm.add("game_over", {
 		// Banner Text
 		var _banner_y = VIEW_WIDTH/2 - 100;
 		draw_set_color(WHITE);
-		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 30, "FINAL SCORE: " + string(score));
-		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 50, "BEST SCORE: " + string(global.best_score));
-		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 70, "RETRY: spacebar");
-		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 90, "QUIT: escape");
+		draw_shadow_text(VIEW_WIDTH/2, _banner_y - 60, "FINAL SCORE: " + string(score));
+		draw_shadow_text(VIEW_WIDTH/2, _banner_y - 30, "BEST SCORE: " + string(global.best_score));
+		draw_shadow_text(VIEW_WIDTH/2, _banner_y, "RETRY: spacebar");
+		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 30, "QUIT: escape");
 	}
 });
 
