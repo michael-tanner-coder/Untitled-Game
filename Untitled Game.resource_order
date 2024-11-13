@@ -61,7 +61,6 @@
     {"name":"Props","order":5,"path":"folders/Objects/Props.yy",},
     {"name":"UI","order":10,"path":"folders/Objects/UI.yy",},
     {"name":"VFX","order":12,"path":"folders/Objects/VFX.yy",},
-    {"name":"Particle Systems","order":15,"path":"folders/Particle Systems.yy",},
     {"name":"Paths","order":4,"path":"folders/Paths.yy",},
     {"name":"Rooms","order":10,"path":"folders/Rooms.yy",},
     {"name":"Bosses","order":4,"path":"folders/Rooms/Bosses.yy",},

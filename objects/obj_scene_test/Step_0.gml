@@ -1,8 +1,6 @@
-/// @description Insert description here
 if (!global.dev_mode) {
     return;
 }
-
 
 if (input_check_pressed("toggle_debug")) {
     global.debug = !global.debug;
@@ -30,10 +28,6 @@ if (keyboard_check_pressed(ord("L"))) {
 
 if (keyboard_check_pressed(ord("X"))) {
     publish(DESTROYED_ALL_ENEMIES);
-}
-
-if (keyboard_check_pressed(ord("F"))) {
-    publish(FLIPPED_ALL_ENEMIES);
 }
 
 if (keyboard_check_pressed(ord("Z"))) {
