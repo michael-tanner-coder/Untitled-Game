@@ -1,5 +1,5 @@
 global.upgrades = [];
-global.default_unlocked_upgrades = ["fast_fire", "steady_fire", "bullet_strength"];
+global.default_unlocked_upgrades = ["fire_faster", "move_faster", "get_sturdy"];
 
 function effect_struct(_property = "", _value = 0, _operation = OPERATIONS.SET) {
     return {
@@ -40,6 +40,36 @@ function get_upgrade_type(_key = "") {
 function init_upgrades_collection() {
     global.upgrades = [
         upgrade_struct(
+                "fire_faster", 
+                "Fire Faster", 
+                "Increase your fire rate by 10%", 
+                500, 
+                spr_white_circle, 
+                [
+                    effect_struct("player_firing_rate", 1.1, OPERATIONS.MULTIPLY),
+                ]
+        ),
+        upgrade_struct(
+                "move_faster", 
+                "Move Faster", 
+                "Increase your move speed by 10%", 
+                500, 
+                spr_white_circle, 
+                [
+                    effect_struct("player_density", 0.9, OPERATIONS.MULTIPLY),
+                ]
+        ),
+        upgrade_struct(
+                "get_sturdy", 
+                "Get Sturdier", 
+                "Increase your weight by 10%", 
+                500, 
+                spr_white_circle, 
+                [
+                    effect_struct("player_density", 1.1, OPERATIONS.MULTIPLY),
+                ]
+        ),
+        upgrade_struct(
                 "big_boy", 
                 "Big Boy", 
                 "Become huge and hard to move (double your size)", 
@@ -49,73 +79,85 @@ function init_upgrades_collection() {
                     effect_struct("player_size", 2, OPERATIONS.SET),
                 ]
         ),
-        upgrade_struct(
-                "tiny_baby",
-                "Tiny Baby", 
-                "Reduce your size by half", 
-                1000, 
-                spr_white_circle, 
-                [
-                    effect_struct("player_size", 0.5, OPERATIONS.SET),
-                ]
-        ),
+        // upgrade_struct(
+        //         "tiny_baby",
+        //         "Tiny Baby", 
+        //         "Reduce your size by half",
+        //         1000, 
+        //         spr_white_circle, 
+        //         [
+        //             effect_struct("player_size", 0.5, OPERATIONS.SET),
+        //         ]
+        // ),
         upgrade_struct(
                 "fast_fire", 
-                "Fast Fire", 
-                "Increase your firing rate (difficult to control)", 
+                "Rapid Fire", 
+                "Increase your firing rate (difficult to control)",
                 1000, 
                 spr_white_circle, 
                 [
                     effect_struct("player_firing_rate", 0.5, OPERATIONS.MULTIPLY),
+                    effect_struct("player_bullet_force", 0.75, OPERATIONS.MULTIPLY),
                 ]
         ),
         upgrade_struct(
                 "steady_fire", 
-                "Steady Fire", 
+                "Steady Fire",
                 "Stabilize your firing rate (slow but easy to control)", 
                 1000, 
                 spr_white_circle, 
                 [
                     effect_struct("player_firing_rate", 2, OPERATIONS.MULTIPLY),
+                    effect_struct("player_bullet_force", 1.25, OPERATIONS.MULTIPLY),
                 ]
         ),
         upgrade_struct(
                 "light_weight", 
                 "Light Weight", 
-                "Increase your movement speed but your shots have more recoil", 
+                "Increase your movement speed but you are easier to push", 
                 1000, 
                 spr_white_circle, 
                 [
-                    effect_struct("player_density", 0.5, OPERATIONS.MULTIPLY),
-                    effect_struct("player_recoil", 2, OPERATIONS.MULTIPLY)
+                    effect_struct("player_density", 0.75, OPERATIONS.MULTIPLY)
                 ]
         ),
         upgrade_struct(
                 "heavy_weight", 
-                "Slow Your Roll", 
-                "Decrease your recoil but you move more slowly", 
+                "Heavy Weight", 
+                "Become harder to push but increase your recoil", 
                 1000, 
                 spr_white_circle, 
                 [
-                    effect_struct("player_density", 0.5, OPERATIONS.DIVIDE),
-                    effect_struct("player_recoil", 2, OPERATIONS.DIVIDE)
+                    effect_struct("player_density", 1.5, OPERATIONS.MULTIPLY),
+                    effect_struct("player_recoil", 1.5, OPERATIONS.MULTIPLY)
                 ]
         ),
         upgrade_struct(
                 "shot_spread", 
                 "Shot Spread", 
-                "Increase your shot count by 1", 
+                "Increase your shot count by 1, but each shot is weaker", 
                 1000, 
                 spr_white_circle, 
                 [
                     effect_struct("player_shot_count", 1, OPERATIONS.ADD),
-                    effect_struct("player_bullet_force", 0.80, OPERATIONS.MULTIPLY),
+                    effect_struct("player_bullet_force", 0.5, OPERATIONS.MULTIPLY),
+                ]
+        ),
+        upgrade_struct(
+                "shot_focus", 
+                "Shot Focus", 
+                "Decrease your shot count by 1, but each shot is stronger", 
+                1000, 
+                spr_white_circle,
+                [
+                    effect_struct("player_shot_count", 1, OPERATIONS.SUBTRACT),
+                    effect_struct("player_bullet_force", 2, OPERATIONS.DIVIDE),
                 ]
         ),
         upgrade_struct(
                 "extra_life", 
                 "Extra Life", 
-                "Gain 1 extra life", 
+                "Gain 1 extra life",
                 4000, 
                 spr_white_circle,
                 [
@@ -123,8 +165,8 @@ function init_upgrades_collection() {
                 ]
         ),
         upgrade_struct(
-                "bullet_strength", 
-                "Bullet Strength", 
+                "bullet_strength",
+                "Bullet Strength",
                 "Stronger bullets that hit harder but have greater recoil", 
                 4000, 
                 spr_white_circle,
@@ -133,16 +175,16 @@ function init_upgrades_collection() {
                     effect_struct("player_recoil", 2, OPERATIONS.MULTIPLY),
                 ]
         ),
-        upgrade_struct(
-                "bomb", 
-                "Bomb", 
-                "Right-Click to plant a ticking bomb", 
-                4000, 
-                spr_white_circle,
-                [
-                    effect_struct("player_alt_fire", ABILITIES.BOMB, OPERATIONS.SET),
-                ]
-        ),
+        // upgrade_struct(
+        //         "bomb", 
+        //         "Bomb", 
+        //         "Right-Click to plant a ticking bomb", 
+        //         4000, 
+        //         spr_white_circle,
+        //         [
+        //             effect_struct("player_alt_fire", ABILITIES.BOMB, OPERATIONS.SET),
+        //         ]
+        // ),
     ];
 
     return global.upgrades;

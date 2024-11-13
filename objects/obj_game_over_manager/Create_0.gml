@@ -93,7 +93,7 @@ fsm.add("unlock", {
 	enter: function() {
 		unlock_next_item(progress_points);
 	
-		// get item data for display 
+		// get item data for display
 		item_data = get_unlock_item_data(next_unlock);
 		item_name = item_data.name;
 		

@@ -324,6 +324,7 @@ Input Icons by Kenney
 					})],
 					
 					["YES (CANNOT BE UNDONE)", new ScriptRunner(function() {
+						reset_unlocks();
 						show_debug_message("deleting data");
 					})]
 				]],
