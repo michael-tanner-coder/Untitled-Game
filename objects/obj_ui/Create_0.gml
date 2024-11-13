@@ -92,7 +92,7 @@ fsm.add("mid_level", {
 		if (show_tutorial) {
 			draw_set_color(c_black);
 			draw_set_alpha(0.5);
-			draw_rectangle(tutorial_banner_center_point, tutorial_banner_y - 20, VIEW_WIDTH/2 + tutorial_banner_center_point, tutorial_banner_y + 120, false);
+			draw_rectangle(tutorial_banner_center_point, tutorial_banner_y - 20, VIEW_WIDTH + tutorial_banner_center_point, tutorial_banner_y + 120, false);
 			draw_set_alpha(1);
 	
 			draw_set_halign(fa_left);

@@ -2,7 +2,6 @@
 // TODO: make sprite for boss and paddle
 
 // TEST PREP
-// TODO: fix tutorial UI code
 // TODO: tune existing upgrades + add new ones
 
 // POLISH
