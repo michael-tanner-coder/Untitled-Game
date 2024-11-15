@@ -1,5 +1,14 @@
 states_array[state].active_behavior();
 
+if (room == rm_main_menu) {
+	window_set_cursor(cr_default);
+	cursor_sprite = -1;
+}
+else {
+	cursor_sprite = spr_reticle;
+	window_set_cursor(cr_none);
+}
+
 if (score > global.best_score) {
 	global.best_score = score;
 }

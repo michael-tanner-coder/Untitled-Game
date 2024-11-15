@@ -41,8 +41,6 @@ global.best_score = 0;
 show_debug_message("TUTORIAL FLAG:");
 show_debug_message(get_flag("needs_tutorial"));
 score = 0;
-cursor_sprite = spr_reticle;
-window_set_cursor(cr_none);
 window_set_caption("I don't know what to call this yet");
 
 base_score = {
