@@ -111,6 +111,11 @@ fsm.add("select_upgrade", {
 	}
 });
 
+fsm.add("inactive", {
+	step: function() {},
+	draw: function() {},
+})
+
 // Methods
 generate_upgrade_options = function() {
 	var _available_upgrades = get_save_data_property("upgrades", global.default_unlocked_upgrades);
@@ -144,4 +149,7 @@ subscribe(id, ENEMY_DEFEATED, function(_points = 0) {
 });
 subscribe(id, LEVEL_RESET, function() {
 	upgrade_progress_points = 0;
+});
+subscribe(id, LOST_LEVEL, function() {
+	fsm.change("inactive");
 })
