@@ -11,7 +11,6 @@
 // TODO: add bomb sprite
 // TODO: scale hitboxes on all enemies
 // TODO: make sprite for exploding enemy
-// TODO: animate flags
 // TODO: slime trail + particles (make 'em slimey!)
 // TODO: 9-sliced sprite for upgrade cards
 
