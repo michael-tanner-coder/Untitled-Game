@@ -24,9 +24,9 @@ fsm.add("wave", {
 	step: function() {
 		
 		// don't spawn until we finish the tutorial and the first wave of enemies
-		if (global.tutorial || !global.first_wave_complete) {
-			return;
-		}
+		// if (global.tutorial || !global.first_wave_complete) {
+		// 	return;
+		// }
 	
 		// countdown to next spawn
 		var _current_money_count = instance_number(obj_money);

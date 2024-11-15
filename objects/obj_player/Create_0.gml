@@ -6,7 +6,6 @@
 // POLISH
 // TODO: placeholder title screen art + logo
 // TODO: change cursor on menus
-// TODO: animation + hitbox update for coins
 // TODO: add shields back to enemies (make them readable)
 // TODO: add bounce sound effect
 // TODO: add bomb sprite

@@ -1146,6 +1146,7 @@
     {"name":"spr_circle_outline","order":10,"path":"sprites/spr_circle_outline/spr_circle_outline.yy",},
     {"name":"spr_circle","order":1,"path":"sprites/spr_circle/spr_circle.yy",},
     {"name":"spr_cloud","order":17,"path":"sprites/spr_cloud/spr_cloud.yy",},
+    {"name":"spr_coin_shadow","order":10,"path":"sprites/spr_coin_shadow/spr_coin_shadow.yy",},
     {"name":"spr_color_overlay","order":6,"path":"sprites/spr_color_overlay/spr_color_overlay.yy",},
     {"name":"spr_corner_piece","order":11,"path":"sprites/spr_corner_piece/spr_corner_piece.yy",},
     {"name":"spr_corner_unlocked","order":4,"path":"sprites/spr_corner_unlocked/spr_corner_unlocked.yy",},

@@ -1324,6 +1324,7 @@
     {"id":{"name":"spr_circle_outline","path":"sprites/spr_circle_outline/spr_circle_outline.yy",},},
     {"id":{"name":"spr_circle","path":"sprites/spr_circle/spr_circle.yy",},},
     {"id":{"name":"spr_cloud","path":"sprites/spr_cloud/spr_cloud.yy",},},
+    {"id":{"name":"spr_coin_shadow","path":"sprites/spr_coin_shadow/spr_coin_shadow.yy",},},
     {"id":{"name":"spr_color_overlay","path":"sprites/spr_color_overlay/spr_color_overlay.yy",},},
     {"id":{"name":"spr_corner_piece","path":"sprites/spr_corner_piece/spr_corner_piece.yy",},},
     {"id":{"name":"spr_corner_unlocked","path":"sprites/spr_corner_unlocked/spr_corner_unlocked.yy",},},
