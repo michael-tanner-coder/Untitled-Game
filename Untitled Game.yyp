@@ -1349,6 +1349,7 @@
     {"id":{"name":"spr_empty","path":"sprites/spr_empty/spr_empty.yy",},},
     {"id":{"name":"spr_enemy_bullet","path":"sprites/spr_enemy_bullet/spr_enemy_bullet.yy",},},
     {"id":{"name":"spr_exploding_dot","path":"sprites/spr_exploding_dot/spr_exploding_dot.yy",},},
+    {"id":{"name":"spr_exploding_enemy_sheet","path":"sprites/spr_exploding_enemy_sheet/spr_exploding_enemy_sheet.yy",},},
     {"id":{"name":"spr_flag","path":"sprites/spr_flag/spr_flag.yy",},},
     {"id":{"name":"spr_flower","path":"sprites/spr_flower/spr_flower.yy",},},
     {"id":{"name":"spr_front_pipe_layer","path":"sprites/spr_front_pipe_layer/spr_front_pipe_layer.yy",},},

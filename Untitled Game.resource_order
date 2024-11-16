@@ -1169,6 +1169,7 @@
     {"name":"spr_empty_red","order":6,"path":"sprites/spr_empty_red/spr_empty_red.yy",},
     {"name":"spr_enemy_bullet","order":34,"path":"sprites/spr_enemy_bullet/spr_enemy_bullet.yy",},
     {"name":"spr_exploding_dot","order":35,"path":"sprites/spr_exploding_dot/spr_exploding_dot.yy",},
+    {"name":"spr_exploding_enemy_sheet","order":22,"path":"sprites/spr_exploding_enemy_sheet/spr_exploding_enemy_sheet.yy",},
     {"name":"spr_flag","order":45,"path":"sprites/spr_flag/spr_flag.yy",},
     {"name":"spr_flower","order":12,"path":"sprites/spr_flower/spr_flower.yy",},
     {"name":"spr_front_pipe_layer","order":10,"path":"sprites/spr_front_pipe_layer/spr_front_pipe_layer.yy",},
