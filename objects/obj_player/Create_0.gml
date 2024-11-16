@@ -7,7 +7,6 @@
 // TODO: placeholder title screen art + logo
 // TODO: add shields back to enemies (make them readable)
 // TODO: add bounce sound effect
-// TODO: add bomb sprite
 // TODO: scale hitboxes on all enemies
 // TODO: make sprite for exploding enemy
 // TODO: slime trail + particles (make 'em slimey!)
@@ -43,7 +42,7 @@ upgrade_stats = {
 	player_firing_rate: global.settings.player_firing_rate,
 	player_shot_spread_angle: global.settings.player_shot_spread_angle,
 	player_size: global.settings.player_size,
-	player_alt_fire: global.settings.player_alt_fire,
+	player_alt_fire: ABILITIES.BOMB,
 };
 
 // Tutorial Variables
