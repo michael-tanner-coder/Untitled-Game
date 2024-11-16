@@ -126,7 +126,7 @@ generate_upgrade_options = function() {
 		do {
 			var _upgrade_key = _available_upgrades[irandom_range(0, array_length(_available_upgrades) - 1)];
 			var _upgrade = get_upgrade_type(_upgrade_key);
-        	
+			
         	_upgrade_was_already_chosen = false;
         	FOREACH available_upgrades ELEMENT
         		if (_elem.key == _upgrade.key) {

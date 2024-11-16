@@ -327,6 +327,7 @@
     {"id":{"name":"obj_shadow","path":"objects/obj_shadow/obj_shadow.yy",},},
     {"id":{"name":"obj_shop_item","path":"objects/obj_shop_item/obj_shop_item.yy",},},
     {"id":{"name":"obj_shop_manager","path":"objects/obj_shop_manager/obj_shop_manager.yy",},},
+    {"id":{"name":"obj_shot_origin","path":"objects/obj_shot_origin/obj_shot_origin.yy",},},
     {"id":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},},
     {"id":{"name":"obj_slowdown_field","path":"objects/obj_slowdown_field/obj_slowdown_field.yy",},},
     {"id":{"name":"obj_spawn_manager","path":"objects/obj_spawn_manager/obj_spawn_manager.yy",},},

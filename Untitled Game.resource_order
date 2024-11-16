@@ -263,6 +263,7 @@
     {"name":"obj_shadow","order":9,"path":"objects/obj_shadow/obj_shadow.yy",},
     {"name":"obj_shop_item","order":7,"path":"objects/obj_shop_item/obj_shop_item.yy",},
     {"name":"obj_shop_manager","order":10,"path":"objects/obj_shop_manager/obj_shop_manager.yy",},
+    {"name":"obj_shot_origin","order":18,"path":"objects/obj_shot_origin/obj_shot_origin.yy",},
     {"name":"obj_slider","order":13,"path":"objects/obj_slider/obj_slider.yy",},
     {"name":"obj_slowdown_field","order":4,"path":"objects/obj_slowdown_field/obj_slowdown_field.yy",},
     {"name":"obj_spawn_manager","order":2,"path":"objects/obj_spawn_manager/obj_spawn_manager.yy",},

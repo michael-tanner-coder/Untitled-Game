@@ -1,5 +1,5 @@
 global.upgrades = [];
-global.default_unlocked_upgrades = ["fire_faster", "move_faster", "get_sturdy"];
+global.default_unlocked_upgrades = ["shot_spread", "shot_focus", "get_sturdy"];
 
 function effect_struct(_property = "", _value = 0, _operation = OPERATIONS.SET) {
     return {
@@ -26,7 +26,7 @@ function get_upgrade_type(_key = "") {
         return;
     }
     
-    var _matching_powerup = undefined;
+    var _matching_upgrade = undefined;
     FOREACH global.upgrades ELEMENT
         var _upgrade = _elem;
         if (_upgrade.key == _key) {

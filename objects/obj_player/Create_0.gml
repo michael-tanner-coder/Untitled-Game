@@ -1,6 +1,5 @@
 // TEST PREP
 // TODO: tune existing upgrades + add new ones
-// TODO: space apart shot origins
 // TODO: fix save data bugs (test on separate laptop)
 
 // POLISH
@@ -40,6 +39,9 @@ upgrade_stats = {
 	player_size: global.settings.player_size,
 	player_alt_fire: global.settings.player_alt_fire,
 };
+
+var _origin = instance_create_layer(x, y, layer, obj_shot_origin);
+shot_origins = [_origin];
 
 // Tutorial Variables
 global.moved = false;
@@ -133,13 +135,14 @@ fsm.add("active", {
 			global.shot = true;
    
 			var _shot_spread_angle = upgrade_stats.player_shot_spread_angle;
-			var _shot_spread_count = upgrade_stats.player_shot_count;
+			var _shot_spread_count = array_length(shot_origins);
 			var _shoot_direction = point_direction(x,y,mouse_x, mouse_y);
 			
 			for (var _i = 0; _i < _shot_spread_count; _i++) {
 				var _bullet_angle = _shoot_direction + (_i * _shot_spread_angle) - ((_shot_spread_count - 1) * (_shot_spread_angle/2));
 				
-				var _bullet = instance_create_layer(x +lengthdir_x(10, _shoot_direction)*2,y +lengthdir_y(10, _shoot_direction)*2, layer, obj_bullet);
+				var _origin_point = shot_origins[_i];
+				var _bullet = instance_create_layer(_origin_point.x, _origin_point.y, layer, obj_bullet);
 	    
 			    // Bullet force
 			    var _x_force, _y_force;
@@ -232,6 +235,20 @@ fsm.add("active", {
 			i_frames--;
 		}
 		i_frames = clamp(i_frames, 0, respawn_i_frames);
+		
+		// Move and rotate shot origins with the player's aim direction
+		var _aim_direction = point_direction(x,y,mouse_x, mouse_y);
+		var _shot_spread_angle = upgrade_stats.player_shot_spread_angle;
+		var _shot_spread_count = array_length(shot_origins);
+		
+		FOREACH shot_origins ELEMENT
+			var _origin_angle = _aim_direction + (_i * _shot_spread_angle) - ((_shot_spread_count - 1) * (_shot_spread_angle/2));
+			var _aim_x = lengthdir_x(1, _origin_angle) * 32;
+			var _aim_y = lengthdir_y(1, _origin_angle) * 32;
+			_elem.x = x + _aim_x;
+			_elem.y = y + _aim_y;
+			_elem.image_angle = _origin_angle - 90;
+		END
 	},
 	draw: function() {
 		draw_8_direction_movement(dash_timer > 0 ? spr_player_sheet_dash : spr_player_sheet, frame_width, frame_height, anim_length, image_alpha, image_blend, frame_width, frame_height);
@@ -240,11 +257,6 @@ fsm.add("active", {
 			draw_set_color(RED);
 			physics_draw_debug();
 		}
-		
-		var _aim_direction = point_direction(x,y,mouse_x, mouse_y);
-		var _aim_x = lengthdir_x(1, _aim_direction) * 32;
-		var _aim_y = lengthdir_y(1, _aim_direction) * 32;
-		draw_sprite_ext(spr_aiming, 0, x + _aim_x, y + _aim_y, 1, 1, _aim_direction - 90, c_white,1);
 	},
 });
 
@@ -334,6 +346,19 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 			physics_fixture_set_angular_damping(fix, upgrade_stats.player_angular_damping);
 			physics_fixture_set_friction(fix, upgrade_stats.player_friction);
 			my_fixture = physics_fixture_bind(fix, self);
+			
+			
+			// Reset placement and number of all shot origin points based on the player_shot_count property 
+			FOREACH shot_origins ELEMENT
+				instance_destroy(_elem);
+			END
+			
+			shot_origins = [];
+			
+			for (var _i = 0; _i < upgrade_stats.player_shot_count; _i++) {
+				var _new_origin_point = instance_create_layer(x, y, layer, obj_shot_origin);
+				array_push(shot_origins, _new_origin_point);
+			}
 			
 			// Update Global Game Variables
 			lives = upgrade_stats.player_lives;
