@@ -31,12 +31,14 @@ function standard_enemy_create_event() {
     hit_spritesheet = spr_hit_enemy_sheet;
     image_xscale = 2;
     image_yscale = 2;
+    is_active = false;
     
     // State Machine
     fsm = new SnowState("active");
     
     fsm.add("active", {
     	step: function() {
+    		is_active = true;
 			standard_enemy_step_event();    		
     	},
     	draw: function() {
@@ -106,6 +108,10 @@ function standard_enemy_draw_event() {
 		draw_set_color(BLUE);
 		physics_draw_debug();
 	}
+	
+	// if (!hit) {
+	// 	draw_sprite_ext(shield_sprite, 0, x, y, image_xscale, image_yscale, 0, c_white, 1);
+	// }
 }
 
 function standard_enemy_destroy_event() {

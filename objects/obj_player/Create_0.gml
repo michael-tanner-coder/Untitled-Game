@@ -1,7 +1,9 @@
 // POLISH
+// TODO: bug hunt
 // TODO: add shields back to enemies (make them readable)
-// TODO: slime trail + particles (make 'em slimey!)
 // TODO: placeholder title screen art + logo
+// TODO: end screen
+// TODO: slime trail + particles (make 'em slimey!)
 
 // Base Player Properties
 x_force = 0;
