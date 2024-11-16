@@ -7,6 +7,7 @@ y_offset = 32 * 4;
 paddle = undefined;
 movement_magnitude = 400;
 base_stun_time = 40;
+point_value = 1000;
 
 fsm.add("active", {
     enter: function() {
@@ -16,9 +17,18 @@ fsm.add("active", {
 	},
     step: function() {
         standard_enemy_step_event();
+        phy_rotation = 0;
+        
+        if (hit) {
+        	sprite_index = spr_paddle_boss_hit;
+        }
+        else {
+        	sprite_index = spr_paddle_boss;
+        }
     },
     draw: function() {
         // standard_enemy_draw_event();
+        
         draw_self();
         if (global.debug) {
 	    	draw_set_color(hit ? RED : BLUE);

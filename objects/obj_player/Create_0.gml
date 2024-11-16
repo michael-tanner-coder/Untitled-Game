@@ -1,15 +1,13 @@
 // TEST PREP
-// TODO: make sprite for boss and paddle
-// TODO: fix save data bugs (test on separate laptop)
 // TODO: tune existing upgrades + add new ones
+// TODO: fix save data bugs (test on separate laptop)
 
 // POLISH
-// TODO: placeholder title screen art + logo
-// TODO: add shields back to enemies (make them readable)
-// TODO: add bounce sound effect
 // TODO: scale hitboxes on all enemies
+// TODO: add bounce sound effect
+// TODO: add shields back to enemies (make them readable)
 // TODO: slime trail + particles (make 'em slimey!)
-// TODO: 9-sliced sprite for upgrade cards
+// TODO: placeholder title screen art + logo
 
 // Base Player Properties
 x_force = 0;
