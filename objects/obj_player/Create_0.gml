@@ -3,7 +3,6 @@
 // TODO: fix save data bugs (test on separate laptop)
 
 // POLISH
-// TODO: scale hitboxes on all enemies
 // TODO: add bounce sound effect
 // TODO: add shields back to enemies (make them readable)
 // TODO: slime trail + particles (make 'em slimey!)
