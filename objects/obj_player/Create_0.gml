@@ -1,9 +1,9 @@
 // TEST PREP
 // TODO: tune existing upgrades + add new ones
+// TODO: space apart shot origins
 // TODO: fix save data bugs (test on separate laptop)
 
 // POLISH
-// TODO: add bounce sound effect
 // TODO: add shields back to enemies (make them readable)
 // TODO: slime trail + particles (make 'em slimey!)
 // TODO: placeholder title screen art + logo
@@ -171,7 +171,6 @@ fsm.add("active", {
 	
 			// Sound Feedback
 			play_sound(snd_shoot, false);
-
 		}
 
 		if (_click_released) {

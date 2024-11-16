@@ -1086,6 +1086,7 @@
     {"id":{"name":"snd_arena_3_music","path":"sounds/snd_arena_3_music/snd_arena_3_music.yy",},},
     {"id":{"name":"snd_arena_4_music","path":"sounds/snd_arena_4_music/snd_arena_4_music.yy",},},
     {"id":{"name":"snd_block_break","path":"sounds/snd_block_break/snd_block_break.yy",},},
+    {"id":{"name":"snd_bounce","path":"sounds/snd_bounce/snd_bounce.yy",},},
     {"id":{"name":"snd_button_back_alt","path":"sounds/snd_button_back_alt/snd_button_back_alt.yy",},},
     {"id":{"name":"snd_button_back","path":"sounds/snd_button_back/snd_button_back.yy",},},
     {"id":{"name":"snd_button_click_alt","path":"sounds/snd_button_click_alt/snd_button_click_alt.yy",},},

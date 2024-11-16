@@ -1,3 +1,5 @@
+play_sound(snd_bounce, false);
+
 if (hit && point_value >= other.point_value) {
 	
 	if (!hit) {

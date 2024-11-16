@@ -187,6 +187,11 @@ global.VinylConfigSON = [
         membersDuckOn: "feedback_ducker",
         members: [
             {
+                sound: snd_bounce,
+                duckPrio: 4,
+                gain: 1,
+            },
+            {
                 sound: snd_points,
                 duckPrio: 4,
                 gain: 1,
