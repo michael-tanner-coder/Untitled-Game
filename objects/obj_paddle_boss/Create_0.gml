@@ -8,12 +8,12 @@ paddle = undefined;
 movement_magnitude = 400;
 base_stun_time = 40;
 point_value = 1000;
+paddle = instance_create_layer(x, y, layer, obj_paddle);
+paddle.origin = self;
 
 fsm.add("active", {
     enter: function() {
 		publish(SPAWNED_BOSS);
-		paddle = instance_create_layer(x, y, layer, obj_paddle);
-		paddle.origin = self;
 	},
     step: function() {
         standard_enemy_step_event();
@@ -27,8 +27,6 @@ fsm.add("active", {
         }
     },
     draw: function() {
-        // standard_enemy_draw_event();
-        
         draw_self();
         if (global.debug) {
 	    	draw_set_color(hit ? RED : BLUE);

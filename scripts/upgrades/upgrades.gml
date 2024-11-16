@@ -1,5 +1,5 @@
 global.upgrades = [];
-global.default_unlocked_upgrades = ["shot_spread", "shot_focus", "get_sturdy"];
+global.default_unlocked_upgrades = ["fire_faster", "move_faster", "get_sturdy"];
 
 function effect_struct(_property = "", _value = 0, _operation = OPERATIONS.SET) {
     return {
@@ -52,7 +52,7 @@ function init_upgrades_collection() {
         upgrade_struct(
                 "move_faster", 
                 "Move Faster", 
-                "Increase your move speed by 10%", 
+                "Increase your move speed by 10% (makes you lighter)", 
                 500, 
                 spr_white_circle, 
                 [
@@ -61,24 +61,24 @@ function init_upgrades_collection() {
         ),
         upgrade_struct(
                 "get_sturdy", 
-                "Get Sturdier", 
-                "Increase your weight by 10%", 
+                "Get Heavier", 
+                "Increase your weight by 10% (makes you slower)", 
                 500, 
                 spr_white_circle, 
                 [
                     effect_struct("player_density", 1.1, OPERATIONS.MULTIPLY),
                 ]
         ),
-        upgrade_struct(
-                "big_boy", 
-                "Big Boy", 
-                "Become huge and hard to move (double your size)", 
-                1000, 
-                spr_white_circle, 
-                [
-                    effect_struct("player_size", 2, OPERATIONS.SET),
-                ]
-        ),
+        // upgrade_struct(
+        //         "big_boy", 
+        //         "Big Boy", 
+        //         "Become huge and hard to move (double your size)", 
+        //         1000, 
+        //         spr_white_circle, 
+        //         [
+        //             effect_struct("player_size", 2, OPERATIONS.SET),
+        //         ]
+        // ),
         // upgrade_struct(
         //         "tiny_baby",
         //         "Tiny Baby", 
@@ -92,7 +92,7 @@ function init_upgrades_collection() {
         upgrade_struct(
                 "fast_fire", 
                 "Rapid Fire", 
-                "Increase your firing rate (difficult to control)",
+                "Increase your firing rate by 50% but with weaker bullets",
                 1000, 
                 spr_white_circle, 
                 [
@@ -103,7 +103,7 @@ function init_upgrades_collection() {
         upgrade_struct(
                 "steady_fire", 
                 "Steady Fire",
-                "Stabilize your firing rate (slow but easy to control)", 
+                "Reduce your firing rate by 50% but gain stronger bullets", 
                 1000, 
                 spr_white_circle, 
                 [
@@ -111,27 +111,27 @@ function init_upgrades_collection() {
                     effect_struct("player_bullet_force", 1.25, OPERATIONS.MULTIPLY),
                 ]
         ),
-        upgrade_struct(
-                "light_weight", 
-                "Light Weight", 
-                "Increase your movement speed but you are easier to push", 
-                1000, 
-                spr_white_circle, 
-                [
-                    effect_struct("player_density", 0.75, OPERATIONS.MULTIPLY)
-                ]
-        ),
-        upgrade_struct(
-                "heavy_weight", 
-                "Heavy Weight", 
-                "Become harder to push but increase your recoil", 
-                1000, 
-                spr_white_circle, 
-                [
-                    effect_struct("player_density", 1.5, OPERATIONS.MULTIPLY),
-                    effect_struct("player_recoil", 1.5, OPERATIONS.MULTIPLY)
-                ]
-        ),
+        // upgrade_struct(
+        //         "light_weight", 
+        //         "Light Weight", 
+        //         "Increase your movement speed but you are easier to push", 
+        //         1000, 
+        //         spr_white_circle, 
+        //         [
+        //             effect_struct("player_density", 0.75, OPERATIONS.MULTIPLY)
+        //         ]
+        // ),
+        // upgrade_struct(
+        //         "heavy_weight", 
+        //         "Heavy Weight", 
+        //         "Become harder to push but increase your recoil", 
+        //         1000, 
+        //         spr_white_circle, 
+        //         [
+        //             effect_struct("player_density", 1.5, OPERATIONS.MULTIPLY),
+        //             effect_struct("player_recoil", 1.5, OPERATIONS.MULTIPLY)
+        //         ]
+        // ),
         upgrade_struct(
                 "shot_spread", 
                 "Shot Spread", 
@@ -143,17 +143,17 @@ function init_upgrades_collection() {
                     effect_struct("player_bullet_force", 0.5, OPERATIONS.MULTIPLY),
                 ]
         ),
-        upgrade_struct(
-                "shot_focus", 
-                "Shot Focus", 
-                "Decrease your shot count by 1, but each shot is stronger", 
-                1000, 
-                spr_white_circle,
-                [
-                    effect_struct("player_shot_count", 1, OPERATIONS.SUBTRACT),
-                    effect_struct("player_bullet_force", 2, OPERATIONS.DIVIDE),
-                ]
-        ),
+        // upgrade_struct(
+        //         "shot_focus", 
+        //         "Shot Focus", 
+        //         "Decrease your shot count by 1, but each shot is stronger", 
+        //         1000, 
+        //         spr_white_circle,
+        //         [
+        //             effect_struct("player_shot_count", 1, OPERATIONS.SUBTRACT),
+        //             effect_struct("player_bullet_force", 2, OPERATIONS.DIVIDE),
+        //         ]
+        // ),
         upgrade_struct(
                 "extra_life", 
                 "Extra Life", 
@@ -173,6 +173,16 @@ function init_upgrades_collection() {
                 [
                     effect_struct("player_bullet_force", 2, OPERATIONS.MULTIPLY),
                     effect_struct("player_recoil", 2, OPERATIONS.MULTIPLY),
+                ]
+        ),
+        upgrade_struct(
+                "closer",
+                "The Closer",
+                "NEGATIVE RECOIL",
+                1000, 
+                spr_white_circle,
+                [
+                    effect_struct("player_recoil", -1, OPERATIONS.MULTIPLY),
                 ]
         ),
         // upgrade_struct(

@@ -1,4 +1,3 @@
-// draw_self();
 if (fsm.event_exists("draw")) {
 	fsm.draw();
 }

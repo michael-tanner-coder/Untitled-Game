@@ -128,44 +128,34 @@ fsm.add("unlock", {
 		draw_rectangle(_rect_x, _rect_y, _rect_x + _rect_width, _rect_y + _rect_height, false);
 		draw_set_alpha(1);
 		
-		draw_set_font(fnt_header);
 		
 		// header
-		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 40, "NEW UNLOCK!", WHITE, PURPLE)
+		draw_set_font(fnt_header);
+		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 40, "NEW UPGRADE UNLOCKED!", WHITE, PURPLE)
 		
 		// item name
-		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 100, item_name, BLUE, WHITE)
+		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 100, item_name, WHITE, PURPLE)
 		
+		// item description
+		draw_set_font(fnt_paragraph);
+		var _description = struct_get(item_data, "description");
+		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 200, _description, WHITE, PURPLE);
+		
+		// _text_renderer.starting_format("fnt_paragraph", WHITE).align(fa_center, fa_middle).draw(_rect_x + _rect_width - (_rect_width/4), _rect_y + string_height("CONTINUE"));
 		// item sprite
-		var _sprite = struct_get(item_data, "sprite");
-		if (_sprite != undefined) {
-			draw_set_color(WHITE);
-			draw_sprite_ext(spr_circle_fill, 0, _rect_x + _rect_width/2, _rect_y + _rect_height/2, 1, 1, 0, c_white, 1);
-			draw_sprite_ext(_sprite, 0, _rect_x + _rect_width/2, _rect_y + _rect_height/2, 1, 1, 0, c_white, 1);
-		}
-		
-		// shop notification
-		if (next_unlock.category == "powerups") {
-			draw_set_color(WHITE);
-			draw_text(_rect_x + _rect_width/2, _rect_y + _rect_height - 50, "NOW AVAILABLE TO PURCHASE AT THE SHOP");
-		}
-
-		// hat notification
-		if (next_unlock.category == "cosmetics") {
-			draw_set_color(WHITE);
-			draw_text(_rect_x + _rect_width/2, _rect_y + _rect_height - 50, "CHECK IT OUT IN THE HATS MENU!");
-		}
-	
-		// lab log notification
-		if (next_unlock.category == "lab_logs") {
-			draw_set_color(WHITE);
-			draw_text(_rect_x + _rect_width/2, _rect_y + _rect_height - 50, "READ UP IN THE LAB LOGS");
-		}
+		// var _sprite = struct_get(item_data, "sprite");
+		// if (_sprite != undefined) {
+		// 	draw_set_color(WHITE);
+		// 	draw_sprite_ext(spr_circle_fill, 0, _rect_x + _rect_width/2, _rect_y + _rect_height/2 + 40, 1, 1, 0, c_white, 1);
+		// 	draw_sprite_ext(_sprite, 0, _rect_x + _rect_width/2, _rect_y + _rect_height/2, 1, 1, 0, c_white, 1);
+		// }
 		
 		// inputs
-		var _continue_icon = input_verb_get_icon("select");
-		var _text_renderer = scribble("CLOSE: [" + sprite_get_name(_continue_icon) +"]");
-		_text_renderer.starting_format("fnt_cutscene_default", WHITE).align(fa_center, fa_middle).draw(_rect_x + _rect_width - (_rect_width/4), _rect_y + string_height("CONTINUE"));
+		draw_set_font(fnt_header);
+		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 300, "PRESS SPACE TO CONTINUE", WHITE, PURPLE)
+		// var _continue_icon = input_verb_get_icon("select");
+		// var _text_renderer = scribble(_description);
+		// _text_renderer.starting_format("fnt_cutscene_default", WHITE).align(fa_center, fa_middle).draw(_rect_x + _rect_width - (_rect_width/4), _rect_y + string_height("CONTINUE"));
 	}
 });
 

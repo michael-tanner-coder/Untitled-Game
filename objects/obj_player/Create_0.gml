@@ -1,7 +1,3 @@
-// TEST PREP
-// TODO: tune existing upgrades + add new ones
-// TODO: fix save data bugs (test on separate laptop)
-
 // POLISH
 // TODO: add shields back to enemies (make them readable)
 // TODO: slime trail + particles (make 'em slimey!)
@@ -22,6 +18,7 @@ respawn_i_frames = 120;
 base_fixture_size = 15;
 available_bombs = 1;
 global.currency = 0;
+boss_defeated = false;
 
 // Upgrade properties
 upgrade_stats = {
@@ -155,7 +152,7 @@ fsm.add("active", {
 			}
     
 		    // Recoil force
-		    var _base_recoil = first_shot ? recoil * 2 : recoil;
+		    var _base_recoil = first_shot ? upgrade_stats.player_recoil * 2 : upgrade_stats.player_recoil;
 			var _x_recoil_force, _y_recoil_force;
 		    _x_recoil_force = lengthdir_x(1, _shoot_direction + 180) * _base_recoil;
 		    _y_recoil_force = lengthdir_y(1, _shoot_direction + 180) * _base_recoil;
@@ -307,6 +304,7 @@ lose_life = function() {
 subscribe(id, ACTORS_DEACTIVATED, function() {fsm.change("idle")});
 subscribe(id, ACTORS_ACTIVATED, function() {fsm.change("active")});
 subscribe(id, WON_LEVEL, function() {fsm.change("idle")});
+subscribe(id, DEFEATED_BOSS, function() {boss_defeated = true;})
 subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 	var _effects = struct_get(upgrade, "effects");
 	
@@ -334,6 +332,18 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 					break;
 			}
 			
+			// Reset placement and number of all shot origin points based on the player_shot_count property 
+			FOREACH shot_origins ELEMENT
+				instance_destroy(_elem);
+			END
+			
+			shot_origins = [];
+			
+			for (var _i = 0; _i < upgrade_stats.player_shot_count; _i++) {
+				var _new_origin_point = instance_create_layer(x, y, layer, obj_shot_origin);
+				array_push(shot_origins, _new_origin_point);
+			}
+			
 			// Update Player Physics
 			physics_remove_fixture(self, my_fixture);
 			physics_fixture_delete(fix);
@@ -346,19 +356,6 @@ subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {
 			physics_fixture_set_angular_damping(fix, upgrade_stats.player_angular_damping);
 			physics_fixture_set_friction(fix, upgrade_stats.player_friction);
 			my_fixture = physics_fixture_bind(fix, self);
-			
-			
-			// Reset placement and number of all shot origin points based on the player_shot_count property 
-			FOREACH shot_origins ELEMENT
-				instance_destroy(_elem);
-			END
-			
-			shot_origins = [];
-			
-			for (var _i = 0; _i < upgrade_stats.player_shot_count; _i++) {
-				var _new_origin_point = instance_create_layer(x, y, layer, obj_shot_origin);
-				array_push(shot_origins, _new_origin_point);
-			}
 			
 			// Update Global Game Variables
 			lives = upgrade_stats.player_lives;

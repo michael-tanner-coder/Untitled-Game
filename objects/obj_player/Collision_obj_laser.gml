@@ -1,4 +1,4 @@
-if (global.settings.invincible_mode_enabled) {
+if (global.settings.invincible_mode_enabled || boss_defeated) {
 	return;
 }
 
