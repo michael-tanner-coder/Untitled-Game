@@ -15,22 +15,22 @@ global.scene_queue = [
         map: rm_combat_test_small,
         goal_score: 20000,
         time_between_spawns: 30,
-        max_enemy_count: 10,
+        max_enemy_count: 8,
         enemy_types: [
             {
                 type: obj_dot,
                 points: 0,
-                limit: 10,
+                limit: 8,
             },
             {
                 type: obj_big_dot,
                 points: 1000,
-                limit: 3,
+                limit: 2,
             },
             {
                 type: obj_growing_dot,
                 points: 4000,
-                limit: 2,
+                limit: 1,
             },
         ],
         boss: obj_paddle_boss,
