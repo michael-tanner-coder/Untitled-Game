@@ -5,6 +5,19 @@
 // TODO: end screen
 // TODO: slime trail + particles (make 'em slimey!)
 
+// PLAY TEST NOTES
+// test deckbuild mechanic: give players a way to choose which types of upgrades could appear in their hand
+// emphasize the card theming to more easily explain the input/output of randomness
+// force the player to shoot at enemies at the start so that they understand the mechanic
+// research movement systems from older games like asteroids and super stardust
+// players need more encouragement at the start. give them a crowd to energize and reward their actions
+// the game needs a more interesting title screen to attract players for future live tests
+// give the game context through a quick story sequence. why is there a fight? what is the player's goal? explain who they are and what they need to do.
+// extend the tutorial to include upgrades, unlocks, and economy concepts
+// build out a concept map of everything the player has to learn
+// slow down the ramp up for enemies
+// potential titles: killing slime, slime wasters, no slime to waste
+
 // Base Player Properties
 x_force = 0;
 y_force = 0;
