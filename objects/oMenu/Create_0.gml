@@ -325,6 +325,10 @@ Input Icons by Kenney
 					
 					["YES (CANNOT BE UNDONE)", new ScriptRunner(function() {
 						reset_unlocks();
+						reset_all_flags();
+						set_flag("needs_tutorial", true);
+						global.tutorial = true;
+						global.first_wave_complete = false;
 						show_debug_message("deleting data");
 					})]
 				]],
@@ -333,11 +337,11 @@ Input Icons by Kenney
 			["CONTROLS", new Controls(global.input_system, "input_save.json", true, ["right", "left", "up", "down"])], // Changes player controls
 		]],
 		
-		["UPGRADES", new ScriptRunner(function() { 
-				menuModePause();
-				menuSetPreset(e_menu_presets.pause_menu);
-				room_goto(rm_item_menu);
-			}), undefined, undefined],
+		// ["UPGRADES", new ScriptRunner(function() { 
+		// 		menuModePause();
+		// 		menuSetPreset(e_menu_presets.pause_menu);
+		// 		room_goto(rm_item_menu);
+		// 	}), undefined, undefined],
 		
 		// // Credits edit text above
 		// ["CREDITS",	new Credits(credits_string)],
