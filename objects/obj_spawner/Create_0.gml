@@ -63,7 +63,7 @@ fsm.add("wave", {
 			
 			var _climax_multiplier = score >= (goal_score * 0.75) ? 2 : 1;
 			
-			global.tension += (raise_tension ? 0.025 * _climax_multiplier : -0.025 ) * DT;
+			global.tension += (raise_tension ? 0.0125 * _climax_multiplier : -0.0125 ) * DT;
 		}
 		
 		// check if we should spawn the boss
