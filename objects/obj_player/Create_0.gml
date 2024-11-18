@@ -291,6 +291,12 @@ lose_life = function() {
 		return;
 	}
 	
+	// track how many times the player has failed; use this to decide when to retain the spawn rate
+	global.attempts += 1;
+	if (global.attempts < 3) {
+		global.tension = 0;
+	}
+	
 	// VFX
 	spawn_particles(part_death, x, y);
 	audio_play_sound(snd_die, 1, false);

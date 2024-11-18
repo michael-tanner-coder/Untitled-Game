@@ -12,7 +12,9 @@ if (_current_scene == undefined) {
 // Current Scene Configurations
 enemy_types = _current_scene.enemy_types;
 modified_time_between_spawns = _current_scene.time_between_spawns;
-current_max_enemy_count = _current_scene.max_enemy_count;
+current_max_enemy_count = _current_scene.default_max_enemy_count;
+default_max_enemy_count = current_max_enemy_count;
+boss_max_enemy_count = _current_scene.boss_max_enemy_count;
 goal_score = _current_scene.goal_score;
 boss_type = _current_scene.boss;
 
@@ -23,6 +25,7 @@ previous_spawn_point = {x_pos: 0, y_pos: 0};
 tutorial_score = 400; // make this configurable
 upgrade_score = 2000; // make this configurable
 raise_tension = true;
+tension_increment = 0.01;
 
 global.boss_lives = 3;
 
@@ -62,8 +65,8 @@ fsm.add("wave", {
 			}
 			
 			var _climax_multiplier = score >= (goal_score * 0.75) ? 2 : 1;
-			
-			global.tension += (raise_tension ? 0.0125 * _climax_multiplier : -0.0125 ) * DT;
+			global.tension += (raise_tension ? tension_increment * _climax_multiplier : -tension_increment ) * DT;
+		
 		}
 		
 		// check if we should spawn the boss
@@ -108,8 +111,8 @@ fsm.add("wave", {
 		}
 		
 		// update max enemy count based on progress into the wave
-		current_max_enemy_count = 1 + ceil(_boss_active ? 4 : 9 * global.tension);
-		current_max_enemy_count = clamp(current_max_enemy_count, 1, 10);
+		current_max_enemy_count = 1 + ceil(_boss_active ? boss_max_enemy_count : default_max_enemy_count * global.tension);
+		current_max_enemy_count = clamp(current_max_enemy_count, 1, default_max_enemy_count);
 		
 		// keep spawn count low when player is first learning
 		if (!global.first_wave_complete && !_boss_active) {

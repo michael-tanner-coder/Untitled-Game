@@ -6,7 +6,8 @@ global.scene_queue = [
         music_layers: [],
         goal_score: 20000,
         time_between_spawns: 30,
-        max_enemy_count: 10,
+        default_max_enemy_count: 6,
+        boss_max_enemy_count: 4,
         enemy_types: [],
         boss: obj_boss_test,
     },
@@ -15,7 +16,8 @@ global.scene_queue = [
         map: rm_combat_test_small,
         goal_score: 20000,
         time_between_spawns: 30,
-        max_enemy_count: 8,
+        default_max_enemy_count: 6,
+        boss_max_enemy_count: 4,
         enemy_types: [
             {
                 type: obj_dot,
@@ -24,12 +26,17 @@ global.scene_queue = [
             },
             {
                 type: obj_big_dot,
-                points: 1000,
+                points: 1300,
                 limit: 2,
             },
             {
                 type: obj_growing_dot,
                 points: 4000,
+                limit: 1,
+            },
+            {
+                type: obj_exploding_dot,
+                points: 8000,
                 limit: 1,
             },
         ],
