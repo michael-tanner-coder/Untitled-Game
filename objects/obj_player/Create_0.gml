@@ -15,6 +15,15 @@
 // give the game context through a quick story sequence. why is there a fight? what is the player's goal? explain who they are and what they need to do.
 // extend the tutorial to include upgrades, unlocks, and economy concepts
 // build out a concept map of everything the player has to learn
+// -- overall goal of the game
+// -- dashing/breaking/shooting/recoil
+// -- bumping into spikes
+// -- how to activate upgrades
+// -- how to get money
+// -- how to unlock things
+// -- what kind of things you can unlock
+// -- how to add newly unlocked things to the deck
+// -- adjusting to the physics/feel
 // slow down the ramp up for enemies
 // potential titles: killing slime, slime wasters, no slime to waste
 
