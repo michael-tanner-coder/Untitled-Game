@@ -33,6 +33,8 @@ function standard_enemy_create_event() {
     image_yscale = 2;
     is_active = false;
     
+    money_value = 25;
+    
     // State Machine
     fsm = new SnowState("active");
     
@@ -134,6 +136,8 @@ function standard_enemy_destroy_event() {
     	}
     	
     	publish(ENEMY_DEFEATED, point_value);
+    	
+    	global.currency += money_value;
     }
     
     unsubscribe_all(id);

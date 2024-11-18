@@ -5,6 +5,7 @@ base_speed = 10;
 point_value = 400;
 shield_sprite = spr_shield;
 movement_magnitude = 100;
+money_value = 50;
 
 // Animation
 rolling_spritesheet = spr_big_enemy_sheet;
