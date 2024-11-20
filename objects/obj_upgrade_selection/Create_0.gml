@@ -119,8 +119,16 @@ fsm.add("inactive", {
 // Methods
 generate_upgrade_options = function() {
 	var _available_upgrades = get_save_data_property("upgrades", global.default_unlocked_upgrades);
+	available_upgrades = [];
 	
-	for (var _i = 0; _i < upgrade_count; _i++) {
+	// FIXME: this created a bug where only two card will appear in the list instead of three
+	if (global.most_recent_unlock != "") {
+		var _recent_unlocked_upgrade = get_upgrade_type(global.most_recent_unlock);
+		array_push(available_upgrades, _recent_unlocked_upgrade);
+		global.most_recent_unlock = "";
+	}
+	
+	for (var _i = 0; _i < upgrade_count - array_length(available_upgrades); _i++) {
 		var _upgrade_was_already_chosen = false;
 		
 		do {

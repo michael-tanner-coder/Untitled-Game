@@ -14,6 +14,7 @@
 // the game needs a more interesting title screen to attract players for future live tests
 // give the game context through a quick story sequence. why is there a fight? what is the player's goal? explain who they are and what they need to do.
 // extend the tutorial to include upgrades, unlocks, and economy concepts
+// put the most recent unlock into the queue for the next time the player has a choice to upgrade
 // build out a concept map of everything the player has to learn
 // -- overall goal of the game
 // -- dashing/breaking/shooting/recoil

@@ -28,6 +28,7 @@ function unlock_next_item(_score = 0) {
         
         if (!is_unlocked(_unlockable) && _score >= _unlockable.required_points) {
             unlock_item(_unlockable);
+            global.most_recent_unlock = _unlockable.key;
             break;
         }
     END
