@@ -273,6 +273,8 @@
     {"id":{"name":"obj_bumper","path":"objects/obj_bumper/obj_bumper.yy",},},
     {"id":{"name":"obj_camera_effects","path":"objects/obj_camera_effects/obj_camera_effects.yy",},},
     {"id":{"name":"obj_card","path":"objects/obj_card/obj_card.yy",},},
+    {"id":{"name":"obj_chain_boss","path":"objects/obj_chain_boss/obj_chain_boss.yy",},},
+    {"id":{"name":"obj_chain_segment","path":"objects/obj_chain_segment/obj_chain_segment.yy",},},
     {"id":{"name":"obj_character_marker","path":"objects/obj_character_marker/obj_character_marker.yy",},},
     {"id":{"name":"obj_character_unlock_transition_manager","path":"objects/obj_character_unlock_transition_manager/obj_character_unlock_transition_manager.yy",},},
     {"id":{"name":"obj_collider","path":"objects/obj_collider/obj_collider.yy",},},

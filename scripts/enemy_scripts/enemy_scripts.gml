@@ -32,6 +32,7 @@ function standard_enemy_create_event() {
     image_xscale = 2;
     image_yscale = 2;
     is_active = false;
+    target = undefined;
     
     money_value = 25;
     
@@ -65,13 +66,15 @@ function standard_enemy_step_event() {
 	var _game_speed = get_global_game_speed();
 			
 	// Follow player if we're not hit
-	var _target = undefined;
+	var _target = target;
 	
-	with(obj_player) {
-	    _target = self;
+	if (is_undefined(_target)) {
+		with(obj_player) {
+		    _target = self;
+		}
 	}
 	
-	if (_target && !hit) {
+	if (_target && !hit && instance_exists(_target)) {
 		show_debug_message("FOUND TARGET");
 	    var _target_direction = point_direction(x,y,_target.x, _target.y);
 	    var _target_distance = distance_to_point(_target.x, _target.y);

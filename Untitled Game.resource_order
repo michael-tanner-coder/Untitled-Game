@@ -214,6 +214,8 @@
     {"name":"obj_bullet","order":6,"path":"objects/obj_bullet/obj_bullet.yy",},
     {"name":"obj_bumper","order":14,"path":"objects/obj_bumper/obj_bumper.yy",},
     {"name":"obj_card","order":16,"path":"objects/obj_card/obj_card.yy",},
+    {"name":"obj_chain_boss","order":8,"path":"objects/obj_chain_boss/obj_chain_boss.yy",},
+    {"name":"obj_chain_segment","order":9,"path":"objects/obj_chain_segment/obj_chain_segment.yy",},
     {"name":"obj_character_unlock_transition_manager","order":2,"path":"objects/obj_character_unlock_transition_manager/obj_character_unlock_transition_manager.yy",},
     {"name":"obj_collider","order":3,"path":"objects/obj_collider/obj_collider.yy",},
     {"name":"obj_credits_spawner","order":16,"path":"objects/obj_credits_spawner/obj_credits_spawner.yy",},
