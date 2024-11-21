@@ -10,11 +10,10 @@ base_stun_time = 40;
 point_value = 1000;
 
 // Chain Properties
-segments = 0;
+segments = 5;
 segment_rope_length = 32;
 chain = [];
 
-// TODO: prevent segments from stunning each other
 // TODO: give the boss more chains on each life
 // TODO: extend the rope length to give the player an easier time beating the segments
 // TODO: play with the weight of the segments

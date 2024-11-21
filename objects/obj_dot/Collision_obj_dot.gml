@@ -1,4 +1,7 @@
 // play_sound(snd_bounce, false);
+if (other.object_index == obj_chain_segment) {
+	return;
+}
 
 if (hit && point_value >= other.point_value) {
 	
