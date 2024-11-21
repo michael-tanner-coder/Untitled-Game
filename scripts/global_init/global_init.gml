@@ -131,6 +131,9 @@ Example usage:
 #macro PLAYED_FLOAT_CHARACTER "played_float_character"
 #macro PLAYED_TWIN_CHARACTER "played_twin_character"
 
+// Constants
+#macro NO_FOLLOW "no_follow"
+
 global.tutorial_flag_list = [
 	PLAYED_NORMAL_CHARACTER, 
 	PLAYED_TALL_CHARACTER, 

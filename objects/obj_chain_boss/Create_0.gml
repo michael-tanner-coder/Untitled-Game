@@ -5,19 +5,17 @@ image_xscale = 2;
 image_yscale = 2;
 x_offset = 32 * 4;
 y_offset = 32 * 4;
-movement_magnitude = 500;
+movement_magnitude = 1000;
 base_stun_time = 40;
 point_value = 1000;
 
 // Chain Properties
 segments = 5;
-segment_rope_length = 32;
+segment_rope_length = 64;
 chain = [];
 
 // TODO: give the boss more chains on each life
-// TODO: extend the rope length to give the player an easier time beating the segments
 // TODO: play with the weight of the segments
-// TODO: consider not using the "target" system
 
 spawn_chain_segments = function() {
 	for(var _i = 0; _i < segments; _i++){
@@ -25,14 +23,14 @@ spawn_chain_segments = function() {
 		var _segment = instance_create_layer(x, y + sprite_get_height(sprite_index), layer, obj_chain_segment);
 		
 		// make the first segment target the head
-		_segment.target = self;
+		_segment.target = NO_FOLLOW;
 	
 		// make all other segments target the most recently spawned segment
 		if (array_length(chain) > 0) {
-			_segment.target = chain[_i-1];
-			physics_joint_rope_create(chain[_i-1], _segment, chain[_i-1].x, chain[_i-1].y, _segment.x, _segment.y, segment_rope_length, false);
+			// _segment.target = chain[_i-1];
+			_segment.joint = physics_joint_rope_create(chain[_i-1], _segment, chain[_i-1].x, chain[_i-1].y, _segment.x, _segment.y, segment_rope_length, false);
 		} else {
-			physics_joint_rope_create(self, _segment, x, y, _segment.x, _segment.y, segment_rope_length, false);
+			_segment.joint = physics_joint_rope_create(self, _segment, x, y, _segment.x, _segment.y, segment_rope_length, false);
 		}
 		
 		// add segment to the array 
@@ -75,26 +73,39 @@ fsm.add("active", {
         chain = _existing_segments;
         
         // give each segment a new target if any have been destroyed
-        for(var _i = 0; _i < array_length(chain); _i++) {
-        	var _segment = chain[_i];
+        // for(var _i = 0; _i < array_length(chain); _i++) {
+        // 	var _segment = chain[_i];
         	
-        	if (!instance_exists(_segment.target)) {
-	        	_segment.target = self;
+	       // 	_segment.target = NO_FOLLOW;
 	        	
-	        	if (_i > 0) {
-	        		_segment.target = chain[_i-1];
-	        		physics_joint_rope_create(self, _segment, x, y, _segment.x, _segment.y, segment_rope_length, false);
-	        	} else {
-	        		physics_joint_rope_create(chain[_i-1], _segment, chain[_i-1].x, chain[_i-1].y, _segment.x, _segment.y, segment_rope_length, false);
-	        	}
-        	}
-        }
+	       // 	if (_i > 0) {
+	       // 		// _segment.target = chain[_i-1];
+	       // 		physics_joint_rope_create(self, _segment, x, y, _segment.x, _segment.y, segment_rope_length, false);
+	       // 	} else {
+	       // 		physics_joint_rope_create(chain[_i-1], _segment, chain[_i-1].x, chain[_i-1].y, _segment.x, _segment.y, segment_rope_length, false);
+	       // 	}
+        // }
     },
     draw: function() {
         draw_self();
+        
         if (global.debug) {
 	    	draw_set_color(hit ? RED : BLUE);
 			physics_draw_debug();
         }
+        
+        FOREACH chain ELEMENT
+        	var _segment = _elem;
+        	if (instance_exists(_segment) && instance_exists(_segment.joint)) {
+				var _anchor_1_x = physics_joint_get_value(_segment.joint, phy_joint_anchor_1_x);
+				var _anchor_1_y = physics_joint_get_value(_segment.joint, phy_joint_anchor_1_y);
+				var _anchor_2_x = physics_joint_get_value(_segment.joint, phy_joint_anchor_2_x);
+				var _anchor_2_y = physics_joint_get_value(_segment.joint, phy_joint_anchor_2_y);
+				var _width = abs(_anchor_1_x - _anchor_2_x);
+				var _height = abs(_anchor_1_y - _anchor_2_y);
+				var _angle = point_direction(_anchor_1_x, _anchor_1_y, _anchor_2_x, _anchor_2_y);
+				draw_sprite_ext(spr_joint, 0, _anchor_1_x + _width/2, _anchor_1_y + _height/2, _width, _height, _angle, RED, 1);
+        	}
+        END
     }
 })

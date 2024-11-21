@@ -6,3 +6,4 @@ point_value = 400;
 shield_sprite = spr_shield;
 movement_magnitude = 100;
 money_value = 50;
+joint = undefined;

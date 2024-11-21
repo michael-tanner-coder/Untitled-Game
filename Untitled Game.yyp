@@ -1371,6 +1371,7 @@
     {"id":{"name":"spr_hover_shiny","path":"sprites/spr_hover_shiny/spr_hover_shiny.yy",},},
     {"id":{"name":"spr_hover","path":"sprites/spr_hover/spr_hover.yy",},},
     {"id":{"name":"spr_impact","path":"sprites/spr_impact/spr_impact.yy",},},
+    {"id":{"name":"spr_joint","path":"sprites/spr_joint/spr_joint.yy",},},
     {"id":{"name":"spr_key_for_grid","path":"sprites/spr_key_for_grid/spr_key_for_grid.yy",},},
     {"id":{"name":"spr_key_meter_fill","path":"sprites/spr_key_meter_fill/spr_key_meter_fill.yy",},},
     {"id":{"name":"spr_key_meter_outline","path":"sprites/spr_key_meter_outline/spr_key_meter_outline.yy",},},

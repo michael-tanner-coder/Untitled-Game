@@ -1188,6 +1188,7 @@
     {"name":"spr_hover_shiny","order":23,"path":"sprites/spr_hover_shiny/spr_hover_shiny.yy",},
     {"name":"spr_hover","order":11,"path":"sprites/spr_hover/spr_hover.yy",},
     {"name":"spr_impact","order":8,"path":"sprites/spr_impact/spr_impact.yy",},
+    {"name":"spr_joint","order":8,"path":"sprites/spr_joint/spr_joint.yy",},
     {"name":"spr_key_for_grid","order":7,"path":"sprites/spr_key_for_grid/spr_key_for_grid.yy",},
     {"name":"spr_key_meter_fill","order":14,"path":"sprites/spr_key_meter_fill/spr_key_meter_fill.yy",},
     {"name":"spr_key_meter_outline","order":15,"path":"sprites/spr_key_meter_outline/spr_key_meter_outline.yy",},
