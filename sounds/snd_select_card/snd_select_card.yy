@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"snMenuShift",
+  "%Name":"snd_select_card",
   "audioGroupId":{
     "name":"UI",
     "path":"audiogroups/UI",
@@ -8,23 +8,18 @@
   "bitDepth":1,
   "bitRate":128,
   "compression":0,
-  "ConfigValues":{
-    "LiveCoding":{
-      "audioGroupId":"{\"name\":\"agMenu\",\"path\":\"audiogroups/agMenu\"}",
-    },
-  },
   "conversionMode":0,
-  "duration":0.400479,
-  "name":"snMenuShift",
+  "duration":0.979708,
+  "name":"snd_select_card",
   "parent":{
-    "name":"Sounds",
-    "path":"folders/Menu/Sounds.yy",
+    "name":"UI",
+    "path":"folders/Sounds/UI.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snMenuShift.wav",
+  "soundFile":"snd_select_card.wav",
   "type":0,
   "volume":1.0,
 }

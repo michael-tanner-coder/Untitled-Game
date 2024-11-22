@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":0.27585,
+  "duration":0.052187,
   "name":"snd_button_click",
   "parent":{
     "name":"UI",

@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":0.960181,
+  "duration":0.189083,
   "name":"snd_button_back",
   "parent":{
     "name":"UI",

@@ -81,6 +81,7 @@ fsm.add("active", {
 			if (global.currency >= price) {
 				global.currency -= price;
 				publish(UPGRADE_SELECTED, upgrade);
+				play_sound(snd_select_card);
 			}
 			else {
 				play_sound(snd_button_back_alt);
