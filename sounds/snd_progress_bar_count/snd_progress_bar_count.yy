@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"snd_time_counter",
+  "%Name":"snd_progress_bar_count",
   "audioGroupId":{
     "name":"UI",
     "path":"audiogroups/UI",
@@ -9,8 +9,8 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":2.698685,
-  "name":"snd_time_counter",
+  "duration":0.535771,
+  "name":"snd_progress_bar_count",
   "parent":{
     "name":"UI",
     "path":"folders/Sounds/UI.yy",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_time_counter.wav",
+  "soundFile":"snd_progress_bar_count.wav",
   "type":0,
   "volume":1.0,
 }

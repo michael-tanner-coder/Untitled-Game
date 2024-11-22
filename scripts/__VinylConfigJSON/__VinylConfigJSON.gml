@@ -389,7 +389,7 @@ global.VinylConfigSON = [
                 duckPrio: 3,
             },
             {
-                sound: snd_time_counter,
+                sound: snd_progress_bar_count,
                 duckPrio: 3,
             },
         ],

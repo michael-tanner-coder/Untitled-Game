@@ -49,7 +49,6 @@ fsm.add("countup", {
 		total_points = global.unlock_progress + score;
 		next_unlock = get_next_unlock();
 		item_name = "";
-		play_sound(snd_time_counter, false);
 	},
 	step: function() {
 		if (next_unlock == undefined) {
@@ -82,6 +81,9 @@ fsm.add("countup", {
 		
 		if (progress_points == total_points) {
 			fsm.change("idle");
+		}
+		else {
+			play_sound(snd_progress_bar_count, false);
 		}
 	},
 	draw: function() {

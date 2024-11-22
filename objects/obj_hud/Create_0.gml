@@ -37,5 +37,5 @@ subscribe(id, ALARM_SOUNDED, function() {
 });
 
 subscribe(id, PURCHASED_ITEM, function() {
-    play_sound(snd_time_counter);
+    play_sound(snd_progress_bar_count);
 })

@@ -97,7 +97,7 @@ render_level_end_scores = function(header, scores = [], row_margin) {
 	    var _current_score = _elem;
 	    
 	    if (_current_score.current_x == -1000) {
-	    	play_sound(snd_time_counter, false);
+	    	play_sound(snd_progress_bar_count, false);
 	    }
 	    
 	    if (_current_score.label == "TOTAL SCORE") {
