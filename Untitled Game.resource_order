@@ -1365,6 +1365,5 @@
     {"name":"spr_underlay","order":16,"path":"sprites/spr_underlay/spr_underlay.yy",},
     {"name":"spr_white_circle","order":9,"path":"sprites/spr_white_circle/spr_white_circle.yy",},
     {"name":"spr_white_dot","order":36,"path":"sprites/spr_white_dot/spr_white_dot.yy",},
-    {"name":"ts_arena_1_floor","order":1,"path":"tilesets/ts_arena_1_floor/ts_arena_1_floor.yy",},
   ],
 }
