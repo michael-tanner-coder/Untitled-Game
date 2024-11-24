@@ -1,6 +1,4 @@
 // POLISH
-// TODO: end screen
-// TODO: make exploding enemies only explode after timer runs out but reduce points for early kills
 // TODO: add shields back to enemies (make them readable)
 // TODO: reframe upgrade mechanics as "cards" (drawing, hands, discards, etc)
 // TODO: retain player cards like a "hand"

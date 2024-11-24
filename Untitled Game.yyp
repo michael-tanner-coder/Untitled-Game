@@ -1562,6 +1562,7 @@
     {"id":{"name":"spr_underlay","path":"sprites/spr_underlay/spr_underlay.yy",},},
     {"id":{"name":"spr_white_circle","path":"sprites/spr_white_circle/spr_white_circle.yy",},},
     {"id":{"name":"spr_white_dot","path":"sprites/spr_white_dot/spr_white_dot.yy",},},
+    {"id":{"name":"spr_white_enemy_sheet","path":"sprites/spr_white_enemy_sheet/spr_white_enemy_sheet.yy",},},
     {"id":{"name":"ts_arena_1","path":"tilesets/ts_arena_1/ts_arena_1.yy",},},
   ],
   "resourceType":"GMProject",
