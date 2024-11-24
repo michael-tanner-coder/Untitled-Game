@@ -1,7 +1,6 @@
 // POLISH
 // TODO: bug hunt (test on another laptop)
 // TODO: add shields back to enemies (make them readable)
-// TODO: placeholder title screen art + logo
 // TODO: end screen
 // TODO: reframe upgrade mechanics as "cards" (drawing, hands, discards, etc)
 // TODO: retain player cards like a "hand"

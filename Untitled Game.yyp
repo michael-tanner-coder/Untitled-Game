@@ -1568,7 +1568,6 @@
   "RoomOrderNodes":[
     {"roomId":{"name":"rm_init","path":"rooms/rm_init/rm_init.yy",},},
     {"roomId":{"name":"rm_combat_test","path":"rooms/rm_combat_test/rm_combat_test.yy",},},
-    {"roomId":{"name":"rm_main_menu","path":"rooms/rm_main_menu/rm_main_menu.yy",},},
     {"roomId":{"name":"rm_game_over","path":"rooms/rm_game_over/rm_game_over.yy",},},
     {"roomId":{"name":"rm_tiles","path":"rooms/rm_tiles/rm_tiles.yy",},},
     {"roomId":{"name":"rm_room_base","path":"rooms/rm_room_base/rm_room_base.yy",},},
@@ -1599,6 +1598,7 @@
     {"roomId":{"name":"rm_combat_test_small_2","path":"rooms/rm_combat_test_small_2/rm_combat_test_small_2.yy",},},
     {"roomId":{"name":"rm_combat_test_small_3","path":"rooms/rm_combat_test_small_3/rm_combat_test_small_3.yy",},},
     {"roomId":{"name":"rm_combat_test_small_4","path":"rooms/rm_combat_test_small_4/rm_combat_test_small_4.yy",},},
+    {"roomId":{"name":"rm_main_menu","path":"rooms/rm_main_menu/rm_main_menu.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

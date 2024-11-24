@@ -95,7 +95,7 @@ Input Icons by Kenney
 		col: {
 			// Color used when an item is selected
 			selected: {
-				normal:		ORANGE,	// Default color
+				normal:		YELLOW,	// Default color
 				intense:	BLUE		// More intense color
 			},
 			
@@ -330,11 +330,13 @@ Input Icons by Kenney
 						global.tutorial = true;
 						global.first_wave_complete = false;
 						show_debug_message("deleting data");
+						gotoPrevPage();
+						gotoPrevPage();
 					})]
 				]],
 			]],
 		
-			["CONTROLS", new Controls(global.input_system, "input_save.json", true, ["right", "left", "up", "down"])], // Changes player controls
+			// ["CONTROLS", new Controls(global.input_system, "input_save.json", true, ["right", "left", "up", "down"])], // Changes player controls
 		]],
 		
 		// ["UPGRADES", new ScriptRunner(function() { 
