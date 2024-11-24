@@ -1,4 +1,26 @@
 // Scene data
+/*
+Story:
+
+After a nuclear-level apocalypse in the magical kingdom of Blobla, only two things survived: the roaches and the slimes.
+
+Slowly but surely the slimes established their own society ruled by kings and queens, but only because they discovered the concept from a deck of enchanted playing cards. 
+
+Slimes, not being very bright, assumed royalty was something to be won in a game. So, every year they hold a tournament to decide who will be the next Slime Monarch.
+
+Competitors use the power of the magic playing cards to strengthen themselves and fight against each other for the chance of becoming Blobla's next ruler.
+*/
+
+/*
+Gameplay:
+
+Slime Wasters is a physics-based arcade-action game with light deck-building mechanics.  
+
+Your goal is to defeat other slimes in combat by pushing them into the spikey walls that surround you without getting pushed into them yourself. 
+
+As you play, you will gradually collect magical playing cards that can enhance your abilities and enable you to take on bigger and badder slimes. 
+*/
+
 global.scene_queue = [
     {
         key: "main-menu",
