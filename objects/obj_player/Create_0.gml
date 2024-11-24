@@ -1,9 +1,14 @@
 // POLISH
-// TODO: bug hunt
+// TODO: bug hunt (test on another laptop)
 // TODO: add shields back to enemies (make them readable)
 // TODO: placeholder title screen art + logo
 // TODO: end screen
+// TODO: reframe upgrade mechanics as "cards" (drawing, hands, discards, etc)
+// TODO: retain player cards like a "hand"
+// TODO: extend tutorial to include card mechanics
+// TODO: make exploding enemies only explode after timer runs out but reduce points for early kills
 // TODO: slime trail + particles (make 'em slimey!)
+// TODO: write a quick story explainer outside of the game
 
 // PLAY TEST NOTES
 // test deckbuild mechanic: give players a way to choose which types of upgrades could appear in their hand
@@ -26,7 +31,6 @@
 // -- how to add newly unlocked things to the deck
 // -- adjusting to the physics/feel
 // slow down the ramp up for enemies
-// potential titles: killing slime, slime wasters, no slime to waste
 
 // Base Player Properties
 x_force = 0;

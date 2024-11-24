@@ -6,7 +6,7 @@ global.scene_queue = [
         music_layers: [],
         goal_score: 20000,
         time_between_spawns: 30,
-        default_max_enemy_count: 6,
+        default_max_enemy_count: 8,
         boss_max_enemy_count: 4,
         enemy_types: [],
         boss: obj_boss_test,
@@ -40,7 +40,7 @@ global.scene_queue = [
                 limit: 1,
             },
         ],
-        boss: obj_chain_boss,
+        boss: obj_paddle_boss,
     },
     {
         key: "level_2",
