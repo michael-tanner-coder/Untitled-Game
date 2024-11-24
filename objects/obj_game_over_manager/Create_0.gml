@@ -17,7 +17,7 @@ progress_bar_height = 50;
 default_draw_behavior = function() {
 	draw_set_color(WHITE);
 	if (next_unlock == undefined) {
-		banner(100, y, "NO MORE UNLOCKS", BLACK, 0.7);
+		banner(100, y, "NO MORE CARDS TO UNLOCK", BLACK, 0.7);
 		return;
 	}
 	
@@ -36,7 +36,7 @@ default_draw_behavior = function() {
 		fillbar(room_width/2 - progress_bar_width/2, y, progress_bar_width, progress_bar_height, _progress_percent, RED, WHITE);
 	
 		draw_set_color(WHITE);
-		draw_text(x + sprite_get_width(outline_sprite) / 2, y + sprite_get_height(outline_sprite) + (bar_margin*2), "PROGRESS TO NEXT UNLOCK");
+		draw_text(x + sprite_get_width(outline_sprite) / 2, y + sprite_get_height(outline_sprite) + (bar_margin*2), "PROGRESS TO UNLOCK NEXT CARD");
 	}
 }
 
@@ -133,7 +133,7 @@ fsm.add("unlock", {
 		
 		// header
 		draw_set_font(fnt_header);
-		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 40, "NEW UPGRADE UNLOCKED!", WHITE, PURPLE)
+		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 40, "NEW CARD UNLOCKED!", WHITE, PURPLE)
 		
 		// item name
 		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 100, item_name, WHITE, PURPLE)

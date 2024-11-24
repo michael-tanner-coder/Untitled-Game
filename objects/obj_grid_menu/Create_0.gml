@@ -41,7 +41,7 @@ function populate_grid() {
             if (!is_unlocked({key: _elem.key, category: "upgrades"})) {
                 var _data_item = {
                     name: "???",
-                    description: "[HAVE NOT YET UNLOCKED THIS UPGRADE]",
+                    description: "[HAVE NOT YET UNLOCKED THIS CARD]",
                     price: 0,
                     sprite: spr_question_mark,
                 };

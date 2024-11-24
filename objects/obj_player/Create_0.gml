@@ -1,6 +1,5 @@
 // POLISH
 // TODO: add shields back to enemies (make them readable)
-// TODO: reframe upgrade mechanics as "cards" (drawing, hands, discards, etc)
 // TODO: retain player cards like a "hand"
 // TODO: extend tutorial to include card mechanics
 // TODO: write a quick story explainer outside of the game
