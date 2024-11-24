@@ -3,7 +3,7 @@ draw_set_font(fnt_default);
 draw_set_color(WHITE);
 draw_set_halign(fa_center);
 
-var _hud_element_y = 10;
+var _hud_element_y = 14;
 
 // -- Score
 var _formatted_score = string_format(round(drawn_score), 8, 0);

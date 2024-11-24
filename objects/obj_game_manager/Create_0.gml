@@ -191,7 +191,6 @@ gain_life = function() {
 
 // event subscriptions
 subscribe(id, COLLECTED_KEY, update_key_count);
-// subscribe(id, ENEMY_DEFEATED, enemy_defeated);
 subscribe(id, LOST_LIFE, lose_life);
 subscribe(id, GAINED_EXTRA_LIFE, gain_life);
 subscribe(id, GAINED_EXTRA_TIME, function() {
@@ -215,8 +214,6 @@ subscribe(id, ACTIVATED_POWERUP, function() {
 	powerup_timer = max_powerup_timer;
 	powerup_active = true;
 });
-// subscribe(id, WON_LEVEL, win);
-// subscribe(id, LOST_LEVEL, lose);
 subscribe(id, CHARACTER_QUEUE_UPDATED, function(_characters = []) {
 	
 	var _character_id_array = [];

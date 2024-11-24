@@ -141,4 +141,15 @@ global.scene_queue = [
         enemy_types: [],
         boss: undefined,
     },
+    {
+        key: "end-screen",
+        map: rm_end,
+        music_layers: [],
+        goal_score: 20000,
+        time_between_spawns: 30,
+        default_max_enemy_count: 8,
+        boss_max_enemy_count: 4,
+        enemy_types: [],
+        boss: obj_boss_test,
+    },
 ];
