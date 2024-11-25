@@ -12,6 +12,7 @@ description_font = fnt_small;
 description_padding = 10;
 price = 0;
 upgrade = global.upgrades[0];
+discard_active = false;
 
 // State Information
 highlighted = false;
@@ -78,6 +79,12 @@ fsm.add("active", {
 		}
 	
 		if (highlighted && mouse_check_button_pressed(mb_left)) {
+			if (discard_active) {
+				publish("discard_card", upgrade);
+				play_sound(snd_button_back_alt);
+				return;
+			}
+			
 			if (global.currency >= price) {
 				global.currency -= price;
 				publish(UPGRADE_SELECTED, upgrade);

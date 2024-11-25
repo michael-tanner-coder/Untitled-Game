@@ -4,6 +4,7 @@ draw_score = 1000; // make this configurable
 hand = [];
 hand_size_limit = 3;
 deck = [];
+hand_full = false;
 var _len = array_length(global.deck);
 array_copy(deck, 0, global.deck, 0, _len);
 
@@ -54,10 +55,8 @@ fsm.add("progress_to_next_draw", {
 fsm.add("view_hand", {
     enter: function() {
     	if (upgrade_progress_points >= draw_score) {
-    		// Increase target points for next upgrade; reset progress
-        	draw_score *= 2;
-        	upgrade_progress_points = 0;
-        	draw_new_card();
+    		fsm.change("draw_card");
+    		return;
     	}
     	
         var _card_margin = 30;
@@ -116,14 +115,89 @@ fsm.add("view_hand", {
 });
 
 fsm.add("draw_card", {
+    enter: function() {
+    	hand_full = array_length(hand) >= hand_size_limit;
+    	
+    	if (upgrade_progress_points >= draw_score && !hand_full) {
+    		// Increase target points for next upgrade; reset progress
+        	draw_score *= 2;
+        	upgrade_progress_points = 0;
+        	draw_new_card();
+        	fsm.change("view_hand");
+    	} else {
+    		fsm.change("discard");
+    	}
+    },
+    step: function() {
+        upgrade_banner_y = lerp(upgrade_banner_y, target_upgrade_banner_y, 0.2);
+        
+        if (input_check_pressed("select")) {
+        	fsm.change("progress_to_next_draw");
+        }
+    },
+    draw: function() {
+    	fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, WHITE);
+	}
+}
+);
+
+fsm.add("discard", {
 	enter: function() {
-		// Increase target points for next upgrade; reset progress
-        draw_score *= 2;
-        upgrade_progress_points = 0;
+		var _card_margin = 30;
+        
+        // Pause all characters in the scene
+        publish(ACTORS_DEACTIVATED);
+        physics_pause_enable(true);
+
+		// Spawn card_obj_instances
+        var _start_x = room_width/2;
+        var _section_width = 0;
+        for (var _i = 0; _i < array_length(hand); _i++) {
+        	
+        	// Base position for card
+        	var _card = instance_create_layer(x, y, "UI_Instances", obj_card);
+        	_card.x = _start_x + ((sprite_get_width(_card.sprite_index) + _card_margin) * _i);
+        	_card.y = starting_card_section_y;
+        	_card.starting_y = _card.y;
+        	_card.target_y = card_section_y;
+        	_card.resting_y = card_section_y;
+        	_card.time_until_active = 10 * _i;
+        	_section_width += sprite_get_width(_card.sprite_index) + _card_margin;
+        	
+        	// Upgrade data for card
+        	var _upgrade = hand[_i];
+        	_card.upgrade = _upgrade;
+        	_card.header = _upgrade.name;
+        	_card.description = _upgrade.description;
+        	_card.price = _upgrade.price;
+        	_card.sprite = _upgrade.sprite;
+        	_card.discard_active = true;
+        	
+        	// Cache all card_obj_instances for disposal later
+        	array_push(card_obj_instances, _card);
+        	
+        }
+        
+        // Reposition card_obj_instances to center the section
+        var _full_card_section_width = _section_width;
+        FOREACH card_obj_instances ELEMENT
+        	var _card = _elem;
+        	_card.x -= _full_card_section_width/2;
+        END
 	},
-	step: {},
-	draw: {},
-});
+	step: function() {
+		 upgrade_banner_y = lerp(upgrade_banner_y, target_upgrade_banner_y, 0.2);
+        
+        if (input_check_pressed("select")) {
+        	fsm.change("progress_to_next_draw");
+        }
+	},
+	draw: function() {
+		fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, WHITE);
+		banner(upgrade_banner_height, upgrade_banner_y, "HAND IS FULL: DISCARD A CARD", BLACK, 0.6);
+		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.75), "(press SPACE to pass)")
+	},
+})
 
 fsm.add("inactive", {
 	step: function() {},
@@ -139,7 +213,6 @@ generate_card_hand = function() {
 	// 	global.most_recent_unlock = "";
 	// }
 	var _cards_to_remove = [];
-	
 	for (var _i = 0; _i < hand_size_limit; _i++) {
 		var _card_was_already_chosen = false;
 		
@@ -222,4 +295,15 @@ subscribe(id, LEVEL_RESET, function() {
 });
 subscribe(id, LOST_LEVEL, function() {
 	fsm.change("inactive");
-})
+});
+subscribe(id, "discard_card", function(_card) {
+	discard_card(_card);
+	
+	FOREACH card_obj_instances ELEMENT
+        	instance_destroy(_elem);
+    END
+
+	card_obj_instances = [];
+	
+	fsm.change("view_hand");
+});

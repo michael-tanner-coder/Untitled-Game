@@ -4,10 +4,6 @@ global.default_deck = ["fire_faster", "move_faster", "get_sturdy", "fire_faster"
 global.deck = global.default_deck;
 global.deck_limit = 20;
 
-function pull_from_deck(_card = {}) {
-    
-}
-
 function effect_struct(_property = "", _value = 0, _operation = OPERATIONS.SET) {
     return {
         property: _property,
