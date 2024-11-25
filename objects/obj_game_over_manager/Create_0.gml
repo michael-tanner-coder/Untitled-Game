@@ -99,6 +99,10 @@ fsm.add("unlock", {
 		item_data = get_unlock_item_data(next_unlock);
 		item_name = item_data.name;
 		
+		// add new card to deck
+		array_push(global.deck, item_data.key);
+		set_save_data_property("deck", global.deck);
+		
 		// reset target points for next time we go to the countup state
 		total_points -= progress_points;
 		progress_points = 0;
