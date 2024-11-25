@@ -17,7 +17,7 @@ progress_bar_height = 50;
 default_draw_behavior = function() {
 	draw_set_color(WHITE);
 	if (next_unlock == undefined) {
-		banner(100, y, "NO MORE CARDS TO UNLOCK", BLACK, 0.7);
+		// banner(100, y, "NO MORE CARDS TO UNLOCK", BLACK, 0.7);
 		return;
 	}
 	
@@ -52,7 +52,12 @@ fsm.add("countup", {
 	},
 	step: function() {
 		if (next_unlock == undefined) {
-			fsm.change("idle");
+			reset_unlocks();
+			progress_points = 0;
+			total_points = 0;
+			global.unlock_progress = 0;
+			score = 0;
+			fsm.change("countup");
 			return;
 		}
 		

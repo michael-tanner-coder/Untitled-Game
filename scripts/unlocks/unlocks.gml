@@ -96,7 +96,7 @@ function is_unlocked(
 }
 
 function reset_unlocks() {
-    set_save_data_property("unlock_progress", 0);
     set_save_data_property("upgrades", global.default_unlocked_upgrades);
+    set_save_data_property("unlock_progress", 0);
     global.unlock_progress = get_save_data_property("unlock_progress", 0);
 }
