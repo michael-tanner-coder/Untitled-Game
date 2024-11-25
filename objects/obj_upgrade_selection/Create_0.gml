@@ -194,7 +194,7 @@ fsm.add("discard", {
 	},
 	draw: function() {
 		fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, WHITE);
-		banner(upgrade_banner_height, upgrade_banner_y, "HAND IS FULL: DISCARD A CARD", BLACK, 0.6);
+		banner(upgrade_banner_height, upgrade_banner_y, "HAND IS FULL: DISCARD A CARD (right-click)", BLACK, 0.6, RED);
 		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.75), "(press SPACE to pass)")
 	},
 })
@@ -213,7 +213,7 @@ generate_card_hand = function() {
 	// 	global.most_recent_unlock = "";
 	// }
 	var _cards_to_remove = [];
-	for (var _i = 0; _i < hand_size_limit; _i++) {
+	for (var _i = 0; _i < hand_size_limit-1; _i++) {
 		var _card_was_already_chosen = false;
 		
 		do {
@@ -284,8 +284,20 @@ generate_card_hand();
 
 // Event Subscriptions
 subscribe(id, UPGRADE_SELECTED, function(_card) {
-	fsm.change("progress_to_next_draw");
-	discard_card(_card);
+	if (fsm.get_current_state() == "discard") {
+		discard_card(_card);
+	
+		FOREACH card_obj_instances ELEMENT
+	        	instance_destroy(_elem);
+	    END
+	
+		card_obj_instances = [];
+	
+		fsm.change("view_hand");
+	} else {
+		fsm.change("progress_to_next_draw");
+		discard_card(_card);
+	}
 });
 subscribe(id, ENEMY_DEFEATED, function(_points = 0) {
 	upgrade_progress_points += _points;
@@ -296,7 +308,7 @@ subscribe(id, LEVEL_RESET, function() {
 subscribe(id, LOST_LEVEL, function() {
 	fsm.change("inactive");
 });
-subscribe(id, "discard_card", function(_card) {
+subscribe(id, DISCARD_CARD, function(_card) {
 	discard_card(_card);
 	
 	FOREACH card_obj_instances ELEMENT

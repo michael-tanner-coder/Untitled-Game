@@ -79,18 +79,19 @@ fsm.add("active", {
 		}
 	
 		if (highlighted && mouse_check_button_pressed(mb_left)) {
-			if (discard_active) {
-				publish("discard_card", upgrade);
-				play_sound(snd_button_back_alt);
-				return;
-			}
-			
 			if (global.currency >= price) {
 				global.currency -= price;
 				publish(UPGRADE_SELECTED, upgrade);
 				play_sound(snd_select_card);
 			}
 			else {
+				play_sound(snd_button_back_alt);
+			}
+		}
+		
+		if (highlighted && mouse_check_button_pressed(mb_right)) {
+			if (discard_active) {
+				publish(DISCARD_CARD, upgrade);
 				play_sound(snd_button_back_alt);
 			}
 		}
