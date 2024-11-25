@@ -1,6 +1,5 @@
 // POLISH
 // TODO: add shields back to enemies (make them readable)
-// TODO: retain player cards like a "hand"
 // TODO: extend tutorial to include card mechanics
 // TODO: bug hunt (test on another laptop)
 // TODO: slime trail + particles (make 'em slimey!)
