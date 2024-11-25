@@ -3,6 +3,9 @@
 draw_score = 1000; // make this configurable
 hand = [];
 hand_size_limit = 3;
+deck = [];
+var _len = array_length(global.deck);
+array_copy(deck, 0, global.deck, 0, _len);
 
 // card section
 card_obj_instances = [];
@@ -44,6 +47,7 @@ fsm.add("progress_to_next_draw", {
    		var _bar_bg_color = upgrade_progress_points >= draw_score ? WHITE : PURPLE;
 		fillbar(progress_bar_x, progress_bar_y, 200, 25, min((upgrade_progress_points/draw_score), 1), RED, _bar_bg_color);
 		draw_set_halign(fa_center);
+		draw_shadow_text(VIEW_WIDTH/2 + 150, 14, "DECK: " + string(array_length(deck)));
 	}
 });
 
@@ -128,20 +132,19 @@ fsm.add("inactive", {
 
 // Methods
 generate_card_hand = function() {
-	var _available_cards = get_save_data_property("upgrades", global.default_unlocked_upgrades);
-	
 	// FIXME: this created a bug where only two card will appear in the list instead of three
 	// if (global.most_recent_unlock != "") {
 	// 	var _recent_unlocked_upgrade = get_upgrade_type(global.most_recent_unlock);
 	// 	array_push(hand, _recent_unlocked_upgrade);
 	// 	global.most_recent_unlock = "";
 	// }
+	var _cards_to_remove = [];
 	
 	for (var _i = 0; _i < hand_size_limit; _i++) {
 		var _card_was_already_chosen = false;
 		
 		do {
-			var _upgrade_key = _available_cards[irandom_range(0, array_length(_available_cards) - 1)];
+			var _upgrade_key = deck[irandom_range(0, array_length(deck) - 1)];
 			var _upgrade = get_upgrade_type(_upgrade_key);
 			
         	_card_was_already_chosen = false;
@@ -153,19 +156,23 @@ generate_card_hand = function() {
 			
 			if (!_card_was_already_chosen) {
         		array_push(hand, _upgrade);
+        		array_push(_cards_to_remove, _upgrade_key);
 			}
 		} until (_card_was_already_chosen == false)
 			
 	}
+	
+	FOREACH _cards_to_remove ELEMENT
+		remove_from_deck(_elem);
+	END
 }
 
 draw_new_card = function() {
-	var _available_cards = get_save_data_property("upgrades", global.default_unlocked_upgrades);
-	
-	if (array_length(hand) < hand_size_limit) {
-		var _upgrade_key = _available_cards[irandom_range(0, array_length(_available_cards) - 1)];
+	if (array_length(hand) < hand_size_limit && array_length(deck) > 0) {
+		var _upgrade_key = deck[irandom_range(0, array_length(deck) - 1)];
 		var _upgrade = get_upgrade_type(_upgrade_key);
     	array_push(hand, _upgrade);
+    	remove_from_deck(_upgrade_key);
 	}
 }
 
@@ -174,13 +181,28 @@ discard_card = function(_card = {}) {
 	
 	FOREACH hand ELEMENT
 		if (_elem.key == _card.key) {
-			_card_to_remove_index = _elem;
+			_card_to_remove_index = _i;
 			break;
 		}
 	END
 	
 	if (_card_to_remove_index != undefined) {
 		array_delete(hand, _card_to_remove_index, 1);
+	}
+}
+
+remove_from_deck = function(_card_key = "") {
+	var _card_to_remove_index = undefined;
+	
+	FOREACH deck ELEMENT
+		if (_elem == _card_key) {
+			_card_to_remove_index = _i;
+			break;
+		}
+	END
+	
+	if (_card_to_remove_index != undefined) {
+		array_delete(deck, _card_to_remove_index, 1);
 	}
 }
 
