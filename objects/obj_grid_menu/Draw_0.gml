@@ -49,3 +49,5 @@ for(var _i = 0; _i < array_height_2d(items); _i++) {
 */
 banner(100, 0, "CARDS");
 draw_shadow_text(room_width/2 + 150, 50, "DECK:" + string(array_length(global.deck))+"/"+string(global.deck_limit));
+draw_shadow_text(room_width/2 - 150, 50, "Green = in the deck");
+draw_shadow_text(room_width/2 - 150, 75, "Click a card to add/remove from the deck");
