@@ -7,7 +7,7 @@ global.default_deck = [
     {key: "fire_faster", id: gen_id()}, {key: "move_faster",  id: gen_id()}, {key: "get_sturdy",  id: gen_id()}
 ];
 global.deck = get_save_data_property(DECK, global.default_deck);
-global.deck_limit = 14;
+global.deck_limit = 20;
 global.card_type_limit = 3;
 
 global.default_collection = [{key: "steady_fire", id: gen_id()}, {key: "fast_fire", id: gen_id()}];
