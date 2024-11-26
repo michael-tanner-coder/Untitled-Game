@@ -262,6 +262,7 @@
     {"name":"obj_quake_force","order":5,"path":"objects/obj_quake_force/obj_quake_force.yy",},
     {"name":"obj_scene_test","order":7,"path":"objects/obj_scene_test/obj_scene_test.yy",},
     {"name":"obj_scrollbar","order":12,"path":"objects/obj_scrollbar/obj_scrollbar.yy",},
+    {"name":"obj_scrollbutton","order":18,"path":"objects/obj_scrollbutton/obj_scrollbutton.yy",},
     {"name":"obj_shadow","order":9,"path":"objects/obj_shadow/obj_shadow.yy",},
     {"name":"obj_shop_item","order":7,"path":"objects/obj_shop_item/obj_shop_item.yy",},
     {"name":"obj_shop_manager","order":10,"path":"objects/obj_shop_manager/obj_shop_manager.yy",},

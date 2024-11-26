@@ -42,7 +42,7 @@ fsm.add("progress_to_next_draw", {
         }
     },
    	draw: function() {
-   		if (upgrade_progress_points >= draw_score) {
+   		if (upgrade_progress_points >= draw_score && array_length(deck) > 0) {
    			banner(50, room_height/6, "PRESS SPACEBAR TO DRAW A CARD", BLACK, 0.6);
    		}
    		var _bar_bg_color = upgrade_progress_points >= draw_score ? WHITE : PURPLE;
@@ -54,7 +54,7 @@ fsm.add("progress_to_next_draw", {
 
 fsm.add("view_hand", {
     enter: function() {
-    	if (upgrade_progress_points >= draw_score) {
+    	if (upgrade_progress_points >= draw_score && array_length(deck) > 0) {
     		fsm.change("draw_card");
     		return;
     	}

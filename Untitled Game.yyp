@@ -326,6 +326,7 @@
     {"id":{"name":"obj_quake_force","path":"objects/obj_quake_force/obj_quake_force.yy",},},
     {"id":{"name":"obj_scene_test","path":"objects/obj_scene_test/obj_scene_test.yy",},},
     {"id":{"name":"obj_scrollbar","path":"objects/obj_scrollbar/obj_scrollbar.yy",},},
+    {"id":{"name":"obj_scrollbutton","path":"objects/obj_scrollbutton/obj_scrollbutton.yy",},},
     {"id":{"name":"obj_shadow","path":"objects/obj_shadow/obj_shadow.yy",},},
     {"id":{"name":"obj_shop_item","path":"objects/obj_shop_item/obj_shop_item.yy",},},
     {"id":{"name":"obj_shop_manager","path":"objects/obj_shop_manager/obj_shop_manager.yy",},},

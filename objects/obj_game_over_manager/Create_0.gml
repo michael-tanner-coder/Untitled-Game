@@ -105,10 +105,11 @@ fsm.add("unlock", {
 		item_name = item_data.name;
 		
 		// adds card to deck; adds to collection if deck is full
+		var _new_card = new_card_instance(item_data.key)
 		if (array_length(global.deck) < global.deck_limit) {
-			add_to_deck(item_data);
+			add_to_deck(_new_card);
 		} else {
-			add_to_collection(item_data);
+			add_to_collection(_new_card);
 		}
 		
 		// reset target points for next time we go to the countup state
