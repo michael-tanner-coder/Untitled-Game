@@ -297,6 +297,13 @@ Input Icons by Kenney
 			menuSetPreset(e_menu_presets.pause_menu);
 			new_game();
 		}), undefined, undefined],
+		
+		["CARDS", new ScriptRunner(function() { 
+				menuModePause();
+				menuSetPreset(e_menu_presets.pause_menu);
+				room_goto(rm_item_menu);
+			}), undefined, undefined],
+		
 
 		["SETTINGS", [
 			["AUDIO", [
@@ -343,12 +350,6 @@ Input Icons by Kenney
 		
 			// ["CONTROLS", new Controls(global.input_system, "input_save.json", true, ["right", "left", "up", "down"])], // Changes player controls
 		]],
-		
-		["CARDS", new ScriptRunner(function() { 
-				menuModePause();
-				menuSetPreset(e_menu_presets.pause_menu);
-				room_goto(rm_item_menu);
-			}), undefined, undefined],
 		
 		// // Credits edit text above
 		// ["CREDITS",	new Credits(credits_string)],

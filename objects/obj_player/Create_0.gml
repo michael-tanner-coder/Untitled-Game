@@ -1,7 +1,6 @@
 // POLISH
-// TODO: let player modify the deck in a menu
-// TODO: extend tutorial to include card mechanics
 // TODO: bug hunt (test on another laptop)
+// TODO: extend tutorial to include card mechanics
 // TODO: add shields back to enemies (make them readable)
 // TODO: slime trail + particles (make 'em slimey!)
 
