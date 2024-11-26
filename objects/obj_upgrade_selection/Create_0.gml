@@ -206,6 +206,10 @@ fsm.add("inactive", {
 
 // Methods
 generate_card_hand = function() {
+	if (array_length(deck) <= 0) {
+		return;
+	}
+	
 	// FIXME: this created a bug where only two card will appear in the list instead of three
 	// if (global.most_recent_unlock != "") {
 	// 	var _recent_unlocked_upgrade = get_upgrade_type(global.most_recent_unlock);

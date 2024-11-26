@@ -10,7 +10,7 @@ global.deck = get_save_data_property(DECK, global.default_deck);
 global.deck_limit = 20;
 global.card_type_limit = 3;
 
-global.default_collection = [{key: "steady_fire", id: gen_id()}, {key: "fast_fire", id: gen_id()}];
+global.default_collection = [];
 global.collection = get_save_data_property(COLLECTION, global.default_collection);
 
 // Deck functions
@@ -125,6 +125,7 @@ function get_upgrade_type(_key = "") {
         var _upgrade = _elem;
         if (_upgrade.key == _key) {
             _matching_upgrade =  _upgrade;
+            break;
         }
     END
     
