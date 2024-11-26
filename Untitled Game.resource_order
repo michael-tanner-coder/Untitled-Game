@@ -313,7 +313,7 @@
     {"name":"rm_combat_test","order":8,"path":"rooms/rm_combat_test/rm_combat_test.yy",},
     {"name":"rm_end","order":5,"path":"rooms/rm_end/rm_end.yy",},
     {"name":"rm_game_over","order":1,"path":"rooms/rm_game_over/rm_game_over.yy",},
-    {"name":"rm_item_menu","order":3,"path":"rooms/rm_item_menu/rm_item_menu.yy",},
+    {"name":"rm_item_menu","order":6,"path":"rooms/rm_item_menu/rm_item_menu.yy",},
     {"name":"rm_level_1","order":1,"path":"rooms/rm_level_1/rm_level_1.yy",},
     {"name":"rm_level_generation","order":6,"path":"rooms/rm_level_generation/rm_level_generation.yy",},
     {"name":"rm_level_transition","order":10,"path":"rooms/rm_level_transition/rm_level_transition.yy",},

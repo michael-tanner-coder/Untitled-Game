@@ -355,7 +355,7 @@ Input Icons by Kenney
 		// ["CREDITS",	new Credits(credits_string)],
 		
 		["CLOSE",		new ScriptRunner(game_end),			// Quits game
-		"QUIT", new ScriptRunner(function() {		// Goes to title screen when in game room
+		"MAIN MENU", new ScriptRunner(function() {		// Goes to title screen when in game room
 			quit_to_menu();
 		})]
 	];
