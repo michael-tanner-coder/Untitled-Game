@@ -134,6 +134,8 @@ Example usage:
 
 // Constants
 #macro NO_FOLLOW "no_follow"
+#macro DECK "deck"
+#macro COLLECTION "collection"
 
 global.tutorial_flag_list = [
 	PLAYED_NORMAL_CHARACTER, 
