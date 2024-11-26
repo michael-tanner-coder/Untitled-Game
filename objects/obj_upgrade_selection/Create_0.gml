@@ -37,7 +37,7 @@ fsm.add("progress_to_next_draw", {
         upgrade_progress_points = 0;
     },
     step: function() {
-        if (keyboard_check_pressed(vk_space)) {
+        if (keyboard_check_pressed(vk_space) && (array_length(deck) > 0 || array_length(hand) > 0)) {
             fsm.change("view_hand");
         }
     },
@@ -218,25 +218,10 @@ generate_card_hand = function() {
 	// }
 	var _cards_to_remove = [];
 	for (var _i = 0; _i < hand_size_limit-1; _i++) {
-		var _card_was_already_chosen = false;
-		
-		do {
-			var _upgrade_struct = deck[irandom_range(0, array_length(deck) - 1)];
-			var _upgrade = get_upgrade_type(_upgrade_struct.key);
-			
-        	_card_was_already_chosen = false;
-        	FOREACH hand ELEMENT
-        		if (_elem.key == _upgrade.key) {
-        			_card_was_already_chosen = true;
-        		}
-        	END
-			
-			if (!_card_was_already_chosen) {
-        		array_push(hand, _upgrade);
-        		array_push(_cards_to_remove, _upgrade_struct);
-			}
-		} until (_card_was_already_chosen == false)
-			
+		var _upgrade_struct = deck[irandom_range(0, array_length(deck) - 1)];
+		var _upgrade = get_upgrade_type(_upgrade_struct.key);
+		array_push(hand, _upgrade);
+		array_push(_cards_to_remove, _upgrade_struct);
 	}
 	
 	FOREACH _cards_to_remove ELEMENT
