@@ -331,9 +331,10 @@ Input Icons by Kenney
 						global.first_wave_complete = false;
 						show_debug_message("deleting data");
 						set_save_data_property(DECK, global.default_deck);
-						set_save_data_property(COLLECTION, []);
+						set_save_data_property(COLLECTION, global.default_collection);
 						global.deck = global.default_deck;
-						global.collection = [];
+						global.collection = global.default_collection;
+						set_save_data_property("counter", 0);
 						gotoPrevPage();
 						gotoPrevPage();
 					})]
@@ -343,11 +344,11 @@ Input Icons by Kenney
 			// ["CONTROLS", new Controls(global.input_system, "input_save.json", true, ["right", "left", "up", "down"])], // Changes player controls
 		]],
 		
-		// ["UPGRADES", new ScriptRunner(function() { 
-		// 		menuModePause();
-		// 		menuSetPreset(e_menu_presets.pause_menu);
-		// 		room_goto(rm_item_menu);
-		// 	}), undefined, undefined],
+		["CARDS", new ScriptRunner(function() { 
+				menuModePause();
+				menuSetPreset(e_menu_presets.pause_menu);
+				room_goto(rm_item_menu);
+			}), undefined, undefined],
 		
 		// // Credits edit text above
 		// ["CREDITS",	new Credits(credits_string)],

@@ -217,8 +217,8 @@ generate_card_hand = function() {
 		var _card_was_already_chosen = false;
 		
 		do {
-			var _upgrade_key = deck[irandom_range(0, array_length(deck) - 1)];
-			var _upgrade = get_upgrade_type(_upgrade_key);
+			var _upgrade_struct = deck[irandom_range(0, array_length(deck) - 1)];
+			var _upgrade = get_upgrade_type(_upgrade_struct.key);
 			
         	_card_was_already_chosen = false;
         	FOREACH hand ELEMENT
@@ -229,7 +229,7 @@ generate_card_hand = function() {
 			
 			if (!_card_was_already_chosen) {
         		array_push(hand, _upgrade);
-        		array_push(_cards_to_remove, _upgrade_key);
+        		array_push(_cards_to_remove, _upgrade_struct);
 			}
 		} until (_card_was_already_chosen == false)
 			
@@ -242,10 +242,10 @@ generate_card_hand = function() {
 
 draw_new_card = function() {
 	if (array_length(hand) < hand_size_limit && array_length(deck) > 0) {
-		var _upgrade_key = deck[irandom_range(0, array_length(deck) - 1)];
-		var _upgrade = get_upgrade_type(_upgrade_key);
+		var _upgrade_struct = deck[irandom_range(0, array_length(deck) - 1)];
+		var _upgrade = get_upgrade_type(_upgrade_struct.key);
     	array_push(hand, _upgrade);
-    	remove_from_temp_deck(_upgrade_key);
+    	remove_from_temp_deck(_upgrade_struct);
 	}
 }
 
@@ -264,11 +264,11 @@ discard_card = function(_card = {}) {
 	}
 }
 
-remove_from_temp_deck = function(_card_key = "") {
+remove_from_temp_deck = function(_card = {}) {
 	var _card_to_remove_index = undefined;
 	
 	FOREACH deck ELEMENT
-		if (_elem == _card_key) {
+		if (_elem.key == _card.key) {
 			_card_to_remove_index = _i;
 			break;
 		}

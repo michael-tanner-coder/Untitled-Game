@@ -1,26 +1,36 @@
 global.upgrades = [];
 global.default_unlocked_upgrades = ["fire_faster", "move_faster", "get_sturdy"];
 
-global.default_deck = ["fire_faster", "move_faster", "get_sturdy", "fire_faster", "move_faster", "get_sturdy", "fire_faster", "move_faster", "get_sturdy"];
+set_save_data_property("counter", 0);
+global.default_deck = [
+    {key: "fire_faster", id: gen_id()}, {key: "move_faster",  id: gen_id()}, {key: "get_sturdy",  id: gen_id()}, 
+    {key: "fire_faster", id: gen_id()}, {key: "move_faster",  id: gen_id()}, {key: "get_sturdy",  id: gen_id()},
+    {key: "fire_faster", id: gen_id()}, {key: "move_faster",  id: gen_id()}, {key: "get_sturdy",  id: gen_id()}
+];
 global.deck = get_save_data_property(DECK, global.default_deck);
 global.deck_limit = 14;
 global.card_type_limit = 3;
 
-global.collection = get_save_data_property(COLLECTION, []);
+global.default_collection = [{key: "steady_fire", id: gen_id()}, {key: "fast_fire", id: gen_id()}];
+global.collection = get_save_data_property(COLLECTION, global.default_collection);
 
 // Deck functions
+function new_card_instance(_key = "") {
+    return {key: _key, id: gen_id()};
+}
+
 function add_to_deck(_card = {}) {
     if (array_length(global.deck) < global.deck_limit) {
         var _card_count = 0;
         
         FOREACH global.deck ELEMENT
-            if (_elem == _card.key) {
-                _card_count++;    
+            if (_elem.key == _card.key) {
+                _card_count++;  
             }
         END
         
         if (_card_count < global.card_type_limit) {
-            array_push(global.deck, _card.key);
+            array_push(global.deck, _card);
         }
         
         set_save_data_property(DECK, global.deck);
@@ -30,40 +40,59 @@ function add_to_deck(_card = {}) {
 function remove_from_deck(_card = {}) {
     var _card_index = undefined;
     FOREACH global.deck ELEMENT
-        if (_card.key == _elem) {
-            _card_is_in_deck = true;
+        if (_card.id == _elem.id && _card.key == _elem.key) {
             _card_index = _i;
+            break;
         }
     END
     
     if (is_numeric(_card_index)) {
-        array_delete(global.deck, _card_index, 0);
+        array_delete(global.deck, _card_index, 1);
         set_save_data_property(DECK, global.deck);
     }
 }
 
-function shuffle_deck(_deck = []) {}
+function is_in_deck(_card = {}) {
+    var _in_deck = false;
+    FOREACH global.deck ELEMENT
+        if (_elem.id == _card.id) {
+            _in_deck = true;
+            break;
+        }
+    END
+    return _in_deck;
+}
 
 // Collection functions
 function add_to_collection(_card = {}) {
-    array_push(global.collection, _card.key);
+    array_push(global.collection, _card);
     set_save_data_property(COLLECTION, global.collection);
 }
 
 function remove_from_collection(_card = {}){
-    // but remove from collection
     var _removal_index = undefined;
     FOREACH global.collection ELEMENT
-        if (_elem == _card.key) {
+        if (_card.id == _elem.id && _card.key == _elem.key) {
             _removal_index = _i;
         }
     END
     
     if (is_numeric(_removal_index)) {
-        array_delete(global.collection, _removal_index, 0);
+        array_delete(global.collection, _removal_index, 1);
     }
     
     set_save_data_property(COLLECTION, global.collection);
+}
+
+function is_in_collection(_card = {}) {
+    var _in_collection = false;
+    FOREACH global.deck ELEMENT
+        if (_elem.id == _card.id) {
+            _in_collection = true;
+            break;
+        }
+    END
+    return _in_collection;
 }
 
 // Card Structs
