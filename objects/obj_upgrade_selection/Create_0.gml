@@ -236,7 +236,7 @@ generate_card_hand = function() {
 	}
 	
 	FOREACH _cards_to_remove ELEMENT
-		remove_from_deck(_elem);
+		remove_from_temp_deck(_elem);
 	END
 }
 
@@ -245,7 +245,7 @@ draw_new_card = function() {
 		var _upgrade_key = deck[irandom_range(0, array_length(deck) - 1)];
 		var _upgrade = get_upgrade_type(_upgrade_key);
     	array_push(hand, _upgrade);
-    	remove_from_deck(_upgrade_key);
+    	remove_from_temp_deck(_upgrade_key);
 	}
 }
 
@@ -264,7 +264,7 @@ discard_card = function(_card = {}) {
 	}
 }
 
-remove_from_deck = function(_card_key = "") {
+remove_from_temp_deck = function(_card_key = "") {
 	var _card_to_remove_index = undefined;
 	
 	FOREACH deck ELEMENT
