@@ -1,9 +1,72 @@
 global.upgrades = [];
 global.default_unlocked_upgrades = ["fire_faster", "move_faster", "get_sturdy"];
-global.default_deck = ["fire_faster", "move_faster", "get_sturdy", "fire_faster", "move_faster", "get_sturdy", "fire_faster", "move_faster", "get_sturdy"];
-global.deck = get_save_data_property("deck", global.default_deck);
-global.deck_limit = 20;
 
+global.default_deck = ["fire_faster", "move_faster", "get_sturdy", "fire_faster", "move_faster", "get_sturdy", "fire_faster", "move_faster", "get_sturdy"];
+global.deck = get_save_data_property(DECK, global.default_deck);
+global.deck_limit = 14;
+global.card_type_limit = 3;
+
+global.collection = get_save_data_property(COLLECTION, []);
+
+// Deck functions
+function add_to_deck(_card = {}) {
+    if (array_length(global.deck) < global.deck_limit) {
+        var _card_count = 0;
+        
+        FOREACH global.deck ELEMENT
+            if (_elem == _card.key) {
+                _card_count++;    
+            }
+        END
+        
+        if (_card_count < global.card_type_limit) {
+            array_push(global.deck, _card.key);
+        }
+        
+        set_save_data_property(DECK, global.deck);
+    }
+}
+
+function remove_from_deck(_card = {}) {
+    var _card_index = undefined;
+    FOREACH global.deck ELEMENT
+        if (_card.key == _elem) {
+            _card_is_in_deck = true;
+            _card_index = _i;
+        }
+    END
+    
+    if (is_numeric(_card_index)) {
+        array_delete(global.deck, _card_index, 0);
+        set_save_data_property(DECK, global.deck);
+    }
+}
+
+function shuffle_deck(_deck = []) {}
+
+// Collection functions
+function add_to_collection(_card = {}) {
+    array_push(global.collection, _card.key);
+    set_save_data_property(COLLECTION, global.collection);
+}
+
+function remove_from_collection(_card = {}){
+    // but remove from collection
+    var _removal_index = undefined;
+    FOREACH global.collection ELEMENT
+        if (_elem == _card.key) {
+            _removal_index = _i;
+        }
+    END
+    
+    if (is_numeric(_removal_index)) {
+        array_delete(global.collection, _removal_index, 0);
+    }
+    
+    set_save_data_property(COLLECTION, global.collection);
+}
+
+// Card Structs
 function effect_struct(_property = "", _value = 0, _operation = OPERATIONS.SET) {
     return {
         property: _property,

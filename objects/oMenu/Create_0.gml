@@ -330,8 +330,10 @@ Input Icons by Kenney
 						global.tutorial = true;
 						global.first_wave_complete = false;
 						show_debug_message("deleting data");
-						set_save_data_property("deck", global.default_deck);
+						set_save_data_property(DECK, global.default_deck);
+						set_save_data_property(COLLECTION, []);
 						global.deck = global.default_deck;
+						global.collection = [];
 						gotoPrevPage();
 						gotoPrevPage();
 					})]
