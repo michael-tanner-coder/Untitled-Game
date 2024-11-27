@@ -36,6 +36,7 @@ global.scene_queue = [
     {
         key: "level",
         map: rm_combat_test_small,
+        tutorial_flag: "basics_tutorial",
         goal_score: 20000,
         time_between_spawns: 30,
         default_max_enemy_count: 6,

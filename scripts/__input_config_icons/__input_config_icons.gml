@@ -33,8 +33,12 @@ input_icons_keyboard_and_mouse()
 .add("space", spr_keyboard_spacebar)
 .add("enter", spr_keyboard_enter)
 .add("backspace", spr_keyboard_backspace)
+.add("W", spr_keyboard_w)
+.add("A", spr_keyboard_a)
+.add("S", spr_keyboard_s)
 .add("D", spr_keyboard_d)
-.add("X", spr_keyboard_x)
+.add("mouse left", spr_mouse_left)
+.add("mouse right", spr_mouse_right)
 //Put extra .add() commands here to add icons to keyboard and mouse
 
 
