@@ -21,7 +21,7 @@ function __input_config_verbs()
             left:  [input_binding_key(vk_left),  input_binding_key("A")],
             right: [input_binding_key(vk_right), input_binding_key("D")],
             jump: input_binding_key(vk_space),
-            shot: input_binding_key(mb_left),
+            shoot: input_binding_key(mb_left),
             alt: input_binding_key(mb_right),
             
             // Card actions
