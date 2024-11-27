@@ -76,8 +76,8 @@ Example usage:
 #macro FELL_FAST "fell_fast"
 #macro DESTROYED_BLOCK "destroyed_block"
 #macro COLLECTED_KEY "collect_key"
-#macro ENABLED_KEY_SPAWNING "enabled_key_spawning"
-#macro DISABLED_KEY_SPAWNING "disabled_key_spawning"
+#macro ENABLED_MONEY_SPAWNING "enabled_money_spawning"
+#macro DISABLED_MONEY_SPAWNING "disabled_money_spawning"
 #macro ENABLED_ENEMY_SPAWNING "enabled_enemy_spawning"
 #macro DISABLED_ENEMY_SPAWNING "disabled_enemy_spawning"
 #macro SPAWNED_BOSS "spawned_boss"
@@ -120,6 +120,7 @@ Example usage:
 #macro UPGRADE_SELECTED "upgrade_selected"
 #macro MENU_ITEM_HIGHLIGHTED "menu_item_highlighted"
 #macro DISCARD_CARD "discard_card"
+#macro DRAW_CARD_IS_AVAILABLE "draw_card_is_available"
 
 // Flags
 #macro STARTED_GAME "started_game"
