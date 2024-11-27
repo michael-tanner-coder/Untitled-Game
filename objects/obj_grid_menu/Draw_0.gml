@@ -4,7 +4,7 @@ for(var _i = 0; _i < array_height_2d(items); _i++) {
     for (var _j = 0; _j < array_length_2d(items, _i); _j++) {
         var _item_x = grid_start_x + _j * (grid_item_width + grid_item_margin);
         var _item_y = grid_start_y + _i * (grid_item_height + grid_item_margin);
-        _item_y += ((area_height / 100 * obj_slider.percentage) - area_height);
+        _item_y += ((grid_area_height / 100 * obj_slider.percentage) - grid_area_height);
         var _item_width = _item_x + grid_item_width;
         var _item_height = _item_y + grid_item_height;
         var _item = items[_i, _j];
@@ -46,3 +46,9 @@ for(var _i = 0; _i < array_height_2d(items); _i++) {
         }
     }
 }
+*/
+draw_set_font(fnt_default);
+banner(100, 0, "");
+draw_shadow_text(room_width/2 + 175, 25, "DECK:" + string(array_length(global.deck))+"/"+string(global.deck_limit));
+draw_shadow_text(room_width/2 - 50, 50, "Green = in the deck");
+draw_shadow_text(room_width/2 - 50, 75, "Click a card to add/remove from the deck");

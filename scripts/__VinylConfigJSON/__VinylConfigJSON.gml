@@ -341,6 +341,14 @@ global.VinylConfigSON = [
         membersDuckOn: "UI_ducker",
         members: [
             {
+                sound: snd_select_card,
+                duckPrio: 3,
+            },
+            {
+                sound: snd_move_card,
+                duckPrio: 3,
+            },
+            {
                 sound: snd_button_back,
                 duckPrio: 3,
             },
@@ -381,7 +389,7 @@ global.VinylConfigSON = [
                 duckPrio: 3,
             },
             {
-                sound: snd_time_counter,
+                sound: snd_progress_bar_count,
                 duckPrio: 3,
             },
         ],

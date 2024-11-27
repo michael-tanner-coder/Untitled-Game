@@ -3,12 +3,12 @@ if (!current_prompt || tutorial_ended) {
 }
 
 var _prompt_x = room_width/2;
-var _prompt_y = room_height/2 - 128;
+var _prompt_y = room_height/6;
 
 var _typing_finished = typist.get_state() == 1;
 
 // Prompt box
-draw_sprite_stretched_ext(spr_tutorial_prompt, 0, _prompt_x-textbox_width/2, _prompt_y-textbox_width/2, textbox_width, textbox_height, c_white, 1);
+// draw_sprite_stretched_ext(spr_tutorial_prompt, 0, _prompt_x-textbox_width/2, _prompt_y-textbox_width/2, textbox_width, textbox_height, c_white, 1);
 
 // Prompt header
 draw_set_color(WHITE);
@@ -48,12 +48,14 @@ if (is_array(_prompt_inputs)) {
     END
 }
 
+banner(textbox_height, _prompt_y, "", BLACK, 0.6);
+
 // Scribble render
 if (!prompt_typing_finished) {
     var _text_renderer = scribble(_full_prompt_string);
-    _text_renderer.starting_format("fnt_cutscene_default", WHITE).align(fa_center, fa_middle).fit_to_box(textbox_width - padding_x, textbox_height - padding_y).draw(_prompt_x, _prompt_y - 64, typist);
+    _text_renderer.starting_format("fnt_default", WHITE).align(fa_center, fa_middle).fit_to_box(textbox_width - padding_x, textbox_height - padding_y).draw(_prompt_x, _prompt_y + textbox_height/2, typist);
 }
 else {
     var _text_renderer = scribble(_full_prompt_string);
-    _text_renderer.starting_format("fnt_cutscene_default", WHITE).align(fa_center, fa_middle).fit_to_box(textbox_width - padding_x, textbox_height - padding_y).draw(_prompt_x, _prompt_y - 64);
+    _text_renderer.starting_format("fnt_default", WHITE).align(fa_center, fa_middle).fit_to_box(textbox_width - padding_x, textbox_height - padding_y).draw(_prompt_x, _prompt_y + textbox_height/2);
 }

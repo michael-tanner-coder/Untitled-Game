@@ -1,0 +1,1 @@
+text="THANKS FOR PLAYING!";

@@ -747,6 +747,9 @@ function __input_initialize()
     __input_key_name_set(vk_left,  "arrow left");
     __input_key_name_set(vk_right, "arrow right");
     
+    __input_key_name_set(mb_right, "mouse right");
+    __input_key_name_set(mb_left, "mouse left");
+    
     __input_key_name_set(vk_tab,      "tab");
     __input_key_name_set(vk_ralt,     "right alt");
     __input_key_name_set(vk_lalt,     "left alt");

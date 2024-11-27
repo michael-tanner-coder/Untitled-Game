@@ -1,6 +1,100 @@
 global.upgrades = [];
 global.default_unlocked_upgrades = ["fire_faster", "move_faster", "get_sturdy"];
 
+global.default_deck = [
+    {key: "fire_faster", id: gen_id()}, {key: "move_faster",  id: gen_id()}, {key: "get_sturdy",  id: gen_id()}, 
+    {key: "fire_faster", id: gen_id()}, {key: "move_faster",  id: gen_id()}, {key: "get_sturdy",  id: gen_id()},
+    {key: "fire_faster", id: gen_id()}, {key: "move_faster",  id: gen_id()}, {key: "get_sturdy",  id: gen_id()}
+];
+global.deck = get_save_data_property(DECK, global.default_deck);
+global.deck_limit = 20;
+global.card_type_limit = 3;
+
+global.default_collection = [];
+global.collection = get_save_data_property(COLLECTION, global.default_collection);
+
+// Deck functions
+function new_card_instance(_key = "") {
+    return {key: _key, id: gen_id()};
+}
+
+function add_to_deck(_card = {}) {
+    if (array_length(global.deck) < global.deck_limit) {
+        var _card_count = 0;
+        
+        FOREACH global.deck ELEMENT
+            if (_elem.key == _card.key) {
+                _card_count++;  
+            }
+        END
+        
+        if (_card_count < global.card_type_limit) {
+            array_push(global.deck, _card);
+        }
+        
+        set_save_data_property(DECK, global.deck);
+    }
+}
+
+function remove_from_deck(_card = {}) {
+    var _card_index = undefined;
+    FOREACH global.deck ELEMENT
+        if (_card.id == _elem.id && _card.key == _elem.key) {
+            _card_index = _i;
+            break;
+        }
+    END
+    
+    if (is_numeric(_card_index)) {
+        array_delete(global.deck, _card_index, 1);
+        set_save_data_property(DECK, global.deck);
+    }
+}
+
+function is_in_deck(_card = {}) {
+    var _in_deck = false;
+    FOREACH global.deck ELEMENT
+        if (_elem.id == _card.id) {
+            _in_deck = true;
+            break;
+        }
+    END
+    return _in_deck;
+}
+
+// Collection functions
+function add_to_collection(_card = {}) {
+    array_push(global.collection, _card);
+    set_save_data_property(COLLECTION, global.collection);
+}
+
+function remove_from_collection(_card = {}){
+    var _removal_index = undefined;
+    FOREACH global.collection ELEMENT
+        if (_card.id == _elem.id && _card.key == _elem.key) {
+            _removal_index = _i;
+        }
+    END
+    
+    if (is_numeric(_removal_index)) {
+        array_delete(global.collection, _removal_index, 1);
+    }
+    
+    set_save_data_property(COLLECTION, global.collection);
+}
+
+function is_in_collection(_card = {}) {
+    var _in_collection = false;
+    FOREACH global.deck ELEMENT
+        if (_elem.id == _card.id) {
+            _in_collection = true;
+            break;
+        }
+    END
+    return _in_collection;
+}
+
+// Card Structs
 function effect_struct(_property = "", _value = 0, _operation = OPERATIONS.SET) {
     return {
         property: _property,
@@ -31,6 +125,7 @@ function get_upgrade_type(_key = "") {
         var _upgrade = _elem;
         if (_upgrade.key == _key) {
             _matching_upgrade =  _upgrade;
+            break;
         }
     END
     
@@ -43,7 +138,7 @@ function init_upgrades_collection() {
                 "fire_faster", 
                 "Fire Faster", 
                 "Increase your fire rate by 10%", 
-                500, 
+                1000, 
                 spr_white_circle, 
                 [
                     effect_struct("player_firing_rate", 1.1, OPERATIONS.MULTIPLY),
@@ -53,7 +148,7 @@ function init_upgrades_collection() {
                 "move_faster", 
                 "Move Faster", 
                 "Increase your move speed by 10% (makes you lighter)", 
-                500, 
+                1000, 
                 spr_white_circle, 
                 [
                     effect_struct("player_density", 0.9, OPERATIONS.MULTIPLY),
@@ -63,80 +158,40 @@ function init_upgrades_collection() {
                 "get_sturdy", 
                 "Get Heavier", 
                 "Increase your weight by 10% (makes you slower)", 
-                500, 
+                1000, 
                 spr_white_circle, 
                 [
-                    effect_struct("player_density", 1.1, OPERATIONS.MULTIPLY),
+                    effect_struct("player_density", 1.2, OPERATIONS.MULTIPLY),
                 ]
         ),
-        // upgrade_struct(
-        //         "big_boy", 
-        //         "Big Boy", 
-        //         "Become huge and hard to move (double your size)", 
-        //         1000, 
-        //         spr_white_circle, 
-        //         [
-        //             effect_struct("player_size", 2, OPERATIONS.SET),
-        //         ]
-        // ),
-        // upgrade_struct(
-        //         "tiny_baby",
-        //         "Tiny Baby", 
-        //         "Reduce your size by half",
-        //         1000, 
-        //         spr_white_circle, 
-        //         [
-        //             effect_struct("player_size", 0.5, OPERATIONS.SET),
-        //         ]
-        // ),
         upgrade_struct(
                 "fast_fire", 
                 "Rapid Fire", 
                 "Increase your firing rate by 50% but with weaker bullets",
-                1000, 
+                2000, 
                 spr_white_circle, 
                 [
                     effect_struct("player_firing_rate", 0.5, OPERATIONS.MULTIPLY),
-                    effect_struct("player_bullet_force", 0.75, OPERATIONS.MULTIPLY),
+                    effect_struct("player_bullet_force", 0.5, OPERATIONS.MULTIPLY),
+                    effect_struct("player_recoil", 1.3, OPERATIONS.MULTIPLY),
                 ]
         ),
         upgrade_struct(
                 "steady_fire", 
                 "Steady Fire",
                 "Reduce your firing rate by 50% but gain stronger bullets", 
-                1000, 
+                2000, 
                 spr_white_circle, 
                 [
                     effect_struct("player_firing_rate", 2, OPERATIONS.MULTIPLY),
-                    effect_struct("player_bullet_force", 1.25, OPERATIONS.MULTIPLY),
+                    effect_struct("player_bullet_force", 2.5, OPERATIONS.MULTIPLY),
                 ]
         ),
-        // upgrade_struct(
-        //         "light_weight", 
-        //         "Light Weight", 
-        //         "Increase your movement speed but you are easier to push", 
-        //         1000, 
-        //         spr_white_circle, 
-        //         [
-        //             effect_struct("player_density", 0.75, OPERATIONS.MULTIPLY)
-        //         ]
-        // ),
-        // upgrade_struct(
-        //         "heavy_weight", 
-        //         "Heavy Weight", 
-        //         "Become harder to push but increase your recoil", 
-        //         1000, 
-        //         spr_white_circle, 
-        //         [
-        //             effect_struct("player_density", 1.5, OPERATIONS.MULTIPLY),
-        //             effect_struct("player_recoil", 1.5, OPERATIONS.MULTIPLY)
-        //         ]
-        // ),
         upgrade_struct(
                 "shot_spread", 
                 "Shot Spread", 
                 "Increase your shot count by 1, but each shot is weaker", 
-                1000, 
+                2000, 
                 spr_white_circle, 
                 [
                     effect_struct("player_shot_count", 1, OPERATIONS.ADD),
@@ -158,7 +213,7 @@ function init_upgrades_collection() {
                 "extra_life", 
                 "Extra Life", 
                 "Gain 1 extra life",
-                4000, 
+                8000, 
                 spr_white_circle,
                 [
                     effect_struct("player_lives", 1, OPERATIONS.ADD),
@@ -171,7 +226,7 @@ function init_upgrades_collection() {
                 4000, 
                 spr_white_circle,
                 [
-                    effect_struct("player_bullet_force", 2, OPERATIONS.MULTIPLY),
+                    effect_struct("player_bullet_force", 4, OPERATIONS.MULTIPLY),
                     effect_struct("player_recoil", 2, OPERATIONS.MULTIPLY),
                 ]
         ),
@@ -179,22 +234,12 @@ function init_upgrades_collection() {
                 "closer",
                 "The Closer",
                 "NEGATIVE RECOIL",
-                1000, 
+                2000, 
                 spr_white_circle,
                 [
                     effect_struct("player_recoil", -1, OPERATIONS.MULTIPLY),
                 ]
         ),
-        // upgrade_struct(
-        //         "bomb", 
-        //         "Bomb", 
-        //         "Right-Click to plant a ticking bomb", 
-        //         4000, 
-        //         spr_white_circle,
-        //         [
-        //             effect_struct("player_alt_fire", ABILITIES.BOMB, OPERATIONS.SET),
-        //         ]
-        // ),
     ];
 
     return global.upgrades;

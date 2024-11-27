@@ -1,9 +1,10 @@
 // Header
-font = fnt_header;
+font = fnt_header_nonsdf;
 text = "HEADER";
-text_color = PINK;
+text_color = BLUE;
 input = undefined;
 
 // Outline
-outline_color = c_white;
-outline_enabled = true;
+outline_color = WHITE;
+outline_enabled = false;
+shadow_enabled = true;

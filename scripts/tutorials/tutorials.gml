@@ -1,252 +1,67 @@
 // Tutorial Data
 global.tutorials = [
     {
-        flag: "demo_build",
+        flag: "basics_tutorial",
         prompts: [
             {
-                text: "Hi, there!",
-                inputs: ["jump"],      // multiple valid inputs for one tutorial prompt
+                text: "Move",
+                inputs: ["up", "left", "down", "right"],
+                count: 4,
+                on_enter_events: [DISABLED_ENEMY_SPAWNING, DISABLED_MONEY_SPAWNING],
             },
             {
-                text: "I've built a quick demo build of the game that takes you through each character and some sample levels.\nNothing in the build is final but it should give an idea of the game.",
-                inputs: ["jump"],  
+                text: "Shoot",
+                inputs: ["shoot"],
+                count: 4,
             },
             {
-                text: "Swaplings is a game about a bunch weird little guys made in a lab. But today, they're busting out.",
-                inputs: ["jump"],  
+                text: "Dash",
+                inputs: ["alt"], 
+                count: 2,
+                on_exit_events: [ENABLED_ENEMY_SPAWNING],
             },
             {
-                text: "No story sequences will be in this build. Just basic gameplay.",
-                inputs: ["jump"],
-            },
-            {
-                text: "Okay, that's enough for now. Let's get started.",
-                inputs: ["jump"],
-                on_exit_events: [FINISHED_SCENE],
+                text: "Push other SLIMES into spikes",
+                events: [ENEMY_DEFEATED],
+                count: 3,
+                on_exit_events: [ENABLED_MONEY_SPAWNING],
             },
         ],
     },
     {
-        flag: "played_normal_character",
+        flag: "card_tutorial",
         prompts: [
             {
-                text: "MOVE",
-                inputs: ["left", "right"],      // multiple valid inputs for one tutorial prompt
-                time: 250,                      // time (in steps) for how long the prompt is active after the player first presses a valid input 
-                on_enter_events: [DISABLED_ENEMY_SPAWNING, DISABLED_KEY_SPAWNING],
+                text: "View the CARDS in your HAND",
+                inputs: ["view_hand"],      // multiple valid inputs for one tutorial prompt
             },
             {
-                text: "JUMP",                   // name of the tutorial concept
-                inputs: ["jump"],               // input the player must make to progress
+                text: "Activate a CARD with MONEY",                   // name of the tutorial concept
+                inputs: ["select_card"],               // input the player must make to progress
+                events: [UPGRADE_SELECTED],
                 count: 3,                       // number of times the player must make the input
             },
             {
-                text: "FALL FAST (while in air)",
-                inputs: ["down"],
-                events: [FELL_FAST],
-                time: 150,
+                text: "Earning enough points will let you draw a CARD",
+                events: [DRAW_CARD_IS_AVAILABLE],
             },
             {
-                text: "Switch your [ORANGE]Swaplings[/ORANGE][c_white] by touching the beams",
-                count: 3,
-                events: [PLAYER_WARPED],
-                on_enter_events: [CHARACTER_QUEUE_UPDATED + " " + string(CHARACTER.NORMAL) + " " + string(CHARACTER.TALL)],
-            },
-            {
-                text: "As [GREEN]Green[/GREEN][c_white]: Bump blocks with your head",
-                events: [BUMPED_BLOCK],
-                count: 3,
-            },
-            {
-                text: "As [GREEN]Green[/GREEN][c_white]: Flip over enemies by bumping blocks; jump on them",
-                on_enter_events: [ENABLED_ENEMY_SPAWNING],
-                events: [ENEMY_DEFEATED],
+                text: "Draw a CARD",
+                inputs: ["draw_card"],
                 count: 1,
             },
             {
-                text: "Collect enough keys to deactivate the beams",            
-                events: [COLLECTED_KEY],        // events that must be published in order to progress
-                count: 3,                       // number of times the event must be published
-                on_enter_events: [ENABLED_ENEMY_SPAWNING, ENABLED_KEY_SPAWNING], // events to publish when the prompt first activates. Event params are separated by spaces 
-            },
-            {
-                text: "Some enemies will have keys inside them",            
-                events: [COLLECTED_KEY],        // events that must be published in order to progress
-                count: 2,                       // number of times the event must be published
-                on_enter_events: [SPAWN_ONLY_KEY_ENEMIES, DISABLED_KEY_SPAWNING], // events to publish when the prompt first activates. Event params are separated by spaces 
-                on_exit_events: [WON_LEVEL],    // events to publish when we finish this prompt
-            },
-        ],
-    },
-    {
-        flag: "played_tall_character",
-        prompts: [
-            {
-                text: "Bump blocks with your head",
-                events: [BUMPED_BLOCK],
-                on_enter_events: [DISABLED_KEY_SPAWNING],
-                count: 3,
-            },
-            {
-                text: "Flip over enemies by bumping blocks; jump on them",
-                events: [ENEMY_DEFEATED],
-                count: 2,
-            },
-            {
-                text: "Swap characters by touching the beam",
-                count: 2,
-                events: [PLAYER_WARPED],
-                on_enter_events: [CHARACTER_QUEUE_UPDATED + " " + string(CHARACTER.TALL) + " " + string(CHARACTER.NORMAL)],
-            },
-            {
-                text: "Collect keys",            
-                events: [COLLECTED_KEY],       
-                count: 3,
-                on_enter_events: [ENABLED_KEY_SPAWNING],
-                on_exit_events: [WON_LEVEL]
-            },
-        ],
-    },    
-    {
-        flag: "played_small_character",
-        prompts: [
-            {
-                text: "Jump higher and faster",
-                inputs: ["jump"],
-                on_enter_events: [SPAWN_NO_KEY_ENEMIES, DISABLED_ENEMY_SPAWNING, DISABLED_KEY_SPAWNING],
-                count: 3,
-            },
-            {
-                text: "Work with other [ORANGE]Swaplings[/ORANGE][c_white] to collect keys",            
-                events: [COLLECTED_KEY],       
-                count: 5,
-                on_enter_events: [ENABLED_KEY_SPAWNING, CHARACTER_QUEUE_UPDATED + " " + string(CHARACTER.SMALL) + " " + string(CHARACTER.TALL)],
-                on_exit_events: [WON_LEVEL]
-            },
-        ],
-    },
-    {
-        flag: "played_big_character",
-        prompts: [
-            {
-                text: "Jump to stomp the ground",
-                inputs: ["jump"],
-                count: 3,
-                on_enter_events: [DISABLED_ENEMY_SPAWNING, DISABLED_KEY_SPAWNING],
-            },
-            {
-                text: "Flip over enemies with your stomps and smash them",
+                text: "If your HAND is full, you can DISCARD",
+                events: [DISCARD_CARD],
                 count: 1,
-                events: [ENEMY_DEFEATED],
-                on_enter_events: [ENABLED_ENEMY_SPAWNING],
             },
             {
-                text: "Work with other [ORANGE]Swaplings[/ORANGE][c_white] to collect keys",            
-                events: [COLLECTED_KEY],       
-                count: 3,
-                on_enter_events: [ENABLED_KEY_SPAWNING, CHARACTER_QUEUE_UPDATED + " " + string(CHARACTER.BIG) +  " " + string(CHARACTER.SMALL) + " " + string(CHARACTER.TALL)],
-                on_exit_events: [WON_LEVEL]
-            },
-        ],
-    },    
-    {
-        flag: "played_spikey_character",
-        prompts: [
-            {
-                text: "Break blocks with your spike",
-                events: [DISABLED_ENEMY_SPAWNING, DISABLED_KEY_SPAWNING, DESTROYED_BLOCK],
-                count: 3,
-            },
-            {
-                text: "Destroy enemies with your spike",
-                count: 2,
-                on_enter_events: [ENABLED_ENEMY_SPAWNING],
-                events: [ENEMY_DEFEATED],
-            },
-            {
-                text: "Collect keys",            
-                events: [COLLECTED_KEY],       
-                count: 3,
-                on_enter_events: [ENABLED_KEY_SPAWNING, CHARACTER_QUEUE_UPDATED + " " + string(CHARACTER.SPIKEY) +  " " + string(CHARACTER.NORMAL) + " " + string(CHARACTER.TALL)],
-                on_exit_events: [WON_LEVEL]
+                text: "Reach 20,000 points to summon the BOSS SLIME. Good luck :)",            
+                time: 150,                       // number of times the event must be published
+                on_enter_events: [ENABLED_ENEMY_SPAWNING, ENABLED_MONEY_SPAWNING], // events to publish when the prompt first activates. Event params are separated by spaces 
             },
         ],
     },
-    {
-        flag: "played_bounce_character",
-        prompts: [
-            {
-                text: "Break blocks while moving",
-                events: [DESTROYED_BLOCK],
-                on_enter_events: [DISABLED_KEY_SPAWNING, DISABLED_ENEMY_SPAWNING],
-                count: 6,
-            },
-            {
-                text: "Time your jumps to bounce higher",
-                inputs: ["jump"],
-                count: 3,
-            },
-            {
-                text: "Destroy enemies by bouncing on them",
-                events: [ENEMY_DEFEATED],
-                count: 2,
-                on_enter_events: [ENABLED_ENEMY_SPAWNING],
-            },
-            {
-                text: "Collect keys",            
-                events: [COLLECTED_KEY],       
-                count: 3,
-                on_enter_events: [ENABLED_KEY_SPAWNING],
-                on_exit_events: [WON_LEVEL]
-            },
-        ],
-    },   
-    {
-        flag: "played_twin_character",
-        prompts: [
-            {
-                text: "You control the red twin",
-                time: 250,
-                on_enter_event: [DISABLED_ENEMY_SPAWNING, DISABLED_KEY_SPAWNING],
-            },
-            {
-                text: "The blue twin won't take damage",
-                time: 150,
-                count: 1,
-                on_enter_events: [SPAWN_NO_KEY_ENEMIES, ENABLED_ENEMY_SPAWNING],
-            },
-            {
-                text: "Both twins can collect keys",            
-                events: [COLLECTED_KEY],
-                count: 3,
-                on_enter_events: [ENABLED_KEY_SPAWNING],
-                on_exit_events: [WON_LEVEL]
-            },
-        ],
-    },
-    {
-        flag: "played_float_character",
-        prompts: [
-            {
-                text: "Raise/lower your head",
-                inputs: ["up"],
-                count: 2,
-                on_enter_events: [SPAWN_NO_KEY_ENEMIES, DISABLED_ENEMY_SPAWNING, DISABLED_KEY_SPAWNING],
-            },
-            {
-                text: "Your head and feet are both vulnerable",
-                on_enter_events: [SPAWN_NO_KEY_ENEMIES, ENABLED_ENEMY_SPAWNING],
-                time: 200,
-            },
-            {
-                text: "Collect keys",            
-                events: [COLLECTED_KEY],       
-                count: 3,
-                on_enter_events: [ENABLED_KEY_SPAWNING],
-                on_exit_events: [WON_LEVEL]
-            },
-        ],
-    },    
 ];
 
 

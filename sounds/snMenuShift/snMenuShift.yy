@@ -14,7 +14,7 @@
     },
   },
   "conversionMode":0,
-  "duration":0.573917,
+  "duration":0.400479,
   "name":"snMenuShift",
   "parent":{
     "name":"Sounds",
@@ -24,7 +24,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snMenuShift",
+  "soundFile":"snMenuShift.wav",
   "type":0,
   "volume":1.0,
 }

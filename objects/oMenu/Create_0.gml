@@ -95,7 +95,7 @@ Input Icons by Kenney
 		col: {
 			// Color used when an item is selected
 			selected: {
-				normal:		ORANGE,	// Default color
+				normal:		YELLOW,	// Default color
 				intense:	BLUE		// More intense color
 			},
 			
@@ -297,6 +297,13 @@ Input Icons by Kenney
 			menuSetPreset(e_menu_presets.pause_menu);
 			new_game();
 		}), undefined, undefined],
+		
+		["CARDS", new ScriptRunner(function() { 
+				menuModePause();
+				menuSetPreset(e_menu_presets.pause_menu);
+				room_goto(rm_item_menu);
+			}), undefined, undefined],
+		
 
 		["SETTINGS", [
 			["AUDIO", [
@@ -330,24 +337,25 @@ Input Icons by Kenney
 						global.tutorial = true;
 						global.first_wave_complete = false;
 						show_debug_message("deleting data");
+						set_save_data_property(DECK, global.default_deck);
+						set_save_data_property(COLLECTION, global.default_collection);
+						global.deck = global.default_deck;
+						global.collection = global.default_collection;
+						set_save_data_property("counter", 0);
+						gotoPrevPage();
+						gotoPrevPage();
 					})]
 				]],
 			]],
 		
-			["CONTROLS", new Controls(global.input_system, "input_save.json", true, ["right", "left", "up", "down"])], // Changes player controls
+			// ["CONTROLS", new Controls(global.input_system, "input_save.json", true, ["right", "left", "up", "down"])], // Changes player controls
 		]],
-		
-		// ["UPGRADES", new ScriptRunner(function() { 
-		// 		menuModePause();
-		// 		menuSetPreset(e_menu_presets.pause_menu);
-		// 		room_goto(rm_item_menu);
-		// 	}), undefined, undefined],
 		
 		// // Credits edit text above
 		// ["CREDITS",	new Credits(credits_string)],
 		
 		["CLOSE",		new ScriptRunner(game_end),			// Quits game
-		"QUIT", new ScriptRunner(function() {		// Goes to title screen when in game room
+		"MAIN MENU", new ScriptRunner(function() {		// Goes to title screen when in game room
 			quit_to_menu();
 		})]
 	];

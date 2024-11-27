@@ -1,4 +1,26 @@
 // Scene data
+/*
+Story:
+
+After a nuclear-level apocalypse in the magical kingdom of Blobla, only two things survived: the roaches and the slimes.
+
+Slowly but surely the slimes established their own society ruled by kings and queens, but only because they discovered the concept from a deck of enchanted playing cards. 
+
+Slimes, not being very bright, assumed royalty was something to be won in a game. So, every year they hold a tournament to decide who will be the next Slime Monarch.
+
+Competitors use the power of the magic playing cards to strengthen themselves and fight against each other for the chance of becoming Blobla's next ruler.
+*/
+
+/*
+Gameplay:
+
+Slime Wasters is a physics-based arcade-action game with light deck-building mechanics.  
+
+Your goal is to defeat other slimes in combat by pushing them into the spikey walls that surround you without getting pushed into them yourself. 
+
+As you play, you will gradually collect magical playing cards that can enhance your abilities and enable you to take on bigger and badder slimes. 
+*/
+
 global.scene_queue = [
     {
         key: "main-menu",
@@ -6,7 +28,7 @@ global.scene_queue = [
         music_layers: [],
         goal_score: 20000,
         time_between_spawns: 30,
-        default_max_enemy_count: 6,
+        default_max_enemy_count: 8,
         boss_max_enemy_count: 4,
         enemy_types: [],
         boss: obj_boss_test,
@@ -14,6 +36,7 @@ global.scene_queue = [
     {
         key: "level",
         map: rm_combat_test_small,
+        tutorial_flag: "basics_tutorial",
         goal_score: 20000,
         time_between_spawns: 30,
         default_max_enemy_count: 6,
@@ -36,7 +59,7 @@ global.scene_queue = [
             },
             {
                 type: obj_exploding_dot,
-                points: 8000,
+                points: 10000,
                 limit: 1,
             },
         ],
@@ -140,5 +163,16 @@ global.scene_queue = [
         max_enemy_count: 10,
         enemy_types: [],
         boss: undefined,
+    },
+    {
+        key: "end-screen",
+        map: rm_end,
+        music_layers: [],
+        goal_score: 20000,
+        time_between_spawns: 30,
+        default_max_enemy_count: 8,
+        boss_max_enemy_count: 4,
+        enemy_types: [],
+        boss: obj_boss_test,
     },
 ];

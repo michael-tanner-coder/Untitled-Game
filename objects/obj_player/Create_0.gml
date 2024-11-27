@@ -1,8 +1,6 @@
 // POLISH
-// TODO: bug hunt
+// TODO: extend tutorial to include card mechanics
 // TODO: add shields back to enemies (make them readable)
-// TODO: placeholder title screen art + logo
-// TODO: end screen
 // TODO: slime trail + particles (make 'em slimey!)
 
 // PLAY TEST NOTES
@@ -26,7 +24,6 @@
 // -- how to add newly unlocked things to the deck
 // -- adjusting to the physics/feel
 // slow down the ramp up for enemies
-// potential titles: killing slime, slime wasters, no slime to waste
 
 // Base Player Properties
 x_force = 0;

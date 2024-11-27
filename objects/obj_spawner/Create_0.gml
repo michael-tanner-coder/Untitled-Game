@@ -78,6 +78,13 @@ fsm.add("wave", {
 			instance_create_layer(obj_boss_spawn_point.x, obj_boss_spawn_point.y, layer, boss_type);
 			screenshake(4, 10, 0.5);
 		}
+		
+		// dev tool to auto-defeat boss
+		if (global.dev_mode && instance_number(boss_type) > 0 && input_check("kill_boss")) {
+			with(boss_type) {
+				instance_destroy(self);
+			}
+		}
 			
 		// countdown to next spawn
 		var _current_enemy_count = instance_number(obj_dot);

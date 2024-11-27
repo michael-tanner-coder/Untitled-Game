@@ -179,3 +179,11 @@ function quit_to_menu() {
     
 }
 
+function go_to_end_scene() {
+	
+	menuModeTitle(); 
+	menuSetPreset(e_menu_presets.title_screen);
+	go_to_scene_by_key("end-screen")		
+	
+}
+

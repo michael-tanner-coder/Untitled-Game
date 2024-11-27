@@ -74,12 +74,12 @@ function fillbar(_x = 0, _y = 0, _width = 100, _height = 50, _fill_percentage = 
 	draw_rectangle(_x + _border_size, _y + _border_size, _x + (_width * _fill_percentage) - _border_size, _y + _height - (_border_size * 2), false);
 }
 
-function banner(_height = 100, _position = room_height/2, _content = "", _background_color = BLACK, _opacity = 1) {
+function banner(_height = 100, _position = room_height/2, _content = "", _background_color = BLACK, _opacity = 1, _text_color = WHITE) {
 	draw_set_alpha(_opacity);
 	draw_set_color(_background_color);
 	draw_rectangle(0, _position, room_width, _position + _height, false);
 	draw_set_alpha(1);
 	draw_set_halign(fa_center);
 	draw_set_valign(fa_middle);
-	draw_shadow_text(room_width/2, _position + _height/2, _content);
+	draw_shadow_text(room_width/2, _position + _height/2, _content, _text_color);
 }

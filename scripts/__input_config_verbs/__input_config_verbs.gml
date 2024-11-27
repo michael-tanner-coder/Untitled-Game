@@ -15,12 +15,20 @@ function __input_config_verbs()
     return {
         keyboard_and_mouse:
         {
-            // character actions
-            up:    [input_binding_key(vk_up),    input_binding_key("W")],
-            down:  [input_binding_key(vk_down),  input_binding_key("S")],
-            left:  [input_binding_key(vk_left),  input_binding_key("A")],
-            right: [input_binding_key(vk_right), input_binding_key("D")],
+            // Character actions
+            up:    [input_binding_key("W")],
+            down:  [input_binding_key("S")],
+            left:  [input_binding_key("A")],
+            right: [input_binding_key("D")],
             jump: input_binding_key(vk_space),
+            shoot: input_binding_key(mb_left),
+            alt: input_binding_key(mb_right),
+            
+            // Card actions
+            draw: input_binding_key(vk_space),
+            view_hand: input_binding_key(vk_space),
+            play_card: input_binding_key(mb_left),
+            discard_card: input_binding_key(mb_right),
             
             // UI actions
             accept:  input_binding_key(vk_space),

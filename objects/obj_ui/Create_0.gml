@@ -89,18 +89,18 @@ fsm.add("start_level", {
 
 fsm.add("mid_level", {
 	draw: function() {
-		if (show_tutorial) {
-			draw_set_color(c_black);
-			draw_set_alpha(0.5);
-			draw_rectangle(tutorial_banner_center_point, tutorial_banner_y - 20, VIEW_WIDTH + tutorial_banner_center_point, tutorial_banner_y + 120, false);
-			draw_set_alpha(1);
+		// if (show_tutorial) {
+		// 	draw_set_color(c_black);
+		// 	draw_set_alpha(0.5);
+		// 	draw_rectangle(tutorial_banner_center_point, tutorial_banner_y - 20, VIEW_WIDTH + tutorial_banner_center_point, tutorial_banner_y + 120, false);
+		// 	draw_set_alpha(1);
 	
-			draw_set_halign(fa_left);
-			draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y, "WASD: move", global.moved ? GREEN : WHITE);
-			draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 20, "LEFT CLICK: shoot", global.shot ? GREEN : WHITE);
-			draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 40, "RIGHT CLICK (HOLD): move fast", global.dashed ? GREEN : WHITE);
-			draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 80, "DON'T TOUCH THE WALLS!", ORANGE);
-		}
+		// 	draw_set_halign(fa_left);
+		// 	draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y, "WASD: move", global.moved ? GREEN : WHITE);
+		// 	draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 20, "LEFT CLICK: shoot", global.shot ? GREEN : WHITE);
+		// 	draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 40, "RIGHT CLICK (HOLD): move fast", global.dashed ? GREEN : WHITE);
+		// 	draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 80, "DON'T TOUCH THE WALLS!", ORANGE);
+		// }
 	}
 });
 
@@ -144,7 +144,7 @@ fsm.add("level_complete", {
 		
 		if (input_check_pressed("select")) {
 			global.temp_game_speed = 1;
-			quit_to_menu();
+			go_to_end_scene();
 		}
 	},
 	

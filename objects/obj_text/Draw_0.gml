@@ -3,7 +3,10 @@ draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 
 draw_set_font(font);
-if (outline_enabled) {
+if (shadow_enabled) {
+    draw_shadow_text(x, y, text, text_color, outline_color);
+}
+else if (outline_enabled) {
     draw_outlined_text(x, y, text, text_color, font, 4, outline_color);
 }
 else {

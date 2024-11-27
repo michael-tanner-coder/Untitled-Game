@@ -3,8 +3,8 @@ standard_enemy_create_event();
 // Base
 base_speed = 5;
 hit_timer = 0;
-growth_rate = 0.25;
-max_scale = 4;
+growth_rate = 1;
+max_scale = 8;
 
 // Animation
 x_offset = 0;
@@ -34,6 +34,14 @@ fsm.add("active", {
 			physics_fixture_delete(fix);
 			my_fixture = create_circle_fixture(radius * image_xscale, 0.5 * image_xscale, 1, 0.875, 0.1, 0.1, 0.4)
 			point_value = image_xscale * 200;
+			
+			if (image_xscale < max_scale/2) {
+				point_value /= 2;
+			}
+			else if (image_xscale >= max_scale * 0.75) {
+				point_value *= 2;
+			}
+			
 			money_value = 10 * image_xscale;
 		}
 		

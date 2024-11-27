@@ -1,5 +1,5 @@
-grid_start_x = 0;
-grid_start_y = 0;
+grid_start_x = 34;
+grid_start_y = 106;
 
 // grid navigation
 current_row = 0;
@@ -15,12 +15,11 @@ grid_data_category = "powerups";
 items[0] = [];
 
 // grid item dimensions/spacing
-grid_item_width = 100;
-grid_item_height = 100;
-grid_item_margin = 10;
+grid_item_width = 70;
+grid_item_height = 108;
+grid_item_margin = 50;
 grid_item_outline_thickness = 6;
-
-area_height = (grid_item_height + grid_item_margin) * 3;
+grid_area_height = (grid_item_height + grid_item_margin) * 3;
 
 // grid methods
 function populate_grid() {
@@ -30,25 +29,29 @@ function populate_grid() {
         FOREACH data_source ELEMENT
             array_push(items[_row], _elem);
             
+            var _card = get_upgrade_type(_elem.key);
+            
             var _x = grid_start_x + _col * (grid_item_width + grid_item_margin);
             var _y = grid_start_y + _row * (grid_item_height + grid_item_margin);
             
             var _grid_block = instance_create_layer(_x, _y, layer, obj_grid_object);
-            _grid_block.data_item = _elem;
-            _grid_block.data_name = _elem.name;
-            _grid_block.data_sprite = _elem.sprite;
+            _grid_block.data_item = _card;
+            _grid_block.data_name = _card.name;
+            _grid_block.data_sprite = _card.sprite;
+            _grid_block.data_instance_struct.key = _elem.key;
+            _grid_block.data_instance_struct.id = _elem.id;
             
-            if (!is_unlocked({key: _elem.key, category: "upgrades"})) {
-                var _data_item = {
-                    name: "???",
-                    description: "[HAVE NOT YET UNLOCKED THIS UPGRADE]",
-                    price: 0,
-                    sprite: spr_question_mark,
-                };
-                _grid_block.data_item = _data_item;
-                _grid_block.data_sprite = spr_question_mark;
-                _grid_block.data_name = "???";
-            }
+            // if (!is_unlocked({key: _card.key, category: "upgrades"})) {
+            //     var _data_item = {
+            //         name: "???",
+            //         description: "[HAVE NOT YET UNLOCKED THIS CARD]",
+            //         price: 0,
+            //         sprite: spr_question_mark,
+            //     };
+            //     _grid_block.data_item = _data_item;
+            //     _grid_block.data_sprite = spr_question_mark;
+            //     _grid_block.data_name = "???";
+            // }
             
             _col++;
             if (_col >= columns) {

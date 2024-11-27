@@ -17,7 +17,7 @@ progress_bar_height = 50;
 default_draw_behavior = function() {
 	draw_set_color(WHITE);
 	if (next_unlock == undefined) {
-		banner(100, y, "NO MORE UNLOCKS", BLACK, 0.7);
+		// banner(100, y, "NO MORE CARDS TO UNLOCK", BLACK, 0.7);
 		return;
 	}
 	
@@ -36,7 +36,7 @@ default_draw_behavior = function() {
 		fillbar(room_width/2 - progress_bar_width/2, y, progress_bar_width, progress_bar_height, _progress_percent, RED, WHITE);
 	
 		draw_set_color(WHITE);
-		draw_text(x + sprite_get_width(outline_sprite) / 2, y + sprite_get_height(outline_sprite) + (bar_margin*2), "PROGRESS TO NEXT UNLOCK");
+		draw_text(x + sprite_get_width(outline_sprite) / 2, y + sprite_get_height(outline_sprite) + (bar_margin*2), "PROGRESS TO UNLOCK NEXT CARD");
 	}
 }
 
@@ -49,11 +49,15 @@ fsm.add("countup", {
 		total_points = global.unlock_progress + score;
 		next_unlock = get_next_unlock();
 		item_name = "";
-		play_sound(snd_time_counter, false);
 	},
 	step: function() {
 		if (next_unlock == undefined) {
-			fsm.change("idle");
+			reset_unlocks();
+			progress_points = 0;
+			total_points = 0;
+			global.unlock_progress = 0;
+			score = 0;
+			fsm.change("countup");
 			return;
 		}
 		
@@ -83,6 +87,9 @@ fsm.add("countup", {
 		if (progress_points == total_points) {
 			fsm.change("idle");
 		}
+		else {
+			play_sound(snd_progress_bar_count, false);
+		}
 	},
 	draw: function() {
 		default_draw_behavior();
@@ -96,6 +103,14 @@ fsm.add("unlock", {
 		// get item data for display
 		item_data = get_unlock_item_data(next_unlock);
 		item_name = item_data.name;
+		
+		// adds card to deck; adds to collection if deck is full
+		var _new_card = new_card_instance(item_data.key)
+		if (array_length(global.deck) < global.deck_limit) {
+			add_to_deck(_new_card);
+		} else {
+			add_to_collection(_new_card);
+		}
 		
 		// reset target points for next time we go to the countup state
 		total_points -= progress_points;
@@ -131,7 +146,7 @@ fsm.add("unlock", {
 		
 		// header
 		draw_set_font(fnt_header);
-		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 40, "NEW UPGRADE UNLOCKED!", WHITE, PURPLE)
+		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 40, "NEW CARD UNLOCKED!", WHITE, PURPLE)
 		
 		// item name
 		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 100, item_name, WHITE, PURPLE)
