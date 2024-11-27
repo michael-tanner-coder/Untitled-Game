@@ -44,7 +44,7 @@ global.tutorials = [
             },
             {
                 text: "Draw a CARD",
-                inputs: ["view_hand"],
+                inputs: ["draw_card"],
                 count: 1,
             },
             {
