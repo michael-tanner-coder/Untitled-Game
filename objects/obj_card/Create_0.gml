@@ -78,6 +78,7 @@ fsm.add("active", {
 			y = lerp(y, resting_y, 0.08);
 		}
 	
+		// Activate card
 		if (highlighted && mouse_check_button_pressed(mb_left)) {
 			if (global.currency >= price) {
 				global.currency -= price;
@@ -87,13 +88,14 @@ fsm.add("active", {
 			else {
 				play_sound(snd_button_back_alt);
 			}
+			
+			return;
 		}
 		
-		if (highlighted && mouse_check_button_pressed(mb_right)) {
-			if (discard_active) {
-				publish(DISCARD_CARD, upgrade);
-				play_sound(snd_button_back_alt);
-			}
+		// Discard card
+		if (highlighted && (mouse_check_button_pressed(mb_right) || keyboard_check(ord("X")))) {
+			publish(DISCARD_CARD, upgrade);
+			play_sound(snd_button_back_alt);
 		}
 	}
 });
