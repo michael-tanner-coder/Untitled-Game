@@ -136,12 +136,6 @@ Example usage:
 #macro PLAYED_SPIKEY_CHARACTER "played_spikey_character"
 #macro PLAYED_FLOAT_CHARACTER "played_float_character"
 #macro PLAYED_TWIN_CHARACTER "played_twin_character"
-
-// Constants
-#macro NO_FOLLOW "no_follow"
-#macro DECK "deck"
-#macro COLLECTION "collection"
-
 global.tutorial_flag_list = [
 	PLAYED_NORMAL_CHARACTER, 
 	PLAYED_TALL_CHARACTER, 
@@ -152,6 +146,12 @@ global.tutorial_flag_list = [
 	PLAYED_FLOAT_CHARACTER,
 	PLAYED_TWIN_CHARACTER
 ];
+
+// Constants
+#macro NO_FOLLOW "no_follow"
+#macro DECK "deck"
+#macro COLLECTION "collection"
+#macro REQUIRED_UNLOCK_POINTS "required_unlock_points"
 
 // Enums
 enum CHARACTER {
@@ -238,8 +238,6 @@ enum ABILITIES {
 
 // Text
 #macro STANDARD_OUTLINE_DISTANCE 4
-
-
 
 // Data Structures
 global.inactive_instances = [];

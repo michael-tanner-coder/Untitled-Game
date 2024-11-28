@@ -83,3 +83,16 @@ function banner(_height = 100, _position = room_height/2, _content = "", _backgr
 	draw_set_valign(fa_middle);
 	draw_shadow_text(room_width/2, _position + _height/2, _content, _text_color);
 }
+
+function get_random_element(_array = []) {
+	if (!is_array(_array)) {
+		show_debug_message("Error: attempted to pass non-array argument into get_random_element");
+		return;
+	}
+	
+	if (array_length(_array) == 1) {
+		return _array[0];
+	}
+	
+	return _array[irandom_range(0, array_length(_array)-1)];
+}

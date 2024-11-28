@@ -11,7 +11,7 @@ function unlock_struct(_key = "", _category = "", _points = 0) {
 }
 
 global.unlock_progress = get_save_data_property("unlock_progress", 0);
-
+global.required_points = get_save_data_property(REQUIRED_UNLOCK_POINTS, 2000);
 
 global.unlockables = [
     unlock_struct("fast_fire", "upgrades", 2000),
@@ -21,6 +21,13 @@ global.unlockables = [
     unlock_struct("extra_life", "upgrades", 22000),
     unlock_struct("closer", "upgrades", 30000),
 ];
+
+function unlock_random_card() {
+    var _card = get_random_element(global.unlockables);
+    unlock_item(_card);
+    global.most_recent_unlock = _card.key;
+    return _card;
+}
 
 function unlock_next_item(_score = 0) {
     FOREACH global.unlockables ELEMENT

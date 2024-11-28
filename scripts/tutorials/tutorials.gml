@@ -10,12 +10,12 @@ global.tutorials = [
                 on_enter_events: [DISABLED_ENEMY_SPAWNING, DISABLED_MONEY_SPAWNING],
             },
             {
-                text: "Shoot",
+                text: "Shoot (hold)",
                 inputs: ["shoot"],
                 count: 4,
             },
             {
-                text: "Dash",
+                text: "Dash (hold)",
                 inputs: ["alt"], 
                 count: 2,
                 on_exit_events: [ENABLED_ENEMY_SPAWNING],

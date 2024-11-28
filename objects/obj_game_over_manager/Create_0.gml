@@ -17,13 +17,9 @@ new_card = undefined;
 // Methods
 default_draw_behavior = function() {
 	draw_set_color(WHITE);
-	if (next_unlock == undefined) {
-		// banner(100, y, "NO MORE CARDS TO UNLOCK", BLACK, 0.7);
-		return;
-	}
 	
-	if (is_numeric(next_unlock.required_points)) {
-		var _progress_percent = progress_points / next_unlock.required_points;
+	if (is_numeric(global.required_points)) {
+		var _progress_percent = progress_points / global.required_points;
 		_progress_percent = clamp(_progress_percent, 0, 1);
 	
 		draw_set_halign(fa_center);
@@ -32,7 +28,7 @@ default_draw_behavior = function() {
 		banner(200, y - 100, "", BLACK, 0.7);
 	
 		var _formatted_points = string_format(round(progress_points), 0, 0);
-		draw_text(x + sprite_get_width(outline_sprite)/2, y - sprite_get_height(outline_sprite) - bar_margin, _formatted_points + "/" + string(next_unlock.required_points));
+		draw_text(x + sprite_get_width(outline_sprite)/2, y - sprite_get_height(outline_sprite) - bar_margin, _formatted_points + "/" + string(global.required_points));
 	
 		fillbar(room_width/2 - progress_bar_width/2, y, progress_bar_width, progress_bar_height, _progress_percent, RED, WHITE);
 	
@@ -48,21 +44,20 @@ fsm.add("countup", {
 	enter: function() {
 		progress_points = global.unlock_progress;
 		total_points = global.unlock_progress + score;
-		next_unlock = get_next_unlock();
 		item_name = "";
 	},
 	step: function() {
-		if (next_unlock == undefined) {
-			reset_unlocks();
-			progress_points = 0;
-			total_points = 0;
-			global.unlock_progress = 0;
-			score = 0;
-			fsm.change("countup");
-			return;
-		}
+		// if (next_unlock == undefined) {
+		// 	reset_unlocks();
+		// 	progress_points = 0;
+		// 	total_points = 0;
+		// 	global.unlock_progress = 0;
+		// 	score = 0;
+		// 	fsm.change("countup");
+		// 	return;
+		// }
 		
-		var _target_points = min(total_points, next_unlock.required_points);
+		var _target_points = min(total_points, global.required_points);
 		progress_points = lerp(progress_points, _target_points, 0.1);
 		progress_points = clamp(progress_points, 0, _target_points);
 		if (abs(progress_points - _target_points) < 1) {
@@ -80,7 +75,7 @@ fsm.add("countup", {
 		}
 		
 		// move to unlock state if we cleared the point requirement for the next unlock
-		if (is_numeric(next_unlock.required_points) && progress_points >= next_unlock.required_points) {
+		if (is_numeric(global.required_points) && progress_points >= global.required_points) {
 			fsm.change("unlock");
 			return;
 		}
@@ -99,10 +94,10 @@ fsm.add("countup", {
 
 fsm.add("unlock", {
 	enter: function() {
-		unlock_next_item(progress_points);
+		var _random_card = unlock_random_card();
 	
 		// get item data for display
-		item_data = get_unlock_item_data(next_unlock);
+		item_data = get_unlock_item_data(_random_card);
 		item_name = item_data.name;
 		new_card = new_card_instance(item_data.key)
 		
@@ -110,6 +105,9 @@ fsm.add("unlock", {
 		total_points -= progress_points;
 		progress_points = 0;
 		global.unlock_progress = 0;
+		global.required_points *= 2;
+		global.required_points = clamp(global.required_points, 0, 40000);
+		set_save_data_property(REQUIRED_UNLOCK_POINTS, global.required_points);
 		
 		play_sound(snd_tutorial_success);
 		
