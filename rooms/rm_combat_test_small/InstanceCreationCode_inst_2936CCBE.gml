@@ -1,1 +1,1 @@
-start_tutorial();
+//start_tutorial();

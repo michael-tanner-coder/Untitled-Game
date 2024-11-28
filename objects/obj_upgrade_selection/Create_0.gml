@@ -37,7 +37,7 @@ fsm.add("progress_to_next_draw", {
         upgrade_progress_points = 0;
     },
     step: function() {
-        if (keyboard_check_pressed(vk_space) && (array_length(deck) > 0 || array_length(hand) > 0)) {
+        if (input_check_pressed("select") && (array_length(deck) > 0 || array_length(hand) > 0)) {
             fsm.change("view_hand");
         }
     },

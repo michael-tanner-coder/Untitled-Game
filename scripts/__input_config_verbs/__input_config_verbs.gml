@@ -22,7 +22,7 @@ function __input_config_verbs()
             right: [input_binding_key("D")],
             jump: input_binding_key(vk_space),
             shoot: input_binding_key(mb_left),
-            alt: input_binding_key(mb_right),
+            alt: [input_binding_key(vk_lshift), input_binding_key(mb_right)],
             
             // Card actions
             draw: input_binding_key(vk_space),
@@ -32,7 +32,7 @@ function __input_config_verbs()
             
             // UI actions
             accept:  input_binding_key(vk_space),
-            select: [input_binding_key(vk_space), input_binding_key(vk_enter)],
+            select: [input_binding_key(ord("R")), input_binding_key(vk_enter)],
             cancel:  [input_binding_key("X"), input_binding_key(vk_backspace)],
             action:  input_binding_key(vk_enter),
             special: input_binding_key(vk_shift),
