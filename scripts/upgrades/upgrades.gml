@@ -213,7 +213,7 @@ function init_upgrades_collection() {
                 "extra_life", 
                 "Extra Life", 
                 "Gain 1 extra life",
-                8000, 
+                6000, 
                 spr_white_circle,
                 [
                     effect_struct("player_lives", 1, OPERATIONS.ADD),
