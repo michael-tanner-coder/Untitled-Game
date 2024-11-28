@@ -12,6 +12,7 @@ item_data = undefined;
 
 progress_bar_width = 400;
 progress_bar_height = 50;
+new_card = undefined;
 
 // Methods
 default_draw_behavior = function() {
@@ -103,14 +104,7 @@ fsm.add("unlock", {
 		// get item data for display
 		item_data = get_unlock_item_data(next_unlock);
 		item_name = item_data.name;
-		
-		// adds card to deck; adds to collection if deck is full
-		var _new_card = new_card_instance(item_data.key)
-		if (array_length(global.deck) < global.deck_limit) {
-			add_to_deck(_new_card);
-		} else {
-			add_to_collection(_new_card);
-		}
+		new_card = new_card_instance(item_data.key)
 		
 		// reset target points for next time we go to the countup state
 		total_points -= progress_points;
@@ -122,7 +116,15 @@ fsm.add("unlock", {
 		global.unlock_modal_open = true;
 	},
 	step: function() {
+		// adds card to deck; adds to collection if deck is full
+		if (input_check_pressed("view_deck") && array_length(global.deck) < global.deck_limit) {
+			add_to_deck(new_card);
+			fsm.change("countup");
+			global.unlock_modal_open = false;
+		}
+		
 		if (input_check_pressed("progress")) {
+			add_to_collection(new_card);
 			fsm.change("countup");
 			global.unlock_modal_open = false;
 		}
@@ -156,6 +158,7 @@ fsm.add("unlock", {
 		var _description = struct_get(item_data, "description");
 		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 200, _description, WHITE, PURPLE);
 		
+		
 		// _text_renderer.starting_format("fnt_paragraph", WHITE).align(fa_center, fa_middle).draw(_rect_x + _rect_width - (_rect_width/4), _rect_y + string_height("CONTINUE"));
 		// item sprite
 		// var _sprite = struct_get(item_data, "sprite");
@@ -167,6 +170,7 @@ fsm.add("unlock", {
 		
 		// inputs
 		draw_set_font(fnt_header);
+		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 250, "ADD TO DECK: R", WHITE, PURPLE);
 		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 300, "PRESS SPACE TO CONTINUE", WHITE, PURPLE)
 		// var _continue_icon = input_verb_get_icon("progress");
 		// var _text_renderer = scribble(_description);
