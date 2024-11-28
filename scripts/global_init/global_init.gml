@@ -21,6 +21,10 @@ global.boss_lives = 3;
 global.attempts = 0;
 global.most_recent_unlock = "";
 
+if (!global.dev_mode) {
+	randomise();
+}
+
 function get_global_game_speed() {
 	return global.settings.game_speed * global.temp_game_speed;
 }
