@@ -190,6 +190,11 @@ fsm.add("idle", {
 			// restart_game();
 			room_restart();
 		}
+		
+		// go to deck Menu
+		if (input_check_pressed("view_deck")) {
+			room_goto(rm_item_menu);
+		}
 	},
 	draw: function() {
 		default_draw_behavior();

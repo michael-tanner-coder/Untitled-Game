@@ -26,7 +26,8 @@ function __input_config_verbs()
             
             // Card actions
             draw: input_binding_key(vk_space),
-            view_hand: input_binding_key(vk_space),
+            view_hand: input_binding_key(ord("R")),
+            view_deck: input_binding_key(ord("R")),
             play_card: input_binding_key(mb_left),
             discard_card: input_binding_key(mb_right),
             

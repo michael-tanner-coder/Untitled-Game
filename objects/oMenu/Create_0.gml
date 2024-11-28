@@ -292,13 +292,18 @@ Input Icons by Kenney
 		
 		// "RESUME",		new ScriptRunner(resumeGame)],						// Resumes the game when paused
 		
-		["NEW GAME", 	new ScriptRunner(function() {
+		["ENTER THE ARENA", 	new ScriptRunner(function() {
 			menuModePause();
 			menuSetPreset(e_menu_presets.pause_menu);
 			new_game();
-		}), undefined, undefined],
+		}), "REENTER THE ARENA", new ScriptRunner(function() {		// Goes to title screen when in game room
+			menuModePause();
+			menuSetPreset(e_menu_presets.pause_menu);
+			new_game();
+			resumeGame();
+		}), undefined],
 		
-		["CARDS", new ScriptRunner(function() { 
+		["VIEW DECK", new ScriptRunner(function() { 
 				menuModePause();
 				menuSetPreset(e_menu_presets.pause_menu);
 				room_goto(rm_item_menu);

@@ -126,7 +126,7 @@ fsm.add("game_over", {
 		draw_set_color(WHITE);
 		draw_shadow_text(VIEW_WIDTH/2, _banner_y - 60, "FINAL SCORE: " + string(score));
 		draw_shadow_text(VIEW_WIDTH/2, _banner_y - 30, "BEST SCORE: " + string(global.best_score));
-		draw_shadow_text(VIEW_WIDTH/2, _banner_y, "RETRY: spacebar");
+		draw_shadow_text(VIEW_WIDTH/2, _banner_y, "RETRY: spacebar | EDIT DECK: 'R'");
 		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 30, "QUIT: escape");
 	}
 });
