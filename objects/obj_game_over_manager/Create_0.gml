@@ -9,6 +9,7 @@ progress_points = global.unlock_progress;
 total_points = global.unlock_progress + score;
 item_name = "";
 item_data = undefined;
+points_from_score = 0;
 
 progress_bar_width = 400;
 progress_bar_height = 50;
@@ -43,7 +44,7 @@ fsm = new SnowState("inactive");
 fsm.add("countup", {
 	enter: function() {
 		progress_points = global.unlock_progress;
-		total_points = global.unlock_progress + score;
+		total_points = global.unlock_progress + points_from_score;
 		item_name = "";
 	},
 	step: function() {
@@ -102,7 +103,8 @@ fsm.add("unlock", {
 		new_card = new_card_instance(item_data.key)
 		
 		// reset target points for next time we go to the countup state
-		total_points -= progress_points;
+		points_from_score -= (global.required_points - global.unlock_progress);
+		points_from_score = clamp(points_from_score, 0, score);
 		progress_points = 0;
 		global.unlock_progress = 0;
 		global.required_points *= 2;
@@ -210,5 +212,6 @@ fsm.add("inactive", {
 
 // Event Subscriptions
 subscribe(id, LOST_LEVEL, function() {
+	points_from_score = score;
 	fsm.change("countup");
 });
