@@ -69,12 +69,12 @@ fsm.add("countup", {
 		}
 	
 		// restart level if we have completed the progress animation
-		if (input_check_pressed("select") && progress_points == _target_points) {
+		if (input_check_pressed("progress") && progress_points == _target_points) {
 			room_restart();
 		}
 		
 		// skip progress bar animation
-		if (input_check_pressed("select")) {
+		if (input_check_pressed("progress")) {
 			progress_points = _target_points;
 		}
 		
@@ -122,7 +122,7 @@ fsm.add("unlock", {
 		global.unlock_modal_open = true;
 	},
 	step: function() {
-		if (input_check_pressed("select")) {
+		if (input_check_pressed("progress")) {
 			fsm.change("countup");
 			global.unlock_modal_open = false;
 		}
@@ -168,7 +168,7 @@ fsm.add("unlock", {
 		// inputs
 		draw_set_font(fnt_header);
 		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 300, "PRESS SPACE TO CONTINUE", WHITE, PURPLE)
-		// var _continue_icon = input_verb_get_icon("select");
+		// var _continue_icon = input_verb_get_icon("progress");
 		// var _text_renderer = scribble(_description);
 		// _text_renderer.starting_format("fnt_cutscene_default", WHITE).align(fa_center, fa_middle).draw(_rect_x + _rect_width - (_rect_width/4), _rect_y + string_height("CONTINUE"));
 	}
@@ -185,7 +185,7 @@ fsm.add("idle", {
 	    	quit_to_menu();
 		}
 		
-		if (input_check_pressed("select")) {
+		if (input_check_pressed("progress")) {
 			// reset_game_state();
 			// restart_game();
 			room_restart();

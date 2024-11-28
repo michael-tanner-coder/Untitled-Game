@@ -142,7 +142,7 @@ fsm.add("level_complete", {
 		victory_bg_x = lerp(victory_bg_x, target_victory_bg_x, 0.05);
 		victory_bg_alpha = lerp(victory_bg_alpha, target_victory_bg_alpha, 0.1);
 		
-		if (input_check_pressed("select")) {
+		if (input_check_pressed("progress")) {
 			global.temp_game_speed = 1;
 			go_to_end_scene();
 		}
@@ -178,7 +178,7 @@ fsm.add("game_complete", {
 		victory_bg_x = lerp(victory_bg_x, target_victory_bg_x, 0.05);
 		victory_bg_alpha = lerp(victory_bg_alpha, target_victory_bg_alpha, 0.1);
 		
-		if (input_check_pressed("select")) {
+		if (input_check_pressed("progress")) {
 			quit_to_menu();
 		}
 	},

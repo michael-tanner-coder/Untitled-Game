@@ -43,7 +43,7 @@ fsm.add("progress_to_next_draw", {
     },
    	draw: function() {
    		if (upgrade_progress_points >= draw_score && array_length(deck) > 0) {
-   			banner(50, room_height/6, "PRESS SPACEBAR TO DRAW A CARD", BLACK, 0.6);
+   			banner(50, room_height/6, "PRESS R TO DRAW A CARD", BLACK, 0.6);
    		}
    		var _bar_bg_color = upgrade_progress_points >= draw_score ? WHITE : PURPLE;
 		fillbar(progress_bar_x, progress_bar_y, 200, 25, min((upgrade_progress_points/draw_score), 1), RED, _bar_bg_color);
@@ -109,8 +109,8 @@ fsm.add("view_hand", {
     },
     draw: function() {
     	fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, WHITE);
-		banner(upgrade_banner_height, upgrade_banner_y, "PLAY A CARD", BLACK, 0.6);
-		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.75), "(press SPACE to pass)")
+		banner(upgrade_banner_height, upgrade_banner_y, "ACTIVATE A CARD (left-click)", BLACK, 0.6);
+		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.75), "(press R to pass)")
 	}
 });
 
@@ -171,7 +171,6 @@ fsm.add("discard", {
         	_card.description = _upgrade.description;
         	_card.price = _upgrade.price;
         	_card.sprite = _upgrade.sprite;
-        	_card.discard_active = true;
         	
         	// Cache all card_obj_instances for disposal later
         	array_push(card_obj_instances, _card);
@@ -194,8 +193,8 @@ fsm.add("discard", {
 	},
 	draw: function() {
 		fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, WHITE);
-		banner(upgrade_banner_height, upgrade_banner_y, "HAND IS FULL: DISCARD A CARD (right-click)", BLACK, 0.6, RED);
-		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.75), "(press SPACE to pass)")
+		banner(upgrade_banner_height, upgrade_banner_y, "HAND IS FULL: DISCARD A CARD (right-click or press 'X')", BLACK, 0.6, RED);
+		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.75), "(press R to pass)")
 	},
 })
 
