@@ -4,12 +4,12 @@ outline_size = 6;
 bar_margin = 20;
 banner_x = -1000;
 
-next_unlock = undefined;
 progress_points = global.unlock_progress;
 total_points = global.unlock_progress + score;
+points_from_score = 0;
+
 item_name = "";
 item_data = undefined;
-points_from_score = 0;
 
 progress_bar_width = 400;
 progress_bar_height = 50;
@@ -41,6 +41,36 @@ default_draw_behavior = function() {
 // State Machine
 fsm = new SnowState("inactive");
 
+fsm.add("inactive", {
+	step: function() {},
+	draw: function() {},
+});
+
+fsm.add("idle", {
+	enter: function() {
+		global.unlock_progress = round(progress_points); // ensure we are only saving rounded points
+		set_save_data_property(UNLOCK_PROGRESS_POINTS, global.unlock_progress);
+	},
+	step: function() {
+		if (input_check_pressed("quit")) {
+	    	reset_game_state();
+	    	quit_to_menu();
+		}
+		
+		if (input_check_pressed("progress")) {
+			room_restart();
+		}
+		
+		// go to deck Menu
+		if (input_check_pressed("view_deck")) {
+			room_goto(rm_item_menu);
+		}
+	},
+	draw: function() {
+		default_draw_behavior();
+	}
+});
+
 fsm.add("countup", {
 	enter: function() {
 		progress_points = global.unlock_progress;
@@ -48,16 +78,7 @@ fsm.add("countup", {
 		item_name = "";
 	},
 	step: function() {
-		// if (next_unlock == undefined) {
-		// 	reset_unlocks();
-		// 	progress_points = 0;
-		// 	total_points = 0;
-		// 	global.unlock_progress = 0;
-		// 	score = 0;
-		// 	fsm.change("countup");
-		// 	return;
-		// }
-		
+		// gradually increase progress_points until it equals target_points
 		var _target_points = min(total_points, global.required_points);
 		progress_points = lerp(progress_points, _target_points, 0.1);
 		progress_points = clamp(progress_points, 0, _target_points);
@@ -65,7 +86,7 @@ fsm.add("countup", {
 			progress_points = _target_points;
 		}
 	
-		// restart level if we have completed the progress animation
+		// let player restart level if we have completed the progress animation
 		if (input_check_pressed("progress") && progress_points == _target_points) {
 			room_restart();
 		}
@@ -81,6 +102,7 @@ fsm.add("countup", {
 			return;
 		}
 		
+		// move to idle state if we did not unlock anything new and have reached the end of the progress bar animation
 		if (progress_points == total_points) {
 			fsm.change("idle");
 		}
@@ -176,38 +198,6 @@ fsm.add("unlock", {
 		// var _text_renderer = scribble(_description);
 		// _text_renderer.starting_format("fnt_cutscene_default", WHITE).align(fa_center, fa_middle).draw(_rect_x + _rect_width - (_rect_width/4), _rect_y + string_height("CONTINUE"));
 	}
-});
-
-fsm.add("idle", {
-	enter: function() {
-		global.unlock_progress = round(total_points); // ensure we are only saving rounded points
-		set_save_data_property("unlock_progress", global.unlock_progress);
-	},
-	step: function() {
-		if (input_check_pressed("quit")) {
-	    	reset_game_state();
-	    	quit_to_menu();
-		}
-		
-		if (input_check_pressed("progress")) {
-			// reset_game_state();
-			// restart_game();
-			room_restart();
-		}
-		
-		// go to deck Menu
-		if (input_check_pressed("view_deck")) {
-			room_goto(rm_item_menu);
-		}
-	},
-	draw: function() {
-		default_draw_behavior();
-	}
-});
-
-fsm.add("inactive", {
-	step: function() {},
-	draw: function() {},
 });
 
 // Event Subscriptions
