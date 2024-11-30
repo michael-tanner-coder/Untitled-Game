@@ -7,9 +7,10 @@ draw_shadow_text(x + width/2, y + 25, header);
 // Sprite
 draw_sprite(sprite, 0, x + width/2, y + 60);
 
-// Price
+// Activation Cost
 draw_set_font(description_font);
-draw_shadow_text(x + width/2, y + 70 + sprite_get_height(sprite), "$" + string(price));
+draw_sprite_ext(spr_mana_icon, 0, x + width/2 - (sprite_get_width(spr_mana_icon) * 2), y + 70 + sprite_get_height(sprite), 1, 1, 0, c_white, 1);
+draw_shadow_text(x + width/2, y + 70 + sprite_get_height(sprite), string(price));
 
 // Description
 var _text_renderer = scribble(description);

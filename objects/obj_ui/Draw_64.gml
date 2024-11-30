@@ -7,13 +7,16 @@ var _hud_element_y = 14;
 
 // -- Score
 var _formatted_score = string_format(round(drawn_score), 8, 0);
-var _formatted_money = string_format(round(global.currency), 5, 0);
+var _formatted_mana = string_format(round(global.currency), 5, 0);
 draw_shadow_text(VIEW_WIDTH/2 + shake_x_offset, _hud_element_y + shake_y_offset, "SCORE: " + string_replace_all(_formatted_score, " ", "0"));
 
-// -- Money
-var _money_string = string_replace_all(_formatted_money, " ", "0");
-var _money_string_width = string_width(_money_string);
-draw_shadow_text(VIEW_WIDTH - _money_string_width, _hud_element_y, "$" + _money_string);
+// -- Mana
+var _mana_string = string_replace_all(_formatted_mana, " ", "0");
+var _mana_string_width = string_width(_mana_string);
+var _mana_ui_x = VIEW_WIDTH - _mana_string_width;
+var _mana_icon_padding = 4;
+draw_sprite_ext(spr_mana_icon, 0, _mana_ui_x - (sprite_get_width(spr_mana_icon) * 2) - _mana_icon_padding, _hud_element_y, 1, 1, 0, c_white, 1);
+draw_shadow_text(_mana_ui_x, _hud_element_y, _mana_string);
 
 // -- Lives
 var _lives_ui_x = sprite_get_width(spr_life);
