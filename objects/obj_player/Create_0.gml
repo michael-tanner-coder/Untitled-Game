@@ -329,8 +329,12 @@ lose_life = function() {
 }
 
 // Event Subscriptions
-subscribe(id, ACTORS_DEACTIVATED, function() {fsm.change("idle")});
-subscribe(id, ACTORS_ACTIVATED, function() {fsm.change("active")});
+subscribe(id, ACTORS_DEACTIVATED, function() {
+	fsm.change("idle");
+});
+subscribe(id, ACTORS_ACTIVATED, function() {
+	fsm.change("active");
+});
 subscribe(id, WON_LEVEL, function() {fsm.change("idle")});
 subscribe(id, DEFEATED_BOSS, function() {boss_defeated = true;})
 subscribe(id, UPGRADE_SELECTED, function(upgrade = {}) {

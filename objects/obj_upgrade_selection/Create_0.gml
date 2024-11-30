@@ -21,24 +21,33 @@ upgrade_progress_points = 0;
 progress_bar_y = 30;
 progress_bar_x = room_width/2 - 100;
 
+// 
+actor_activation_timer = -1;
+
 // State Machine
 fsm = new SnowState("progress_to_next_draw");
         
 fsm.add("progress_to_next_draw", {
     enter: function() {
-        publish(ACTORS_ACTIVATED);
-        physics_pause_enable(false);
-        
         FOREACH card_obj_instances ELEMENT
         	instance_destroy(_elem);
         END
 
 		card_obj_instances = [];
         upgrade_progress_points = 0;
+        actor_activation_timer = 5;
     },
     step: function() {
         if (input_check_pressed("select") && (array_length(deck) > 0 || array_length(hand) > 0)) {
             fsm.change("view_hand");
+        }
+        
+        // hold off on activating actors until we pass a given number of frames
+        actor_activation_timer--;
+        if (actor_activation_timer == 0) {
+    		publish(ACTORS_ACTIVATED);
+        	physics_pause_enable(false);
+        	actor_activation_timer = -1;
         }
     },
    	draw: function() {
