@@ -1,41 +1,146 @@
 {
-    "characters": [0],
-    "unlocked_powerups": [],
-    "highscores": [],
     "unlocked_levels": [],
     "flags": {
-        "started_game": false,
-        "finished_tutorial": false,
-        "beat_game": false,
-        "needs_tutorial": true
+      "needs_tutorial": true,
+      "finished_tutorial": false,
+      "beat_game": false,
+      "played_normal_character": false,
+      "played_tall_character": false,
+      "played_small_character": false,
+      "played_big_character": false,
+      "played_bounce_character": false,
+      "played_spikey_character": false,
+      "played_float_character": false,
+      "started_game": false,
+      "played_twin_character": false
     },
+    "characters": [
+      0
+    ],
+    "inputs": {
+      "up": [
+        38,
+        "w",
+        32781,
+        0
+      ],
+      "jump": [
+        32,
+        32769
+      ],
+      "down": [
+        40,
+        "s",
+        32782,
+        0
+      ],
+      "select": [
+        13,
+        32,
+        32769
+      ],
+      "progress": [
+        32,
+        32769
+      ],
+      "skip": [
+        13,
+        32778,
+        32770
+      ],
+      "left": [
+        37,
+        "a",
+        32783,
+        0
+      ],
+      "pause": [
+        13,
+        27,
+        32778
+      ],
+      "right": [
+        39,
+        "d",
+        32784,
+        0
+      ]
+    },
+    "deck": [
+      {
+        "id": 126,
+        "key": "fire_faster"
+      },
+      {
+        "id": 125,
+        "key": "move_faster"
+      },
+      {
+        "id": 124,
+        "key": "get_sturdy"
+      },
+      {
+        "id": 123,
+        "key": "fire_faster"
+      },
+      {
+        "id": 122,
+        "key": "move_faster"
+      },
+      {
+        "id": 121,
+        "key": "get_sturdy"
+      },
+      {
+        "id": 120,
+        "key": "fire_faster"
+      },
+      {
+        "id": 119,
+        "key": "move_faster"
+      },
+      {
+        "id": 118,
+        "key": "get_sturdy"
+      }
+    ],
+    "upgrades": [
+      "fire_faster",
+      "move_faster",
+      "get_sturdy"
+    ],
+    "highscores": [],
+    "collection": [],
     "settings": {
-        "audio_master": 0.5,
-        "audio_sounds": 1,
-        "audio_music": 1,
-        "screenshake_enabled": true,
-        "flashing_enabled": true,
-        "particles_enabled": true,
-        "high_contrast_mode_enabled": true,
-        "game_speed": 1,
-        "invincible_mode_enabled": false,
-        "window_mode": 0,
-        "vsync": 0,
-        "player_speed": 5,
-        "player_size": 1,
-        "player_col": 2,
-        "player_density": 1,
-        "player_restitution": 0.5,
-        "player_linear_damping": 2,
-        "player_angular_damping": 10,
-        "player_friction": 20,
-        "player_recoil": 23,
-        "player_lives": 0,
-        "player_shot_count": 0,
-        "player_shot_spread_angle": 30,
-        "player_bullet_force": 10,
-        "player_firing_rate": 10,
-        "player_alt_fire": 0
+      "audio_master": 0.06,
+      "window_mode": 1,
+      "player_recoil": 46.82,
+      "player_speed": 6.1,
+      "player_alt_fire": 0,
+      "player_size": 1.03,
+      "player_shot_spread_angle": 36.69,
+      "player_firing_rate": 10.39,
+      "player_bullet_force": 20.68,
+      "player_shot_count": 0,
+      "player_lives": 0,
+      "particles_enabled": 1,
+      "player_friction": 20.32,
+      "player_angular_damping": 10.01,
+      "player_linear_damping": 2.03,
+      "player_restitution": 2.52,
+      "player_density": 0.73,
+      "audio_music": 0.51,
+      "audio_sounds": 1,
+      "game_speed": 1,
+      "screenshake_enabled": 1,
+      "particles": true,
+      "invincible_mode_enabled": 0,
+      "player_col": 2,
+      "flashing_enabled": 1,
+      "high_contrast_mode_enabled": true,
+      "vsync": 0
     },
-    "inputs": {"up":[38.0,"w",32781.0,0.0],"down":[40.0,"s",32782.0,0.0],"jump":[32.0,32769.0],"pause":[13.0,27.0,32778.0],"skip":[13.0,32778.0,32770.0],"left":[37.0,"a",32783.0,0.0],"progress":[32.0,32769.0],"right":[39.0,"d",32784.0,0.0],"select":[13.0,32.0,32769.0]}
-}
+    "unlock_progress": 0,
+    "counter": 0,
+    "unlocked_powerups": []
+  }
