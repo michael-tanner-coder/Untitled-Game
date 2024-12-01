@@ -34,7 +34,6 @@ fsm.add("progress_to_next_draw", {
         END
 
 		card_obj_instances = [];
-        upgrade_progress_points = 0;
         actor_activation_timer = 5;
     },
     step: function() {
@@ -117,7 +116,8 @@ fsm.add("view_hand", {
         }
     },
     draw: function() {
-    	fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, WHITE);
+    	var _bar_bg_color = upgrade_progress_points >= draw_score ? WHITE : PURPLE;
+		fillbar(progress_bar_x, progress_bar_y, 200, 25, min((upgrade_progress_points/draw_score), 1), RED, _bar_bg_color);
 		banner(upgrade_banner_height, upgrade_banner_y, "SPEND MANA TO PLAY A CARD (left-click)", BLACK, 0.6);
 		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.65), "DISCARD A CARD TO GAIN MANA (right-click)", ORANGE);
 		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.90), "(press R to close)");
@@ -146,7 +146,8 @@ fsm.add("draw_card", {
         }
     },
     draw: function() {
-    	fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, WHITE);
+    	var _bar_bg_color = upgrade_progress_points >= draw_score ? WHITE : PURPLE;
+		fillbar(progress_bar_x, progress_bar_y, 200, 25, min((upgrade_progress_points/draw_score), 1), RED, _bar_bg_color);
 	}
 }
 );
