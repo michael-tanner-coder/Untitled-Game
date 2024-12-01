@@ -118,8 +118,9 @@ fsm.add("view_hand", {
     },
     draw: function() {
     	fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, WHITE);
-		banner(upgrade_banner_height, upgrade_banner_y, "ACTIVATE A CARD (left-click)", BLACK, 0.6);
-		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.75), "(press R to pass)")
+		banner(upgrade_banner_height, upgrade_banner_y, "SPEND MANA TO PLAY A CARD (left-click)", BLACK, 0.6);
+		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.65), "DISCARD A CARD TO GAIN MANA (right-click)", ORANGE);
+		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.90), "(press R to close)");
 	}
 });
 

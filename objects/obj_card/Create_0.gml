@@ -96,6 +96,16 @@ fsm.add("active", {
 		if (highlighted && (mouse_check_button_pressed(mb_right) || keyboard_check(ord("X")))) {
 			publish(DISCARD_CARD, upgrade);
 			play_sound(snd_button_back_alt);
+			
+			// give player spare mana when discarding a card
+			var _extra_mana = price/4;
+			global.currency += _extra_mana;
+			var _score_text = instance_create_layer(room_width - width, 64, layer, obj_float_text);
+			_score_text.text = "+" + string(_extra_mana);
+			_score_text.text_sprite = spr_mana_icon;
+			draw_set_font(_score_text.text_font);
+			_score_text.text_sprite_offset_x = (-1 * string_width(_score_text.text)/2)-4;
+			play_sound(snd_points, false);
 		}
 	}
 });
