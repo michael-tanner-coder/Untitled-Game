@@ -62,7 +62,7 @@ function spawn_level_layout(_layout = {}) {
        instance_destroy(self);
    }
    
-   with (obj_money) {
+   with (obj_mana) {
        instance_destroy(self);
    }
    
@@ -78,7 +78,7 @@ function destroy_level_layout() {
        instance_destroy(self);
     }
    
-    with (obj_money) {
+    with (obj_mana) {
        instance_destroy(self);
     }
 }

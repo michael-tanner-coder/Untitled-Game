@@ -18,7 +18,7 @@ var _current_layout_struct = {
     key: "",
     blocks: [],
     enemy_spawn_points: [],
-    money_spawn_points: [],
+    mana_spawn_points: [],
 };
 
 var _key = room_get_name(room);
@@ -38,8 +38,8 @@ with (obj_dot) {
     });
 }
 
-with (obj_money) {
-    array_push(_current_layout_struct.money_spawn_points, {
+with (obj_mana) {
+    array_push(_current_layout_struct.mana_spawn_points, {
         x_pos: x,
         y_pos: y,
     });

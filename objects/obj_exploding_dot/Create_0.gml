@@ -42,7 +42,7 @@ fsm.add("active", {
 				point_value *= 2;
 			}
 			
-			money_value = 10 * image_xscale;
+			mana_value = 10 * image_xscale;
 		}
 		
 		if (image_xscale >= max_scale) {

@@ -10,13 +10,14 @@ if (_current_scene == undefined) {
 
 // Current Scene Configurations
 modified_time_between_spawns = _current_scene.time_between_spawns;
-current_max_money_count = 1;
+current_max_mana_count = 1;
 goal_score = _current_scene.goal_score;
 
 // Set Spawner properties
 base_time_between_spawns = 100;
 spawn_timer = base_time_between_spawns;
 previous_spawn_point = {x_pos: 0, y_pos: 0};
+min_spawn_distance_from_player = 128;
 
 // State Machine
 fsm = new SnowState("wave");
@@ -29,24 +30,31 @@ fsm.add("wave", {
 		// }
 	
 		// countdown to next spawn
-		var _current_money_count = instance_number(obj_money);
-		if (_current_money_count < current_max_money_count && spawn_timer > 0) {
+		var _current_mana_count = instance_number(obj_mana);
+		if (_current_mana_count < current_max_mana_count && spawn_timer > 0) {
 			spawn_timer--;
 		}
 	
-		// when it's time for the next spawn, calculate the value of an enemy spawn to determine if it will fit in the room
-		if (spawn_timer <= 0 && is_array(struct_get(global.current_layout, "money_spawn_points"))) {
+		// when it's time for the next spawn, get the spawn points designated for this map layout
+		if (spawn_timer <= 0 && is_array(struct_get(global.current_layout, "mana_spawn_points"))) {
 			
-			// get the target enemy type to spawn
-			var _spawn_points = global.current_layout.money_spawn_points;
+			// get the spawn position of the mana gem
+			var _spawn_points = global.current_layout.mana_spawn_points;
 			var _chosen_spawn_point = _spawn_points[irandom_range(0, array_length(_spawn_points)-1)];
-			var _chosen_spawn = obj_money;
+			var _chosen_spawn = obj_mana;
 			var _count_of_spawn_type = instance_number(_chosen_spawn);
 			
-			// if the value is not too large, spawn the enemy
+			// distance between spawn point and player
+			var _distance_from_player = min_spawn_distance_from_player;
+			with(obj_player) {
+				_distance_from_player = distance_to_point(_chosen_spawn_point.x_pos, _chosen_spawn_point.y_pos);
+			}
+			
+			// if the spawn point is not a repeat and it is not too close to the player, spawn the gem
 			var _repeated_spawn_point = previous_spawn_point.x_pos == _chosen_spawn_point.x_pos && previous_spawn_point.y_pos == _chosen_spawn_point.y_pos;
 			if	(
-					_current_money_count < current_max_money_count && 
+					_distance_from_player >= min_spawn_distance_from_player &&
+					_current_mana_count < current_max_mana_count && 
 					!_repeated_spawn_point
 				) 
 			{

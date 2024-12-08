@@ -7,7 +7,7 @@ global.tutorials = [
                 text: "Move",
                 inputs: ["up", "left", "down", "right"],
                 count: 4,
-                on_enter_events: [DISABLED_ENEMY_SPAWNING, DISABLED_MONEY_SPAWNING],
+                on_enter_events: [DISABLED_ENEMY_SPAWNING, DISABLED_MANA_SPAWNING],
             },
             {
                 text: "Shoot (hold)",
@@ -24,7 +24,7 @@ global.tutorials = [
                 text: "Push other SLIMES into spikes",
                 events: [ENEMY_DEFEATED],
                 count: 3,
-                on_exit_events: [ENABLED_MONEY_SPAWNING],
+                on_exit_events: [ENABLED_MANA_SPAWNING],
             },
         ],
     },
@@ -36,7 +36,7 @@ global.tutorials = [
                 inputs: ["view_hand"],      // multiple valid inputs for one tutorial prompt
             },
             {
-                text: "Activate a CARD with MONEY",                   // name of the tutorial concept
+                text: "Activate a CARD with MANA",                   // name of the tutorial concept
                 inputs: ["select_card"],               // input the player must make to progress
                 events: [UPGRADE_SELECTED],
                 count: 3,                       // number of times the player must make the input
@@ -58,7 +58,7 @@ global.tutorials = [
             {
                 text: "Reach 20,000 points to summon the BOSS SLIME. Good luck :)",            
                 time: 150,                       // number of times the event must be published
-                on_enter_events: [ENABLED_ENEMY_SPAWNING, ENABLED_MONEY_SPAWNING], // events to publish when the prompt first activates. Event params are separated by spaces 
+                on_enter_events: [ENABLED_ENEMY_SPAWNING, ENABLED_MANA_SPAWNING], // events to publish when the prompt first activates. Event params are separated by spaces 
             },
         ],
     },
