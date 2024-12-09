@@ -224,6 +224,7 @@
   "name":"Untitled Game",
   "resources":[
     {"id":{"name":"EaseOutElastic","path":"animcurves/EaseOutElastic/EaseOutElastic.yy",},},
+    {"id":{"name":"FallingBounce","path":"animcurves/FallingBounce/FallingBounce.yy",},},
     {"id":{"name":"seq_player_idle_scale","path":"animcurves/seq_player_idle_scale/seq_player_idle_scale.yy",},},
     {"id":{"name":"seq_player_spike_bounce","path":"animcurves/seq_player_spike_bounce/seq_player_spike_bounce.yy",},},
     {"id":{"name":"seq_player_walk_left_leg_position","path":"animcurves/seq_player_walk_left_leg_position/seq_player_walk_left_leg_position.yy",},},
@@ -287,6 +288,7 @@
     {"id":{"name":"obj_enemy_bullet","path":"objects/obj_enemy_bullet/obj_enemy_bullet.yy",},},
     {"id":{"name":"obj_enemy_spawn_particle_emitter","path":"objects/obj_enemy_spawn_particle_emitter/obj_enemy_spawn_particle_emitter.yy",},},
     {"id":{"name":"obj_exploding_dot","path":"objects/obj_exploding_dot/obj_exploding_dot.yy",},},
+    {"id":{"name":"obj_falling_spawn","path":"objects/obj_falling_spawn/obj_falling_spawn.yy",},},
     {"id":{"name":"obj_flag","path":"objects/obj_flag/obj_flag.yy",},},
     {"id":{"name":"obj_float_text","path":"objects/obj_float_text/obj_float_text.yy",},},
     {"id":{"name":"obj_game_manager","path":"objects/obj_game_manager/obj_game_manager.yy",},},
@@ -1358,6 +1360,7 @@
     {"id":{"name":"spr_enemy_bullet","path":"sprites/spr_enemy_bullet/spr_enemy_bullet.yy",},},
     {"id":{"name":"spr_exploding_dot","path":"sprites/spr_exploding_dot/spr_exploding_dot.yy",},},
     {"id":{"name":"spr_exploding_enemy_sheet","path":"sprites/spr_exploding_enemy_sheet/spr_exploding_enemy_sheet.yy",},},
+    {"id":{"name":"spr_falling_slime","path":"sprites/spr_falling_slime/spr_falling_slime.yy",},},
     {"id":{"name":"spr_flag","path":"sprites/spr_flag/spr_flag.yy",},},
     {"id":{"name":"spr_flower","path":"sprites/spr_flower/spr_flower.yy",},},
     {"id":{"name":"spr_front_pipe_layer","path":"sprites/spr_front_pipe_layer/spr_front_pipe_layer.yy",},},
