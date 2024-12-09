@@ -43,8 +43,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_dot",
-    "path":"sprites/spr_dot/spr_dot.yy",
+    "name":"spr_falling_slime",
+    "path":"sprites/spr_falling_slime/spr_falling_slime.yy",
   },
   "spriteMaskId":null,
   "visible":true,

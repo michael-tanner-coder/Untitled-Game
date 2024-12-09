@@ -18,7 +18,7 @@ if (keyboard_check_pressed(ord("Q"))) {
     go_to_next_scene();
 }
 
-if (keyboard_check_pressed(ord("E"))) {
+if (keyboard_check_pressed(ord("I"))) {
     publish("win_level");
 }
 

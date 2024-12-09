@@ -66,7 +66,6 @@ fsm.add("wave", {
 			
 			var _climax_multiplier = score >= (goal_score * 0.75) ? 2 : 1;
 			global.tension += (raise_tension ? tension_increment * _climax_multiplier : -tension_increment ) * DT;
-		
 		}
 		
 		// check if we should spawn the boss
@@ -87,7 +86,7 @@ fsm.add("wave", {
 		}
 			
 		// countdown to next spawn
-		var _current_enemy_count = instance_number(obj_dot);
+		var _current_enemy_count = instance_number(obj_dot) + instance_number(obj_falling_spawn);
 		if (_current_enemy_count < current_max_enemy_count && spawn_timer > 0) {
 			spawn_timer--;
 		}
@@ -111,7 +110,22 @@ fsm.add("wave", {
 				) 
 			{
 				previous_spawn_point = _chosen_spawn_point;
-				instance_create_layer(_chosen_spawn_point.x_pos, _chosen_spawn_point.y_pos, layer, _chosen_spawn.type);
+				// instance_create_layer(_chosen_spawn_point.x_pos, _chosen_spawn_point.y_pos, layer, _chosen_spawn.type);
+				var _sprite = object_get_sprite(_chosen_spawn.type);
+				var _sprite_height = sprite_get_height(_sprite);
+				var _falling_spawn = instance_create_layer(_chosen_spawn_point.x_pos, -1 * _sprite_height, layer, obj_falling_spawn);
+				
+				_falling_spawn.spawn_type = _chosen_spawn.type;
+				_falling_spawn.target_y = _chosen_spawn_point.y_pos;
+				_falling_spawn.spawn_height = _sprite_height;
+				_falling_spawn.sprite_index = _sprite;
+				
+				if (_chosen_spawn.type == obj_big_dot) {
+					_falling_spawn.sprite_index = spr_falling_slime_yellow;
+					_falling_spawn.image_xscale = 4;
+					_falling_spawn.image_yscale = 4;
+				}
+				
 				spawn_timer = base_time_between_spawns + (modified_time_between_spawns * (1 - global.tension));
 			}
 			

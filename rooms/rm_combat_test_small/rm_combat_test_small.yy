@@ -39,7 +39,6 @@
     {"name":"inst_2834CC43","path":"rooms/rm_combat_test_small/rm_combat_test_small.yy",},
     {"name":"inst_4D6C7010","path":"rooms/rm_combat_test_small/rm_combat_test_small.yy",},
     {"name":"inst_2936CCBE","path":"rooms/rm_combat_test_small/rm_combat_test_small.yy",},
-    {"name":"inst_29675E0A","path":"rooms/rm_combat_test_small/rm_combat_test_small.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -79,7 +78,6 @@
         {"$GMRInstance":"","%Name":"inst_4B2AB563","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_4B2AB563","objectId":{"name":"obj_flag","path":"objects/obj_flag/obj_flag.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":223.0,"y":496.0,},
         {"$GMRInstance":"","%Name":"inst_2834CC43","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_2834CC43","objectId":{"name":"obj_flag","path":"objects/obj_flag/obj_flag.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":351.0,"y":496.0,},
         {"$GMRInstance":"","%Name":"inst_4D6C7010","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_4D6C7010","objectId":{"name":"obj_flag","path":"objects/obj_flag/obj_flag.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":479.0,"y":496.0,},
-        {"$GMRInstance":"","%Name":"inst_29675E0A","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_29675E0A","objectId":{"name":"obj_falling_spawn","path":"objects/obj_falling_spawn/obj_falling_spawn.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":400.0,"y":-64.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"Spikes","depth":299,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Spikes","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":18,"SerialiseWidth":20,"TileCompressedData":[
           -61,-2147483648,21,0,6,27,6,27,6,27,6,27,6,27,6,27,6,27,6,27,0,-2147483648,-2147483648,29,-16,-2147483648,

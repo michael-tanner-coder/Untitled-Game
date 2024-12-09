@@ -9,7 +9,7 @@ image_yscale = 2;
 // Animation properties
 animation = FallingBounce;
 starting_y = -1 * spawn_height; // original y position from before we start animating (start outside the top of the frame)
-target_y = 200; // destination y position when animating
+target_y = 0; // destination y position when animating
 resting_y = y; // default y position when not animating
 animation_progress = 0;
 animation_speed = 0.02;
