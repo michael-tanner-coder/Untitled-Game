@@ -76,7 +76,6 @@ fsm.add("wave", {
 			
 			var _sprite = object_get_sprite(boss_type);
 			var _sprite_height = sprite_get_height(_sprite);
-			// var _falling_spawn = instance_create_layer(obj_boss_spawn_point.x, obj_boss_spawn_point.y, layer, boss_type);
 			var _falling_spawn = instance_create_layer(obj_boss_spawn_point.x, -1*_sprite_height, layer, obj_falling_spawn);
 			
 			_falling_spawn.spawn_type = boss_type;
@@ -84,9 +83,10 @@ fsm.add("wave", {
 			_falling_spawn.spawn_height = _sprite_height;
 			_falling_spawn.sprite_index = _sprite;
 			_falling_spawn.shadow_sprite = spr_shadow_boss;
+			
 			boss_active = true;
 				
-			// screenshake(4, 10, 0.5);
+			screenshake(4, 10, 0.5);
 		}
 		
 		// dev tool to auto-defeat boss

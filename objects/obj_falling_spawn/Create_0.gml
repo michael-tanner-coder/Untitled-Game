@@ -30,6 +30,7 @@ fsm.add("animating", {
 		shadow.sprite_index = shadow_sprite;
 	},
 	step: function() {
+		// update shadow properties
 		shadow.y = target_y + spawn_height/2;
 		shadow.sprite_index = shadow_sprite;
 		
