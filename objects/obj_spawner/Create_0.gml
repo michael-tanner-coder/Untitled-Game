@@ -83,6 +83,7 @@ fsm.add("wave", {
 			_falling_spawn.target_y = obj_boss_spawn_point.x;
 			_falling_spawn.spawn_height = _sprite_height;
 			_falling_spawn.sprite_index = _sprite;
+			_falling_spawn.shadow_sprite = spr_shadow_boss;
 			boss_active = true;
 				
 			// screenshake(4, 10, 0.5);
@@ -120,7 +121,7 @@ fsm.add("wave", {
 				) 
 			{
 				previous_spawn_point = _chosen_spawn_point;
-				// instance_create_layer(_chosen_spawn_point.x_pos, _chosen_spawn_point.y_pos, layer, _chosen_spawn.type);
+
 				var _sprite = object_get_sprite(_chosen_spawn.type);
 				var _sprite_height = sprite_get_height(_sprite);
 				var _falling_spawn = instance_create_layer(_chosen_spawn_point.x_pos, -1 * _sprite_height, layer, obj_falling_spawn);
@@ -134,6 +135,7 @@ fsm.add("wave", {
 					_falling_spawn.sprite_index = spr_falling_slime_yellow;
 					_falling_spawn.image_xscale = 4;
 					_falling_spawn.image_yscale = 4;
+					_falling_spawn.shadow_sprite = spr_shadow_big;
 				}
 				
 				spawn_timer = base_time_between_spawns + (modified_time_between_spawns * (1 - global.tension));

@@ -1543,6 +1543,7 @@
     {"id":{"name":"spr_rounded_box","path":"sprites/spr_rounded_box/spr_rounded_box.yy",},},
     {"id":{"name":"spr_scrollbar","path":"sprites/spr_scrollbar/spr_scrollbar.yy",},},
     {"id":{"name":"spr_shadow_big","path":"sprites/spr_shadow_big/spr_shadow_big.yy",},},
+    {"id":{"name":"spr_shadow_boss","path":"sprites/spr_shadow_boss/spr_shadow_boss.yy",},},
     {"id":{"name":"spr_shadow","path":"sprites/spr_shadow/spr_shadow.yy",},},
     {"id":{"name":"spr_shield_big","path":"sprites/spr_shield_big/spr_shield_big.yy",},},
     {"id":{"name":"spr_shield","path":"sprites/spr_shield/spr_shield.yy",},},

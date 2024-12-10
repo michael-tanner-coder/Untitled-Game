@@ -1351,6 +1351,7 @@
     {"name":"spr_rounded_box","order":5,"path":"sprites/spr_rounded_box/spr_rounded_box.yy",},
     {"name":"spr_scrollbar","order":21,"path":"sprites/spr_scrollbar/spr_scrollbar.yy",},
     {"name":"spr_shadow_big","order":6,"path":"sprites/spr_shadow_big/spr_shadow_big.yy",},
+    {"name":"spr_shadow_boss","order":11,"path":"sprites/spr_shadow_boss/spr_shadow_boss.yy",},
     {"name":"spr_shadow","order":5,"path":"sprites/spr_shadow/spr_shadow.yy",},
     {"name":"spr_shield_big","order":31,"path":"sprites/spr_shield_big/spr_shield_big.yy",},
     {"name":"spr_shield","order":30,"path":"sprites/spr_shield/spr_shield.yy",},

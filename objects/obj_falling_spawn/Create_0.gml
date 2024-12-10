@@ -12,7 +12,7 @@ starting_y = -1 * spawn_height; // original y position from before we start anim
 target_y = 0; // destination y position when animating
 resting_y = y; // default y position when not animating
 animation_progress = 0;
-animation_speed = 0.02;
+animation_speed = 0.015;
 
 // Shadow to spawn
 shadow = undefined;
@@ -30,6 +30,9 @@ fsm.add("animating", {
 		shadow.sprite_index = shadow_sprite;
 	},
 	step: function() {
+		shadow.y = target_y + spawn_height/2;
+		shadow.sprite_index = shadow_sprite;
+		
 		// drop animation
 		var _curveStruct = animcurve_get(animation);
 		var _channel = animcurve_get_channel(_curveStruct, "y");
