@@ -32,6 +32,7 @@ var _score_y = left_ui_start_y + _label_height;
 draw_set_color(paragraph_text_color);
 var _formatted_score = string_format(round(drawn_score), 8, 0);
 draw_text(left_ui_start_x, _score_y, string_replace_all(_formatted_score, " ", "0"));
+draw_sprite(spr_level_progress_bar, 0, left_ui_start_x, _score_y + _label_height);
 
 // TIME
 if (!data_source.is_tutorial_scene) {
