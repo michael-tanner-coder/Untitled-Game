@@ -40,8 +40,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_growing_dot",
-    "path":"sprites/spr_growing_dot/spr_growing_dot.yy",
+    "name":"spr_falling_slime_purple",
+    "path":"sprites/spr_falling_slime_purple/spr_falling_slime_purple.yy",
   },
   "spriteMaskId":null,
   "visible":true,

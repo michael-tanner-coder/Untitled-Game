@@ -17,6 +17,7 @@ default_max_enemy_count = current_max_enemy_count;
 boss_max_enemy_count = _current_scene.boss_max_enemy_count;
 goal_score = _current_scene.goal_score;
 boss_type = _current_scene.boss;
+boss_active = false;
 
 // Set Spawner properties
 base_time_between_spawns = 30;
@@ -33,7 +34,6 @@ global.boss_lives = 3;
 fsm = new SnowState("wave");
 fsm.add("wave", {
 	step: function() {
-		var _boss_active = instance_number(boss_type) > 0;
 		
 		if (global.tutorial) {
 			return;
@@ -55,7 +55,7 @@ fsm.add("wave", {
 		}
 	
 		// raise and lower tension of the level periodically after the initial wave
-		if (global.first_wave_complete || _boss_active) {
+		if (global.first_wave_complete || boss_active) {
 			if (global.tension >= 1) {
 				raise_tension = false;
 			}
@@ -66,16 +66,26 @@ fsm.add("wave", {
 			
 			var _climax_multiplier = score >= (goal_score * 0.75) ? 2 : 1;
 			global.tension += (raise_tension ? tension_increment * _climax_multiplier : -tension_increment ) * DT;
-		
 		}
 		
 		// check if we should spawn the boss
-		if ((score >= goal_score && boss_type != undefined && instance_number(boss_type) < 1) || (global.dev_mode && input_check_pressed("spawn_boss"))) {
+		if ((score >= goal_score && boss_type != undefined && !boss_active) || (global.dev_mode && input_check_pressed("spawn_boss"))) {
 			with(obj_dot) {
 				instance_destroy(self);
 			}
 			
-			instance_create_layer(obj_boss_spawn_point.x, obj_boss_spawn_point.y, layer, boss_type);
+			var _sprite = object_get_sprite(boss_type);
+			var _sprite_height = sprite_get_height(_sprite);
+			var _falling_spawn = instance_create_layer(obj_boss_spawn_point.x, -1*_sprite_height, layer, obj_falling_spawn);
+			
+			_falling_spawn.spawn_type = boss_type;
+			_falling_spawn.target_y = obj_boss_spawn_point.x;
+			_falling_spawn.spawn_height = _sprite_height;
+			_falling_spawn.sprite_index = _sprite;
+			_falling_spawn.shadow_sprite = spr_shadow_boss;
+			
+			boss_active = true;
+				
 			screenshake(4, 10, 0.5);
 		}
 		
@@ -87,7 +97,7 @@ fsm.add("wave", {
 		}
 			
 		// countdown to next spawn
-		var _current_enemy_count = instance_number(obj_dot);
+		var _current_enemy_count = instance_number(obj_dot) + instance_number(obj_falling_spawn);
 		if (_current_enemy_count < current_max_enemy_count && spawn_timer > 0) {
 			spawn_timer--;
 		}
@@ -111,18 +121,34 @@ fsm.add("wave", {
 				) 
 			{
 				previous_spawn_point = _chosen_spawn_point;
-				instance_create_layer(_chosen_spawn_point.x_pos, _chosen_spawn_point.y_pos, layer, _chosen_spawn.type);
+
+				var _sprite = object_get_sprite(_chosen_spawn.type);
+				var _sprite_height = sprite_get_height(_sprite);
+				var _falling_spawn = instance_create_layer(_chosen_spawn_point.x_pos, -1 * _sprite_height, layer, obj_falling_spawn);
+				
+				_falling_spawn.spawn_type = _chosen_spawn.type;
+				_falling_spawn.target_y = _chosen_spawn_point.y_pos;
+				_falling_spawn.spawn_height = _sprite_height;
+				_falling_spawn.sprite_index = _sprite;
+				
+				if (_chosen_spawn.type == obj_big_dot) {
+					_falling_spawn.sprite_index = spr_falling_slime_yellow;
+					_falling_spawn.image_xscale = 4;
+					_falling_spawn.image_yscale = 4;
+					_falling_spawn.shadow_sprite = spr_shadow_big;
+				}
+				
 				spawn_timer = base_time_between_spawns + (modified_time_between_spawns * (1 - global.tension));
 			}
 			
 		}
 		
 		// update max enemy count based on progress into the wave
-		current_max_enemy_count = 1 + ceil(_boss_active ? boss_max_enemy_count : default_max_enemy_count * global.tension);
+		current_max_enemy_count = 1 + ceil(boss_active ? boss_max_enemy_count : default_max_enemy_count * global.tension);
 		current_max_enemy_count = clamp(current_max_enemy_count, 1, default_max_enemy_count);
 		
 		// keep spawn count low when player is first learning
-		if (!global.first_wave_complete && !_boss_active) {
+		if (!global.first_wave_complete && !boss_active) {
 			current_max_enemy_count = 1;
 		}
 

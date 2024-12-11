@@ -41,8 +41,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_exploding_dot",
-    "path":"sprites/spr_exploding_dot/spr_exploding_dot.yy",
+    "name":"spr_falling_slime_green",
+    "path":"sprites/spr_falling_slime_green/spr_falling_slime_green.yy",
   },
   "spriteMaskId":null,
   "visible":true,
