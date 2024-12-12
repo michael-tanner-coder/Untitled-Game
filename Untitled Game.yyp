@@ -1314,6 +1314,7 @@
     {"id":{"name":"spr_big_enemy_sheet","path":"sprites/spr_big_enemy_sheet/spr_big_enemy_sheet.yy",},},
     {"id":{"name":"spr_block","path":"sprites/spr_block/spr_block.yy",},},
     {"id":{"name":"spr_bomb","path":"sprites/spr_bomb/spr_bomb.yy",},},
+    {"id":{"name":"spr_boss_life_icon","path":"sprites/spr_boss_life_icon/spr_boss_life_icon.yy",},},
     {"id":{"name":"spr_boss","path":"sprites/spr_boss/spr_boss.yy",},},
     {"id":{"name":"spr_bowler_hat_large","path":"sprites/spr_bowler_hat_large/spr_bowler_hat_large.yy",},},
     {"id":{"name":"spr_bowler_hat","path":"sprites/spr_bowler_hat/spr_bowler_hat.yy",},},
