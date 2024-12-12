@@ -3,12 +3,29 @@ draw_set_font(fnt_default);
 draw_set_color(WHITE);
 draw_set_halign(fa_center);
 
-var _hud_element_y = 14;
+var _hud_element_y = 20;
 
 // -- Score
+var _score_x = 225;
 var _formatted_score = string_format(round(drawn_score), 8, 0);
 var _formatted_mana = string_format(round(global.currency), 5, 0);
-draw_shadow_text(VIEW_WIDTH/2 + shake_x_offset, _hud_element_y + shake_y_offset, "SCORE: " + string_replace_all(_formatted_score, " ", "0"));
+draw_shadow_text(_score_x + shake_x_offset, _hud_element_y + shake_y_offset, "SCORE: " + string_replace_all(_formatted_score, " ", "0"));
+
+// -- Progress
+var _progress_bar_margin_y = 8;
+var _score_height = string_height(_formatted_score);
+var _progress_bar_x = _score_x;
+var _progress_bar_y = (_hud_element_y + _score_height/2) + _progress_bar_margin_y;
+draw_sprite(spr_level_progress_bar, 0, _progress_bar_x, _progress_bar_y);
+
+var _marker_progress = clamp(score/goal_score, 0, 1);
+var _progress_bar_width = sprite_get_width(spr_level_progress_bar);
+var _marker_height = sprite_get_height(spr_level_progress_marker);
+var _marker_x = (_progress_bar_x - _progress_bar_width/2) + (_progress_bar_width * _marker_progress);
+draw_sprite(spr_level_progress_marker, 0, _marker_x, (_progress_bar_y) - (_marker_height/2));
+
+var _trophy_height = sprite_get_height(spr_trophy);
+draw_sprite(spr_trophy, 0, _progress_bar_x + _progress_bar_width/2, _progress_bar_y - _trophy_height/2)
 
 // -- Mana
 var _mana_string = string_replace_all(_formatted_mana, " ", "0");

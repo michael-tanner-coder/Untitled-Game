@@ -54,7 +54,7 @@ fsm.add("progress_to_next_draw", {
    			banner(50, room_height/6, "PRESS R TO DRAW A CARD", BLACK, 0.6);
    		}
    		var _bar_bg_color = upgrade_progress_points >= draw_score ? WHITE : PURPLE;
-		fillbar(progress_bar_x, progress_bar_y, 200, 25, min((upgrade_progress_points/draw_score), 1), RED, _bar_bg_color);
+		// fillbar(progress_bar_x, progress_bar_y, 200, 25, min((upgrade_progress_points/draw_score), 1), RED, _bar_bg_color);
 		draw_set_halign(fa_center);
 		draw_shadow_text(VIEW_WIDTH/2 + 150, 14, "DECK: " + string(array_length(deck)));
 	}
