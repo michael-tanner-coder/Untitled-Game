@@ -20,6 +20,7 @@ tutorial_banner_y = VIEW_HEIGHT/6;
 tutorial_text_padding_left = 40;
 show_tutorial = global.tutorial;
 won_level = false;
+boss_active = false;
 
 victory_bg_y = 64;
 victory_bg_x = -1 * VIEW_WIDTH;
@@ -88,7 +89,7 @@ fsm.add("start_level", {
 });
 
 fsm.add("mid_level", {
-	draw: function() {
+	draw_gui: function() {
 		// if (show_tutorial) {
 		// 	draw_set_color(c_black);
 		// 	draw_set_alpha(0.5);
@@ -101,6 +102,18 @@ fsm.add("mid_level", {
 		// 	draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 40, "RIGHT CLICK (HOLD): move fast", global.dashed ? GREEN : WHITE);
 		// 	draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 80, "DON'T TOUCH THE WALLS!", ORANGE);
 		// }
+		
+		// -- Boss Lives
+		if (boss_active) {
+			var _boss_lives = global.boss_lives;
+			var _lives_icon_margin = 16;
+			var _boss_life_section_width = (sprite_get_width(spr_boss_life_icon) * 3) + (_lives_icon_margin * 2);
+			var _lives_ui_x = VIEW_WIDTH/2 - _boss_life_section_width/2;
+			var _boss_life_ui_y = VIEW_HEIGHT - sprite_get_height(spr_boss_life_icon);
+			for(var _i = 0; _i < _boss_lives; _i++) {
+				draw_sprite(spr_boss_life_icon, 0, _lives_ui_x + (sprite_get_width(spr_boss_life_icon) + _lives_icon_margin) * _i, _boss_life_ui_y);
+			}
+		}
 	}
 });
 
@@ -206,3 +219,4 @@ fsm.add("game_complete", {
 subscribe(id, WON_LEVEL, function() {fsm.change("level_complete")});
 subscribe(id, WON_GAME, function() {fsm.change("game_complete")});
 subscribe(id, LOST_LEVEL, function() {fsm.change("game_over")});
+subscribe(id, SPAWNED_BOSS, function() {boss_active = true;});
