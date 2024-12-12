@@ -16,13 +16,34 @@ upgrade_banner_y = -1000;
 target_upgrade_banner_y = room_height/4;
 upgrade_banner_height = 200;
 
+// draw indictator
+flash_time = 0;
+
 // progress bar
 upgrade_progress_points = 0;
-progress_bar_y = 30;
-progress_bar_x = room_width/2 - 100;
+progress_bar_y = 15;
+progress_bar_x = 360;
 
 // 
 actor_activation_timer = -1;
+
+// Methods
+draw_card_meter = function() {
+	// Draw Meter + Deck Icon
+	draw_sprite(spr_deck_card_east_bay, 0, progress_bar_x + 4, progress_bar_y + 4);
+	draw_sprite(spr_deck_card_purple, 0, progress_bar_x + 2, progress_bar_y + 2);
+	draw_sprite(spr_deck_card_white, 0, progress_bar_x, progress_bar_y);
+	
+	var _fill_width = sprite_get_width(spr_deck_card_fill);
+	var _fill_height = sprite_get_height(spr_deck_card_fill);
+	var _fill_x = progress_bar_x;
+	var _fill_y = progress_bar_y + _fill_height - (_fill_height * min((upgrade_progress_points/draw_score), 1));
+	draw_sprite_part(spr_deck_card_fill, 0, 0, _fill_height - (_fill_height * min((upgrade_progress_points/draw_score), 1)), _fill_width, _fill_height, _fill_x, _fill_y);
+	
+	// Card Count
+	draw_set_halign(fa_center);
+	draw_shadow_text(progress_bar_x + _fill_width * 2, progress_bar_y + _fill_width/2, "x " + string(array_length(deck)));
+}
 
 // State Machine
 fsm = new SnowState("progress_to_next_draw");
@@ -53,10 +74,24 @@ fsm.add("progress_to_next_draw", {
    		if (upgrade_progress_points >= draw_score && array_length(deck) > 0) {
    			banner(50, room_height/6, "PRESS R TO DRAW A CARD", BLACK, 0.6);
    		}
-   		var _bar_bg_color = upgrade_progress_points >= draw_score ? WHITE : PURPLE;
-		// fillbar(progress_bar_x, progress_bar_y, 200, 25, min((upgrade_progress_points/draw_score), 1), RED, _bar_bg_color);
-		draw_set_halign(fa_center);
-		draw_shadow_text(VIEW_WIDTH/2 + 150, 14, "DECK: " + string(array_length(deck)));
+   		
+		draw_card_meter();
+		
+		// Card Draw Indicator
+		// --only start rendering indicator when we have filled the draw progress meter
+   		var _show_draw_indicator = upgrade_progress_points >= draw_score;
+   		
+		// -- toggle rendering of indicator at regular intervals
+		flash_time++;
+		if (flash_time >= 30) {
+			_show_draw_indicator = false;
+		}
+		flash_time = loop_clamp(flash_time, 0, 60);
+		
+		//
+		if (_show_draw_indicator) {
+			draw_sprite(spr_draw_indicator, 0, progress_bar_x + sprite_get_width(spr_draw_indicator)/2, progress_bar_y - sprite_get_height(spr_draw_indicator)/2);
+		}
 	}
 });
 
@@ -116,8 +151,7 @@ fsm.add("view_hand", {
         }
     },
     draw: function() {
-    	var _bar_bg_color = upgrade_progress_points >= draw_score ? WHITE : PURPLE;
-		fillbar(progress_bar_x, progress_bar_y, 200, 25, min((upgrade_progress_points/draw_score), 1), RED, _bar_bg_color);
+		draw_card_meter();
 		banner(upgrade_banner_height, upgrade_banner_y, "SPEND MANA TO PLAY A CARD (left-click)", BLACK, 0.6);
 		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.65), "DISCARD A CARD TO GAIN MANA (right-click)", ORANGE);
 		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.90), "(press R to close)");
@@ -146,8 +180,7 @@ fsm.add("draw_card", {
         }
     },
     draw: function() {
-    	var _bar_bg_color = upgrade_progress_points >= draw_score ? WHITE : PURPLE;
-		fillbar(progress_bar_x, progress_bar_y, 200, 25, min((upgrade_progress_points/draw_score), 1), RED, _bar_bg_color);
+    	draw_card_meter();
 	}
 }
 );
@@ -203,7 +236,7 @@ fsm.add("discard", {
         }
 	},
 	draw: function() {
-		fillbar(progress_bar_x, progress_bar_y, 200, 25,1, RED, WHITE);
+		draw_card_meter();
 		banner(upgrade_banner_height, upgrade_banner_y, "HAND IS FULL: DISCARD A CARD (right-click or press 'X')", BLACK, 0.6, RED);
 		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.75), "(press R to pass)")
 	},
