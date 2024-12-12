@@ -25,7 +25,8 @@ var _marker_x = (_progress_bar_x - _progress_bar_width/2) + (_progress_bar_width
 draw_sprite(spr_level_progress_marker, 0, _marker_x, (_progress_bar_y) - (_marker_height/2));
 
 var _trophy_height = sprite_get_height(spr_trophy);
-draw_sprite(spr_trophy, 0, _progress_bar_x + _progress_bar_width/2, _progress_bar_y - _trophy_height/2)
+var _trophy_margin_x = 4;
+draw_sprite(spr_trophy, 0, (_progress_bar_x + _progress_bar_width/2) + _trophy_margin_x, _progress_bar_y - _trophy_height/2)
 
 // -- Mana
 var _mana_string = string_replace_all(_formatted_mana, " ", "0");
