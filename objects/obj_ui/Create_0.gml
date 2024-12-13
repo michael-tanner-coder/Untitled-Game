@@ -1,3 +1,5 @@
+// TODO: refactor UI coding to not use precise "magic" numbers (need to calculate spacing b/t elements)
+
 var _current_scene = get_current_scene();
 if (_current_scene == undefined) {
 	_current_scene = {
@@ -49,7 +51,6 @@ color_blocks = [
 
 goal_score = _current_scene.goal_score;
 
-
 shake_text = function(_time = 0, _magnitude = 0, _fade_rate = 0) {
 	shake_time = _time;
 	shake_magnitude = _magnitude;
@@ -90,19 +91,6 @@ fsm.add("start_level", {
 
 fsm.add("mid_level", {
 	draw_gui: function() {
-		// if (show_tutorial) {
-		// 	draw_set_color(c_black);
-		// 	draw_set_alpha(0.5);
-		// 	draw_rectangle(tutorial_banner_center_point, tutorial_banner_y - 20, VIEW_WIDTH + tutorial_banner_center_point, tutorial_banner_y + 120, false);
-		// 	draw_set_alpha(1);
-	
-		// 	draw_set_halign(fa_left);
-		// 	draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y, "WASD: move", global.moved ? GREEN : WHITE);
-		// 	draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 20, "LEFT CLICK: shoot", global.shot ? GREEN : WHITE);
-		// 	draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 40, "RIGHT CLICK (HOLD): move fast", global.dashed ? GREEN : WHITE);
-		// 	draw_shadow_text(tutorial_text_padding_left + tutorial_banner_center_point , tutorial_banner_y + 80, "DON'T TOUCH THE WALLS!", ORANGE);
-		// }
-		
 		// -- Boss Lives
 		if (boss_active) {
 			var _boss_lives = global.boss_lives;

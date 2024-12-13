@@ -21,8 +21,8 @@ flash_time = 0;
 
 // progress bar
 upgrade_progress_points = 0;
-progress_bar_y = 15;
-progress_bar_x = 360;
+progress_bar_y = 18;
+progress_bar_x = 380;
 
 // 
 actor_activation_timer = -1;
@@ -41,8 +41,9 @@ draw_card_meter = function() {
 	draw_sprite_part(spr_deck_card_fill, 0, 0, _fill_height - (_fill_height * min((upgrade_progress_points/draw_score), 1)), _fill_width, _fill_height, _fill_x, _fill_y);
 	
 	// Card Count
+	var _card_count_y = progress_bar_y-3;
 	draw_set_halign(fa_center);
-	draw_shadow_text(progress_bar_x + _fill_width * 2, progress_bar_y + _fill_width/2, "x " + string(array_length(deck)));
+	draw_shadow_text(progress_bar_x + _fill_width * 2, _card_count_y + _fill_width/2, "x " + string(array_length(deck)));
 }
 
 // State Machine

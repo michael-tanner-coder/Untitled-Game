@@ -1416,6 +1416,7 @@
     {"id":{"name":"spr_level_background","path":"sprites/spr_level_background/spr_level_background.yy",},},
     {"id":{"name":"spr_level_progress_bar","path":"sprites/spr_level_progress_bar/spr_level_progress_bar.yy",},},
     {"id":{"name":"spr_level_progress_marker","path":"sprites/spr_level_progress_marker/spr_level_progress_marker.yy",},},
+    {"id":{"name":"spr_life_slot","path":"sprites/spr_life_slot/spr_life_slot.yy",},},
     {"id":{"name":"spr_life","path":"sprites/spr_life/spr_life.yy",},},
     {"id":{"name":"spr_light_shaft","path":"sprites/spr_light_shaft/spr_light_shaft.yy",},},
     {"id":{"name":"spr_lighting","path":"sprites/spr_lighting/spr_lighting.yy",},},

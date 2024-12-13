@@ -4,6 +4,7 @@ global.input_settings = "input_save.json";
 
 // Global game state
 global.starting_life_count = 3;
+global.max_player_lives = 3;
 lives = global.starting_life_count;
 global.paused = false;
 global.intro = false;
