@@ -22,10 +22,30 @@ global.unlockables = [
     unlock_struct("closer", "upgrades", 30000),
 ];
 
+function get_unlock_data(_key = "") {
+    var _unlock = undefined;
+    
+    FOREACH global.unlockables ELEMENT
+        if (_elem.key == _key) {
+            _unlock = _elem;
+            break;
+        }
+    END
+    
+    return _unlock;
+}
+
 function unlock_random_card() {
     var _card = get_random_element(global.unlockables);
     unlock_item(_card);
     global.most_recent_unlock = _card.key;
+    return _card;
+}
+
+function unlock_card(_card_key = "") {
+    var _card = get_unlock_data(_card_key);
+    unlock_item(_card);
+    global.most_recent_unlock = _card_key;
     return _card;
 }
 
