@@ -89,8 +89,8 @@ fsm.add("progress_to_next_draw", {
 		}
 		flash_time = loop_clamp(flash_time, 0, 60);
 		
-		//
-		if (_show_draw_indicator) {
+		// 
+		if (_show_draw_indicator && array_length(deck) > 0) {
 			draw_sprite(spr_draw_indicator, 0, progress_bar_x + sprite_get_width(spr_draw_indicator)/2, progress_bar_y - sprite_get_height(spr_draw_indicator)/2);
 		}
 	}
