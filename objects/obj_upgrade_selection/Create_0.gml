@@ -262,20 +262,14 @@ generate_card_hand = function() {
 	// }
 	var _cards_to_remove = [];
 	for (var _i = 0; _i < hand_size_limit-1; _i++) {
-		var _upgrade_struct = deck[irandom_range(0, array_length(deck) - 1)];
-		var _upgrade = get_upgrade_type(_upgrade_struct.key);
-		array_push(hand, _upgrade);
-		array_push(_cards_to_remove, _upgrade_struct);
+		draw_new_card();
 	}
-	
-	FOREACH _cards_to_remove ELEMENT
-		remove_from_temp_deck(_elem);
-	END
 }
 
 draw_new_card = function() {
 	if (array_length(hand) < hand_size_limit && array_length(deck) > 0) {
-		var _upgrade_struct = deck[irandom_range(0, array_length(deck) - 1)];
+		var _struct_deck = build_deck_of_structs(deck);
+		var _upgrade_struct = get_weighted_random_card(_struct_deck);
 		var _upgrade = get_upgrade_type(_upgrade_struct.key);
     	array_push(hand, _upgrade);
     	remove_from_temp_deck(_upgrade_struct);
