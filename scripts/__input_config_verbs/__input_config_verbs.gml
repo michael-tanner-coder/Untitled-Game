@@ -30,6 +30,7 @@ function __input_config_verbs()
             view_deck: input_binding_key(ord("R")),
             play_card: input_binding_key(mb_left),
             discard_card: input_binding_key(mb_right),
+            view_discard_pile: [input_binding_key("G")],
             
             // UI actions
             accept:  input_binding_key(vk_space),

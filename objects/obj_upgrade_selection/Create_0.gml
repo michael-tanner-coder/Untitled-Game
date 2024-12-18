@@ -2,6 +2,7 @@
 // upgrade parameters
 draw_score = 1000; // make this configurable
 hand = [];
+discard_pile = [];
 hand_size_limit = 3;
 deck = [];
 hand_full = false;
@@ -61,6 +62,10 @@ fsm.add("progress_to_next_draw", {
     step: function() {
         if (input_check_pressed("select") && (array_length(deck) > 0 || array_length(hand) > 0)) {
             fsm.change("view_hand");
+        }
+        
+        if (input_check_pressed("view_discard_pile")) {
+            fsm.change("view_discard_pile");
         }
         
         // hold off on activating actors until we pass a given number of frames
@@ -156,6 +161,63 @@ fsm.add("view_hand", {
 		banner(upgrade_banner_height, upgrade_banner_y, "SPEND MANA TO PLAY A CARD (left-click)", BLACK, 0.6);
 		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.65), "DISCARD A CARD TO GAIN MANA (right-click)", ORANGE);
 		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.90), "(press R to close)");
+	}
+});
+
+fsm.add("view_discard_pile", {
+    enter: function() {
+        var _card_margin = 30;
+        
+        // Pause all characters in the scene
+        publish(ACTORS_DEACTIVATED);
+        physics_pause_enable(true);
+
+		// Spawn card_obj_instances
+        var _start_x = room_width/2;
+        var _section_width = 0;
+        for (var _i = 0; _i < array_length(discard_pile); _i++) {
+        	
+        	// Base position for card
+        	var _card = instance_create_layer(x, y, "UI_Instances", obj_card);
+        	_card.x = _start_x + ((sprite_get_width(_card.sprite_index) + _card_margin) * _i);
+        	_card.y = starting_card_section_y;
+        	_card.starting_y = _card.y;
+        	_card.target_y = card_section_y;
+        	_card.resting_y = card_section_y;
+        	_card.time_until_active = 10 * _i;
+        	_section_width += sprite_get_width(_card.sprite_index) + _card_margin;
+        	
+        	// Upgrade data for card
+        	var _upgrade = discard_pile[_i];
+        	_card.upgrade = _upgrade;
+        	_card.header = _upgrade.name;
+        	_card.description = _upgrade.description;
+        	_card.price = _upgrade.price;
+        	_card.sprite = _upgrade.sprite;
+        	
+        	// Cache all card_obj_instances for disposal later
+        	array_push(card_obj_instances, _card);
+        	
+        }
+        
+        // Reposition card_obj_instances to center the section
+        var _full_card_section_width = _section_width;
+        FOREACH card_obj_instances ELEMENT
+        	var _card = _elem;
+        	_card.x -= _full_card_section_width/2;
+        END
+    },
+    step: function() {
+        upgrade_banner_y = lerp(upgrade_banner_y, target_upgrade_banner_y, 0.2);
+        
+        if (input_check_pressed("view_discard_pile")) {
+        	fsm.change("progress_to_next_draw");
+        }
+    },
+    draw: function() {
+		draw_card_meter();
+		banner(upgrade_banner_height, upgrade_banner_y, "DISCARD PILE", BLACK, 0.6);
+		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.90), "(press Q to close)");
 	}
 });
 
@@ -286,7 +348,10 @@ discard_card = function(_card = {}) {
 		}
 	END
 	
+	
 	if (_card_to_remove_index != undefined) {
+		var _discarded_card = hand[_card_to_remove_index];
+		array_push(discard_pile, _discarded_card);
 		array_delete(hand, _card_to_remove_index, 1);
 	}
 }
