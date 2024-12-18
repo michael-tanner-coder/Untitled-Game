@@ -117,10 +117,12 @@ fsm.add("countup", {
 
 fsm.add("unlock", {
 	enter: function() {
-		var _random_card = unlock_random_card();
+		var _struct_collection = build_deck_of_structs(global.unlockables);
+		var _random_card = get_weighted_random_card(_struct_collection);
+		var _unlocked_card = unlock_card(_random_card.key);
 	
 		// get item data for display
-		item_data = get_unlock_item_data(_random_card);
+		item_data = get_unlock_item_data(_unlocked_card);
 		item_name = item_data.name;
 		new_card = new_card_instance(item_data.key)
 		

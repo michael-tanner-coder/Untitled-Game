@@ -62,6 +62,43 @@ function is_in_deck(_card = {}) {
     return _in_deck;
 }
 
+function get_weighted_random_card(_card_collection = []) {
+    var _weight_sum = 0;
+    
+    FOREACH _card_collection ELEMENT
+        var _card = _elem;
+        _weight_sum += _card.randomness_weight;
+    END
+    
+    var _roll = floor(random_range(0, _weight_sum));
+    var _found_card = undefined;
+    
+    while (_found_card == undefined) {
+        FOREACH _card_collection ELEMENT
+            var _card = _elem;
+            
+            if (_roll <= _card.randomness_weight) {
+                _found_card = _card;
+                break;
+            }
+            
+            _roll -= _card.randomness_weight;
+        END
+    }
+    
+    return _found_card;
+}
+
+function build_deck_of_structs(_deck = []) {
+    var _struct_deck = [];
+    FOREACH _deck ELEMENT
+        var _card = _elem;
+        var _card_struct = get_upgrade_type(_card.key);
+        array_push(_struct_deck, _card_struct);
+    END
+    return _struct_deck;
+}
+
 // Collection functions
 function add_to_collection(_card = {}) {
     array_push(global.collection, _card);
@@ -103,7 +140,7 @@ function effect_struct(_property = "", _value = 0, _operation = OPERATIONS.SET) 
     }
 }
 
-function upgrade_struct(_key="", _name="", _description="", _price=0, _sprite=undefined, _effects=[]) {
+function upgrade_struct(_key="", _name="", _description="", _price=0, _sprite=undefined, _effects=[], _randomness_weight = 100) {
     return {
         key: _key,
         name: _name,
@@ -111,6 +148,7 @@ function upgrade_struct(_key="", _name="", _description="", _price=0, _sprite=un
         price: _price,
         sprite: _sprite,
         effects: _effects,
+        randomness_weight: _randomness_weight,
     }
 }
 
@@ -196,7 +234,8 @@ function init_upgrades_collection() {
                 [
                     effect_struct("player_shot_count", 1, OPERATIONS.ADD),
                     effect_struct("player_bullet_force", 0.5, OPERATIONS.MULTIPLY),
-                ]
+                ],
+                50
         ),
         // upgrade_struct(
         //         "shot_focus", 
@@ -217,7 +256,8 @@ function init_upgrades_collection() {
                 spr_white_circle,
                 [
                     effect_struct("player_lives", 1, OPERATIONS.ADD),
-                ]
+                ],
+                0,
         ),
         upgrade_struct(
                 "bullet_strength",
@@ -228,7 +268,8 @@ function init_upgrades_collection() {
                 [
                     effect_struct("player_bullet_force", 4, OPERATIONS.MULTIPLY),
                     effect_struct("player_recoil", 2, OPERATIONS.MULTIPLY),
-                ]
+                ],
+                20
         ),
         upgrade_struct(
                 "closer",
@@ -238,7 +279,8 @@ function init_upgrades_collection() {
                 spr_white_circle,
                 [
                     effect_struct("player_recoil", -1, OPERATIONS.MULTIPLY),
-                ]
+                ],
+                10
         ),
     ];
 
