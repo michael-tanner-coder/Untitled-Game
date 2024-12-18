@@ -194,6 +194,7 @@ fsm.add("view_discard_pile", {
         	_card.description = _upgrade.description;
         	_card.price = _upgrade.price;
         	_card.sprite = _upgrade.sprite;
+        	_card.disabled = true;
         	
         	// Cache all card_obj_instances for disposal later
         	array_push(card_obj_instances, _card);

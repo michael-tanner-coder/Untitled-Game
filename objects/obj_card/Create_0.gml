@@ -18,6 +18,7 @@ discard_active = false;
 highlighted = false;
 time_until_active = 120;
 static_card = false;
+disabled = false;
 
 // Animation
 starting_y = y; // original y position from before we start animating
@@ -76,6 +77,11 @@ fsm.add("active", {
 		}
 		else {
 			y = lerp(y, resting_y, 0.08);
+		}
+		
+		// Disabled cards can't be selected
+		if (disabled) {
+			return;
 		}
 	
 		// Activate card
