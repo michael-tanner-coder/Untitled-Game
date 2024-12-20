@@ -117,8 +117,9 @@ fsm.add("progress_to_next_draw", {
 
 fsm.add("view_hand", {
     enter: function() {
+    	selection_price = 0;
+    		
     	if (upgrade_progress_points >= draw_score && array_length(deck) > 0) {
-    		selection_price = 0;
     		fsm.change("draw_card");
     		return;
     	}
@@ -182,9 +183,8 @@ fsm.add("view_hand", {
     },
     draw: function() {
 		draw_card_meter();
-		banner(upgrade_banner_height, upgrade_banner_y, "SPEND MANA TO PLAY A CARD (left-click)", BLACK, 0.6);
-		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.65), "DISCARD A CARD TO GAIN MANA (right-click)", ORANGE);
-		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.90), "(press R to close)");
+		banner(upgrade_banner_height, upgrade_banner_y, "SELECT CARDS: LEFT-CLICK | CLOSE MENU: R", BLACK, 0.6);
+		draw_shadow_text(room_width/2, room_height/2 - 90, "MANA COST: " + string(selection_price), global.currency >= selection_price ? WHITE : RED, PURPLE);
 	}
 });
 
