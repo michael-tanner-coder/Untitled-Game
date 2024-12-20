@@ -1,2 +1,2 @@
-sprite_index = spr_button_normal;
+sprite = spr_button_normal;
 highlighted = false;

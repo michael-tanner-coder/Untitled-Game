@@ -1437,6 +1437,7 @@
     {"id":{"name":"spr_pillar_box","path":"sprites/spr_pillar_box/spr_pillar_box.yy",},},
     {"id":{"name":"spr_pipe_elbow","path":"sprites/spr_pipe_elbow/spr_pipe_elbow.yy",},},
     {"id":{"name":"spr_pipe","path":"sprites/spr_pipe/spr_pipe.yy",},},
+    {"id":{"name":"spr_pixel","path":"sprites/spr_pixel/spr_pixel.yy",},},
     {"id":{"name":"spr_player_big_body","path":"sprites/spr_player_big_body/spr_player_big_body.yy",},},
     {"id":{"name":"spr_player_big_crotch","path":"sprites/spr_player_big_crotch/spr_player_big_crotch.yy",},},
     {"id":{"name":"spr_player_big_face_hurt","path":"sprites/spr_player_big_face_hurt/spr_player_big_face_hurt.yy",},},

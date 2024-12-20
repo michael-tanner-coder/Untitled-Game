@@ -1,7 +1,10 @@
+image_xscale = width;
+image_yscale = height;
+
 draw_set_alpha(image_alpha);
 
 // Sprite
-draw_sprite_stretched(sprite_index, 0, x, y, width, height);
+draw_sprite_stretched(sprite, 0, x, y, width, height);
 
 // Text
 var _text_renderer = scribble(text);

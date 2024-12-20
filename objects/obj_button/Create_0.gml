@@ -2,6 +2,7 @@
 width = 150;
 height = 60;
 color = BLUE;
+sprite = spr_button_normal;
 
 // Button Content
 text = "Lorem ipsum type shit";

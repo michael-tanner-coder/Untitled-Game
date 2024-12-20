@@ -1253,6 +1253,7 @@
     {"name":"spr_pillar_box","order":4,"path":"sprites/spr_pillar_box/spr_pillar_box.yy",},
     {"name":"spr_pipe_elbow","order":4,"path":"sprites/spr_pipe_elbow/spr_pipe_elbow.yy",},
     {"name":"spr_pipe","order":3,"path":"sprites/spr_pipe/spr_pipe.yy",},
+    {"name":"spr_pixel","order":40,"path":"sprites/spr_pixel/spr_pixel.yy",},
     {"name":"spr_player_big_body","order":3,"path":"sprites/spr_player_big_body/spr_player_big_body.yy",},
     {"name":"spr_player_big_crotch","order":4,"path":"sprites/spr_player_big_crotch/spr_player_big_crotch.yy",},
     {"name":"spr_player_big_face_hurt","order":8,"path":"sprites/spr_player_big_face_hurt/spr_player_big_face_hurt.yy",},
