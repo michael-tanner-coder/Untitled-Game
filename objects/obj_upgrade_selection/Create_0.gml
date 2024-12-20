@@ -466,7 +466,6 @@ subscribe(id, PLAYED_CARD, function() {
 	fsm.change("view_hand");
 });
 subscribe(id, DISCARD_CARD, function() {
-	// TODO: need to give player mana when discarding
 	// TODO: need to disable the button
 	if (array_length(selected_cards) <= 0) {
 		return;
@@ -476,8 +475,16 @@ subscribe(id, DISCARD_CARD, function() {
 	FOREACH selected_cards ELEMENT
 		// for each card, discard the card data from your hand
 		var _card = _elem;
+		var _extra_mana = _card.price/4;
+		global.currency += _extra_mana;
+		var _score_text = instance_create_layer(room_width/2, room_height/2, layer, obj_float_text);
+		_score_text.text = "+" + string(_extra_mana);
+		_score_text.text_sprite = spr_mana_icon;
+		draw_set_font(_score_text.text_font);
+		_score_text.text_sprite_offset_x = (-1 * string_width(_score_text.text)/2)-4;
 		discard_card(_card);
 	END
+	play_sound(snd_points, false);
 	
 	// destroy all card object instances
 	with (obj_card) {
