@@ -124,8 +124,10 @@ Example usage:
 #macro FULLSCREEN_TOGGLED "fullscreen_toggled"
 #macro UPGRADE_SELECTED "upgrade_selected"
 #macro MENU_ITEM_HIGHLIGHTED "menu_item_highlighted"
+#macro PLAYED_CARD "played_card"
 #macro DISCARD_CARD "discard_card"
 #macro DRAW_CARD_IS_AVAILABLE "draw_card_is_available"
+#macro CARD_SELECTED "card_selected"
 
 // Flags
 #macro STARTED_GAME "started_game"
