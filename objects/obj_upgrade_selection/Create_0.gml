@@ -17,6 +17,10 @@ upgrade_banner_y = -1000;
 target_upgrade_banner_y = room_height/4;
 upgrade_banner_height = 200;
 
+// buttons
+play_button = undefined;
+discard_button = undefined;
+
 // draw indictator
 flash_time = 0;
 
@@ -52,6 +56,14 @@ fsm = new SnowState("progress_to_next_draw");
         
 fsm.add("progress_to_next_draw", {
     enter: function() {
+    	if (play_button != undefined) {
+    		instance_destroy(play_button);
+    	}
+    	
+    	if (discard_button != undefined) {
+	    	instance_destroy(discard_button);
+    	}	
+        
         FOREACH card_obj_instances ELEMENT
         	instance_destroy(_elem);
         END
@@ -113,6 +125,15 @@ fsm.add("view_hand", {
         // Pause all characters in the scene
         publish(ACTORS_DEACTIVATED);
         physics_pause_enable(true);
+        
+        // Spawn buttons
+        play_button = instance_create_layer(60, 90, "UI_Instances", obj_button);
+        play_button.text = "PLAY";
+        play_button.on_click_event = PLAYED_CARD;
+        
+        discard_button = instance_create_layer(430, 90, "UI_Instances", obj_button);
+        discard_button.text = "DISCARD";
+        discard_button.on_click_event = DISCARD_CARD;
 
 		// Spawn card_obj_instances
         var _start_x = room_width/2;
@@ -401,14 +422,9 @@ subscribe(id, LEVEL_RESET, function() {
 subscribe(id, LOST_LEVEL, function() {
 	fsm.change("inactive");
 });
-subscribe(id, DISCARD_CARD, function(_card) {
-	discard_card(_card);
-	
-	FOREACH card_obj_instances ELEMENT
-        	instance_destroy(_elem);
-    END
-
-	card_obj_instances = [];
-	
-	fsm.change("view_hand");
+subscribe(id, PLAYED_CARD, function() {
+	show_debug_message("PLAYED CARDS!");
+});
+subscribe(id, DISCARD_CARD, function() {
+	show_debug_message("DISCARD CARDS!");
 });
