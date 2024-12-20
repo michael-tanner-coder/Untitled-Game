@@ -118,6 +118,7 @@ fsm.add("progress_to_next_draw", {
 fsm.add("view_hand", {
     enter: function() {
     	selection_price = 0;
+    	selected_cards = [];
     		
     	if (upgrade_progress_points >= draw_score && array_length(deck) > 0) {
     		fsm.change("draw_card");
@@ -175,11 +176,20 @@ fsm.add("view_hand", {
         END
     },
     step: function() {
+    	if (play_button != undefined) {
+        	play_button.disabled = selection_price > global.currency || array_length(selected_cards) <= 0;
+    	}
+    	
+    	if (discard_button != undefined) {
+	        discard_button.disabled = array_length(selected_cards) <= 0;
+    	}
+    	
         upgrade_banner_y = lerp(upgrade_banner_y, target_upgrade_banner_y, 0.2);
         
         if (input_check_pressed("select")) {
         	fsm.change("progress_to_next_draw");
         }
+        
     },
     draw: function() {
 		draw_card_meter();
@@ -436,7 +446,6 @@ subscribe(id, PLAYED_CARD, function() {
 		global.currency -= selection_price;
 	}
 	else {
-		// TODO: need to show player error message that price is too high (or disable the button)
 		return;
 	}
 	
@@ -466,7 +475,6 @@ subscribe(id, PLAYED_CARD, function() {
 	fsm.change("view_hand");
 });
 subscribe(id, DISCARD_CARD, function() {
-	// TODO: need to disable the button
 	if (array_length(selected_cards) <= 0) {
 		return;
 	}

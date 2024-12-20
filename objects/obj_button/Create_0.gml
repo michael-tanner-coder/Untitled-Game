@@ -16,7 +16,7 @@ event_payload = {};
 highlighted = false;
 time_until_active = 120;
 static_button = false;
-disabled = false;
+disabled = true;
 selected = false;
 
 // Animation
@@ -28,7 +28,7 @@ animation_speed = 0.02;
 animation = EaseOutElastic;
 
 // State Machine
-fsm = new SnowState("inactive");
+fsm = new SnowState("active");
 
 fsm.add("animating", {
 	enter: function() {
@@ -67,26 +67,20 @@ fsm.add("inactive", {
 });
 
 fsm.add("active", {
-	enter: function() {
-		// target_y = resting_y - 75;
-	},
+	enter: function() {},
 	step: function() {
-		// if (highlighted || selected) {
-		// 	y = lerp(y, target_y, 0.08);
-		// }
-		// else {
-		// 	y = lerp(y, resting_y, 0.08);
-		// }
-		
-		// Disabled cards can't be selected
+		// Disabled buttons are faded and can't be selected
 		if (disabled) {
+			image_alpha = 0.5;
 			return;
+		}
+		else {
+			image_alpha = 1;
 		}
 	
 		// Select card
 		if (highlighted && mouse_check_button_pressed(mb_left)) {
 			publish(on_click_event);
-			return;
 		}
 	}
 });
