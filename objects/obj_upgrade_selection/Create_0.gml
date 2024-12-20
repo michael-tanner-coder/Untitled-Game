@@ -118,6 +118,7 @@ fsm.add("progress_to_next_draw", {
 fsm.add("view_hand", {
     enter: function() {
     	if (upgrade_progress_points >= draw_score && array_length(deck) > 0) {
+    		selection_price = 0;
     		fsm.change("draw_card");
     		return;
     	}
@@ -421,23 +422,6 @@ subscribe(id, CARD_SELECTED, function(_payload = {}) {
 		array_delete(selected_cards, _selected_card_index, 1);
 	}
 });
-subscribe(id, UPGRADE_SELECTED, function(_card) {
-	
-	if (fsm.get_current_state() == "discard") {
-		discard_card(_card);
-	
-		FOREACH card_obj_instances ELEMENT
-	        instance_destroy(_elem);
-	    END
-	
-		card_obj_instances = [];
-	
-		fsm.change("view_hand");
-	} else {
-		fsm.change("progress_to_next_draw");
-		discard_card(_card);
-	}
-});
 subscribe(id, ENEMY_DEFEATED, function(_points = 0) {
 	upgrade_progress_points += _points;
 });
@@ -448,8 +432,63 @@ subscribe(id, LOST_LEVEL, function() {
 	fsm.change("inactive");
 });
 subscribe(id, PLAYED_CARD, function() {
-	show_debug_message("PLAYED CARDS!");
+	if (global.currency >= selection_price && array_length(selected_cards) > 0) {
+		global.currency -= selection_price;
+	}
+	else {
+		// TODO: need to show player error message that price is too high (or disable the button)
+		return;
+	}
+	
+	// iterate over selected cards
+	FOREACH selected_cards ELEMENT
+		var _card = _elem;
+		
+		// for each card, publish upgrade event with the card's data
+		publish(UPGRADE_SELECTED, _card);
+		
+		// for each card, discard the card data from your hand
+		discard_card(_card);
+		
+	END
+	
+	// destroy all card object instances
+	with (obj_card) {
+		instance_destroy(self);
+	}
+	card_obj_instances = [];
+	
+	// destroy all button instances
+	instance_destroy(play_button);
+	instance_destroy(discard_button);
+	
+	// restart view hand state to regenerate hand
+	fsm.change("view_hand");
 });
 subscribe(id, DISCARD_CARD, function() {
-	show_debug_message("DISCARD CARDS!");
+	// TODO: need to give player mana when discarding
+	// TODO: need to disable the button
+	if (array_length(selected_cards) <= 0) {
+		return;
+	}
+	
+	// iterate over selected cards
+	FOREACH selected_cards ELEMENT
+		// for each card, discard the card data from your hand
+		var _card = _elem;
+		discard_card(_card);
+	END
+	
+	// destroy all card object instances
+	with (obj_card) {
+		instance_destroy(self);
+	}
+	card_obj_instances = [];
+	
+	// destroy all button instances
+	instance_destroy(play_button);
+	instance_destroy(discard_button);
+	
+	// restart view hand state to regenerate hand 
+	fsm.change("view_hand");
 });
