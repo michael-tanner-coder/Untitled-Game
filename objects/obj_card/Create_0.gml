@@ -19,6 +19,7 @@ highlighted = false;
 time_until_active = 120;
 static_card = false;
 disabled = false;
+selected = false;
 
 // Animation
 starting_y = y; // original y position from before we start animating
@@ -72,7 +73,7 @@ fsm.add("active", {
 		target_y = resting_y - 75;
 	},
 	step: function() {
-		if (highlighted) {
+		if (highlighted || selected) {
 			y = lerp(y, target_y, 0.08);
 		}
 		else {
@@ -84,22 +85,33 @@ fsm.add("active", {
 			return;
 		}
 	
-		// Activate card
+		// Select card
 		if (highlighted && mouse_check_button_pressed(mb_left)) {
-			if (global.currency >= price) {
-				global.currency -= price;
-				publish(UPGRADE_SELECTED, upgrade);
+			selected = !selected;
+			
+			var _event_payload = {
+				selected: selected,
+				card_data: upgrade,
+				price: price,
+			};
+			
+			// if (global.currency >= price) {
+				// global.currency -= price;
+				publish(CARD_SELECTED, _event_payload);
 				play_sound(snd_select_card);
-			}
-			else {
-				play_sound(snd_button_back_alt);
-			}
+			// }
+			// else {
+			// 	play_sound(snd_button_back_alt);
+			// }
 			
 			return;
 		}
 		
 		// Discard card
+		/*
 		if (highlighted && (mouse_check_button_pressed(mb_right) || keyboard_check(ord("X")))) {
+			selected = !selected;
+			
 			publish(DISCARD_CARD, upgrade);
 			play_sound(snd_button_back_alt);
 			
@@ -113,5 +125,6 @@ fsm.add("active", {
 			_score_text.text_sprite_offset_x = (-1 * string_width(_score_text.text)/2)-4;
 			play_sound(snd_points, false);
 		}
+		*/
 	}
 });

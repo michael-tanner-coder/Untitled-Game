@@ -6,6 +6,8 @@ discard_pile = [];
 hand_size_limit = 3;
 deck = [];
 hand_full = false;
+selected_cards = [];
+selection_price = 0;
 var _len = array_length(global.deck);
 array_copy(deck, 0, global.deck, 0, _len);
 
@@ -200,7 +202,7 @@ fsm.add("view_discard_pile", {
         	
         	// Base position for card
         	var _card = instance_create_layer(x, y, "UI_Instances", obj_card);
-        	_card.x = _start_x + ((sprite_get_width(_card.sprite_index) + _card_margin) * _i);
+        	_card.x = _start_x + ((sprite_get_width(_card.sprite_index) + _card_margin/2) * _i);
         	_card.y = starting_card_section_y;
         	_card.starting_y = _card.y;
         	_card.target_y = card_section_y;
@@ -397,12 +399,35 @@ remove_from_temp_deck = function(_card = {}) {
 generate_card_hand();
 
 // Event Subscriptions
+subscribe(id, CARD_SELECTED, function(_payload = {}) {
+	var _price = struct_get(_payload, "price");
+	var _selected = struct_get(_payload, "selected");
+	var _card = struct_get(_payload, "card_data");
+	
+	// if selected,
+	if (_selected) {
+		selection_price += _price; 
+		array_push(selected_cards, _card);
+	} 
+	// if not selected,
+	else {
+		selection_price -= _price;
+		var _selected_card_index = 0;
+		FOREACH selected_cards ELEMENT
+			if (_elem.key == _card.key) {
+				_selected_card_index = _i;
+			}
+		END
+		array_delete(selected_cards, _selected_card_index, 1);
+	}
+});
 subscribe(id, UPGRADE_SELECTED, function(_card) {
+	
 	if (fsm.get_current_state() == "discard") {
 		discard_card(_card);
 	
 		FOREACH card_obj_instances ELEMENT
-	        	instance_destroy(_elem);
+	        instance_destroy(_elem);
 	    END
 	
 		card_obj_instances = [];
