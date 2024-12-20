@@ -8,6 +8,10 @@ text = "Lorem ipsum type shit";
 text_font = fnt_small;
 text_padding = 5;
 
+// Events
+on_click_event = "";
+event_payload = {};
+
 // State Information
 highlighted = false;
 time_until_active = 120;
@@ -81,7 +85,7 @@ fsm.add("active", {
 	
 		// Select card
 		if (highlighted && mouse_check_button_pressed(mb_left)) {
-			selected = !selected;
+			publish(on_click_event);
 			return;
 		}
 	}
