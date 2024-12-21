@@ -1,6 +1,6 @@
 // Configuration Properties
 // upgrade parameters
-draw_score = 500; // make this configurable
+draw_score = 1000; // make this configurable
 hand = [];
 discard_pile = [];
 hand_size_limit = 3;
@@ -28,6 +28,7 @@ retrieve_button = undefined;
 
 // draw indictator
 flash_time = 0;
+got_lucky_draw = false;
 
 // progress bar
 upgrade_progress_points = 0;
@@ -36,11 +37,6 @@ progress_bar_x = 380;
 
 // 
 actor_activation_timer = -1;
-
-/* 
--- When Lucky Draw is active, increase all card weights < 50 by the lucky draw boost (global var)
--- When Lucky Draw is inactive, reset the boost global var
-*/ 
 
 // Methods
 draw_card_meter = function() {
@@ -214,6 +210,12 @@ fsm.add("view_hand", {
 		draw_card_meter();
 		banner(upgrade_banner_height, upgrade_banner_y, "SELECT CARDS: LEFT-CLICK | CLOSE MENU: R", BLACK, 0.6);
 		draw_shadow_text(room_width/2, room_height/2 - 90, "MANA COST: " + string(selection_price), global.currency >= selection_price ? WHITE : RED, PURPLE);
+		if (got_lucky_draw) {
+			draw_shadow_text(room_width/2, room_height/2 - 120, "LUCKY DRAW!", YELLOW, PURPLE);
+		}
+	},
+	leave: function() {
+		got_lucky_draw = false;
 	}
 });
 
@@ -305,10 +307,24 @@ fsm.add("draw_card", {
     	hand_full = array_length(hand) >= hand_size_limit;
     	
     	if (upgrade_progress_points >= draw_score && !hand_full) {
-    		// Increase target points for next upgrade; reset progress
+        	// Roll a chance for the player to get a lucky draw
+        	var _excess_points = max(upgrade_progress_points - draw_score, 0);
+        	var _excess_points_percentage = min(_excess_points/draw_score, 1);
+        	var _random_chance = random_range(0, 100);
+        	
+        	got_lucky_draw = _random_chance <= (_excess_points_percentage * 100);
+        	if (got_lucky_draw) {
+        		lucky_draw_new_card();
+        	}
+        	else {
+        		draw_new_card();
+        	}
+        	
+        	// Increase target points for next upgrade; reset progress
         	draw_score *= 2;
         	upgrade_progress_points = 0;
-        	draw_new_card();
+        	
+        	// Show player their new hand after drawing
         	fsm.change("view_hand");
     	} else {
     		fsm.change("discard");
@@ -411,6 +427,16 @@ draw_new_card = function() {
 	if (array_length(hand) < hand_size_limit && array_length(deck) > 0) {
 		var _struct_deck = build_deck_of_structs(deck);
 		var _upgrade_struct = get_weighted_random_card(_struct_deck);
+		var _upgrade = get_upgrade_type(_upgrade_struct.key);
+    	array_push(hand, _upgrade);
+    	remove_from_temp_deck(_upgrade_struct);
+	}
+}
+
+lucky_draw_new_card = function() {
+	if (array_length(hand) < hand_size_limit && array_length(deck) > 0) {
+		var _struct_deck = build_deck_of_structs(deck);
+		var _upgrade_struct = get_weighted_rare_card(_struct_deck);
 		var _upgrade = get_upgrade_type(_upgrade_struct.key);
     	array_push(hand, _upgrade);
     	remove_from_temp_deck(_upgrade_struct);
