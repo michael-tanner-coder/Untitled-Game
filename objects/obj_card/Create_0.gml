@@ -92,7 +92,7 @@ fsm.add("active", {
 				selected: selected,
 				card_data: upgrade,
 				price: price,
-				card_instance: self,
+				card_instance: id,
 			};
 			
 			publish(CARD_SELECTED, _event_payload);

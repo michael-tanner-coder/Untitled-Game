@@ -191,7 +191,6 @@ fsm.add("view_hand", {
         if (input_check_pressed("select")) {
         	fsm.change("progress_to_next_draw");
         }
-        
     },
     draw: function() {
 		draw_card_meter();
@@ -202,7 +201,7 @@ fsm.add("view_hand", {
 
 fsm.add("view_discard_pile", {
     enter: function() {
-    	selected_cards = 0;
+    	selected_cards = [];
     	selection_price = 0;
     	
         var _card_margin = 30;
@@ -233,7 +232,6 @@ fsm.add("view_discard_pile", {
         	_card.description = _upgrade.description;
         	_card.price = _upgrade.price;
         	_card.sprite = _upgrade.sprite;
-        	_card.disabled = true;
         	
         	// Cache all card_obj_instances for disposal later
         	array_push(card_obj_instances, _card);
@@ -257,6 +255,7 @@ fsm.add("view_discard_pile", {
     draw: function() {
 		draw_card_meter();
 		banner(upgrade_banner_height, upgrade_banner_y, "DISCARD PILE", BLACK, 0.6);
+		draw_shadow_text(room_width/2, room_height/2 - 90, "RETRIEVE UP TO: " + string(retrieve_count), WHITE, PURPLE);
 		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.90), "(press Q to close)");
 	}
 });
@@ -388,7 +387,6 @@ discard_card = function(_card = {}) {
 		}
 	END
 	
-	
 	if (_card_to_remove_index != undefined) {
 		var _discarded_card = hand[_card_to_remove_index];
 		array_push(discard_pile, _discarded_card);
@@ -411,30 +409,65 @@ remove_from_temp_deck = function(_card = {}) {
 	}
 }
 
+check_if_card_selected = function(_card) {
+	var _found_card = false;
+	
+	FOREACH selected_cards ELEMENT
+		if (_card == _elem) {
+			_found_card = true;
+		}
+	END
+	
+	return _found_card;
+}
+
 // -- Randomly select cards for your starting hand 
 generate_card_hand();
 
 // Event Subscriptions
 subscribe(id, CARD_SELECTED, function(_payload = {}) {
 	var _price = struct_get(_payload, "price");
-	var _selected = struct_get(_payload, "selected");
 	var _card = struct_get(_payload, "card_data");
+	var _card_instance = struct_get(_payload, "card_instance");
+	var _selected = check_if_card_selected(_card_instance);
 	
-	// if selected,
-	if (_selected) {
-		selection_price += _price; 
-		array_push(selected_cards, _card);
+	// if already selected,
+	if (!_selected) {
+		
+		// only allow card selection if we're under the limit of selected cards to retrieve
+		if (fsm.get_current_state() == "view_discard_pile") {
+			if (retrieve_count > 0) {
+				retrieve_count -= 1;
+			}
+			else {
+				return;
+			}
+		}
+		
+		// 
+		selection_price += _price;
+		
+		array_push(selected_cards, _card_instance);
+		
+		_card_instance.selected = true;
 	} 
-	// if not selected,
+	// if not already selected,
 	else {
+		if (fsm.get_current_state() == "view_discard_pile") {
+			retrieve_count += 1;
+		}
+	
 		selection_price -= _price;
+		
 		var _selected_card_index = 0;
 		FOREACH selected_cards ELEMENT
-			if (_elem.key == _card.key) {
+			if (_elem == _card_instance) {
 				_selected_card_index = _i;
 			}
 		END
 		array_delete(selected_cards, _selected_card_index, 1);
+		
+		_card_instance.selected = false;
 	}
 });
 subscribe(id, ENEMY_DEFEATED, function(_points = 0) {
@@ -458,7 +491,7 @@ subscribe(id, PLAYED_CARD, function() {
 	
 	// iterate over selected cards
 	FOREACH selected_cards ELEMENT
-		var _card = _elem;
+		var _card = _elem.upgrade;
 		
 		// certain effects need to be implemented within the card selection UI
 		FOREACH _card.effects ELEMENT
@@ -506,7 +539,7 @@ subscribe(id, DISCARD_CARD, function() {
 	// iterate over selected cards
 	FOREACH selected_cards ELEMENT
 		// for each card, discard the card data from your hand
-		var _card = _elem;
+		var _card = _elem.upgrade;
 		var _extra_mana = _card.price/4;
 		global.currency += _extra_mana;
 		var _score_text = instance_create_layer(room_width/2, room_height/2, layer, obj_float_text);
