@@ -24,6 +24,7 @@ upgrade_banner_height = 200;
 // buttons
 play_button = undefined;
 discard_button = undefined;
+retrieve_button = undefined;
 
 // draw indictator
 flash_time = 0;
@@ -209,7 +210,13 @@ fsm.add("view_discard_pile", {
         // Pause all characters in the scene
         publish(ACTORS_DEACTIVATED);
         physics_pause_enable(true);
-
+        
+        // Spawn retrieve button
+        retrieve_button = instance_create_layer(room_width/2, 90, "UI_Instances", obj_button);
+        retrieve_button.x -= retrieve_button.width/2;
+		retrieve_button.text = "RETRIEVE";
+        retrieve_button.on_click_event = RETRIEVE_CARD;
+		
 		// Spawn card_obj_instances
         var _start_x = room_width/2;
         var _section_width = 0;
@@ -248,6 +255,10 @@ fsm.add("view_discard_pile", {
     step: function() {
         upgrade_banner_y = lerp(upgrade_banner_y, target_upgrade_banner_y, 0.2);
         
+        if (retrieve_button != undefined) {
+        	retrieve_button.disabled = array_length(selected_cards) <= 0;
+        }
+        
         if (input_check_pressed("view_discard_pile")) {
         	fsm.change("progress_to_next_draw");
         }
@@ -257,6 +268,18 @@ fsm.add("view_discard_pile", {
 		banner(upgrade_banner_height, upgrade_banner_y, "DISCARD PILE", BLACK, 0.6);
 		draw_shadow_text(room_width/2, room_height/2 - 90, "RETRIEVE UP TO: " + string(retrieve_count), WHITE, PURPLE);
 		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.90), "(press Q to close)");
+	},
+	leave: function() {
+		if (retrieve_button != undefined) {
+	    	instance_destroy(retrieve_button);
+	    }
+	    
+		with (obj_card) {
+			instance_destroy(self);
+		}
+		card_obj_instances = [];
+	    
+	    selected_cards = [];
 	}
 });
 
@@ -470,15 +493,19 @@ subscribe(id, CARD_SELECTED, function(_payload = {}) {
 		_card_instance.selected = false;
 	}
 });
+
 subscribe(id, ENEMY_DEFEATED, function(_points = 0) {
 	upgrade_progress_points += _points;
 });
+
 subscribe(id, LEVEL_RESET, function() {
 	upgrade_progress_points = 0;
 });
+
 subscribe(id, LOST_LEVEL, function() {
 	fsm.change("inactive");
 });
+
 subscribe(id, PLAYED_CARD, function() {
 	if (global.currency >= selection_price && array_length(selected_cards) > 0) {
 		global.currency -= selection_price;
@@ -531,6 +558,7 @@ subscribe(id, PLAYED_CARD, function() {
 		fsm.change("view_hand");
 	}
 });
+
 subscribe(id, DISCARD_CARD, function() {
 	if (array_length(selected_cards) <= 0) {
 		return;
@@ -562,5 +590,31 @@ subscribe(id, DISCARD_CARD, function() {
 	instance_destroy(discard_button);
 	
 	// restart view hand state to regenerate hand 
+	fsm.change("view_hand");
+});
+
+subscribe(id, RETRIEVE_CARD, function() {
+	// for each selected card
+	FOREACH selected_cards ELEMENT
+	
+		// get the struct card data
+		var _selected_card = _elem.upgrade;
+		
+		// add to hand array (similar to draw method)
+		array_push(hand, _selected_card);
+		
+		// remove from discard pile
+		var _discard_pile_index = 0;
+		FOREACH discard_pile ELEMENT
+			var _discarded_card = _elem;
+			if (_discarded_card.key == _selected_card.key) {
+				_discard_pile_index = _i;
+			}
+		END
+		array_delete(discard_pile, _discard_pile_index, 1);
+		
+	END
+	
+	// go back to view hand state
 	fsm.change("view_hand");
 });
