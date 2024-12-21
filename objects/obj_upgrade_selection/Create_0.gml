@@ -8,6 +8,8 @@ deck = [];
 hand_full = false;
 selected_cards = [];
 selection_price = 0;
+retrieve_count = 0;
+
 var _len = array_length(global.deck);
 array_copy(deck, 0, global.deck, 0, _len);
 
@@ -200,6 +202,9 @@ fsm.add("view_hand", {
 
 fsm.add("view_discard_pile", {
     enter: function() {
+    	selected_cards = 0;
+    	selection_price = 0;
+    	
         var _card_margin = 30;
         
         // Pause all characters in the scene
@@ -449,9 +454,24 @@ subscribe(id, PLAYED_CARD, function() {
 		return;
 	}
 	
+	var _go_to_discard_pile = false;
+	
 	// iterate over selected cards
 	FOREACH selected_cards ELEMENT
 		var _card = _elem;
+		
+		// certain effects need to be implemented within the card selection UI
+		FOREACH _card.effects ELEMENT
+			var _effect = _elem;
+			
+			if (_effect.property == "retrieve_discard_pile") {
+				// add the card's value to the retrieve_count number
+				retrieve_count += _effect.value;
+				
+				// set boolean to check when we want to move to discard pile UI
+				_go_to_discard_pile = true;
+			}
+		END
 		
 		// for each card, publish upgrade event with the card's data
 		publish(UPGRADE_SELECTED, _card);
@@ -472,7 +492,11 @@ subscribe(id, PLAYED_CARD, function() {
 	instance_destroy(discard_button);
 	
 	// restart view hand state to regenerate hand
-	fsm.change("view_hand");
+	if (_go_to_discard_pile) {
+		fsm.change("view_discard_pile");
+	} else {
+		fsm.change("view_hand");
+	}
 });
 subscribe(id, DISCARD_CARD, function() {
 	if (array_length(selected_cards) <= 0) {

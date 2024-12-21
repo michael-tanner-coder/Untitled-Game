@@ -206,6 +206,7 @@ enum OPERATIONS {
 	MULTIPLY,
 	DIVIDE,
 	SET,
+	NONE
 }
 
 enum ABILITIES {
