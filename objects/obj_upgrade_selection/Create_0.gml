@@ -1,6 +1,6 @@
 // Configuration Properties
 // upgrade parameters
-draw_score = 1000; // make this configurable
+draw_score = 500; // make this configurable
 hand = [];
 discard_pile = [];
 hand_size_limit = 3;
@@ -38,8 +38,6 @@ progress_bar_x = 380;
 actor_activation_timer = -1;
 
 /* 
--- Render card sprite as a fill based on excess points 
--- Render Lucky Draw indicator when excess points are maxed
 -- When Lucky Draw is active, increase all card weights < 50 by the lucky draw boost (global var)
 -- When Lucky Draw is inactive, reset the boost global var
 */ 
@@ -51,11 +49,20 @@ draw_card_meter = function() {
 	draw_sprite(spr_deck_card_purple, 0, progress_bar_x + 2, progress_bar_y + 2);
 	draw_sprite(spr_deck_card_white, 0, progress_bar_x, progress_bar_y);
 	
+	// Draw Fill Bar
 	var _fill_width = sprite_get_width(spr_deck_card_fill);
 	var _fill_height = sprite_get_height(spr_deck_card_fill);
 	var _fill_x = progress_bar_x;
 	var _fill_y = progress_bar_y + _fill_height - (_fill_height * min((upgrade_progress_points/draw_score), 1));
 	draw_sprite_part(spr_deck_card_fill, 0, 0, _fill_height - (_fill_height * min((upgrade_progress_points/draw_score), 1)), _fill_width, _fill_height, _fill_x, _fill_y);
+	
+	// Lucky Draw Fill Bar
+	var _excess_points = max(upgrade_progress_points - draw_score, 0);
+	var _excess_fill_x = progress_bar_x;
+	var _excess_fill_y = progress_bar_y + _fill_height - (_fill_height * min((_excess_points/draw_score), 1));
+	if (_excess_points > 0) {
+		draw_sprite_part(spr_deck_card_fill_lucky, 0, 0, _fill_height - (_fill_height * min(_excess_points/draw_score, 1)), _fill_width, _fill_height, _excess_fill_x, _excess_fill_y);
+	}
 	
 	// Card Count
 	var _card_count_y = progress_bar_y-3;
@@ -109,7 +116,10 @@ fsm.add("progress_to_next_draw", {
 		
 		// Card Draw Indicator
 		// --only start rendering indicator when we have filled the draw progress meter
+		var _excess_points = max(upgrade_progress_points - draw_score, 0);
    		var _show_draw_indicator = upgrade_progress_points >= draw_score;
+   		var _show_lucky_draw_indicator = _excess_points >= draw_score;
+   		var _draw_indicator = _show_lucky_draw_indicator ? spr_lucky_draw_indicator : spr_draw_indicator;
    		
 		// -- toggle rendering of indicator at regular intervals
 		flash_time++;
@@ -120,7 +130,7 @@ fsm.add("progress_to_next_draw", {
 		
 		// 
 		if (_show_draw_indicator && array_length(deck) > 0) {
-			draw_sprite(spr_draw_indicator, 0, progress_bar_x + sprite_get_width(spr_draw_indicator)/2, progress_bar_y - sprite_get_height(spr_draw_indicator)/2);
+			draw_sprite(_draw_indicator, 0, progress_bar_x + sprite_get_width(spr_draw_indicator)/2, progress_bar_y - sprite_get_height(spr_draw_indicator)/2);
 		}
 	}
 });
