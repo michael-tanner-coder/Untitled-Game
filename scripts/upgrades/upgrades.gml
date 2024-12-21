@@ -2,7 +2,8 @@ global.upgrades = [];
 global.default_unlocked_upgrades = ["fire_faster", "move_faster", "get_sturdy"];
 
 global.default_deck = [
-    {key: "revive", id: gen_id()}, {key: "move_faster", id: gen_id()}
+    {key: "fire_faster", id: gen_id()}, {key: "move_faster", id: gen_id()},{key: "get_sturdy", id: gen_id()},
+    {key: "fire_faster", id: gen_id()}, {key: "move_faster", id: gen_id()},{key: "get_sturdy", id: gen_id()},
 ];
 global.deck = get_save_data_property(DECK, global.default_deck);
 global.deck_limit = 20;
