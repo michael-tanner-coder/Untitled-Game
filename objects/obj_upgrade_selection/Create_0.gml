@@ -605,12 +605,12 @@ subscribe(id, RETRIEVE_CARD, function() {
 		
 		// remove from discard pile
 		var _discard_pile_index = 0;
-		FOREACH discard_pile ELEMENT
-			var _discarded_card = _elem;
+		for (var _j = 0; _j < array_length(discard_pile); _j++) {
+			var _discarded_card = discard_pile[_j];
 			if (_discarded_card.key == _selected_card.key) {
-				_discard_pile_index = _i;
+				_discard_pile_index = _j;
 			}
-		END
+		}
 		array_delete(discard_pile, _discard_pile_index, 1);
 		
 	END
