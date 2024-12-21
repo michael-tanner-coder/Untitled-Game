@@ -2,9 +2,8 @@ global.upgrades = [];
 global.default_unlocked_upgrades = ["fire_faster", "move_faster", "get_sturdy"];
 
 global.default_deck = [
-    {key: "fire_faster", id: gen_id()}, {key: "move_faster",  id: gen_id()}, {key: "get_sturdy",  id: gen_id()}, 
-    {key: "fire_faster", id: gen_id()}, {key: "move_faster",  id: gen_id()}, {key: "get_sturdy",  id: gen_id()},
-    {key: "fire_faster", id: gen_id()}, {key: "move_faster",  id: gen_id()}, {key: "get_sturdy",  id: gen_id()}
+    {key: "fire_faster", id: gen_id()}, {key: "move_faster", id: gen_id()},{key: "get_sturdy", id: gen_id()},
+    {key: "fire_faster", id: gen_id()}, {key: "move_faster", id: gen_id()},{key: "get_sturdy", id: gen_id()},
 ];
 global.deck = get_save_data_property(DECK, global.default_deck);
 global.deck_limit = 20;
@@ -281,6 +280,17 @@ function init_upgrades_collection() {
                     effect_struct("player_recoil", -1, OPERATIONS.MULTIPLY),
                 ],
                 10
+        ),
+        upgrade_struct(
+                "revive",
+                "Revive",
+                "Retrieve 1 card from the discard pile",
+                200, 
+                spr_white_circle,
+                [
+                    effect_struct("retrieve_discard_pile", 1, OPERATIONS.NONE),
+                ],
+                100
         ),
     ];
 

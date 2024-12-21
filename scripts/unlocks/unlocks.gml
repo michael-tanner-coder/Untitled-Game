@@ -20,6 +20,7 @@ global.unlockables = [
     unlock_struct("bullet_strength", "upgrades", 20000),
     unlock_struct("extra_life", "upgrades", 22000),
     unlock_struct("closer", "upgrades", 30000),
+    unlock_struct("revive", "upgrades", 60000),
 ];
 
 function get_unlock_data(_key = "") {

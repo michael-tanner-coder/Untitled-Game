@@ -1,24 +1,23 @@
 // Base Styles
 width = 150;
-height = 300;
+height = 60;
 color = BLUE;
+sprite = spr_button_normal;
 
-// Card Content
-header = "Card Header";
-header_font = fnt_medium;
-sprite = spr_white_circle;
-description = "Lorem ipsum type shit";
-description_font = fnt_small;
-description_padding = 10;
-price = 0;
-upgrade = global.upgrades[0];
-discard_active = false;
+// Button Content
+text = "Lorem ipsum type shit";
+text_font = fnt_small;
+text_padding = 5;
+
+// Events
+on_click_event = "";
+event_payload = {};
 
 // State Information
 highlighted = false;
 time_until_active = 120;
-static_card = false;
-disabled = false;
+static_button = false;
+disabled = true;
 selected = false;
 
 // Animation
@@ -30,7 +29,7 @@ animation_speed = 0.02;
 animation = EaseOutElastic;
 
 // State Machine
-fsm = new SnowState("inactive");
+fsm = new SnowState("active");
 
 fsm.add("animating", {
 	enter: function() {
@@ -57,47 +56,32 @@ fsm.add("animating", {
 
 fsm.add("inactive", {
 	step: function() {
-		if (static_card) {
+		if (static_button) {
 			return;
 		}
 		
 		time_until_active--;
 		if (time_until_active <= 0) {
-			fsm.change("animating");
+			fsm.change("active");
 		}
 	}
 });
 
 fsm.add("active", {
-	enter: function() {
-		target_y = resting_y - 75;
-	},
+	enter: function() {},
 	step: function() {
-		// Moving cards based on highlight/selection state
-		if (highlighted || selected) {
-			y = lerp(y, target_y, 0.08);
+		// Disabled buttons are faded and can't be selected
+		if (disabled) {
+			image_alpha = 0.5;
+			return;
 		}
 		else {
-			y = lerp(y, resting_y, 0.08);
-		}
-		
-		// Disabled cards can't be selected
-		if (disabled) {
-			return;
+			image_alpha = 1;
 		}
 	
 		// Select card
 		if (highlighted && mouse_check_button_pressed(mb_left)) {
-			var _event_payload = {
-				selected: selected,
-				card_data: upgrade,
-				price: price,
-				card_instance: id,
-			};
-			
-			publish(CARD_SELECTED, _event_payload);
-			
-			play_sound(snd_select_card);
+			publish(on_click_event);
 		}
 	}
 });
