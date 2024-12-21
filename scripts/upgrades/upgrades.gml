@@ -4,6 +4,8 @@ global.default_unlocked_upgrades = ["fire_faster", "move_faster", "get_sturdy"];
 global.default_deck = [
     {key: "fire_faster", id: gen_id()}, {key: "move_faster", id: gen_id()},{key: "get_sturdy", id: gen_id()},
     {key: "fire_faster", id: gen_id()}, {key: "move_faster", id: gen_id()},{key: "get_sturdy", id: gen_id()},
+    {key: "fire_faster", id: gen_id()}, {key: "move_faster", id: gen_id()},{key: "get_sturdy", id: gen_id()},
+    {key: "fire_faster", id: gen_id()}, {key: "move_faster", id: gen_id()},{key: "get_sturdy", id: gen_id()},
 ];
 global.deck = get_save_data_property(DECK, global.default_deck);
 global.deck_limit = 20;
@@ -87,6 +89,44 @@ function get_weighted_random_card(_card_collection = []) {
     
     return _found_card;
 }
+
+function get_weighted_rare_card(_card_collection = []) {
+    var _weight_sum = 0;
+    var _rare_cards = [];
+    
+    FOREACH _card_collection ELEMENT
+        if (_elem.randomness_weight <= 50) {
+            array_push(_rare_cards, _elem);
+        }
+    END
+    
+    FOREACH _rare_cards ELEMENT
+        _weight_sum += _elem.randomness_weight;
+    END
+    
+    if (array_length(_rare_cards) <= 0) {
+        return get_weighted_random_card(_card_collection);
+    }
+    
+    var _roll = floor(random_range(0, _weight_sum));
+    var _found_card = undefined;
+    
+    while (_found_card == undefined) {
+        FOREACH _rare_cards ELEMENT
+            var _card = _elem;
+            
+            if (_roll <= _card.randomness_weight) {
+                _found_card = _card;
+                break;
+            }
+            
+            _roll -= _card.randomness_weight;
+        END
+    }
+    
+    return _found_card;
+}
+
 
 function build_deck_of_structs(_deck = []) {
     var _struct_deck = [];
@@ -179,7 +219,8 @@ function init_upgrades_collection() {
                 spr_white_circle, 
                 [
                     effect_struct("player_firing_rate", 1.1, OPERATIONS.MULTIPLY),
-                ]
+                ],
+                100
         ),
         upgrade_struct(
                 "move_faster", 
@@ -189,7 +230,8 @@ function init_upgrades_collection() {
                 spr_white_circle, 
                 [
                     effect_struct("player_density", 0.9, OPERATIONS.MULTIPLY),
-                ]
+                ],
+                100
         ),
         upgrade_struct(
                 "get_sturdy", 
@@ -199,7 +241,8 @@ function init_upgrades_collection() {
                 spr_white_circle, 
                 [
                     effect_struct("player_density", 1.2, OPERATIONS.MULTIPLY),
-                ]
+                ],
+                20
         ),
         upgrade_struct(
                 "fast_fire", 

@@ -28,6 +28,7 @@ retrieve_button = undefined;
 
 // draw indictator
 flash_time = 0;
+got_lucky_draw = false;
 
 // progress bar
 upgrade_progress_points = 0;
@@ -44,11 +45,20 @@ draw_card_meter = function() {
 	draw_sprite(spr_deck_card_purple, 0, progress_bar_x + 2, progress_bar_y + 2);
 	draw_sprite(spr_deck_card_white, 0, progress_bar_x, progress_bar_y);
 	
+	// Draw Fill Bar
 	var _fill_width = sprite_get_width(spr_deck_card_fill);
 	var _fill_height = sprite_get_height(spr_deck_card_fill);
 	var _fill_x = progress_bar_x;
 	var _fill_y = progress_bar_y + _fill_height - (_fill_height * min((upgrade_progress_points/draw_score), 1));
 	draw_sprite_part(spr_deck_card_fill, 0, 0, _fill_height - (_fill_height * min((upgrade_progress_points/draw_score), 1)), _fill_width, _fill_height, _fill_x, _fill_y);
+	
+	// Lucky Draw Fill Bar
+	var _excess_points = max(upgrade_progress_points - draw_score, 0);
+	var _excess_fill_x = progress_bar_x;
+	var _excess_fill_y = progress_bar_y + _fill_height - (_fill_height * min((_excess_points/draw_score), 1));
+	if (_excess_points > 0) {
+		draw_sprite_part(spr_deck_card_fill_lucky, 0, 0, _fill_height - (_fill_height * min(_excess_points/draw_score, 1)), _fill_width, _fill_height, _excess_fill_x, _excess_fill_y);
+	}
 	
 	// Card Count
 	var _card_count_y = progress_bar_y-3;
@@ -102,7 +112,10 @@ fsm.add("progress_to_next_draw", {
 		
 		// Card Draw Indicator
 		// --only start rendering indicator when we have filled the draw progress meter
+		var _excess_points = max(upgrade_progress_points - draw_score, 0);
    		var _show_draw_indicator = upgrade_progress_points >= draw_score;
+   		var _show_lucky_draw_indicator = _excess_points >= draw_score;
+   		var _draw_indicator = _show_lucky_draw_indicator ? spr_lucky_draw_indicator : spr_draw_indicator;
    		
 		// -- toggle rendering of indicator at regular intervals
 		flash_time++;
@@ -113,7 +126,7 @@ fsm.add("progress_to_next_draw", {
 		
 		// 
 		if (_show_draw_indicator && array_length(deck) > 0) {
-			draw_sprite(spr_draw_indicator, 0, progress_bar_x + sprite_get_width(spr_draw_indicator)/2, progress_bar_y - sprite_get_height(spr_draw_indicator)/2);
+			draw_sprite(_draw_indicator, 0, progress_bar_x + sprite_get_width(spr_draw_indicator)/2, progress_bar_y - sprite_get_height(spr_draw_indicator)/2);
 		}
 	}
 });
@@ -197,6 +210,12 @@ fsm.add("view_hand", {
 		draw_card_meter();
 		banner(upgrade_banner_height, upgrade_banner_y, "SELECT CARDS: LEFT-CLICK | CLOSE MENU: R", BLACK, 0.6);
 		draw_shadow_text(room_width/2, room_height/2 - 90, "MANA COST: " + string(selection_price), global.currency >= selection_price ? WHITE : RED, PURPLE);
+		if (got_lucky_draw) {
+			draw_shadow_text(room_width/2, room_height/2 - 120, "LUCKY DRAW!", YELLOW, PURPLE);
+		}
+	},
+	leave: function() {
+		got_lucky_draw = false;
 	}
 });
 
@@ -288,10 +307,24 @@ fsm.add("draw_card", {
     	hand_full = array_length(hand) >= hand_size_limit;
     	
     	if (upgrade_progress_points >= draw_score && !hand_full) {
-    		// Increase target points for next upgrade; reset progress
+        	// Roll a chance for the player to get a lucky draw
+        	var _excess_points = max(upgrade_progress_points - draw_score, 0);
+        	var _excess_points_percentage = min(_excess_points/draw_score, 1);
+        	var _random_chance = random_range(0, 100);
+        	
+        	got_lucky_draw = _random_chance <= (_excess_points_percentage * 100);
+        	if (got_lucky_draw) {
+        		lucky_draw_new_card();
+        	}
+        	else {
+        		draw_new_card();
+        	}
+        	
+        	// Increase target points for next upgrade; reset progress
         	draw_score *= 2;
         	upgrade_progress_points = 0;
-        	draw_new_card();
+        	
+        	// Show player their new hand after drawing
         	fsm.change("view_hand");
     	} else {
     		fsm.change("discard");
@@ -394,6 +427,16 @@ draw_new_card = function() {
 	if (array_length(hand) < hand_size_limit && array_length(deck) > 0) {
 		var _struct_deck = build_deck_of_structs(deck);
 		var _upgrade_struct = get_weighted_random_card(_struct_deck);
+		var _upgrade = get_upgrade_type(_upgrade_struct.key);
+    	array_push(hand, _upgrade);
+    	remove_from_temp_deck(_upgrade_struct);
+	}
+}
+
+lucky_draw_new_card = function() {
+	if (array_length(hand) < hand_size_limit && array_length(deck) > 0) {
+		var _struct_deck = build_deck_of_structs(deck);
+		var _upgrade_struct = get_weighted_rare_card(_struct_deck);
 		var _upgrade = get_upgrade_type(_upgrade_struct.key);
     	array_push(hand, _upgrade);
     	remove_from_temp_deck(_upgrade_struct);
