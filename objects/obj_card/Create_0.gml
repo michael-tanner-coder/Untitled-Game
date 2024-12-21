@@ -73,6 +73,7 @@ fsm.add("active", {
 		target_y = resting_y - 75;
 	},
 	step: function() {
+		// Moving cards based on highlight/selection state
 		if (highlighted || selected) {
 			y = lerp(y, target_y, 0.08);
 		}
@@ -87,44 +88,16 @@ fsm.add("active", {
 	
 		// Select card
 		if (highlighted && mouse_check_button_pressed(mb_left)) {
-			selected = !selected;
-			
 			var _event_payload = {
 				selected: selected,
 				card_data: upgrade,
 				price: price,
+				card_instance: self,
 			};
 			
-			// if (global.currency >= price) {
-				// global.currency -= price;
-				publish(CARD_SELECTED, _event_payload);
-				play_sound(snd_select_card);
-			// }
-			// else {
-			// 	play_sound(snd_button_back_alt);
-			// }
+			publish(CARD_SELECTED, _event_payload);
 			
-			return;
+			play_sound(snd_select_card);
 		}
-		
-		// Discard card
-		/*
-		if (highlighted && (mouse_check_button_pressed(mb_right) || keyboard_check(ord("X")))) {
-			selected = !selected;
-			
-			publish(DISCARD_CARD, upgrade);
-			play_sound(snd_button_back_alt);
-			
-			// give player spare mana when discarding a card
-			var _extra_mana = price/4;
-			global.currency += _extra_mana;
-			var _score_text = instance_create_layer(room_width - width, 64, layer, obj_float_text);
-			_score_text.text = "+" + string(_extra_mana);
-			_score_text.text_sprite = spr_mana_icon;
-			draw_set_font(_score_text.text_font);
-			_score_text.text_sprite_offset_x = (-1 * string_width(_score_text.text)/2)-4;
-			play_sound(snd_points, false);
-		}
-		*/
 	}
 });
