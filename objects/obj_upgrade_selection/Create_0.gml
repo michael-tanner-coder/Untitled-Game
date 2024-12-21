@@ -37,6 +37,13 @@ progress_bar_x = 380;
 // 
 actor_activation_timer = -1;
 
+/* 
+-- Render card sprite as a fill based on excess points 
+-- Render Lucky Draw indicator when excess points are maxed
+-- When Lucky Draw is active, increase all card weights < 50 by the lucky draw boost (global var)
+-- When Lucky Draw is inactive, reset the boost global var
+*/ 
+
 // Methods
 draw_card_meter = function() {
 	// Draw Meter + Deck Icon
