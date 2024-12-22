@@ -3,7 +3,7 @@
 draw_score = 1000; // make this configurable
 hand = [];
 discard_pile = [];
-hand_size_limit = 3;
+hand_size_limit = 4;
 deck = [];
 hand_full = false;
 selected_cards = [];
@@ -163,7 +163,7 @@ fsm.add("view_hand", {
         	
         	// Base position for card
         	var _card = instance_create_layer(x, y, "UI_Instances", obj_card);
-        	_card.x = _start_x + ((sprite_get_width(_card.sprite_index) + _card_margin) * _i);
+        	_card.x = _start_x + (((sprite_get_width(_card.sprite_index)/2) + _card_margin) * _i);
         	_card.y = starting_card_section_y;
         	_card.starting_y = _card.y;
         	_card.target_y = card_section_y;
@@ -418,7 +418,7 @@ generate_card_hand = function() {
 	// 	global.most_recent_unlock = "";
 	// }
 	var _cards_to_remove = [];
-	for (var _i = 0; _i < hand_size_limit-1; _i++) {
+	for (var _i = 0; _i < hand_size_limit; _i++) {
 		draw_new_card();
 	}
 }
