@@ -1150,6 +1150,7 @@
     {"name":"spr_butterfly","order":4,"path":"sprites/spr_butterfly/spr_butterfly.yy",},
     {"name":"spr_button_highlighted","order":39,"path":"sprites/spr_button_highlighted/spr_button_highlighted.yy",},
     {"name":"spr_button_normal","order":38,"path":"sprites/spr_button_normal/spr_button_normal.yy",},
+    {"name":"spr_button_pressed","order":43,"path":"sprites/spr_button_pressed/spr_button_pressed.yy",},
     {"name":"spr_cannon","order":2,"path":"sprites/spr_cannon/spr_cannon.yy",},
     {"name":"spr_cannonball","order":3,"path":"sprites/spr_cannonball/spr_cannonball.yy",},
     {"name":"spr_card_highlighted","order":24,"path":"sprites/spr_card_highlighted/spr_card_highlighted.yy",},

@@ -1328,6 +1328,7 @@
     {"id":{"name":"spr_butterfly","path":"sprites/spr_butterfly/spr_butterfly.yy",},},
     {"id":{"name":"spr_button_highlighted","path":"sprites/spr_button_highlighted/spr_button_highlighted.yy",},},
     {"id":{"name":"spr_button_normal","path":"sprites/spr_button_normal/spr_button_normal.yy",},},
+    {"id":{"name":"spr_button_pressed","path":"sprites/spr_button_pressed/spr_button_pressed.yy",},},
     {"id":{"name":"spr_cannon","path":"sprites/spr_cannon/spr_cannon.yy",},},
     {"id":{"name":"spr_cannonball","path":"sprites/spr_cannonball/spr_cannonball.yy",},},
     {"id":{"name":"spr_card_highlighted","path":"sprites/spr_card_highlighted/spr_card_highlighted.yy",},},
