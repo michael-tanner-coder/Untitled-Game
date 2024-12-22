@@ -321,6 +321,7 @@
     {"id":{"name":"obj_muzzle_flash","path":"objects/obj_muzzle_flash/obj_muzzle_flash.yy",},},
     {"id":{"name":"obj_paddle_boss","path":"objects/obj_paddle_boss/obj_paddle_boss.yy",},},
     {"id":{"name":"obj_paddle","path":"objects/obj_paddle/obj_paddle.yy",},},
+    {"id":{"name":"obj_page_count","path":"objects/obj_page_count/obj_page_count.yy",},},
     {"id":{"name":"obj_particle_emitter","path":"objects/obj_particle_emitter/obj_particle_emitter.yy",},},
     {"id":{"name":"obj_pathfinding_grid","path":"objects/obj_pathfinding_grid/obj_pathfinding_grid.yy",},},
     {"id":{"name":"obj_physics_text","path":"objects/obj_physics_text/obj_physics_text.yy",},},

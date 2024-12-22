@@ -1,6 +1,5 @@
-// paginate the grid menu
-// make page count component (show which page is current)
-// Make deck objects emit event when clicked (change active deck)
+// paginate the grid menu (fix size of page count component; fix off-by-one error)
+// Make deck objects emit event when clicked (change active deck; show the deck as active in UI)
 
 // Dimensions/Positioning
 column_limit = 3;
@@ -11,12 +10,13 @@ record_margin_y = 10;
 
 // Objects
 record_object = obj_deck;
+page_counter = undefined;
 
 // Pagination
 current_page = 0;
 page_count = 1;
 pages = [];
-records_per_page = 8;
+records_per_page = 4;
 records = global.available_decks;
 
 // Methods
@@ -59,7 +59,7 @@ spawn_record_objects = function() {
     FOREACH _records ELEMENT
         // Spawn record object with data passed as a param
         var _record_data = _elem;
-        var _record_object  = instance_create_layer(starting_x, starting_y, layer, record_object, _record_data);
+        var _record_object  = instance_create_layer(starting_x, starting_y, layer, record_object, {deck_data: _record_data});
         
         // Find grid position for record object; adjust when we exceed column limit
         if (_column_count > 0) {
@@ -84,7 +84,7 @@ refresh_ui = function() {
     with(record_object) {
         instance_destroy(self);
     }
-    
+
     spawn_record_objects();
 }
 
@@ -102,7 +102,7 @@ spawn_ui_objects = function() {
     var _grid_width = column_limit * (sprite_get_width(object_get_sprite(record_object)) + record_margin_x);
     var _left_button = instance_create_layer(starting_x - sprite_get_width(spr_arrow_button_left_normal) - record_margin_x, room_height/2, layer, obj_button);
     var _right_button = instance_create_layer(starting_x + _grid_width, room_height/2, layer, obj_button);
-    var _confirm_button = instance_create_layer(room_width/2 - sprite_get_width(spr_button_normal)/2, room_height - 150, layer, obj_button);
+    var _confirm_button = instance_create_layer(room_width/2 - sprite_get_width(spr_button_normal)/2, room_height - 100, layer, obj_button);
     
     _left_button.sprite = spr_arrow_button_left_normal;
     _left_button.normal_sprite = spr_arrow_button_left_normal;
@@ -120,6 +120,10 @@ spawn_ui_objects = function() {
     
     _confirm_button.on_click_event = "start_run";
     _confirm_button.text = "CONFIRM";
+
+    page_counter = instance_create_layer(room_width/2, room_height - 150, layer, obj_page_count);
+    page_counter.page_count =  page_count;
+    page_counter.current_page = current_page;
 }
 
 // Event Subscriptions
@@ -131,6 +135,9 @@ subscribe(id, "prev_page", function() {
 });
 subscribe(id, "start_run", function() {
      go_to_scene_by_key("level");
+});
+subscribe(id, "select_deck", function(_deck = {}) {
+     global.active_deck = _deck;
 });
 
 // Init

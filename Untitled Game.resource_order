@@ -258,6 +258,7 @@
     {"name":"obj_muzzle_flash","order":11,"path":"objects/obj_muzzle_flash/obj_muzzle_flash.yy",},
     {"name":"obj_paddle_boss","order":7,"path":"objects/obj_paddle_boss/obj_paddle_boss.yy",},
     {"name":"obj_paddle","order":16,"path":"objects/obj_paddle/obj_paddle.yy",},
+    {"name":"obj_page_count","order":30,"path":"objects/obj_page_count/obj_page_count.yy",},
     {"name":"obj_particle_emitter","order":1,"path":"objects/obj_particle_emitter/obj_particle_emitter.yy",},
     {"name":"obj_pathfinding_grid","order":1,"path":"objects/obj_pathfinding_grid/obj_pathfinding_grid.yy",},
     {"name":"obj_physics_text","order":12,"path":"objects/obj_physics_text/obj_physics_text.yy",},
