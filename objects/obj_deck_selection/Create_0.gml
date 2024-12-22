@@ -1,8 +1,137 @@
-// add decks to a grid menu
 // paginate the grid menu
 // add pagination arrows
 // make page count component (show which page is current)
-// refresh UI to show decks for current page
 // Make deck objects emit event when clicked (change active deck)
-// Add confirm button to start run with selected deck
-// Show deck menu when starting a new game
+
+// Dimensions/Positioning
+column_limit = 3;
+starting_x = x;
+starting_y = y;
+record_margin_x = 10;
+record_margin_y = 10;
+
+// Objects
+record_object = obj_deck;
+
+// Pagination
+current_page = 0;
+page_count = 1;
+pages = [];
+records_per_page = 8;
+records = global.available_decks;
+
+// Methods
+paginate_data = function() {
+    var _total_record_count = array_length(records);
+    var _record_count = 0;
+    var _new_page = [];
+    
+    page_count = ceil(_total_record_count / records_per_page);
+    
+    FOREACH records ELEMENT
+        var _record = _elem;
+        
+        if (_record_count == records_per_page) {
+            array_push(pages, _new_page);
+            _new_page = [];
+            _record_count = 0;
+        }
+        
+        if (_record_count < records_per_page) {
+            _record_count += 1;
+            array_push(_new_page, _record);
+        }
+    END
+    
+    if (array_length(pages) < page_count) {
+        array_push(pages, _new_page);
+    }
+}
+
+spawn_record_objects = function() {
+    var _records = pages[current_page];
+    var _column_count = 0;
+    var _x = starting_x;
+    var _y = starting_y;
+    
+    show_debug_message("RECORD COUNT:");
+    show_debug_message(string(array_length(_records)));
+    
+    FOREACH _records ELEMENT
+        // Spawn record object with data passed as a param
+        var _record_data = _elem;
+        var _record_object  = instance_create_layer(starting_x, starting_y, layer, record_object, _record_data);
+        
+        // Find grid position for record object; adjust when we exceed column limit
+        if (_column_count > 0) {
+            _x += (sprite_get_width(_record_object.sprite_index) + record_margin_x); 
+        }
+        
+        // Track column count so that we know when we've exceeded the column limit 
+        _column_count += 1;
+        if (_column_count > column_limit) {
+            _column_count = 0;
+            _y += sprite_get_height(_record_object.sprite_index) + record_margin_y;
+            _x = starting_x;
+        }
+        
+        _record_object.x = _x;
+        _record_object.y = _y;
+    END
+}
+
+refresh_ui = function() {
+    
+    with(record_object) {
+        instance_destroy(self);
+    }
+    
+    spawn_record_objects();
+}
+
+go_to_next_page = function() {
+    current_page = min(current_page + 1, page_count-1);
+    refresh_ui();
+}
+
+go_to_previous_page = function() {
+    current_page = max(current_page - 1, 0);
+    refresh_ui();
+}
+
+spawn_ui_objects = function() {
+    var _left_button = instance_create_layer(36, 254, layer, obj_button);
+    var _right_button = instance_create_layer(588, 254, layer, obj_button);
+    var _confirm_button = instance_create_layer(room_width/2 - sprite_get_width(spr_button_normal)/2, room_height - 100, layer, obj_button);
+    
+    _left_button.normal_sprite = spr_arrow_button_left_normal;
+    _left_button.highlight_sprite = spr_arrow_button_left_highlighted;
+    _left_button.pressed_sprite = spr_arrow_button_left_pressed;
+    _left_button.on_click_event = "prev_page";
+    _left_button.use_nine_slice = false;
+
+    _right_button.normal_sprite = spr_arrow_button_right_normal;
+    _right_button.highlight_sprite = spr_arrow_button_right_highlighted;
+    _right_button.pressed_sprite = spr_arrow_button_right_pressed;
+    _right_button.on_click_event = "next_page";
+    _right_button.use_nine_slice = false;
+    
+    _confirm_button.on_click_event = "start_run";
+    _confirm_button.text = "CONFIRM";
+}
+
+// Event Subscriptions
+subscribe(id, "next_page", function() {
+    go_to_next_page();
+});
+subscribe(id, "prev_page", function() {
+    go_to_previous_page();
+});
+subscribe(id, "start_run", function() {
+     go_to_scene_by_key("level");
+});
+
+// Init
+paginate_data();
+spawn_record_objects();
+spawn_ui_objects();

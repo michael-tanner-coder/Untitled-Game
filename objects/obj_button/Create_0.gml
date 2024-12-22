@@ -9,7 +9,7 @@ sprite = normal_sprite;
 use_nine_slice = true;
 
 // Button Content
-text = "Lorem ipsum type shit";
+text = "";
 text_font = fnt_small;
 text_padding = 5;
 
@@ -21,7 +21,7 @@ event_payload = {};
 highlighted = false;
 time_until_active = 120;
 static_button = false;
-disabled = true;
+disabled = false;
 selected = false;
 
 // Animation

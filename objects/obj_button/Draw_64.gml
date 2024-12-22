@@ -8,7 +8,7 @@ if (use_nine_slice) {
 	draw_sprite_stretched(sprite, 0, x, y, width, height);
 }
 else {
-	draw_self();
+	draw_sprite(sprite, 0, x, y);
 }
 
 // Text
