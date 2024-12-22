@@ -116,7 +116,7 @@ function start_game() {
     if (!_started_game) {
         set_flag("started_game", true);
         
-        go_to_scene_by_key("level");
+        go_to_scene_by_key("deck-selection");
         
         return;
     }

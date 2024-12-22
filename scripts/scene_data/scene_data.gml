@@ -34,6 +34,17 @@ global.scene_queue = [
         boss: obj_boss_test,
     },
     {
+        key: "deck-selection",
+        map: rm_deck_selection_menu,
+        music_layers: [],
+        goal_score: 20000,
+        time_between_spawns: 30,
+        default_max_enemy_count: 8,
+        boss_max_enemy_count: 4,
+        enemy_types: [],
+        boss: obj_boss_test,
+    },
+    {
         key: "level",
         map: rm_combat_test_small,
         tutorial_flag: "basics_tutorial",

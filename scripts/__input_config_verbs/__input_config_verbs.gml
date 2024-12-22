@@ -34,7 +34,7 @@ function __input_config_verbs()
             
             // UI actions
             accept:  input_binding_key(vk_space),
-            select: [input_binding_key(ord("R")), input_binding_key(vk_enter)],
+            select: [input_binding_key(mb_left), input_binding_key(vk_enter)],
             cancel:  [input_binding_key("X"), input_binding_key(vk_backspace)],
             action:  input_binding_key(vk_enter),
             special: input_binding_key(vk_shift),

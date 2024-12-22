@@ -1,6 +1,3 @@
-// create a deck struct
-// create an array of available decks and global active deck var
-// create a clickable deck object
 // add decks to a grid menu
 // paginate the grid menu
 // add pagination arrows

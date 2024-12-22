@@ -284,6 +284,7 @@
     {"id":{"name":"obj_credits_spawner","path":"objects/obj_credits_spawner/obj_credits_spawner.yy",},},
     {"id":{"name":"obj_crowd_member","path":"objects/obj_crowd_member/obj_crowd_member.yy",},},
     {"id":{"name":"obj_deck_selection","path":"objects/obj_deck_selection/obj_deck_selection.yy",},},
+    {"id":{"name":"obj_deck","path":"objects/obj_deck/obj_deck.yy",},},
     {"id":{"name":"obj_destroy_force","path":"objects/obj_destroy_force/obj_destroy_force.yy",},},
     {"id":{"name":"obj_dot","path":"objects/obj_dot/obj_dot.yy",},},
     {"id":{"name":"obj_empty","path":"objects/obj_empty/obj_empty.yy",},},
@@ -381,6 +382,7 @@
     {"id":{"name":"rm_combat_test_small_4","path":"rooms/rm_combat_test_small_4/rm_combat_test_small_4.yy",},},
     {"id":{"name":"rm_combat_test_small","path":"rooms/rm_combat_test_small/rm_combat_test_small.yy",},},
     {"id":{"name":"rm_combat_test","path":"rooms/rm_combat_test/rm_combat_test.yy",},},
+    {"id":{"name":"rm_deck_selection_menu","path":"rooms/rm_deck_selection_menu/rm_deck_selection_menu.yy",},},
     {"id":{"name":"rm_end","path":"rooms/rm_end/rm_end.yy",},},
     {"id":{"name":"rm_game_over","path":"rooms/rm_game_over/rm_game_over.yy",},},
     {"id":{"name":"rm_init","path":"rooms/rm_init/rm_init.yy",},},
@@ -1644,6 +1646,7 @@
     {"roomId":{"name":"rm_main_menu","path":"rooms/rm_main_menu/rm_main_menu.yy",},},
     {"roomId":{"name":"rm_end","path":"rooms/rm_end/rm_end.yy",},},
     {"roomId":{"name":"rm_item_menu","path":"rooms/rm_item_menu/rm_item_menu.yy",},},
+    {"roomId":{"name":"rm_deck_selection_menu","path":"rooms/rm_deck_selection_menu/rm_deck_selection_menu.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

@@ -10,11 +10,20 @@ global.default_deck = [
 global.deck = get_save_data_property(DECK, global.default_deck);
 global.deck_limit = 20;
 global.card_type_limit = 3;
+global.saved_decks = [];
+global.active_deck = {};
 
 global.default_collection = [];
 global.collection = get_save_data_property(COLLECTION, global.default_collection);
 
 // Deck functions
+function deck_struct(_name = "", _cards = []) {
+    return {
+        name: _name,
+        cards: _cards,
+    };
+}
+
 function new_card_instance(_key = "") {
     return {key: _key, id: gen_id()};
 }
@@ -127,7 +136,6 @@ function get_weighted_rare_card(_card_collection = []) {
     return _found_card;
 }
 
-
 function build_deck_of_structs(_deck = []) {
     var _struct_deck = [];
     FOREACH _deck ELEMENT
@@ -136,6 +144,14 @@ function build_deck_of_structs(_deck = []) {
         array_push(_struct_deck, _card_struct);
     END
     return _struct_deck;
+}
+
+function init_decks_list() {
+    global.available_decks = [
+        deck_struct("Base Deck", global.deck)
+    ];
+    
+    global.active_deck = global.available_decks[0];
 }
 
 // Collection functions
@@ -340,4 +356,7 @@ function init_upgrades_collection() {
     return global.upgrades;
 }
 
+// Initialization
 init_upgrades_collection();
+
+init_decks_list();
