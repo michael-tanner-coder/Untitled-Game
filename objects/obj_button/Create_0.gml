@@ -2,7 +2,11 @@
 width = 150;
 height = 60;
 color = BLUE;
-sprite = spr_button_normal;
+highlight_sprite = spr_button_highlighted;
+pressed_sprite = spr_button_pressed;
+normal_sprite = spr_button_normal;
+sprite = normal_sprite;
+use_nine_slice = true;
 
 // Button Content
 text = "Lorem ipsum type shit";

@@ -1,3 +1,3 @@
-sprite = spr_button_highlighted;
+sprite = highlight_sprite;
 highlighted = true;
 play_sound(snd_move_card);

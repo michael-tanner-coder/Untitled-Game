@@ -4,7 +4,12 @@ image_yscale = height;
 draw_set_alpha(image_alpha);
 
 // Sprite
-draw_sprite_stretched(sprite, 0, x, y, width, height);
+if (use_nine_slice) {
+	draw_sprite_stretched(sprite, 0, x, y, width, height);
+}
+else {
+	draw_self();
+}
 
 // Text
 var _text_renderer = scribble(text);
