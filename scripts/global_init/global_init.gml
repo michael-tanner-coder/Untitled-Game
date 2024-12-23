@@ -21,6 +21,7 @@ global.temp_game_speed = 1;
 global.boss_lives = 3;
 global.attempts = 0;
 global.most_recent_unlock = "";
+global.gamepad_was_connected = false;
 
 if (!global.dev_mode) {
 	randomise();

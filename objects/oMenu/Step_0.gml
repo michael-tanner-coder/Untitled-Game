@@ -150,3 +150,11 @@ menu_option_prev = menu_option;
 // Play sound
 if (sn != undefined) audio_play_sound(sn, 5, false);
 sn = undefined;
+
+#region Gamepad Detection
+
+if (!global.gamepad_was_connected && gamepad_is_connected(0)) {
+	global.gamepad_was_connected = true;
+}
+
+#endregion
