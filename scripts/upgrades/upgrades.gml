@@ -148,19 +148,7 @@ function build_deck_of_structs(_deck = []) {
 
 function init_decks_list() {
     global.available_decks = [
-        deck_struct("Base Deck", global.deck),
-        deck_struct("Advanced Deck", global.deck),
-        deck_struct("Mega Deck", global.deck),
-        deck_struct("Base Deck", global.deck),
-        deck_struct("Advanced Deck", global.deck),
-        deck_struct("Mega Deck", global.deck),
-        deck_struct("Base Deck", global.deck),
-        deck_struct("Advanced Deck", global.deck),
-        deck_struct("Mega Deck", global.deck),
-        deck_struct("Base Deck", global.deck),
-        deck_struct("Advanced Deck", global.deck),
-        deck_struct("Mega Deck", global.deck),
-        deck_struct("Base Deck", global.deck),
+        deck_struct("Base Deck", global.default_deck),
         deck_struct("Advanced Deck", global.deck),
         deck_struct("Mega Deck", global.deck),
     ];

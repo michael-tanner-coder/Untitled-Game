@@ -1,5 +1,4 @@
 // paginate the grid menu (fix size of page count component; fix off-by-one error)
-// Make deck objects emit event when clicked (change active deck; show the deck as active in UI)
 
 // Dimensions/Positioning
 column_limit = 3;
@@ -60,6 +59,7 @@ spawn_record_objects = function() {
         // Spawn record object with data passed as a param
         var _record_data = _elem;
         var _record_object  = instance_create_layer(starting_x, starting_y, layer, record_object, {deck_data: _record_data});
+        _record_object.deck_data = _record_data;
         
         // Find grid position for record object; adjust when we exceed column limit
         if (_column_count > 0) {
@@ -136,8 +136,14 @@ subscribe(id, "prev_page", function() {
 subscribe(id, "start_run", function() {
      go_to_scene_by_key("level");
 });
-subscribe(id, "select_deck", function(_deck = {}) {
-     global.active_deck = _deck;
+subscribe(id, "select_deck", function(_payload = {}) {
+    var _deck_data = _payload.deck_data;
+    var _deck_instance = _payload.deck_instance;
+    global.active_deck = _deck_data;
+    with (obj_deck) {
+        selected = false;
+    }
+    _deck_instance.selected = true;
 });
 
 // Init

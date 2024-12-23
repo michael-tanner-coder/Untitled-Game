@@ -10,8 +10,8 @@ selected_cards = [];
 selection_price = 0;
 retrieve_count = 0;
 
-var _len = array_length(global.deck);
-array_copy(deck, 0, global.deck, 0, _len);
+var _len = array_length(global.active_deck.cards);
+array_copy(deck, 0, global.active_deck.cards, 0, _len);
 
 // card section
 card_obj_instances = [];
