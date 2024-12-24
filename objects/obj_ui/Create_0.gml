@@ -23,33 +23,26 @@ tutorial_text_padding_left = 40;
 show_tutorial = global.tutorial;
 won_level = false;
 boss_active = false;
+goal_score = _current_scene.goal_score;
 
-victory_bg_y = 64;
-victory_bg_x = -1 * VIEW_WIDTH;
-target_victory_bg_x = 0;
+// Transition Animation
+transition_bg_buffer = 64;
+victory_bg_y = 0;
+transition_bg_starting_x = -1 * sprite_get_width(spr_wipe_transition_base);
+victory_bg_x = transition_bg_starting_x;
+target_victory_bg_x = -1 * transition_bg_buffer;
 victory_bg_alpha = 0;
 target_victory_bg_alpha = 0.7;
 victory_banner_y = (VIEW_HEIGHT/2) - 120;
+animation_progress = 0;
+animation_speed = 0.02;
+animation = WipeTransition;
 
-color_block_offset = 32;
-color_blocks = [
-	YELLOW,
-	ORANGE,
-	RED, 
-	PURPLE,
-	SMALT_BLUE,
-	GREEN,
-	WILD_RICE,
-	PERANO,
-	PORTAGE,
-	EAST_BAY,
-	BLUE,
-	DARK_BLUE, 
-	PINK,
-	PERSIAN_PINK
-];
+tile_x = 0;
+tile_y = 0;
+transition_surface = -1;
 
-goal_score = _current_scene.goal_score;
+// test layering off effect (no game objects rendering on top)
 
 shake_text = function(_time = 0, _magnitude = 0, _fade_rate = 0) {
 	shake_time = _time;
@@ -58,34 +51,64 @@ shake_text = function(_time = 0, _magnitude = 0, _fade_rate = 0) {
 	shake = true;
 }
 
+animate_transition = function(_target_x) {
+	var _curveStruct = animcurve_get(animation);
+	var _channel = animcurve_get_channel(_curveStruct, "x");
+	var _value = animcurve_channel_evaluate(_channel, animation_progress)
+	
+	var _distance = (_target_x - transition_bg_starting_x);
+	victory_bg_x = transition_bg_starting_x + (_distance * _value);
+	
+	animation_progress += animation_speed;
+	animation_progress = clamp(animation_progress, 0, 1);
+}
+draw_transition = function(_x, _y) {
+		// if (!surface_exists(transition_surface)) {
+		// 	transition_surface = surface_create(sprite_get_width(spr_wipe_transition_base), sprite_get_height(spr_wipe_transition_base));
+		// }
+		
+		// surface_set_target(transition_surface);
+		
+		draw_sprite(spr_wipe_transition_base, 0, _x, _y);
+		
+		// gpu_set_colorwriteenable(1, 1, 1, 0);
+		
+		// draw_set_alpha(0.4);
+		// draw_sprite_tiled(spr_tile_deck, 0, tile_x, tile_y);
+		// draw_set_alpha(1);
+
+		// gpu_set_colorwriteenable(1, 1, 1, 1);
+		
+		// surface_reset_target();
+		
+		// draw_surface(transition_surface, _x - sprite_get_xoffset(spr_wipe_transition_base), _y - sprite_get_yoffset(spr_wipe_transition_base));
+}
+
 // State Machine
 fsm = new SnowState("start_level");
 
 fsm.add("start_level", {
 	enter: function() {
-		victory_bg_x = target_victory_bg_x;
+		animation_progress = 0;
 		victory_bg_alpha = 1;
+		target_victory_bg_x = VIEW_WIDTH;
 	},
 	
 	step: function() {
-		victory_bg_x = lerp(victory_bg_x, VIEW_WIDTH * 2, 0.05);
-		victory_bg_alpha = lerp(victory_bg_alpha, 0, 0.1);
+		animate_transition(target_victory_bg_x);
 		
-		if (victory_bg_x >= VIEW_WIDTH * 1.5) {
+		// enable the card for selection when animation is finished
+		if (animation_progress >= 1) {
 			fsm.change("mid_level");
 		}
+		
+		// move tile animation
+		tile_x += 1;
+		tile_y += 1;
 	},
 	
 	draw: function() {
-		// Color background
-		FOREACH color_blocks ELEMENT
-			var _block_width = VIEW_WIDTH + (color_block_offset * array_length(color_blocks));
-			var _block_height = VIEW_HEIGHT / array_length(color_blocks);
-			var _block_x = victory_bg_x - color_block_offset * _i;
-			var _block_y = victory_bg_y + (_i * _block_height);
-			draw_set_color(_elem);
-			draw_rectangle(_block_x, _block_y, _block_x + _block_width, _block_y + _block_height, false);	
-		END
+		draw_transition(victory_bg_x, victory_bg_y);
 	},	
 });
 
@@ -106,21 +129,22 @@ fsm.add("mid_level", {
 });
 
 fsm.add("game_over", {
+	enter: function() {
+		animation_progress = 0;
+		victory_bg_x = transition_bg_starting_x;
+		victory_bg_alpha = 1;
+		target_victory_bg_x = -1 * transition_bg_buffer;
+	},
+	
 	step: function() {
-		victory_bg_x = lerp(victory_bg_x, target_victory_bg_x, 0.05);
-		victory_bg_alpha = lerp(victory_bg_alpha, target_victory_bg_alpha, 0.1);
+		animate_transition(target_victory_bg_x);
+		
+		tile_x += 1;
+		tile_y += 1;
 	},
 	
 	draw: function() {
-		// Color background
-		FOREACH color_blocks ELEMENT
-			var _block_width = VIEW_WIDTH + (color_block_offset * array_length(color_blocks));
-			var _block_height = VIEW_HEIGHT / array_length(color_blocks);
-			var _block_x = ceil(victory_bg_x - color_block_offset * _i);
-			var _block_y = victory_bg_y + (_i * _block_height);
-			draw_set_color(_elem);
-			draw_rectangle(_block_x, _block_y, _block_x + _block_width, _block_y + _block_height, false);	
-		END
+		draw_transition(victory_bg_x, victory_bg_y);
 		
 		// Banner Text
 		var _banner_y = VIEW_WIDTH/2 - 100;
@@ -129,19 +153,23 @@ fsm.add("game_over", {
 		draw_shadow_text(VIEW_WIDTH/2, _banner_y - 30, "BEST SCORE: " + string(global.best_score));
 		draw_shadow_text(VIEW_WIDTH/2, _banner_y, "RETRY: spacebar | EDIT DECK: 'R'");
 		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 30, "QUIT: escape");
-	}
+	},
+	
+	leave: function() {
+		transition_bg_starting_x = target_victory_bg_x;
+	},
 });
 
 fsm.add("level_complete", {
 	enter: function() {
+		animation_progress = 0;
 		target_victory_bg_x = 0;
 		victory_bg_alpha = 0;
 		target_victory_bg_alpha = 0.7;
 	},
 	
 	step: function() {
-		victory_bg_x = lerp(victory_bg_x, target_victory_bg_x, 0.05);
-		victory_bg_alpha = lerp(victory_bg_alpha, target_victory_bg_alpha, 0.1);
+		animate_transition(target_victory_bg_x);
 		
 		if (input_check_pressed("progress")) {
 			global.temp_game_speed = 1;
@@ -150,15 +178,7 @@ fsm.add("level_complete", {
 	},
 	
 	draw: function() {
-		// Color background
-		FOREACH color_blocks ELEMENT
-			var _block_width = VIEW_WIDTH + (color_block_offset * array_length(color_blocks));
-			var _block_height = VIEW_HEIGHT / array_length(color_blocks);
-			var _block_x = victory_bg_x - color_block_offset * _i;
-			var _block_y = victory_bg_y + (_i * _block_height);
-			draw_set_color(_elem);
-			draw_rectangle(_block_x, _block_y, _block_x + _block_width, _block_y + _block_height, false);	
-		END
+		draw_transition(victory_bg_x, victory_bg_y);
 		
 		// Text banners
 		banner(100, victory_banner_y, "LEVEL COMPLETE", BLACK, victory_bg_alpha);
@@ -173,11 +193,11 @@ fsm.add("game_complete", {
 		target_victory_bg_x = 0;
 		victory_bg_alpha = 0;
 		target_victory_bg_alpha = 0.7;
+		animation_progress = 0;
 	},
 	
 	step: function() {
-		victory_bg_x = lerp(victory_bg_x, target_victory_bg_x, 0.05);
-		victory_bg_alpha = lerp(victory_bg_alpha, target_victory_bg_alpha, 0.1);
+		animate_transition(target_victory_bg_x);
 		
 		if (input_check_pressed("progress")) {
 			quit_to_menu();
@@ -185,15 +205,7 @@ fsm.add("game_complete", {
 	},
 	
 	draw: function() {
-		// Color background
-		FOREACH color_blocks ELEMENT
-			var _block_width = VIEW_WIDTH + (color_block_offset * array_length(color_blocks));
-			var _block_height = VIEW_HEIGHT / array_length(color_blocks);
-			var _block_x = victory_bg_x - color_block_offset * _i;
-			var _block_y = victory_bg_y + (_i * _block_height);
-			draw_set_color(_elem);
-			draw_rectangle(_block_x, _block_y, _block_x + _block_width, _block_y + _block_height, false);	
-		END
+		draw_transition(victory_bg_x, victory_bg_y);
 		
 		// Text banners
 		banner(100, victory_banner_y, "VICTORY ACHIEVED", BLACK, victory_bg_alpha);
