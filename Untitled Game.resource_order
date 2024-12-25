@@ -292,6 +292,7 @@
     {"name":"obj_upgrade_selection","order":14,"path":"objects/obj_upgrade_selection/obj_upgrade_selection.yy",},
     {"name":"obj_wall","order":7,"path":"objects/obj_wall/obj_wall.yy",},
     {"name":"obj_waypoint","order":2,"path":"objects/obj_waypoint/obj_waypoint.yy",},
+    {"name":"obj_wipe_transition","order":31,"path":"objects/obj_wipe_transition/obj_wipe_transition.yy",},
     {"name":"oInputManager","order":5,"path":"objects/oInputManager/oInputManager.yy",},
     {"name":"oMenu","order":6,"path":"objects/oMenu/oMenu.yy",},
     {"name":"block_destruction","order":2,"path":"particles/block_destruction/block_destruction.yy",},

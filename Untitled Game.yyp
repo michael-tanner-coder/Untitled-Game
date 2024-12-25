@@ -356,6 +356,7 @@
     {"id":{"name":"obj_upgrade_selection","path":"objects/obj_upgrade_selection/obj_upgrade_selection.yy",},},
     {"id":{"name":"obj_wall","path":"objects/obj_wall/obj_wall.yy",},},
     {"id":{"name":"obj_waypoint","path":"objects/obj_waypoint/obj_waypoint.yy",},},
+    {"id":{"name":"obj_wipe_transition","path":"objects/obj_wipe_transition/obj_wipe_transition.yy",},},
     {"id":{"name":"oInputManager","path":"objects/oInputManager/oInputManager.yy",},},
     {"id":{"name":"oMenu","path":"objects/oMenu/oMenu.yy",},},
     {"id":{"name":"block_destruction","path":"particles/block_destruction/block_destruction.yy",},},

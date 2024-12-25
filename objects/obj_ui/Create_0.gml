@@ -25,24 +25,17 @@ won_level = false;
 boss_active = false;
 goal_score = _current_scene.goal_score;
 
-// Transition Animation
-transition_bg_buffer = 64;
-victory_bg_y = 0;
-transition_bg_starting_x = -1 * sprite_get_width(spr_wipe_transition_base);
-victory_bg_x = transition_bg_starting_x;
-target_victory_bg_x = -1 * transition_bg_buffer;
+// Victory Banner
 victory_bg_alpha = 0;
 target_victory_bg_alpha = 0.7;
 victory_banner_y = (VIEW_HEIGHT/2) - 120;
-animation_progress = 0;
-animation_speed = 0.02;
-animation = WipeTransition;
 
-tile_x = 0;
-tile_y = 0;
+// Transition Effect
 transition_surface = -1;
+transition_effect_object = obj_wipe_transition;
+transition_effect_instance = undefined;
 
-// test layering off effect (no game objects rendering on top)
+// test card pattern with draw surfaces
 
 shake_text = function(_time = 0, _magnitude = 0, _fade_rate = 0) {
 	shake_time = _time;
@@ -51,37 +44,12 @@ shake_text = function(_time = 0, _magnitude = 0, _fade_rate = 0) {
 	shake = true;
 }
 
-animate_transition = function(_target_x) {
-	var _curveStruct = animcurve_get(animation);
-	var _channel = animcurve_get_channel(_curveStruct, "x");
-	var _value = animcurve_channel_evaluate(_channel, animation_progress)
-	
-	var _distance = (_target_x - transition_bg_starting_x);
-	victory_bg_x = transition_bg_starting_x + (_distance * _value);
-	
-	animation_progress += animation_speed;
-	animation_progress = clamp(animation_progress, 0, 1);
-}
-draw_transition = function(_x, _y) {
-		// if (!surface_exists(transition_surface)) {
-		// 	transition_surface = surface_create(sprite_get_width(spr_wipe_transition_base), sprite_get_height(spr_wipe_transition_base));
-		// }
-		
-		// surface_set_target(transition_surface);
-		
-		draw_sprite(spr_wipe_transition_base, 0, _x, _y);
-		
-		// gpu_set_colorwriteenable(1, 1, 1, 0);
-		
-		// draw_set_alpha(0.4);
-		// draw_sprite_tiled(spr_tile_deck, 0, tile_x, tile_y);
-		// draw_set_alpha(1);
-
-		// gpu_set_colorwriteenable(1, 1, 1, 1);
-		
-		// surface_reset_target();
-		
-		// draw_surface(transition_surface, _x - sprite_get_xoffset(spr_wipe_transition_base), _y - sprite_get_yoffset(spr_wipe_transition_base));
+spawn_transition_effect = function() {
+	transition_effect_instance = instance_create_layer(x, y, layer, transition_effect_object);
+	transition_effect_instance.starting_x = -1 * sprite_get_width(transition_effect_instance.sprite_index);
+	transition_effect_instance.target_x = -1 * transition_effect_instance.x_buffer
+	transition_effect_instance.start_animation();
+	transition_effect_instance.depth = depth - 1;
 }
 
 // State Machine
@@ -89,27 +57,22 @@ fsm = new SnowState("start_level");
 
 fsm.add("start_level", {
 	enter: function() {
-		animation_progress = 0;
-		victory_bg_alpha = 1;
-		target_victory_bg_x = VIEW_WIDTH;
+		transition_effect_instance = instance_create_layer(x, y, layer, transition_effect_object);
+		transition_effect_instance.target_x = sprite_get_width(transition_effect_instance.sprite_index);
+		transition_effect_instance.start_animation();
 	},
 	
 	step: function() {
-		animate_transition(target_victory_bg_x);
-		
-		// enable the card for selection when animation is finished
-		if (animation_progress >= 1) {
+		if (transition_effect_instance != undefined && transition_effect_instance.animation_progress >= 1) {
 			fsm.change("mid_level");
 		}
-		
-		// move tile animation
-		tile_x += 1;
-		tile_y += 1;
 	},
 	
-	draw: function() {
-		draw_transition(victory_bg_x, victory_bg_y);
-	},	
+	draw: function() {},
+	
+	leave: function() {
+		instance_destroy(transition_effect_instance);
+	}
 });
 
 fsm.add("mid_level", {
@@ -130,23 +93,12 @@ fsm.add("mid_level", {
 
 fsm.add("game_over", {
 	enter: function() {
-		animation_progress = 0;
-		victory_bg_x = transition_bg_starting_x;
-		victory_bg_alpha = 1;
-		target_victory_bg_x = -1 * transition_bg_buffer;
+		spawn_transition_effect();
 	},
 	
-	step: function() {
-		animate_transition(target_victory_bg_x);
-		
-		tile_x += 1;
-		tile_y += 1;
-	},
+	step: function() {},
 	
 	draw: function() {
-		draw_transition(victory_bg_x, victory_bg_y);
-		
-		// Banner Text
 		var _banner_y = VIEW_WIDTH/2 - 100;
 		draw_set_color(WHITE);
 		draw_shadow_text(VIEW_WIDTH/2, _banner_y - 60, "FINAL SCORE: " + string(score));
@@ -156,21 +108,16 @@ fsm.add("game_over", {
 	},
 	
 	leave: function() {
-		transition_bg_starting_x = target_victory_bg_x;
-	},
+		instance_destroy(transition_effect_instance);
+	}
 });
 
 fsm.add("level_complete", {
 	enter: function() {
-		animation_progress = 0;
-		target_victory_bg_x = 0;
-		victory_bg_alpha = 0;
-		target_victory_bg_alpha = 0.7;
+		spawn_transition_effect();
 	},
 	
 	step: function() {
-		animate_transition(target_victory_bg_x);
-		
 		if (input_check_pressed("progress")) {
 			global.temp_game_speed = 1;
 			go_to_end_scene();
@@ -178,9 +125,6 @@ fsm.add("level_complete", {
 	},
 	
 	draw: function() {
-		draw_transition(victory_bg_x, victory_bg_y);
-		
-		// Text banners
 		banner(100, victory_banner_y, "LEVEL COMPLETE", BLACK, victory_bg_alpha);
 		banner(100, victory_banner_y + 120, "FINAL SCORE: " + string(score), BLACK, victory_bg_alpha);
 		banner(100, victory_banner_y + 240, "PRESS SPACE TO CONTINUE", BLACK, victory_bg_alpha);
@@ -190,24 +134,16 @@ fsm.add("level_complete", {
 
 fsm.add("game_complete", {
 	enter: function() {
-		target_victory_bg_x = 0;
-		victory_bg_alpha = 0;
-		target_victory_bg_alpha = 0.7;
-		animation_progress = 0;
+		spawn_transition_effect();
 	},
 	
 	step: function() {
-		animate_transition(target_victory_bg_x);
-		
 		if (input_check_pressed("progress")) {
 			quit_to_menu();
 		}
 	},
 	
 	draw: function() {
-		draw_transition(victory_bg_x, victory_bg_y);
-		
-		// Text banners
 		banner(100, victory_banner_y, "VICTORY ACHIEVED", BLACK, victory_bg_alpha);
 		banner(100, victory_banner_y + 120, "FINAL SCORE: " + string(score), BLACK, victory_bg_alpha);
 		banner(100, victory_banner_y + 240, "PRESS SPACE TO CONTINUE", BLACK, victory_bg_alpha);
