@@ -1,4 +1,5 @@
 // paginate the grid menu (fix size of page count component; fix off-by-one error)
+// re-align UI elements (fix large hitbox of arrow buttons)
 
 // Dimensions/Positioning
 column_limit = 3;
@@ -17,6 +18,10 @@ page_count = 1;
 pages = [];
 records_per_page = 4;
 records = global.available_decks;
+
+// Transition animation
+transition_effect_object = obj_wipe_transition;
+transition_effect_instance = undefined;
 
 // Methods
 paginate_data = function() {
@@ -58,7 +63,7 @@ spawn_record_objects = function() {
     FOREACH _records ELEMENT
         // Spawn record object with data passed as a param
         var _record_data = _elem;
-        var _record_object  = instance_create_layer(starting_x, starting_y, layer, record_object, {deck_data: _record_data});
+        var _record_object  = instance_create_layer(starting_x, starting_y, layer, record_object);
         _record_object.deck_data = _record_data;
         
         // Find grid position for record object; adjust when we exceed column limit
@@ -134,7 +139,7 @@ subscribe(id, "prev_page", function() {
     go_to_previous_page();
 });
 subscribe(id, "start_run", function() {
-     go_to_scene_by_key("level");
+    fsm.change("confirmation");
 });
 subscribe(id, "select_deck", function(_payload = {}) {
     var _deck_data = _payload.deck_data;
@@ -150,3 +155,27 @@ subscribe(id, "select_deck", function(_payload = {}) {
 paginate_data();
 spawn_record_objects();
 spawn_ui_objects();
+
+// State Machine
+fsm = new SnowState("selection");
+
+fsm.add("selection", {
+    enter: function() {},
+    step: function() {},
+    draw: function() {},
+});
+
+fsm.add("confirmation", {
+    enter: function() {
+        transition_effect_instance = instance_create_layer(x, y, "UI_Instances", transition_effect_object);
+    	transition_effect_instance.starting_x = -1 * sprite_get_width(transition_effect_instance.sprite_index);
+    	transition_effect_instance.target_x = -1 * transition_effect_instance.x_buffer
+    	transition_effect_instance.start_animation();
+    },
+    step: function() {
+        if (transition_effect_instance.animation_progress >= 1) {
+            go_to_scene_by_key("level");
+        }
+    },
+    draw: function() {},
+});
