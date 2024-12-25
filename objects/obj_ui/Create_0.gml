@@ -23,33 +23,19 @@ tutorial_text_padding_left = 40;
 show_tutorial = global.tutorial;
 won_level = false;
 boss_active = false;
+goal_score = _current_scene.goal_score;
 
-victory_bg_y = 64;
-victory_bg_x = -1 * VIEW_WIDTH;
-target_victory_bg_x = 0;
+// Victory Banner
 victory_bg_alpha = 0;
 target_victory_bg_alpha = 0.7;
 victory_banner_y = (VIEW_HEIGHT/2) - 120;
 
-color_block_offset = 32;
-color_blocks = [
-	YELLOW,
-	ORANGE,
-	RED, 
-	PURPLE,
-	SMALT_BLUE,
-	GREEN,
-	WILD_RICE,
-	PERANO,
-	PORTAGE,
-	EAST_BAY,
-	BLUE,
-	DARK_BLUE, 
-	PINK,
-	PERSIAN_PINK
-];
+// Transition Effect
+transition_surface = -1;
+transition_effect_object = obj_wipe_transition;
+transition_effect_instance = undefined;
 
-goal_score = _current_scene.goal_score;
+// test card pattern with draw surfaces
 
 shake_text = function(_time = 0, _magnitude = 0, _fade_rate = 0) {
 	shake_time = _time;
@@ -58,35 +44,35 @@ shake_text = function(_time = 0, _magnitude = 0, _fade_rate = 0) {
 	shake = true;
 }
 
+spawn_transition_effect = function() {
+	transition_effect_instance = instance_create_layer(x, y, layer, transition_effect_object);
+	transition_effect_instance.starting_x = -1 * sprite_get_width(transition_effect_instance.sprite_index);
+	transition_effect_instance.target_x = -1 * transition_effect_instance.x_buffer
+	transition_effect_instance.start_animation();
+	transition_effect_instance.depth = depth - 1;
+}
+
 // State Machine
 fsm = new SnowState("start_level");
 
 fsm.add("start_level", {
 	enter: function() {
-		victory_bg_x = target_victory_bg_x;
-		victory_bg_alpha = 1;
+		transition_effect_instance = instance_create_layer(x, y, layer, transition_effect_object);
+		transition_effect_instance.target_x = sprite_get_width(transition_effect_instance.sprite_index);
+		transition_effect_instance.start_animation();
 	},
 	
 	step: function() {
-		victory_bg_x = lerp(victory_bg_x, VIEW_WIDTH * 2, 0.05);
-		victory_bg_alpha = lerp(victory_bg_alpha, 0, 0.1);
-		
-		if (victory_bg_x >= VIEW_WIDTH * 1.5) {
+		if (transition_effect_instance != undefined && transition_effect_instance.animation_progress >= 1) {
 			fsm.change("mid_level");
 		}
 	},
 	
-	draw: function() {
-		// Color background
-		FOREACH color_blocks ELEMENT
-			var _block_width = VIEW_WIDTH + (color_block_offset * array_length(color_blocks));
-			var _block_height = VIEW_HEIGHT / array_length(color_blocks);
-			var _block_x = victory_bg_x - color_block_offset * _i;
-			var _block_y = victory_bg_y + (_i * _block_height);
-			draw_set_color(_elem);
-			draw_rectangle(_block_x, _block_y, _block_x + _block_width, _block_y + _block_height, false);	
-		END
-	},	
+	draw: function() {},
+	
+	leave: function() {
+		instance_destroy(transition_effect_instance);
+	}
 });
 
 fsm.add("mid_level", {
@@ -106,43 +92,33 @@ fsm.add("mid_level", {
 });
 
 fsm.add("game_over", {
-	step: function() {
-		victory_bg_x = lerp(victory_bg_x, target_victory_bg_x, 0.05);
-		victory_bg_alpha = lerp(victory_bg_alpha, target_victory_bg_alpha, 0.1);
+	enter: function() {
+		spawn_transition_effect();
 	},
 	
-	draw: function() {
-		// Color background
-		FOREACH color_blocks ELEMENT
-			var _block_width = VIEW_WIDTH + (color_block_offset * array_length(color_blocks));
-			var _block_height = VIEW_HEIGHT / array_length(color_blocks);
-			var _block_x = ceil(victory_bg_x - color_block_offset * _i);
-			var _block_y = victory_bg_y + (_i * _block_height);
-			draw_set_color(_elem);
-			draw_rectangle(_block_x, _block_y, _block_x + _block_width, _block_y + _block_height, false);	
-		END
-		
-		// Banner Text
+	step: function() {},
+	
+	draw_gui: function() {
 		var _banner_y = VIEW_WIDTH/2 - 100;
 		draw_set_color(WHITE);
+		draw_set_halign(fa_center);
 		draw_shadow_text(VIEW_WIDTH/2, _banner_y - 60, "FINAL SCORE: " + string(score));
 		draw_shadow_text(VIEW_WIDTH/2, _banner_y - 30, "BEST SCORE: " + string(global.best_score));
 		draw_shadow_text(VIEW_WIDTH/2, _banner_y, "RETRY: spacebar | EDIT DECK: 'R'");
 		draw_shadow_text(VIEW_WIDTH/2, _banner_y + 30, "QUIT: escape");
+	},
+	
+	leave: function() {
+		instance_destroy(transition_effect_instance);
 	}
 });
 
 fsm.add("level_complete", {
 	enter: function() {
-		target_victory_bg_x = 0;
-		victory_bg_alpha = 0;
-		target_victory_bg_alpha = 0.7;
+		spawn_transition_effect();
 	},
 	
 	step: function() {
-		victory_bg_x = lerp(victory_bg_x, target_victory_bg_x, 0.05);
-		victory_bg_alpha = lerp(victory_bg_alpha, target_victory_bg_alpha, 0.1);
-		
 		if (input_check_pressed("progress")) {
 			global.temp_game_speed = 1;
 			go_to_end_scene();
@@ -150,17 +126,6 @@ fsm.add("level_complete", {
 	},
 	
 	draw: function() {
-		// Color background
-		FOREACH color_blocks ELEMENT
-			var _block_width = VIEW_WIDTH + (color_block_offset * array_length(color_blocks));
-			var _block_height = VIEW_HEIGHT / array_length(color_blocks);
-			var _block_x = victory_bg_x - color_block_offset * _i;
-			var _block_y = victory_bg_y + (_i * _block_height);
-			draw_set_color(_elem);
-			draw_rectangle(_block_x, _block_y, _block_x + _block_width, _block_y + _block_height, false);	
-		END
-		
-		// Text banners
 		banner(100, victory_banner_y, "LEVEL COMPLETE", BLACK, victory_bg_alpha);
 		banner(100, victory_banner_y + 120, "FINAL SCORE: " + string(score), BLACK, victory_bg_alpha);
 		banner(100, victory_banner_y + 240, "PRESS SPACE TO CONTINUE", BLACK, victory_bg_alpha);
@@ -170,32 +135,16 @@ fsm.add("level_complete", {
 
 fsm.add("game_complete", {
 	enter: function() {
-		target_victory_bg_x = 0;
-		victory_bg_alpha = 0;
-		target_victory_bg_alpha = 0.7;
+		spawn_transition_effect();
 	},
 	
 	step: function() {
-		victory_bg_x = lerp(victory_bg_x, target_victory_bg_x, 0.05);
-		victory_bg_alpha = lerp(victory_bg_alpha, target_victory_bg_alpha, 0.1);
-		
 		if (input_check_pressed("progress")) {
 			quit_to_menu();
 		}
 	},
 	
 	draw: function() {
-		// Color background
-		FOREACH color_blocks ELEMENT
-			var _block_width = VIEW_WIDTH + (color_block_offset * array_length(color_blocks));
-			var _block_height = VIEW_HEIGHT / array_length(color_blocks);
-			var _block_x = victory_bg_x - color_block_offset * _i;
-			var _block_y = victory_bg_y + (_i * _block_height);
-			draw_set_color(_elem);
-			draw_rectangle(_block_x, _block_y, _block_x + _block_width, _block_y + _block_height, false);	
-		END
-		
-		// Text banners
 		banner(100, victory_banner_y, "VICTORY ACHIEVED", BLACK, victory_bg_alpha);
 		banner(100, victory_banner_y + 120, "FINAL SCORE: " + string(score), BLACK, victory_bg_alpha);
 		banner(100, victory_banner_y + 240, "PRESS SPACE TO CONTINUE", BLACK, victory_bg_alpha);

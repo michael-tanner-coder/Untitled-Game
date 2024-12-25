@@ -402,7 +402,9 @@ fsm.add("discard", {
 
 fsm.add("inactive", {
 	step: function() {},
-	draw: function() {},
+	draw: function() {
+		draw_card_meter();
+	},
 })
 
 // Methods
