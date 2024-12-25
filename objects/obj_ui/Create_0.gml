@@ -98,9 +98,10 @@ fsm.add("game_over", {
 	
 	step: function() {},
 	
-	draw: function() {
+	draw_gui: function() {
 		var _banner_y = VIEW_WIDTH/2 - 100;
 		draw_set_color(WHITE);
+		draw_set_halign(fa_center);
 		draw_shadow_text(VIEW_WIDTH/2, _banner_y - 60, "FINAL SCORE: " + string(score));
 		draw_shadow_text(VIEW_WIDTH/2, _banner_y - 30, "BEST SCORE: " + string(global.best_score));
 		draw_shadow_text(VIEW_WIDTH/2, _banner_y, "RETRY: spacebar | EDIT DECK: 'R'");

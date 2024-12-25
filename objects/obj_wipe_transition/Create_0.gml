@@ -5,7 +5,7 @@ transition_y = 0;
 target_x = -1 * x_buffer;
 
 animation_progress = 0;
-animation_speed = 0.02;
+animation_speed = 0.015;
 animation = WipeTransition;
 
 // State Machine
