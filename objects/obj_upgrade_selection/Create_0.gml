@@ -87,7 +87,7 @@ fsm.add("progress_to_next_draw", {
         actor_activation_timer = 5;
     },
     step: function() {
-        if (input_check_pressed("select") && (array_length(deck) > 0 || array_length(hand) > 0)) {
+        if (input_check_pressed("view_hand") && (array_length(deck) > 0 || array_length(hand) > 0)) {
             fsm.change("view_hand");
         }
         
@@ -202,7 +202,7 @@ fsm.add("view_hand", {
     	
         upgrade_banner_y = lerp(upgrade_banner_y, target_upgrade_banner_y, 0.2);
         
-        if (input_check_pressed("select")) {
+        if (input_check_pressed("view_hand")) {
         	fsm.change("progress_to_next_draw");
         }
     },
