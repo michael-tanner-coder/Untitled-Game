@@ -1,10 +1,10 @@
-image_xscale = width;
-image_yscale = height;
 
 draw_set_alpha(image_alpha);
 
 // Sprite
 if (use_nine_slice) {
+	image_xscale = width;
+	image_yscale = height;
 	draw_sprite_stretched(sprite, 0, x, y, width, height);
 }
 else {
