@@ -1,5 +1,4 @@
 // paginate the grid menu (fix size of page count component; fix off-by-one error)
-// re-align UI elements (fix large hitbox of arrow buttons)
 
 // Dimensions/Positioning
 column_limit = 3;
@@ -107,8 +106,9 @@ spawn_ui_objects = function() {
     var _grid_width = column_limit * (sprite_get_width(object_get_sprite(record_object)) + record_margin_x);
     var _left_button = instance_create_layer(starting_x - sprite_get_width(spr_arrow_button_left_normal) - record_margin_x, room_height/2, layer, obj_button);
     var _right_button = instance_create_layer(starting_x + _grid_width, room_height/2, layer, obj_button);
-    var _confirm_button = instance_create_layer(room_width/2 - sprite_get_width(spr_button_normal)/2, room_height - 100, layer, obj_button);
+    var _confirm_button = instance_create_layer(x, y, layer, obj_button);
     
+    _left_button.sprite_index = spr_arrow_button_left_normal;
     _left_button.sprite = spr_arrow_button_left_normal;
     _left_button.normal_sprite = spr_arrow_button_left_normal;
     _left_button.highlight_sprite = spr_arrow_button_left_highlighted;
@@ -116,6 +116,7 @@ spawn_ui_objects = function() {
     _left_button.on_click_event = "prev_page";
     _left_button.use_nine_slice = false;
 
+    _right_button.sprite_index = spr_arrow_button_right_normal;
     _right_button.sprite = spr_arrow_button_right_normal;
     _right_button.normal_sprite = spr_arrow_button_right_normal;
     _right_button.highlight_sprite = spr_arrow_button_right_highlighted;
@@ -125,10 +126,20 @@ spawn_ui_objects = function() {
     
     _confirm_button.on_click_event = "start_run";
     _confirm_button.text = "CONFIRM";
+    _confirm_button.x = VIEW_WIDTH/2 - _confirm_button.width/2;
+    _confirm_button.y = room_height - 175;
 
     page_counter = instance_create_layer(room_width/2, room_height - 150, layer, obj_page_count);
     page_counter.page_count =  page_count;
     page_counter.current_page = current_page;
+}
+
+center_grid = function() {
+    starting_x = room_width/2;
+    
+    var _grid_width = (column_limit * sprite_get_width(object_get_sprite(record_object))) + ((column_limit-1) * record_margin_x);
+    
+    starting_x -= _grid_width/2;
 }
 
 // Event Subscriptions
@@ -153,6 +164,7 @@ subscribe(id, "select_deck", function(_payload = {}) {
 
 // Init
 paginate_data();
+center_grid();
 spawn_record_objects();
 spawn_ui_objects();
 
