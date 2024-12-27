@@ -1091,6 +1091,7 @@
     {"id":{"name":"__shd_scribble_bake_shadow","path":"shaders/__shd_scribble_bake_shadow/__shd_scribble_bake_shadow.yy",},},
     {"id":{"name":"__shd_scribble_msdf","path":"shaders/__shd_scribble_msdf/__shd_scribble_msdf.yy",},},
     {"id":{"name":"__shd_scribble","path":"shaders/__shd_scribble/__shd_scribble.yy",},},
+    {"id":{"name":"sh_flash","path":"shaders/sh_flash/sh_flash.yy",},},
     {"id":{"name":"sh_overlay","path":"shaders/sh_overlay/sh_overlay.yy",},},
     {"id":{"name":"sh_white","path":"shaders/sh_white/sh_white.yy",},},
     {"id":{"name":"shChangeHighlightColor","path":"shaders/shChangeHighlightColor/shChangeHighlightColor.yy",},},

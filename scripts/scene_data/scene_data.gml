@@ -80,7 +80,7 @@ global.scene_queue = [
             },
             {
                 type: obj_growing_dot,
-                points: 4000,
+                points: 300,
                 limit: 1,
             },
             {

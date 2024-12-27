@@ -932,6 +932,7 @@
     {"name":"__shd_scribble_bake_outline_8dir","order":2,"path":"shaders/__shd_scribble_bake_outline_8dir/__shd_scribble_bake_outline_8dir.yy",},
     {"name":"__shd_scribble_bake_shadow","order":4,"path":"shaders/__shd_scribble_bake_shadow/__shd_scribble_bake_shadow.yy",},
     {"name":"__shd_scribble_msdf","order":5,"path":"shaders/__shd_scribble_msdf/__shd_scribble_msdf.yy",},
+    {"name":"sh_flash","order":2,"path":"shaders/sh_flash/sh_flash.yy",},
     {"name":"sh_overlay","order":1,"path":"shaders/sh_overlay/sh_overlay.yy",},
     {"name":"snd_arena_1_music","order":12,"path":"sounds/snd_arena_1_music/snd_arena_1_music.yy",},
     {"name":"snd_arena_2_music","order":13,"path":"sounds/snd_arena_2_music/snd_arena_2_music.yy",},
