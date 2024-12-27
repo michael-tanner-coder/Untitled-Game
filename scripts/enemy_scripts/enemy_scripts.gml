@@ -108,6 +108,12 @@ function standard_enemy_step_event() {
 		x_force = 0;
 		y_force = 0;
 	}
+	
+	// Destroy self when touching a lethal object
+	if (position_meeting(x, y, [obj_spike])) {
+		hit = true;
+		instance_destroy(self);
+	}
 }
 
 function standard_enemy_draw_event() {
