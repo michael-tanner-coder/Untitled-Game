@@ -15,6 +15,10 @@ rolling_spritesheet = spr_exploding_enemy_sheet;
 radius = 8;
 my_fixture = create_circle_fixture(radius, 0.5, 1, 0.875, 0.1, 0.1, 0.4);
 
+// Spikes
+max_spikes = 5;
+emitted_spikes = 1;
+
 // State Machine
 fsm = new SnowState("active");
 
