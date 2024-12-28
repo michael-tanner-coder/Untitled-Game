@@ -89,6 +89,7 @@
     {"name":"Audio","order":7,"path":"folders/Scripts/Audio.yy",},
     {"name":"Debug","order":16,"path":"folders/Scripts/Debug.yy",},
     {"name":"Display","order":1,"path":"folders/Scripts/Display.yy",},
+    {"name":"Animation","order":19,"path":"folders/Scripts/Animation.yy",},
     {"name":"Initialization","order":3,"path":"folders/Scripts/Initialization.yy",},
     {"name":"Input","order":6,"path":"folders/Scripts/Input.yy",},
     {"name":"Scripts","order":1,"path":"folders/Scripts/Input/Scripts.yy",},
@@ -173,6 +174,7 @@
     {"name":"Runtime Setup","order":10,"path":"folders/Vinyl/Runtime Setup.yy",},
   ],
   "ResourceOrderSettings":[
+    {"name":"Explosion","order":4,"path":"animcurves/Explosion/Explosion.yy",},
     {"name":"FallingBounce","order":2,"path":"animcurves/FallingBounce/FallingBounce.yy",},
     {"name":"seq_player_idle_scale","order":5,"path":"animcurves/seq_player_idle_scale/seq_player_idle_scale.yy",},
     {"name":"seq_player_spike_bounce","order":4,"path":"animcurves/seq_player_spike_bounce/seq_player_spike_bounce.yy",},
