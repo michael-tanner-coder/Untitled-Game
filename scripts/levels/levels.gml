@@ -16,6 +16,7 @@ function level_struct(_key = "", _name = "", _preview_sprite = undefined, _best_
 }
 
 global.levels = [];
+global.default_unlocked_levels = ["level_1"];
 global.chosen_level = "level_1";
 
 function init_levels_collection() {

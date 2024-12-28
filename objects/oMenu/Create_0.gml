@@ -337,7 +337,6 @@ Input Icons by Kenney
 					
 					["YES (CANNOT BE UNDONE)", new ScriptRunner(function() {
 						reset_unlocks();
-						reset_unlocked_levels();
 						reset_all_flags();
 						set_flag("needs_tutorial", true);
 						global.tutorial = true;
