@@ -186,7 +186,7 @@ fsm.add("confirmation", {
     },
     step: function() {
         if (transition_effect_instance.animation_progress >= 1) {
-            go_to_scene_by_key("level");
+            go_to_scene_by_key(global.chosen_level);
         }
     },
     draw: function() {},

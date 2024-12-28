@@ -5,7 +5,7 @@ height = 0;
 
 highlighted = false;
 selected = false;
-on_click_event = "";
+on_click_event = "level_selected";
 
 text_padding = 20;
 unlocked = false;

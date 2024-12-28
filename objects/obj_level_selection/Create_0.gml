@@ -1,9 +1,4 @@
-level_data = [
-        level_struct("level_1", "Jack Arena", undefined, 0, "basic_set", 0, 40000),
-        level_struct("level_2", "Queen Arena", undefined, 0, "advanced_set", 0, 80000),
-        level_struct("level_3", "King Arena", undefined, 0, "pro_set", 0, 160000),
-        level_struct("level_4", "Joker Arena", undefined, 0, "final_set", 0, 320000),
-];
+level_data = global.levels;
 level_object = obj_level_menu_item;
 starting_y = HEADER_HEIGHT;
 
@@ -30,3 +25,11 @@ spawn_level_menu_items = function() {
 }
 
 spawn_level_menu_items();
+
+// Event Subscriptions
+subscribe(id, "level_selected", function(_level = {}) {
+    show_debug_message("LEVEL SELECTED");
+    show_debug_message(_level);
+    global.chosen_level = _level.key;
+    go_to_scene_by_key("deck-selection");
+});

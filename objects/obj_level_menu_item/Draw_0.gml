@@ -6,6 +6,12 @@ draw_set_alpha(image_alpha);
 draw_set_color(color);
 draw_rectangle(x, y, x + width, y + height, false);
 
+// Outline
+if (highlighted) {
+    draw_set_color(WHITE);
+    draw_rectangle(x, y, x + width, y + height, true);
+}
+
 // Text
 var _name = struct_get(level_data, "name");
 if (_name != undefined && is_string(_name)) {
