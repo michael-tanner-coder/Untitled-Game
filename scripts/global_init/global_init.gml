@@ -45,6 +45,8 @@ function get_global_game_speed() {
 #macro VIEW_WIDTH camera_get_view_width(VIEW)
 #macro VIEW_HEIGHT camera_get_view_height(VIEW)
 
+#macro HEADER_HEIGHT 64
+
 // Game Rules
 #macro STANDARD_SPAWN_RATE 450
 #macro STANDARD_TIME_LIMIT 200

@@ -1,3 +1,11 @@
+// TODO: 
+// Implement arena selection menu
+// Implement arena unlock notification
+// Tie arenas to specific scene data with enemy spawns & maps
+// Tie boss defeat to arena unlock
+// Take player to victory screen when finishing last arena
+
+
 function level_struct(_key = "", _name = "", _preview_sprite = undefined, _best_score = 0, _card_set_key = "", _unlock_progress = 0, _max_unlock_progress = 0) {
     return {
         key: _key,
