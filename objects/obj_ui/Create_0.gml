@@ -121,7 +121,24 @@ fsm.add("level_complete", {
 	step: function() {
 		if (input_check_pressed("progress")) {
 			global.temp_game_speed = 1;
-			go_to_end_scene();
+			
+			// unlock next level
+			var _next_scene = get_next_scene();
+			var _unlock_struct = {category: "levels", key: _next_scene.key};
+			var _unlock_data = get_unlock_item_data(_unlock_struct);
+			if (_unlock_data != undefined) {
+				if (!is_unlocked(_unlock_struct)) {
+					unlock_item(_unlock_struct);
+				}
+			}
+			
+			// either go to game ending or main menu, depending on if we are at the last level or not
+			if (_next_scene != undefined && _next_scene.key == "victory") {
+				go_to_end_scene();
+			} else if (_next_scene != undefined) {
+				quit_to_menu();
+			}
+			
 		}
 	},
 	
