@@ -344,8 +344,8 @@ Input Icons by Kenney
 						show_debug_message("deleting data");
 						set_save_data_property(DECK, global.default_deck);
 						set_save_data_property(COLLECTION, global.default_collection);
-						set_save_data_property(REQUIRED_UNLOCK_POINTS, 2000);
-						global.required_points = 2000;
+						set_save_data_property(REQUIRED_UNLOCK_POINTS, global.default_required_points);
+						global.required_points = global.default_required_points;
 						global.deck = global.default_deck;
 						global.collection = global.default_collection;
 						set_save_data_property("counter", 0);

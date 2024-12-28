@@ -20,8 +20,7 @@ global.collection = get_save_data_property(COLLECTION, global.default_collection
 global.card_sets = [];
 
 // TODO:
-// refactor progress save data to a struct of several progress numbers
-// when on the game over screen, check the active level and pull the progress and card set data for that level
+// give each level a maximum point limit for unlocks
 // show stats for progress and number of cards collected on level select screen
 // make each level's progress bar a different color on the game over screen
 
