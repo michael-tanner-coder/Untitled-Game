@@ -1,4 +1,4 @@
-speed = 3;
+speed = 4;
 x_speed = 2;
 y_speed = 2;
 shadow_x_offset = -4;
