@@ -1,6 +1,4 @@
 // TODO: 
-// Make mockup for arena selection screen
-// Make mockup for arena unlock
 // Implement arenas as an unlockable data structure
 // Tie arenas to specific scene data with enemy spawns & maps
 // Implement arena selection menu
@@ -10,6 +8,7 @@
 
 global.unlock_map = {
     upgrades: init_upgrades_collection(),
+    levels: init_levels_collection(),
 };
 
 function unlock_struct(_key = "", _category = "", _points = 0) {

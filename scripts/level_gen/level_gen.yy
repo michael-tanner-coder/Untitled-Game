@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"level_gen",
   "parent":{
-    "name":"Level Gen",
-    "path":"folders/Scripts/Level Gen.yy",
+    "name":"Levels",
+    "path":"folders/Scripts/Levels.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
