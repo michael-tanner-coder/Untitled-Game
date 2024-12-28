@@ -1,3 +1,13 @@
+// TODO: 
+// Make mockup for arena selection screen
+// Make mockup for arena unlock
+// Implement arenas as an unlockable data structure
+// Tie arenas to specific scene data with enemy spawns & maps
+// Implement arena selection menu
+// Implement arena unlock notification
+// Tie boss defeat to arena unlock
+// Take player to victory screen when finishing last arena
+
 global.unlock_map = {
     upgrades: init_upgrades_collection(),
 };
