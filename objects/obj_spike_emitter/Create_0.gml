@@ -1,6 +1,7 @@
 spike_sets = [[1,0], [0, 1], [-1, 0], [0, -1]];
 spike_count = 5;
-spike_interval = 20;
+max_spike_spawn_timer = 20;
+spike_spawn_timer = 0;
 spike_separation_degrees = 90;
 starting_angle = 0;
 
