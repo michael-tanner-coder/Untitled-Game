@@ -16,9 +16,14 @@ global.unlock_progress = get_save_data_property("unlock_progress", 0);
 global.required_points = get_save_data_property(REQUIRED_UNLOCK_POINTS, 2000);
 
 global.unlockables = [
-    unlock_struct("fast_fire", "upgrades", 2000),
+    unlock_struct("fire_faster", "upgrades", 1000),
+    unlock_struct("move_faster", "upgrades", 1200),
+    unlock_struct("get_sturdy", "upgrades", 1300),
+    unlock_struct("bullet_strength", "upgrades", 1400),
     unlock_struct("shot_spread", "upgrades", 8000),
+    unlock_struct("shot_focus", "upgrades", 9000),
     unlock_struct("steady_fire", "upgrades", 16000),
+    unlock_struct("fast_fire", "upgrades", 17000),
     unlock_struct("bullet_strength", "upgrades", 20000),
     unlock_struct("extra_life", "upgrades", 22000),
     unlock_struct("closer", "upgrades", 30000),

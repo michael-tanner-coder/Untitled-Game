@@ -57,4 +57,14 @@ function reset_unlocked_levels() {
     
 }
 
+function get_level_struct(_key = "") {
+    var _level = undefined;
+    FOREACH global.levels ELEMENT
+        if (_elem.key == _key) {
+            _level = _elem;
+        }
+    END
+    return _level;
+}
+
 init_levels_collection();

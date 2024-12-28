@@ -117,8 +117,18 @@ fsm.add("countup", {
 
 fsm.add("unlock", {
 	enter: function() {
-		var _struct_collection = build_deck_of_structs(global.unlockables);
+		// pull card set data from active level
+		var _level_key = global.chosen_level;
+		var _level_data = get_level_struct(_level_key);
+		var _card_set_key = struct_get(_level_data, "card_set");
+		var _card_set_struct = get_card_set_struct(_card_set_key);
+		var _card_keys = struct_get(_card_set_struct, "cards");
+		
+		// use card set data to find a weighted random card
+		var _struct_collection = build_deck_of_structs(_card_keys);
 		var _random_card = get_weighted_random_card(_struct_collection);
+		show_debug_message("_random_card.key");
+		show_debug_message(_random_card.key);
 		var _unlocked_card = unlock_card(_random_card.key);
 	
 		// get item data for display

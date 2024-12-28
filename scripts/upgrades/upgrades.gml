@@ -22,7 +22,6 @@ global.card_sets = [];
 // TODO:
 // refactor progress save data to a struct of several progress numbers
 // when on the game over screen, check the active level and pull the progress and card set data for that level
-// any cards awarded to player must be from that level's card set
 // show stats for progress and number of cards collected on level select screen
 // make each level's progress bar a different color on the game over screen
 
@@ -147,11 +146,19 @@ function get_weighted_rare_card(_card_collection = []) {
     return _found_card;
 }
 
-function build_deck_of_structs(_deck = []) {
+function build_deck_of_structs(_cards = []) {
     var _struct_deck = [];
-    FOREACH _deck ELEMENT
+    FOREACH _cards ELEMENT
         var _card = _elem;
-        var _card_struct = get_upgrade_type(_card.key);
+        var _card_struct = undefined;
+        
+        if (is_string(_card)) {
+            _card_struct = get_upgrade_type(_card);
+        }
+        else {
+            _card_struct = get_upgrade_type(_card.key);
+        }
+        
         array_push(_struct_deck, _card_struct);
     END
     return _struct_deck;
@@ -215,6 +222,16 @@ function init_card_sets() {
         card_set_struct("king_set", "King Set", ["bullet_strength", "fast_fire"]),   
         card_set_struct("joker_set", "Joker Set", ["closer", "shot_focus"])    
     ];
+}
+
+function get_card_set_struct(_key = "") {
+    var _set = undefined;
+    FOREACH global.card_sets ELEMENT
+        if (_elem.key == _key) {
+            _set = _elem;
+        }
+    END
+    return _set;
 }
 
 
