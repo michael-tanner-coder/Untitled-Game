@@ -137,12 +137,13 @@ fsm.add("unlock", {
 		new_card = new_card_instance(item_data.key)
 		
 		// reset target points for next time we go to the countup state
+		var _level_point_limit = struct_get(_level_data, "max_unlock_progress");
 		points_from_score -= (global.required_points[$ global.chosen_level] - global.unlock_progress[$ global.chosen_level]);
 		points_from_score = clamp(points_from_score, 0, score);
 		progress_points = 0;
 		global.unlock_progress[$ global.chosen_level] = 0;
 		global.required_points[$ global.chosen_level] *= 2;
-		global.required_points[$ global.chosen_level] = clamp(global.required_points[$ global.chosen_level], 0, 40000);
+		global.required_points[$ global.chosen_level] = clamp(global.required_points[$ global.chosen_level], 0, _level_point_limit);
 		set_save_data_property(REQUIRED_UNLOCK_POINTS, global.required_points);
 		
 		play_sound(snd_tutorial_success);

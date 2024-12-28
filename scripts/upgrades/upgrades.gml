@@ -20,9 +20,13 @@ global.collection = get_save_data_property(COLLECTION, global.default_collection
 global.card_sets = [];
 
 // TODO:
-// give each level a maximum point limit for unlocks
 // show stats for progress and number of cards collected on level select screen
 // make each level's progress bar a different color on the game over screen
+
+// POLISH
+// add screenshots of levels to the selection menu
+// make level menu respond to key inputs
+// give each menu item an animation when highlighted
 
 
 // Deck functions

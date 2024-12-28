@@ -16,8 +16,8 @@ global.chosen_level = "level_1";
 
 function init_levels_collection() {
     global.levels = [
-        level_struct("level_1", "Jack Arena", undefined, 0, "jack_set", 0, 40000),
-        level_struct("level_2", "Queen Arena", undefined, 0, "queen_set", 0, 80000),
+        level_struct("level_1", "Jack Arena", undefined, 0, "jack_set", 0, 3000),
+        level_struct("level_2", "Queen Arena", undefined, 0, "queen_set", 0, 5000),
         level_struct("level_3", "King Arena", undefined, 0, "king_set", 0, 160000),
         level_struct("level_4", "Joker Arena", undefined, 0, "joker_set", 0, 320000),
     ];
