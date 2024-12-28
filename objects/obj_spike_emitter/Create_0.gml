@@ -14,9 +14,9 @@ spawn_spikes = function() {
         _spike.x += sprite_get_width(_spike.sprite_index) * _current_set[0];
         _spike.y += sprite_get_width(_spike.sprite_index) * _current_set[1];
 
-        _spike.x_speed = _spike.speed * _current_set[0];
-        _spike.y_speed = _spike.speed * _current_set[1];
-        
+        _spike.x_speed = lengthdir_x(_spike.speed, _direction);
+        _spike.y_speed = lengthdir_y(_spike.speed, _direction);
+
         with (_spike) {
             direction = _direction;
             image_angle = _direction;
@@ -27,3 +27,5 @@ spawn_spikes = function() {
     
     spike_count--;
 }
+
+instance_create_layer(x, y, layer, obj_quake_force);
