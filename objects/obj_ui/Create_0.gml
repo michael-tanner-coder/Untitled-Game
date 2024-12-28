@@ -35,6 +35,8 @@ transition_surface = -1;
 transition_effect_object = obj_wipe_transition;
 transition_effect_instance = undefined;
 
+unlocked_level = false;
+
 // test card pattern with draw surfaces
 
 shake_text = function(_time = 0, _magnitude = 0, _fade_rate = 0) {
@@ -116,23 +118,25 @@ fsm.add("game_over", {
 fsm.add("level_complete", {
 	enter: function() {
 		spawn_transition_effect();
+		
+		// unlock next level
+		var _next_scene = get_next_scene();
+		var _unlock_struct = {category: "levels", key: _next_scene.key};
+		var _unlock_data = get_unlock_item_data(_unlock_struct);
+		if (_unlock_data != undefined) {
+			if (!is_unlocked(_unlock_struct)) {
+				unlock_item(_unlock_struct);
+				unlocked_level = true;
+			}
+		}
 	},
 	
 	step: function() {
 		if (input_check_pressed("progress")) {
 			global.temp_game_speed = 1;
 			
-			// unlock next level
-			var _next_scene = get_next_scene();
-			var _unlock_struct = {category: "levels", key: _next_scene.key};
-			var _unlock_data = get_unlock_item_data(_unlock_struct);
-			if (_unlock_data != undefined) {
-				if (!is_unlocked(_unlock_struct)) {
-					unlock_item(_unlock_struct);
-				}
-			}
-			
 			// either go to game ending or main menu, depending on if we are at the last level or not
+			var _next_scene = get_next_scene();
 			if (_next_scene != undefined && _next_scene.key == "victory") {
 				go_to_end_scene();
 			} else if (_next_scene != undefined) {
@@ -142,10 +146,15 @@ fsm.add("level_complete", {
 		}
 	},
 	
-	draw: function() {
+	draw_gui: function() {
+		draw_set_color(WHITE);
+		draw_set_halign(fa_center);
 		banner(100, victory_banner_y, "LEVEL COMPLETE", BLACK, victory_bg_alpha);
 		banner(100, victory_banner_y + 120, "FINAL SCORE: " + string(score), BLACK, victory_bg_alpha);
 		banner(100, victory_banner_y + 240, "PRESS SPACE TO CONTINUE", BLACK, victory_bg_alpha);
+		if (unlocked_level) {
+			banner(100, victory_banner_y-40, "UNLOCKED NEW LEVEL!", YELLOW, victory_bg_alpha);
+		}
 	},
 	
 });

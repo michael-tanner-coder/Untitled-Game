@@ -128,7 +128,7 @@ global.scene_queue = [
         boss: obj_chain_boss,
     },
     {
-        key: "level_4",
+        key: "level_3",
         map: rm_combat_test_small,
         tutorial_flag: "basics_tutorial",
         goal_score: 40000,
