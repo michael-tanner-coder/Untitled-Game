@@ -80,7 +80,7 @@ global.scene_queue = [
         ],
         boss: obj_paddle_boss,
     },
-       {
+    {
         key: "level_2",
         map: rm_combat_test_small,
         tutorial_flag: "basics_tutorial",
@@ -128,64 +128,98 @@ global.scene_queue = [
         boss: obj_chain_boss,
     },
     {
-        key: "level_3",
-        map: rm_combat_test_small,
-        goal_score: 80000,
-        time_between_spawns: 30,
-        max_enemy_count: 10,
-        enemy_types: [
-            {
-                type: obj_dot,
-                points: 0,
-                limit: 10,
-            },
-            {
-                type: obj_big_dot,
-                points: 1500,
-                limit: 3,
-            },
-            {
-                type: obj_growing_dot,
-                points: 2500,
-                limit: 2,
-            },
-            {
-                type: obj_exploding_dot,
-                points: 3500,
-                limit: 2,
-            }
-        ],
-        boss: obj_boss_test,
-    },
-    {
         key: "level_4",
         map: rm_combat_test_small,
-        goal_score: 160000,
+        tutorial_flag: "basics_tutorial",
+        goal_score: 40000,
         time_between_spawns: 30,
-        max_enemy_count: 10,
+        default_max_enemy_count: 6,
+        boss_max_enemy_count: 4,
         enemy_types: [
             {
                 type: obj_dot,
                 points: 0,
-                limit: 10,
+                limit: 8,
             },
             {
                 type: obj_big_dot,
-                points: 1500,
-                limit: 3,
+                points: 1300,
+                limit: 2,
             },
             {
                 type: obj_growing_dot,
-                points: 2500,
+                points: 4000,
+                limit: 1,
+            },
+            {
+                type: obj_dot,
+                points: 0,
+                limit: 8,
+            },
+            {
+                type: obj_big_dot,
+                points: 1300,
                 limit: 2,
             },
             {
+                type: obj_growing_dot,
+                points: 300,
+                limit: 1,
+            },
+            {
                 type: obj_exploding_dot,
-                points: 3500,
-                limit: 2,
-            }
+                points: 200,
+                limit: 1,
+            },
         ],
-        boss: obj_boss_test,
+        boss: obj_chain_boss,
+    },
+     {
+        key: "level_4",
+        map: rm_combat_test_small,
+        tutorial_flag: "basics_tutorial",
+        goal_score: 40000,
+        time_between_spawns: 30,
+        default_max_enemy_count: 6,
+        boss_max_enemy_count: 4,
+        enemy_types: [
+            {
+                type: obj_dot,
+                points: 0,
+                limit: 8,
+            },
+            {
+                type: obj_big_dot,
+                points: 1300,
+                limit: 2,
+            },
+            {
+                type: obj_growing_dot,
+                points: 4000,
+                limit: 1,
+            },
+            {
+                type: obj_dot,
+                points: 0,
+                limit: 8,
+            },
+            {
+                type: obj_big_dot,
+                points: 1300,
+                limit: 2,
+            },
+            {
+                type: obj_growing_dot,
+                points: 300,
+                limit: 1,
+            },
+            {
+                type: obj_exploding_dot,
+                points: 200,
+                limit: 1,
+            },
+        ],
+        boss: obj_chain_boss,
     },
     {
         key: "victory",
