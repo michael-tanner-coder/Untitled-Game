@@ -16,6 +16,17 @@ global.active_deck = {};
 global.default_collection = [];
 global.collection = get_save_data_property(COLLECTION, global.default_collection);
 
+
+global.card_sets = [];
+
+// TODO:
+// refactor progress save data to a struct of several progress numbers
+// when on the game over screen, check the active level and pull the progress and card set data for that level
+// any cards awarded to player must be from that level's card set
+// show stats for progress and number of cards collected on level select screen
+// make each level's progress bar a different color on the game over screen
+
+
 // Deck functions
 function deck_struct(_name = "", _cards = []) {
     return {
@@ -188,6 +199,25 @@ function is_in_collection(_card = {}) {
     return _in_collection;
 }
 
+// Card Sets
+function card_set_struct(_key = "", _name = "", _cards = []) {
+    return {
+        key: _key,
+        name: _name,
+        cards: _cards,
+    };
+}
+
+function init_card_sets() {
+    global.card_sets = [
+        card_set_struct("jack_set", "Jack Set", ["fire_faster", "move_faster", "get_sturdy"]),  
+        card_set_struct("queen_set", "Queen Set", ["revive", "shot_spread", "extra_life"]), 
+        card_set_struct("king_set", "King Set", ["bullet_strength", "fast_fire"]),   
+        card_set_struct("joker_set", "Joker Set", ["closer", "shot_focus"])    
+    ];
+}
+
+
 // Card Structs
 function effect_struct(_property = "", _value = 0, _operation = OPERATIONS.SET) {
     return {
@@ -297,17 +327,17 @@ function init_upgrades_collection() {
                 ],
                 50
         ),
-        // upgrade_struct(
-        //         "shot_focus", 
-        //         "Shot Focus", 
-        //         "Decrease your shot count by 1, but each shot is stronger", 
-        //         1000, 
-        //         spr_white_circle,
-        //         [
-        //             effect_struct("player_shot_count", 1, OPERATIONS.SUBTRACT),
-        //             effect_struct("player_bullet_force", 2, OPERATIONS.DIVIDE),
-        //         ]
-        // ),
+        upgrade_struct(
+                "shot_focus", 
+                "Shot Focus", 
+                "Decrease your shot count by 1, but each shot is stronger", 
+                1000, 
+                spr_white_circle,
+                [
+                    effect_struct("player_shot_count", 1, OPERATIONS.SUBTRACT),
+                    effect_struct("player_bullet_force", 2, OPERATIONS.DIVIDE),
+                ]
+        ),
         upgrade_struct(
                 "extra_life", 
                 "Extra Life", 
@@ -362,3 +392,5 @@ function init_upgrades_collection() {
 init_upgrades_collection();
 
 init_decks_list();
+
+init_card_sets();
