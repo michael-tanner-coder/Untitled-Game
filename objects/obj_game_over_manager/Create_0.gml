@@ -31,7 +31,9 @@ default_draw_behavior = function() {
 		var _formatted_points = string_format(round(progress_points), 0, 0);
 		draw_text(x + sprite_get_width(outline_sprite)/2, y - sprite_get_height(outline_sprite) - bar_margin, _formatted_points + "/" + string(global.required_points[$ global.chosen_level]));
 	
-		fillbar(room_width/2 - progress_bar_width/2, y, progress_bar_width, progress_bar_height, _progress_percent, RED, WHITE);
+		var _level_data = get_level_struct(global.chosen_level); // TODO: refactor this to pull the data once in the create event
+		var _color = struct_get(_level_data, "color");
+		fillbar(room_width/2 - progress_bar_width/2, y, progress_bar_width, progress_bar_height, _progress_percent, _color, WHITE);
 	
 		draw_set_color(WHITE);
 		draw_text(x + sprite_get_width(outline_sprite) / 2, y + sprite_get_height(outline_sprite) + (bar_margin*2), "PROGRESS TO UNLOCK NEXT CARD");

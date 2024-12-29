@@ -19,15 +19,6 @@ global.collection = get_save_data_property(COLLECTION, global.default_collection
 
 global.card_sets = [];
 
-// TODO:
-// make each level's progress bar a different color on the game over screen
-
-// POLISH
-// add screenshots of levels to the selection menu
-// make level menu respond to key inputs
-// give each menu item an animation when highlighted
-
-
 // Deck functions
 function deck_struct(_name = "", _cards = []) {
     return {

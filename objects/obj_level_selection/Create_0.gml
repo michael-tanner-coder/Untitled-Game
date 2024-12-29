@@ -2,7 +2,10 @@ level_data = global.levels;
 level_object = obj_level_menu_item;
 starting_y = HEADER_HEIGHT;
 
-colors = [GREEN, BLUE, YELLOW, RED];
+// POLISH
+// add screenshots of levels to the selection menu
+// make level menu respond to key inputs
+// give each menu item an animation when highlighted
 
 spawn_level_menu_items = function() {
     var _x = 0;
@@ -11,7 +14,7 @@ spawn_level_menu_items = function() {
         var _level_data = _elem;
         var _level_menu_item = instance_create_layer(_x, _y, layer, level_object);
         _level_menu_item.level_data = _level_data;
-        _level_menu_item.color = colors[_i];
+        _level_menu_item.color = struct_get(_level_data, "color");
         _level_menu_item.width = VIEW_WIDTH;
         _level_menu_item.height = (VIEW_HEIGHT - HEADER_HEIGHT) / array_length(level_data);
         _y += _level_menu_item.height;

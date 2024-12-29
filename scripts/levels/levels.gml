@@ -1,4 +1,4 @@
-function level_struct(_key = "", _name = "", _preview_sprite = undefined, _best_score = 0, _card_set_key = "", _unlock_progress = 0, _max_unlock_progress = 0) {
+function level_struct(_key = "", _name = "", _preview_sprite = undefined, _best_score = 0, _card_set_key = "", _unlock_progress = 0, _max_unlock_progress = 0, _color = WHITE) {
     return {
         key: _key,
         preview_sprite: undefined,
@@ -7,6 +7,7 @@ function level_struct(_key = "", _name = "", _preview_sprite = undefined, _best_
         card_set: _card_set_key,
         unlock_progress: _unlock_progress,
         max_unlock_progress: _max_unlock_progress,
+        color: _color,
     };
 }
 
@@ -16,10 +17,10 @@ global.chosen_level = "level_1";
 
 function init_levels_collection() {
     global.levels = [
-        level_struct("level_1", "Jack Arena", undefined, 0, "jack_set", 0, 3000),
-        level_struct("level_2", "Queen Arena", undefined, 0, "queen_set", 0, 5000),
-        level_struct("level_3", "King Arena", undefined, 0, "king_set", 0, 160000),
-        level_struct("level_4", "Joker Arena", undefined, 0, "joker_set", 0, 320000),
+        level_struct("level_1", "Jack Arena", undefined, 0, "jack_set", 0, 40000, GREEN),
+        level_struct("level_2", "Queen Arena", undefined, 0, "queen_set", 0, 80000, BLUE),
+        level_struct("level_3", "King Arena", undefined, 0, "king_set", 0, 160000, YELLOW),
+        level_struct("level_4", "Joker Arena", undefined, 0, "joker_set", 0, 320000, RED),
     ];
     
     return global.levels;
