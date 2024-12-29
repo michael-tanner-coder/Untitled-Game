@@ -1207,6 +1207,8 @@
     {"name":"spr_draw_indicator","order":32,"path":"sprites/spr_draw_indicator/spr_draw_indicator.yy",},
     {"name":"spr_driller_shiny","order":28,"path":"sprites/spr_driller_shiny/spr_driller_shiny.yy",},
     {"name":"spr_driller","order":7,"path":"sprites/spr_driller/spr_driller.yy",},
+    {"name":"spr_edit_button_highlighted","order":50,"path":"sprites/spr_edit_button_highlighted/spr_edit_button_highlighted.yy",},
+    {"name":"spr_edit_button_normal","order":49,"path":"sprites/spr_edit_button_normal/spr_edit_button_normal.yy",},
     {"name":"spr_empty_blue","order":5,"path":"sprites/spr_empty_blue/spr_empty_blue.yy",},
     {"name":"spr_empty_green","order":7,"path":"sprites/spr_empty_green/spr_empty_green.yy",},
     {"name":"spr_empty_red","order":6,"path":"sprites/spr_empty_red/spr_empty_red.yy",},

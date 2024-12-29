@@ -1,9 +1,4 @@
 // TODO:
-
-// Deck Selection:
-// add "edit" button next to highlighted deck
-// add "new" button on lower right corner
-
 // Deck Create/Edit:
 // create card grid item object
 // create deck_editing object; port over grid and pagination code
@@ -19,7 +14,7 @@
 column_limit = 3;
 starting_x = x;
 starting_y = y;
-record_margin_x = 10;
+record_margin_x = 20;
 record_margin_y = 10;
 
 // Objects
@@ -122,6 +117,8 @@ spawn_ui_objects = function() {
     var _left_button = instance_create_layer(starting_x - sprite_get_width(spr_arrow_button_left_normal) - record_margin_x, room_height/2, layer, obj_button);
     var _right_button = instance_create_layer(starting_x + _grid_width, room_height/2, layer, obj_button);
     var _confirm_button = instance_create_layer(x, y, layer, obj_button);
+    var _edit_button = instance_create_layer(x, y, layer, obj_button);
+    var _new_button = instance_create_layer(x, y, layer, obj_button);
     
     _left_button.sprite_index = spr_arrow_button_left_normal;
     _left_button.sprite = spr_arrow_button_left_normal;
@@ -143,6 +140,20 @@ spawn_ui_objects = function() {
     _confirm_button.text = "CONFIRM";
     _confirm_button.x = VIEW_WIDTH/2 - _confirm_button.width/2;
     _confirm_button.y = room_height - 135;
+    
+    _edit_button.on_click_event = "edit_deck";
+    _edit_button.text = "EDIT";
+    _edit_button.x = VIEW_WIDTH - 128;
+    _edit_button.y = VIEW_HEIGHT - 128;
+    _edit_button.width = 64;
+    _edit_button.height = 24;
+
+    _new_button.on_click_event = "create_deck";
+    _new_button.text = "+NEW";
+    _new_button.x = _edit_button.x;
+    _new_button.y = _edit_button.y + _edit_button.height + 8;
+    _new_button.width = 64;
+    _new_button.height = 24;
 
     page_counter = instance_create_layer(room_width/2, room_height - 165, layer, obj_page_count);
     page_counter.page_count =  page_count;

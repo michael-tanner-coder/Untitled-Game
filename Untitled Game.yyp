@@ -1388,6 +1388,8 @@
     {"id":{"name":"spr_draw_indicator","path":"sprites/spr_draw_indicator/spr_draw_indicator.yy",},},
     {"id":{"name":"spr_driller_shiny","path":"sprites/spr_driller_shiny/spr_driller_shiny.yy",},},
     {"id":{"name":"spr_driller","path":"sprites/spr_driller/spr_driller.yy",},},
+    {"id":{"name":"spr_edit_button_highlighted","path":"sprites/spr_edit_button_highlighted/spr_edit_button_highlighted.yy",},},
+    {"id":{"name":"spr_edit_button_normal","path":"sprites/spr_edit_button_normal/spr_edit_button_normal.yy",},},
     {"id":{"name":"spr_empty_blue","path":"sprites/spr_empty_blue/spr_empty_blue.yy",},},
     {"id":{"name":"spr_empty_green","path":"sprites/spr_empty_green/spr_empty_green.yy",},},
     {"id":{"name":"spr_empty_red","path":"sprites/spr_empty_red/spr_empty_red.yy",},},
