@@ -1,13 +1,13 @@
 // TODO:
 // Deck Create/Edit:
-// create deck_editing object; port over grid and pagination code
-// render and paginate the player's full card collection
-// give the deck_edit object two modes: create and edit
-// place deck_edit object in two separate menu rooms; assign each instance its own mode
 // create tooltip object; show card info when hovering over object
 // add/remove from deck when clicking card; show card counts and deck limit
 // create text box to hold deck name (create mode = blank box, edit mode = display saved name)
 // spawn a confirm button (create mode = creat deck object, edit mode = save changes)
+
+// Edit/Create Mode
+mode = "edit";
+deck_data = global.active_deck;
 
 // Dimensions/Positioning
 column_limit = 3;
@@ -17,7 +17,7 @@ record_margin_x = 20;
 record_margin_y = 10;
 
 // Objects
-record_object = obj_deck;
+record_object = obj_card_grid_item;
 page_counter = undefined;
 
 // Pagination
@@ -25,7 +25,7 @@ current_page = 0;
 page_count = 1;
 pages = [];
 records_per_page = 9;
-records = global.available_decks;
+records = global.collection;
 
 // Transition animation
 transition_effect_object = obj_wipe_transition;
@@ -72,7 +72,7 @@ spawn_record_objects = function() {
         // Spawn record object with data passed as a param
         var _record_data = _elem;
         var _record_object  = instance_create_layer(starting_x, starting_y, layer, record_object);
-        _record_object.deck_data = _record_data;
+        _record_object.card_data = _record_data;
         
         // Find grid position for record object; adjust when we exceed column limit
         if (_column_count > 0) {
@@ -178,13 +178,13 @@ subscribe(id, "start_run", function() {
     fsm.change("confirmation");
 });
 subscribe(id, "select_deck", function(_payload = {}) {
-    var _deck_data = _payload.deck_data;
-    var _deck_instance = _payload.deck_instance;
-    global.active_deck = _deck_data;
+    var _card_data = _payload.card_data;
+    var _card_instance = _payload.card_instance;
+    global.active_deck = _card_data;
     with (obj_deck) {
         selected = false;
     }
-    _deck_instance.selected = true;
+    _card_instance.selected = true;
 });
 
 // Init

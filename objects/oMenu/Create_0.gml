@@ -306,7 +306,7 @@ Input Icons by Kenney
 		["VIEW DECK", new ScriptRunner(function() { 
 				menuModePause();
 				menuSetPreset(e_menu_presets.pause_menu);
-				room_goto(rm_item_menu);
+				room_goto(rm_deck_edit_menu);
 			}), undefined, undefined],
 		
 

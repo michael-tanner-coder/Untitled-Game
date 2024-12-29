@@ -2,9 +2,9 @@
   "$GMSprite":"",
   "%Name":"spr_card_mini",
   "bboxMode":0,
-  "bbox_bottom":31,
+  "bbox_bottom":63,
   "bbox_left":0,
-  "bbox_right":24,
+  "bbox_right":49,
   "bbox_top":0,
   "collisionKind":1,
   "collisionTolerance":0,
@@ -16,7 +16,7 @@
   ],
   "gridX":0,
   "gridY":0,
-  "height":32,
+  "height":64,
   "HTile":false,
   "layers":[
     {"$GMImageLayer":"","%Name":"ae7447ff-eaa3-4ad0-a0d2-e19796d1cd3c","blendMode":0,"displayName":"default","isLocked":false,"name":"ae7447ff-eaa3-4ad0-a0d2-e19796d1cd3c","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
@@ -105,5 +105,5 @@
   },
   "type":0,
   "VTile":false,
-  "width":25,
+  "width":50,
 }
