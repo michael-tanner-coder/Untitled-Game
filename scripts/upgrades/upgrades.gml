@@ -20,7 +20,6 @@ global.collection = get_save_data_property(COLLECTION, global.default_collection
 global.card_sets = [];
 
 // TODO:
-// show stats for progress and number of cards collected on level select screen
 // make each level's progress bar a different color on the game over screen
 
 // POLISH
@@ -401,7 +400,7 @@ function init_upgrades_collection() {
                 [
                     effect_struct("retrieve_discard_pile", 1, OPERATIONS.NONE),
                 ],
-                100
+                50
         ),
     ];
 

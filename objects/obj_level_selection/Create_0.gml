@@ -20,7 +20,24 @@ spawn_level_menu_items = function() {
         var _key = struct_get(_level_data, "key");
         var _unlocked = is_unlocked({category: "levels", key: _key });
         _level_menu_item.unlocked = _unlocked;
-
+        
+        // get card collection data for each level
+        var _card_set = struct_get(_level_data, "card_set");
+        var _card_set_data = get_card_set_struct(_card_set);
+        var _cards = struct_get(_card_set_data, "cards");
+    
+        _level_menu_item.card_set_total = array_length(_cards);
+        var _unlocked_card_count = 0;
+        for (var _j = 0; _j < array_length(_cards); _j++) {
+            if (is_unlocked({category: "upgrades", key: _cards[_j]})) {
+                _unlocked_card_count += 1;
+            }
+        }
+        _level_menu_item.cards_collected =  _unlocked_card_count;
+        
+        // get card unlock progress for each level
+        _level_menu_item.card_unlock_progress = global.unlock_progress[$ _key];
+        _level_menu_item.card_unlock_progress_limit = global.required_points[$ _key];
     END
 }
 
