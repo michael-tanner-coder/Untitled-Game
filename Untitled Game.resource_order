@@ -1263,6 +1263,7 @@
     {"name":"spr_life","order":3,"path":"sprites/spr_life/spr_life.yy",},
     {"name":"spr_light_shaft","order":7,"path":"sprites/spr_light_shaft/spr_light_shaft.yy",},
     {"name":"spr_lighting","order":5,"path":"sprites/spr_lighting/spr_lighting.yy",},
+    {"name":"spr_lock","order":48,"path":"sprites/spr_lock/spr_lock.yy",},
     {"name":"spr_logo","order":11,"path":"sprites/spr_logo/spr_logo.yy",},
     {"name":"spr_lucky_draw_indicator","order":42,"path":"sprites/spr_lucky_draw_indicator/spr_lucky_draw_indicator.yy",},
     {"name":"spr_mana_icon","order":36,"path":"sprites/spr_mana_icon/spr_mana_icon.yy",},

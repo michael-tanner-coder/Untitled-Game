@@ -1448,6 +1448,7 @@
     {"id":{"name":"spr_life","path":"sprites/spr_life/spr_life.yy",},},
     {"id":{"name":"spr_light_shaft","path":"sprites/spr_light_shaft/spr_light_shaft.yy",},},
     {"id":{"name":"spr_lighting","path":"sprites/spr_lighting/spr_lighting.yy",},},
+    {"id":{"name":"spr_lock","path":"sprites/spr_lock/spr_lock.yy",},},
     {"id":{"name":"spr_logo","path":"sprites/spr_logo/spr_logo.yy",},},
     {"id":{"name":"spr_lucky_draw_indicator","path":"sprites/spr_lucky_draw_indicator/spr_lucky_draw_indicator.yy",},},
     {"id":{"name":"spr_mana_icon","path":"sprites/spr_mana_icon/spr_mana_icon.yy",},},

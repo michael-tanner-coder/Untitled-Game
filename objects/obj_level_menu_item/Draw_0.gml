@@ -39,3 +39,8 @@ fillbar(x + 340 + _string_width, y + 4 + height/2 + _string_height/2 + progress_
 
 // Reset drawing
 draw_set_alpha(1);
+
+// Lock Sprite
+if (!unlocked) {
+    draw_sprite(spr_lock, 0, x + width - sprite_get_width(spr_lock) - text_padding, y + height/2 - sprite_get_height(spr_lock)/2)
+}
