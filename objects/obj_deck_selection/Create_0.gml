@@ -2,7 +2,6 @@
 
 // Deck Selection:
 // fix size of page count component
-// fix off-by-one error when spawning deck objects
 // add "edit" button next to highlighted deck
 // add "new" button on lower right corner
 
@@ -32,7 +31,7 @@ page_counter = undefined;
 current_page = 0;
 page_count = 1;
 pages = [];
-records_per_page = 4;
+records_per_page = 9;
 records = global.available_decks;
 
 // Transition animation
@@ -90,7 +89,7 @@ spawn_record_objects = function() {
         // Track column count so that we know when we've exceeded the column limit 
         _column_count += 1;
         if (_column_count > column_limit) {
-            _column_count = 0;
+            _column_count = 1;
             _y += sprite_get_height(_record_object.sprite_index) + record_margin_y;
             _x = starting_x;
         }
@@ -144,7 +143,7 @@ spawn_ui_objects = function() {
     _confirm_button.on_click_event = "start_run";
     _confirm_button.text = "CONFIRM";
     _confirm_button.x = VIEW_WIDTH/2 - _confirm_button.width/2;
-    _confirm_button.y = room_height - 175;
+    _confirm_button.y = room_height - 135;
 
     page_counter = instance_create_layer(room_width/2, room_height - 150, layer, obj_page_count);
     page_counter.page_count =  page_count;

@@ -12,6 +12,7 @@ global.deck_limit = 20;
 global.card_type_limit = 3;
 global.saved_decks = [];
 global.active_deck = {};
+global.available_decks = [];
 
 global.default_collection = [];
 global.collection = get_save_data_property(COLLECTION, global.default_collection);
@@ -159,6 +160,12 @@ function build_deck_of_structs(_cards = []) {
 
 function init_decks_list() {
     global.available_decks = [
+        deck_struct("Base Deck", global.default_deck),
+        deck_struct("Advanced Deck", global.deck),
+        deck_struct("Mega Deck", global.deck),
+        deck_struct("Base Deck", global.default_deck),
+        deck_struct("Advanced Deck", global.deck),
+        deck_struct("Mega Deck", global.deck),
         deck_struct("Base Deck", global.default_deck),
         deck_struct("Advanced Deck", global.deck),
         deck_struct("Mega Deck", global.deck),
