@@ -1,4 +1,21 @@
-// paginate the grid menu (fix size of page count component; fix off-by-one error)
+// TODO:
+
+// Deck Selection:
+// fix size of page count component
+// fix off-by-one error when spawning deck objects
+// add "edit" button next to highlighted deck
+// add "new" button on lower right corner
+
+// Deck Create/Edit:
+// create card grid item object
+// create deck_editing object; port over grid and pagination code
+// render and paginate the player's full card collection
+// give the deck_edit object two modes: create and edit
+// place deck_edit object in two separate menu rooms; assign each instance its own mode
+// create tooltip object; show card info when hovering over object
+// add/remove from deck when clicking card; show card counts and deck limit
+// create text box to hold deck name (create mode = blank box, edit mode = display saved name)
+// spawn a confirm button (create mode = creat deck object, edit mode = save changes)
 
 // Dimensions/Positioning
 column_limit = 3;
