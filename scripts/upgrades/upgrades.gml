@@ -168,7 +168,6 @@ function init_decks_list() {
         deck_struct("Mega Deck", global.deck),
         deck_struct("Base Deck", global.default_deck),
         deck_struct("Advanced Deck", global.deck),
-        deck_struct("Mega Deck", global.deck),
     ];
     
     global.active_deck = global.available_decks[0];

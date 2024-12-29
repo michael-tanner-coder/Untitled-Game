@@ -1,7 +1,7 @@
-var _height = sprite_get_height(page_icon) + page_icon_padding;
-var _width = (page_count * sprite_get_width(page_icon) + page_icon_margin_x) + page_icon_padding;
-draw_sprite_stretched(sprite_index, 0, x, y, _width, _height);
+// Base
+draw_sprite_stretched(sprite_index, 0, x, y, width, height);
 
+// Page Icons
 var _x = x + page_icon_padding;
 var _y = y + page_icon_padding/2;
 for(var _i = 0; _i < page_count; _i++) {

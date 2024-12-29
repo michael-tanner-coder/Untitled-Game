@@ -1,7 +1,6 @@
 // TODO:
 
 // Deck Selection:
-// fix size of page count component
 // add "edit" button next to highlighted deck
 // add "new" button on lower right corner
 
@@ -31,7 +30,7 @@ page_counter = undefined;
 current_page = 0;
 page_count = 1;
 pages = [];
-records_per_page = 9;
+records_per_page = 3;
 records = global.available_decks;
 
 // Transition animation
