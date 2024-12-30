@@ -1,6 +1,5 @@
 // TODO:
 // Deck Create/Edit:
-// add/remove from deck when clicking card
 // save/edit decks when confirming changes
 // connect "edit" and "new" buttons to the appropriate menus
 
@@ -81,7 +80,7 @@ spawn_record_objects = function() {
     FOREACH _records ELEMENT
         // Spawn record object with data passed as a param
         var _record_data = _elem;
-        var _card_data = get_upgrade_type(_elem.key);
+        var _card_data = variable_clone(get_upgrade_type(_record_data.key));
         var _record_object  = instance_create_layer(starting_x, starting_y, layer, record_object);
         _record_object.card_data = struct_merge(_card_data, _record_data, false);
         show_debug_message("KEY");
@@ -196,13 +195,11 @@ subscribe(id, "select_card", function(_payload = {}) {
     var _card_instance = _payload.card_instance;
     _card_instance.selected = true;
 
-     if (is_in_deck(_card_data)) {
-        remove_from_deck(_card_data);
-        add_to_collection(_card_data);
+     if (is_in_deck(_card_data, deck_data.cards)) {
+        remove_from_deck(_card_data, deck_data.cards);
         play_sound(snd_button_click);
     } else {
-        add_to_deck(_card_data);
-        remove_from_collection(_card_data);
+        add_to_deck(_card_data, deck_data.cards);
         play_sound(snd_button_back);
     }
 });

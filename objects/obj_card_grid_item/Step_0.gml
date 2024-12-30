@@ -13,5 +13,8 @@ if (highlighted && mouse_check_button_pressed(mb_left)) {
     publish(on_click_event, event_payload);
 }
 
-image_xscale = selected ? 1.2 : 1;
-image_yscale = selected ? 1.2 : 1;
+
+image_blend = c_white;
+if (is_in_deck(card_data, global.active_deck.cards)) {
+    image_blend = RED;
+}

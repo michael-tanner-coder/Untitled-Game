@@ -348,7 +348,7 @@ Input Icons by Kenney
 						global.required_points = global.default_required_points;
 						global.deck = global.default_deck;
 						global.collection = global.default_collection;
-						set_save_data_property("counter", 0);
+						set_save_data_property("counter", array_length(global.default_deck));
 						gotoPrevPage();
 						gotoPrevPage();
 					})]

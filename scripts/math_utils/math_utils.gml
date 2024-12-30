@@ -98,7 +98,7 @@ function loop_clamp(_val, _min, _max) {
 }
 
 function gen_id() {
-    var _counter = get_save_data_property("counter", 0);
+    var _counter = get_save_data_property("counter", array_length(global.default_deck));
     _counter++;
     set_save_data_property("counter", _counter);
     return _counter;
