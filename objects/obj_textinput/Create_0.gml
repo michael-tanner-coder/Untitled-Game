@@ -1,3 +1,5 @@
+input_id = "";
+
 // String Properties
 input_string = "";
 input_string_x = x;

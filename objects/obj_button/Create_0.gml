@@ -1,3 +1,5 @@
+button_id = "";
+
 // Base Styles
 width = 150;
 height = 60;

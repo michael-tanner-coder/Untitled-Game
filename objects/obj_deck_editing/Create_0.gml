@@ -2,7 +2,6 @@
 // Deck Create/Edit:
 // add/remove from deck when clicking card
 // create text box to hold deck name (create mode = blank box, edit mode = display saved name)
-// spawn a confirm button (create mode = creat deck object, edit mode = save changes)
 
 // Edit/Create Mode
 mode = "edit";
@@ -134,7 +133,7 @@ spawn_ui_objects = function() {
     _right_button.on_click_event = "next_page";
     _right_button.use_nine_slice = false;
     
-    _confirm_button.on_click_event = "start_run";
+    _confirm_button.on_click_event = "open_name_modal";
     _confirm_button.text = "CONFIRM";
     _confirm_button.x = VIEW_WIDTH/2 - _confirm_button.width/2;
     _confirm_button.y = room_height - 135;
@@ -161,12 +160,53 @@ center_grid = function() {
 subscribe(id, "next_page", function() {
     go_to_next_page();
 });
+
 subscribe(id, "prev_page", function() {
     go_to_previous_page();
 });
-subscribe(id, "start_run", function() {
-    fsm.change("confirmation");
+
+subscribe(id, "open_name_modal", function() {
+    var _textinput = instance_create_layer(200, VIEW_HEIGHT/2, layer, obj_textinput);
+    var _confirm_button = instance_create_layer(_textinput.x, _textinput.y + string_height("W"), layer, obj_button);
+    var _cancel_button = instance_create_layer(_textinput.x + _confirm_button.width + 32, _textinput.y + string_height("W"), layer, obj_button);
+    
+    _textinput.input_character_limit = 10;
+    _textinput.input_id = "name_input";
+    _textinput.input_string_x = _textinput.x;
+    _textinput.input_string_y = _textinput.y;
+    _textinput.depth = depth - 1;
+    
+    _confirm_button.button_id = "confirm_name";
+    _confirm_button.text = "CONFIRM";
+    _confirm_button.on_click_event = "confirm_changes";
+    _confirm_button.depth = depth - 1;
+    
+    _cancel_button.button_id = "cancel_name";
+    _cancel_button.text = "CANCEL";
+    _cancel_button.on_click_event = "close_name_modal";
+    _cancel_button.depth = depth - 1;
+    
+    if (mode == "edit") {
+        _textinput.input_string = deck_data.name;
+        keyboard_string = _textinput.input_string;
+    }
+    
 });
+
+subscribe(id, "close_name_modal", function() {
+    keyboard_string = "";
+    
+    with(obj_textinput) {
+        instance_destroy(self);
+    }
+    
+    with(obj_button) {
+        if (button_id == "cancel_name" || button_id == "confirm_name") {
+            instance_destroy(self);
+        }
+    }
+});
+
 subscribe(id, "select_card", function(_payload = {}) {
     var _card_data = _payload.card_data;
     var _card_instance = _payload.card_instance;
@@ -183,6 +223,28 @@ subscribe(id, "select_card", function(_payload = {}) {
     }
 });
 
+subscribe(id, "confirm_changes", function() {
+    // Pull deck name
+    var _deck_name = "";
+    with(obj_textinput) {
+        if (input_id == "name_input") {
+            _deck_name = input_string;
+        }
+    }
+    
+    // Pull deck cards
+    var _cards = struct_get(deck_data, "cards");
+    
+    // Save changes
+    if (mode == "edit") {
+        // save changes to existing deck
+    }
+    
+    if (mode == "create") {
+        // create new deck
+    }
+})
+
 // Init
 paginate_data();
 center_grid();
@@ -190,25 +252,16 @@ spawn_record_objects();
 spawn_ui_objects();
 
 // State Machine
-fsm = new SnowState("selection");
+fsm = new SnowState("editing");
 
-fsm.add("selection", {
+fsm.add("editing", {
     enter: function() {},
     step: function() {},
     draw: function() {},
 });
 
-fsm.add("confirmation", {
-    enter: function() {
-        transition_effect_instance = instance_create_layer(x, y, "UI_Instances", transition_effect_object);
-    	transition_effect_instance.starting_x = -1 * sprite_get_width(transition_effect_instance.sprite_index);
-    	transition_effect_instance.target_x = -1 * transition_effect_instance.x_buffer
-    	transition_effect_instance.start_animation();
-    },
-    step: function() {
-        if (transition_effect_instance.animation_progress >= 1) {
-            go_to_scene_by_key(global.chosen_level);
-        }
-    },
+fsm.add("name_input", {
+    enter: function() {},
+    step: function() {},
     draw: function() {},
 });

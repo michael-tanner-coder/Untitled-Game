@@ -1,8 +1,3 @@
-// TODO:
-// Deck Create/Edit:
-// add/remove from deck when clicking card; show card counts and deck limit
-// create text box to hold deck name (create mode = blank box, edit mode = display saved name)
-// spawn a confirm button (create mode = creat deck object, edit mode = save changes)
 
 // Dimensions/Positioning
 column_limit = 3;
