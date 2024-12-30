@@ -1,7 +1,7 @@
 // TODO:
 // Deck Create/Edit:
-// prevent all other UI interaction when modal is active (use UI stack??)
 // add/remove from deck when clicking card
+// prevent all other UI interaction when modal is active (use UI stack??)
 // create text box to hold deck name (create mode = blank box, edit mode = display saved name)
 
 // Edit/Create Mode
@@ -42,6 +42,11 @@ paginate_data = function() {
     FOREACH records ELEMENT
         var _record = _elem;
         
+        show_debug_message("key")
+        show_debug_message(_elem.key)
+        show_debug_message("id")
+        show_debug_message(_elem.id)
+        
         if (_record_count == records_per_page) {
             array_push(pages, _new_page);
             _new_page = [];
@@ -60,6 +65,11 @@ paginate_data = function() {
 }
 
 spawn_record_objects = function() {
+    show_debug_message("SPAWN RECORD OBJECTS");
+    if (array_length(pages) == 0) {
+        return;
+    }
+    
     var _records = pages[current_page];
     var _column_count = 0;
     var _x = starting_x;
@@ -73,7 +83,11 @@ spawn_record_objects = function() {
         var _record_data = _elem;
         var _card_data = get_upgrade_type(_elem.key);
         var _record_object  = instance_create_layer(starting_x, starting_y, layer, record_object);
-        _record_object.card_data = struct_merge(_card_data, _record_data, true);
+        _record_object.card_data = struct_merge(_card_data, _record_data, false);
+        show_debug_message("KEY");
+        show_debug_message(_record_object.card_data.key);
+        show_debug_message("ID");
+        show_debug_message(_record_object.card_data.id);
         
         // Find grid position for record object; adjust when we exceed column limit
         if (_column_count > 0) {
@@ -212,7 +226,7 @@ subscribe(id, "select_card", function(_payload = {}) {
     var _card_data = _payload.card_data;
     var _card_instance = _payload.card_instance;
     _card_instance.selected = true;
-    
+
      if (is_in_deck(_card_data)) {
         remove_from_deck(_card_data);
         add_to_collection(_card_data);
