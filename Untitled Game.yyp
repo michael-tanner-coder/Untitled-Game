@@ -357,6 +357,7 @@
     {"id":{"name":"obj_text_box","path":"objects/obj_text_box/obj_text_box.yy",},},
     {"id":{"name":"obj_text","path":"objects/obj_text/obj_text.yy",},},
     {"id":{"name":"obj_tip_prompt","path":"objects/obj_tip_prompt/obj_tip_prompt.yy",},},
+    {"id":{"name":"obj_tooltip","path":"objects/obj_tooltip/obj_tooltip.yy",},},
     {"id":{"name":"obj_trail","path":"objects/obj_trail/obj_trail.yy",},},
     {"id":{"name":"obj_tutorial_manager","path":"objects/obj_tutorial_manager/obj_tutorial_manager.yy",},},
     {"id":{"name":"obj_ui","path":"objects/obj_ui/obj_ui.yy",},},

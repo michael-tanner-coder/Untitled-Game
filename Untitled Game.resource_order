@@ -293,6 +293,7 @@
     {"name":"obj_text_box","order":5,"path":"objects/obj_text_box/obj_text_box.yy",},
     {"name":"obj_text","order":6,"path":"objects/obj_text/obj_text.yy",},
     {"name":"obj_tip_prompt","order":4,"path":"objects/obj_tip_prompt/obj_tip_prompt.yy",},
+    {"name":"obj_tooltip","order":35,"path":"objects/obj_tooltip/obj_tooltip.yy",},
     {"name":"obj_trail","order":4,"path":"objects/obj_trail/obj_trail.yy",},
     {"name":"obj_tutorial_manager","order":7,"path":"objects/obj_tutorial_manager/obj_tutorial_manager.yy",},
     {"name":"obj_ui","order":14,"path":"objects/obj_ui/obj_ui.yy",},

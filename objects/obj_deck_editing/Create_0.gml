@@ -1,6 +1,5 @@
 // TODO:
 // Deck Create/Edit:
-// create tooltip object; show card info when hovering over object
 // add/remove from deck when clicking card; show card counts and deck limit
 // create text box to hold deck name (create mode = blank box, edit mode = display saved name)
 // spawn a confirm button (create mode = creat deck object, edit mode = save changes)
@@ -19,6 +18,7 @@ record_margin_y = 10;
 // Objects
 record_object = obj_card_grid_item;
 page_counter = undefined;
+tooltip = undefined;
 
 // Pagination
 current_page = 0;
@@ -71,8 +71,9 @@ spawn_record_objects = function() {
     FOREACH _records ELEMENT
         // Spawn record object with data passed as a param
         var _record_data = _elem;
+        var _card_data = get_upgrade_type(_elem.key);
         var _record_object  = instance_create_layer(starting_x, starting_y, layer, record_object);
-        _record_object.card_data = _record_data;
+        _record_object.card_data = _card_data;
         
         // Find grid position for record object; adjust when we exceed column limit
         if (_column_count > 0) {
@@ -116,9 +117,7 @@ spawn_ui_objects = function() {
     var _left_button = instance_create_layer(starting_x - sprite_get_width(spr_arrow_button_left_normal) - record_margin_x, room_height/2, layer, obj_button);
     var _right_button = instance_create_layer(starting_x + _grid_width, room_height/2, layer, obj_button);
     var _confirm_button = instance_create_layer(x, y, layer, obj_button);
-    var _edit_button = instance_create_layer(x, y, layer, obj_button);
-    var _new_button = instance_create_layer(x, y, layer, obj_button);
-    
+
     _left_button.sprite_index = spr_arrow_button_left_normal;
     _left_button.sprite = spr_arrow_button_left_normal;
     _left_button.normal_sprite = spr_arrow_button_left_normal;
@@ -139,24 +138,15 @@ spawn_ui_objects = function() {
     _confirm_button.text = "CONFIRM";
     _confirm_button.x = VIEW_WIDTH/2 - _confirm_button.width/2;
     _confirm_button.y = room_height - 135;
-    
-    _edit_button.on_click_event = "edit_deck";
-    _edit_button.text = "EDIT";
-    _edit_button.x = VIEW_WIDTH - 128;
-    _edit_button.y = VIEW_HEIGHT - 128;
-    _edit_button.width = 64;
-    _edit_button.height = 24;
-
-    _new_button.on_click_event = "create_deck";
-    _new_button.text = "+NEW";
-    _new_button.x = _edit_button.x;
-    _new_button.y = _edit_button.y + _edit_button.height + 8;
-    _new_button.width = 64;
-    _new_button.height = 24;
 
     page_counter = instance_create_layer(room_width/2, room_height - 165, layer, obj_page_count);
     page_counter.page_count =  page_count;
     page_counter.current_page = current_page;
+    
+    tooltip = instance_create_layer(-1000, -1000, layer, obj_tooltip);
+    tooltip.header = "HEADER";
+    tooltip.text = "Description";
+    tooltip.depth = depth - 10;
 }
 
 center_grid = function() {

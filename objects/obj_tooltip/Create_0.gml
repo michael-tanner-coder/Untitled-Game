@@ -1,0 +1,9 @@
+font = fnt_default;
+header = "";
+text = "";
+anchor_x = x;
+anchor_y = x;
+width = 180;
+height = 120;
+padding = 8;
+header_section_height = 16;
