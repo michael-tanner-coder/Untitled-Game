@@ -1,6 +1,8 @@
 // TODO:
 // Deck Create/Edit:
 // add/remove from deck when clicking card
+// save/edit decks when confirming changes
+// connect "edit" and "new" buttons to the appropriate menus
 
 // Edit/Create Mode
 mode = "edit";
