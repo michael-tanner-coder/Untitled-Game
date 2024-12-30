@@ -1,6 +1,6 @@
 // TODO:
 // Deck Create/Edit:
-// add/remove from deck when clicking card; show card counts and deck limit
+// add/remove from deck when clicking card
 // create text box to hold deck name (create mode = blank box, edit mode = display saved name)
 // spawn a confirm button (create mode = creat deck object, edit mode = save changes)
 
@@ -73,7 +73,7 @@ spawn_record_objects = function() {
         var _record_data = _elem;
         var _card_data = get_upgrade_type(_elem.key);
         var _record_object  = instance_create_layer(starting_x, starting_y, layer, record_object);
-        _record_object.card_data = _card_data;
+        _record_object.card_data = struct_merge(_card_data, _record_data, true);
         
         // Find grid position for record object; adjust when we exceed column limit
         if (_column_count > 0) {
@@ -167,14 +167,20 @@ subscribe(id, "prev_page", function() {
 subscribe(id, "start_run", function() {
     fsm.change("confirmation");
 });
-subscribe(id, "select_deck", function(_payload = {}) {
+subscribe(id, "select_card", function(_payload = {}) {
     var _card_data = _payload.card_data;
     var _card_instance = _payload.card_instance;
-    global.active_deck = _card_data;
-    with (obj_deck) {
-        selected = false;
-    }
     _card_instance.selected = true;
+    
+     if (is_in_deck(_card_data)) {
+        remove_from_deck(_card_data);
+        add_to_collection(_card_data);
+        play_sound(snd_button_click);
+    } else {
+        add_to_deck(_card_data);
+        remove_from_collection(_card_data);
+        play_sound(snd_button_back);
+    }
 });
 
 // Init
