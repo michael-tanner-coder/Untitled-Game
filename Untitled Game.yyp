@@ -356,6 +356,7 @@
     {"id":{"name":"obj_test","path":"objects/obj_test/obj_test.yy",},},
     {"id":{"name":"obj_text_box","path":"objects/obj_text_box/obj_text_box.yy",},},
     {"id":{"name":"obj_text","path":"objects/obj_text/obj_text.yy",},},
+    {"id":{"name":"obj_textinput","path":"objects/obj_textinput/obj_textinput.yy",},},
     {"id":{"name":"obj_tip_prompt","path":"objects/obj_tip_prompt/obj_tip_prompt.yy",},},
     {"id":{"name":"obj_tooltip","path":"objects/obj_tooltip/obj_tooltip.yy",},},
     {"id":{"name":"obj_trail","path":"objects/obj_trail/obj_trail.yy",},},
