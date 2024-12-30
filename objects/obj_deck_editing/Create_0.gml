@@ -1,8 +1,6 @@
 // TODO:
 // Deck Create/Edit:
 // add/remove from deck when clicking card
-// prevent all other UI interaction when modal is active (use UI stack??)
-// create text box to hold deck name (create mode = blank box, edit mode = display saved name)
 
 // Edit/Create Mode
 mode = "edit";
@@ -139,6 +137,7 @@ spawn_ui_objects = function() {
     _left_button.pressed_sprite = spr_arrow_button_left_pressed;
     _left_button.on_click_event = "prev_page";
     _left_button.use_nine_slice = false;
+    _left_button.button_id = "left_button";
 
     _right_button.sprite_index = spr_arrow_button_right_normal;
     _right_button.sprite = spr_arrow_button_right_normal;
@@ -147,11 +146,13 @@ spawn_ui_objects = function() {
     _right_button.pressed_sprite = spr_arrow_button_right_pressed;
     _right_button.on_click_event = "next_page";
     _right_button.use_nine_slice = false;
+    _right_button.button_id = "right_button";
     
     _confirm_button.on_click_event = "open_name_modal";
     _confirm_button.text = "CONFIRM";
     _confirm_button.x = VIEW_WIDTH/2 - _confirm_button.width/2;
     _confirm_button.y = room_height - 135;
+    _confirm_button.button_id = "confirm_button";
 
     page_counter = instance_create_layer(room_width/2, room_height - 165, layer, obj_page_count);
     page_counter.page_count =  page_count;
@@ -181,45 +182,11 @@ subscribe(id, "prev_page", function() {
 });
 
 subscribe(id, "open_name_modal", function() {
-    var _textinput = instance_create_layer(200, VIEW_HEIGHT/2, layer, obj_textinput);
-    var _confirm_button = instance_create_layer(_textinput.x, _textinput.y + string_height("W"), layer, obj_button);
-    var _cancel_button = instance_create_layer(_textinput.x + _confirm_button.width + 32, _textinput.y + string_height("W"), layer, obj_button);
-    
-    _textinput.input_character_limit = 10;
-    _textinput.input_id = "name_input";
-    _textinput.input_string_x = _textinput.x;
-    _textinput.input_string_y = _textinput.y;
-    _textinput.depth = depth - 1;
-    
-    _confirm_button.button_id = "confirm_name";
-    _confirm_button.text = "CONFIRM";
-    _confirm_button.on_click_event = "confirm_changes";
-    _confirm_button.depth = depth - 1;
-    
-    _cancel_button.button_id = "cancel_name";
-    _cancel_button.text = "CANCEL";
-    _cancel_button.on_click_event = "close_name_modal";
-    _cancel_button.depth = depth - 1;
-    
-    if (mode == "edit") {
-        _textinput.input_string = deck_data.name;
-        keyboard_string = _textinput.input_string;
-    }
-    
+    fsm.change("name_input");
 });
 
 subscribe(id, "close_name_modal", function() {
-    keyboard_string = "";
-    
-    with(obj_textinput) {
-        instance_destroy(self);
-    }
-    
-    with(obj_button) {
-        if (button_id == "cancel_name" || button_id == "confirm_name") {
-            instance_destroy(self);
-        }
-    }
+     fsm.change("editing");
 });
 
 subscribe(id, "select_card", function(_payload = {}) {
@@ -270,13 +237,90 @@ spawn_ui_objects();
 fsm = new SnowState("editing");
 
 fsm.add("editing", {
-    enter: function() {},
-    step: function() {},
+    enter: function() {
+        keyboard_string = "";
+        
+        with(obj_textinput) {
+            instance_destroy(self);
+        }
+        
+        with(record_object) {
+            disabled = false;
+        }
+        
+        var _button_ids = ["confirm_button", "left_button", "right_button"];
+        with(obj_button) {
+            if (button_id == "cancel_name" || button_id == "confirm_name") {
+                instance_destroy(self);
+            }
+            
+            if (array_contains(_button_ids, button_id)) {
+                disabled = false;
+            }
+        }
+    },
+    step: function() {
+        tooltip.anchor_x = -1000;
+        tooltip.anchor_y = -1000;
+        var _tooltip = tooltip;
+        with(record_object) {
+            if (highlighted) {
+                _tooltip.anchor_x = x + sprite_get_width(sprite_index);
+                _tooltip.anchor_y = y;
+                _tooltip.header = struct_get(card_data, "name");
+                _tooltip.text = struct_get(card_data, "description");
+            }
+        }
+    },
     draw: function() {},
 });
 
 fsm.add("name_input", {
-    enter: function() {},
+    enter: function() {
+        // Disabled existing UI inputs
+        with(record_object) {
+            disabled = true;
+        }
+        
+        var _button_ids = ["confirm_button", "left_button", "right_button"];
+        with(obj_button) {
+            if (array_contains(_button_ids, button_id)) {
+                disabled = true;
+            }
+        }
+        
+        // UI Inputs
+        var _textinput = instance_create_layer(200, VIEW_HEIGHT/2 - 100, layer, obj_textinput);
+        var _confirm_button = instance_create_layer(_textinput.x, _textinput.y + string_height("W"), layer, obj_button);
+        var _cancel_button = instance_create_layer(_textinput.x + _confirm_button.width + 32, _textinput.y + string_height("W"), layer, obj_button);
+        
+        _textinput.input_character_limit = 10;
+        _textinput.input_id = "name_input";
+        _textinput.input_string_x = _textinput.x;
+        _textinput.input_string_y = _textinput.y;
+        _textinput.depth = depth - 1;
+        
+        _confirm_button.button_id = "confirm_name";
+        _confirm_button.text = "CONFIRM";
+        _confirm_button.on_click_event = "confirm_changes";
+        _confirm_button.depth = depth - 1;
+        
+        _cancel_button.button_id = "cancel_name";
+        _cancel_button.text = "CANCEL";
+        _cancel_button.on_click_event = "close_name_modal";
+        _cancel_button.depth = depth - 1;
+        
+        // Change input text based on mode
+        if (mode == "edit") {
+            _textinput.input_string = deck_data.name;
+            keyboard_string = _textinput.input_string;
+        }
+    },
     step: function() {},
-    draw: function() {},
+    draw: function() {
+        draw_set_alpha(0.5);
+        draw_set_color(BLACK);
+        draw_rectangle(0, 0, VIEW_WIDTH, VIEW_HEIGHT, false);
+        draw_set_alpha(1);
+    },
 });

@@ -1,3 +1,7 @@
+if (disabled) {
+    return;
+}
+
 if (highlighted && mouse_check_button_pressed(mb_left)) {
     show_debug_message("CLICKED CARD:");
     show_debug_message("name");
