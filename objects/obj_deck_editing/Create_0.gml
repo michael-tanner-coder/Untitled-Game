@@ -1,5 +1,6 @@
 // TODO:
 // Deck Create/Edit:
+// prevent all other UI interaction when modal is active (use UI stack??)
 // add/remove from deck when clicking card
 // create text box to hold deck name (create mode = blank box, edit mode = display saved name)
 
