@@ -15,7 +15,7 @@ global.active_deck = {};
 global.available_decks = [];
 
 global.default_collection = [];
-global.collection = get_save_data_property(COLLECTION, global.default_collection);
+global.collection = [];
 
 
 global.card_sets = [];
@@ -171,6 +171,8 @@ function init_decks_list() {
     ];
     
     global.active_deck = global.available_decks[0];
+    global.default_collection = global.active_deck.cards;
+    global.collection = get_save_data_property(COLLECTION, global.default_collection);
 }
 
 // Collection functions
