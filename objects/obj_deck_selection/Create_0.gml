@@ -17,7 +17,7 @@ current_page = 0;
 page_count = 1;
 pages = [];
 records_per_page = 9;
-records = global.available_decks;
+records = get_save_data_property("decks", [deck_struct("Base Deck", global.default_deck)]);
 
 // Transition animation
 transition_effect_object = obj_wipe_transition;
@@ -162,6 +162,7 @@ center_grid = function() {
 
 // Event Subscriptions
 subscribe(id, "create_deck", function() {
+    global.active_deck = {name: "", cards: []};
     room_goto(rm_deck_create_menu);
 });
 
