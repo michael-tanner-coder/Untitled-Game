@@ -11,3 +11,9 @@ if (string_length(keyboard_string) > input_character_limit) {
 if (focused) {
     input_string = keyboard_string;
 }
+
+typist.in(max(string_length(input_string)-1, 1), 100);
+
+// flicker cursor at the end of the typed string
+flicker_time--;
+flicker_time = loop_clamp(flicker_time, -max_flicker_time, max_flicker_time);
