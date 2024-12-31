@@ -9,6 +9,8 @@ record_margin_y = 10;
 // Objects
 record_object = obj_deck;
 page_counter = undefined;
+edit_button = undefined;
+new_button = undefined;
 
 // Pagination
 current_page = 0;
@@ -106,8 +108,6 @@ spawn_ui_objects = function() {
     var _left_button = instance_create_layer(starting_x - sprite_get_width(spr_arrow_button_left_normal) - record_margin_x, room_height/2, layer, obj_button);
     var _right_button = instance_create_layer(starting_x + _grid_width, room_height/2, layer, obj_button);
     var _confirm_button = instance_create_layer(x, y, layer, obj_button);
-    var _edit_button = instance_create_layer(x, y, layer, obj_button);
-    var _new_button = instance_create_layer(x, y, layer, obj_button);
     
     _left_button.sprite_index = spr_arrow_button_left_normal;
     _left_button.sprite = spr_arrow_button_left_normal;
@@ -130,19 +130,22 @@ spawn_ui_objects = function() {
     _confirm_button.x = VIEW_WIDTH/2 - _confirm_button.width/2;
     _confirm_button.y = room_height - 135;
     
-    _edit_button.on_click_event = "edit_deck";
-    _edit_button.text = "EDIT";
-    _edit_button.x = VIEW_WIDTH - 128;
-    _edit_button.y = VIEW_HEIGHT - 128;
-    _edit_button.width = 64;
-    _edit_button.height = 24;
+    edit_button = instance_create_layer(x, y, layer, obj_button);
+    new_button = instance_create_layer(x, y, layer, obj_button);
+    
+    edit_button.on_click_event = "edit_deck";
+    edit_button.text = "EDIT";
+    edit_button.x = VIEW_WIDTH - 128;
+    edit_button.y = VIEW_HEIGHT - 128;
+    edit_button.width = 64;
+    edit_button.height = 24;
 
-    _new_button.on_click_event = "create_deck";
-    _new_button.text = "+NEW";
-    _new_button.x = _edit_button.x;
-    _new_button.y = _edit_button.y + _edit_button.height + 8;
-    _new_button.width = 64;
-    _new_button.height = 24;
+    new_button.on_click_event = "create_deck";
+    new_button.text = "+NEW";
+    new_button.x = edit_button.x;
+    new_button.y = edit_button.y + edit_button.height + 8;
+    new_button.width = 64;
+    new_button.height = 24;
 
     page_counter = instance_create_layer(room_width/2, room_height - 165, layer, obj_page_count);
     page_counter.page_count =  page_count;
@@ -158,6 +161,14 @@ center_grid = function() {
 }
 
 // Event Subscriptions
+subscribe(id, "create_deck", function() {
+    room_goto(rm_deck_create_menu);
+});
+
+subscribe(id, "edit_deck", function(_payload = {}) {
+    room_goto(rm_deck_edit_menu);
+});
+
 subscribe(id, "next_page", function() {
     go_to_next_page();
 });

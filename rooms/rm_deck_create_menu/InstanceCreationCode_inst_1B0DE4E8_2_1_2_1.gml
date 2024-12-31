@@ -1,1 +1,1 @@
-text="CREATE A DECK";
+text="CREATE DECK";
