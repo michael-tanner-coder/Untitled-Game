@@ -213,17 +213,13 @@ subscribe(id, "confirm_changes", function() {
         }
     }
     
-    // Pull deck cards
-    var _cards = struct_get(deck_data, "cards");
+    // Create deck save payload
+    if (_deck_name != "") {
+        deck_data.name = _deck_name;
+    }
     
     // Save changes
-    if (mode == "edit") {
-        // save changes to existing deck
-    }
-    
-    if (mode == "create") {
-        // create new deck
-    }
+   save_deck(deck_data);
 })
 
 // Init

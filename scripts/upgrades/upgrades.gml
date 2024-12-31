@@ -80,6 +80,28 @@ function is_in_deck(_card = {}, _deck = []) {
     return _in_deck;
 }
 
+function save_deck(_deck = {}) {
+    // find deck by name
+    var _updated_deck = undefined;
+    var _name = struct_get(_deck, "name");
+    FOREACH global.saved_decks ELEMENT
+        if (_name == _elem.name) {
+            _updated_deck = _elem;
+        }
+    END
+    
+    // if no existing deck, create one
+    if (_updated_deck == undefined) {
+        array_push(global.saved_decks, _deck);
+        set_save_data_property("decks", global.saved_decks);
+    }
+    // otherwise, update existing deck
+    else {
+        _updated_deck = _deck;
+        set_save_data_property("decks", global.saved_decks);
+    }
+}
+
 function get_weighted_random_card(_card_collection = []) {
     var _weight_sum = 0;
     
