@@ -37,7 +37,8 @@ paginate_data = function() {
     
     page_count = ceil(_total_record_count / records_per_page);
     
-    FOREACH records ELEMENT
+    // reversing the array so that the latest cards are shown first
+    FOREACH array_reverse(records) ELEMENT
         var _record = _elem;
         
         show_debug_message("key")
