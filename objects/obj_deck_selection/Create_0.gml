@@ -199,7 +199,13 @@ fsm = new SnowState("selection");
 
 fsm.add("selection", {
     enter: function() {},
-    step: function() {},
+    step: function() {
+        // disable the "new" button if we have reached the max number of saved decks
+        new_button.disabled = array_length(global.saved_decks) >= global.deck_number_limit;
+        
+        // disable the "edit" button if we do not have an actively selected deck
+        edit_button.disabled = global.active_deck == undefined;
+    },
     draw: function() {},
 });
 

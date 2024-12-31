@@ -11,6 +11,7 @@ global.default_deck = [
 ];
 
 global.deck = get_save_data_property(DECK, global.default_deck);
+global.deck_number_limit = 10;
 global.deck_limit = 20;
 global.card_type_limit = 3;
 global.saved_decks = [];
