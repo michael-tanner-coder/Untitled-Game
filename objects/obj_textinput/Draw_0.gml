@@ -28,6 +28,6 @@ if (flicker_time > 0) {
 // character limit
 var _char_count = string_length(input_string);
 var _limit_color = _char_count < input_character_limit ? WHITE : RED;
-draw_shadow_text(x + _box_width, y, string(_char_count) + "/" + string(input_character_limit), _limit_color, PURPLE);
+draw_shadow_text(x + _box_width + string_width("W")/2, y, string(_char_count) + "/" + string(input_character_limit), _limit_color, PURPLE);
 
 draw_set_alpha(1);

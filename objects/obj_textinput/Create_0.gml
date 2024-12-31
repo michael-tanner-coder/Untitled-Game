@@ -14,7 +14,7 @@ text_shadow_color = PURPLE;
 
 // Scribble effects
 typist = scribble_typist();
-typist.in(4, 40);
+typist.in(4, 100);
 typist.sound_per_char([snd_speak_med_7], 0.75, 1.25);
 typist.ease(SCRIBBLE_EASE.ELASTIC, 0, 4, 1, 1, 0, 0);
 
