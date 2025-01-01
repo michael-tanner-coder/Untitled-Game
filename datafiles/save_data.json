@@ -77,48 +77,16 @@
         "max_points": 320000
       }
     },
-    "deck": [
-      {
-        "id": 126,
-        "key": "fire_faster"
-      },
-      {
-        "id": 125,
-        "key": "move_faster"
-      },
-      {
-        "id": 124,
-        "key": "get_sturdy"
-      },
-      {
-        "id": 123,
-        "key": "fire_faster"
-      },
-      {
-        "id": 122,
-        "key": "move_faster"
-      },
-      {
-        "id": 121,
-        "key": "get_sturdy"
-      },
-      {
-        "id": 120,
-        "key": "fire_faster"
-      },
-      {
-        "id": 119,
-        "key": "move_faster"
-      },
-      {
-        "id": 118,
-        "key": "get_sturdy"
-      }
-    ],
-    "upgrades": [
+    "unlocked_cards": [
       "fire_faster",
       "move_faster",
       "get_sturdy"
+    ],
+    "decks": [
+      {
+        "name": "Base Deck",
+        "cards": []
+      }
     ],
     "highscores": [],
     "collection": [],

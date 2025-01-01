@@ -9,7 +9,6 @@ global.default_deck = [
     {key: "fire_faster", id: 7}, {key: "move_faster", id: 8},{key: "get_sturdy", id: 9},
     {key: "fire_faster", id: 10}, {key: "move_faster", id: 11},{key: "get_sturdy", id: 12},
 ];
-global.deck = get_save_data_property(DECK, global.default_deck);
 global.deck_number_limit = 10;
 global.deck_limit = 20;
 global.card_type_limit = 3;
@@ -187,13 +186,13 @@ function build_deck_of_structs(_cards = []) {
 function init_decks_list() {
     global.available_decks = [
         deck_struct("Base Deck", global.default_deck),
-        deck_struct("Advanced Deck", global.deck),
-        deck_struct("Mega Deck", global.deck),
+        deck_struct("Advanced Deck", global.default_deck),
+        deck_struct("Mega Deck", global.default_deck),
         deck_struct("Base Deck", global.default_deck),
-        deck_struct("Advanced Deck", global.deck),
-        deck_struct("Mega Deck", global.deck),
+        deck_struct("Advanced Deck", global.default_deck),
+        deck_struct("Mega Deck", global.default_deck),
         deck_struct("Base Deck", global.default_deck),
-        deck_struct("Advanced Deck", global.deck),
+        deck_struct("Advanced Deck", global.default_deck),
     ];
     global.active_deck = global.available_decks[0];
     global.default_collection = global.active_deck.cards;
@@ -219,17 +218,6 @@ function remove_from_collection(_card = {}){
     }
     
     set_save_data_property(COLLECTION, global.collection);
-}
-
-function is_in_collection(_card = {}) {
-    var _in_collection = false;
-    FOREACH global.deck ELEMENT
-        if (_elem.id == _card.id) {
-            _in_collection = true;
-            break;
-        }
-    END
-    return _in_collection;
 }
 
 // Card Sets
