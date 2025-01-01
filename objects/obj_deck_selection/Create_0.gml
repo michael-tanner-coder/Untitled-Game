@@ -17,7 +17,7 @@ current_page = 0;
 page_count = 1;
 pages = [];
 records_per_page = 9;
-records = get_save_data_property("decks", [deck_struct("Base Deck", global.default_deck)]);
+records = get_save_data_property(DECKS, [global.default_deck]);
 
 // Transition animation
 transition_effect_object = obj_wipe_transition;

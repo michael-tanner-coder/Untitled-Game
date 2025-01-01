@@ -3,18 +3,19 @@ global.upgrades = [];
 global.default_unlocked_upgrades = ["fire_faster", "move_faster", "get_sturdy"];
 
 // Decks
-global.default_deck = [
-    {key: "fire_faster", id: 1}, {key: "move_faster", id: 2},{key: "get_sturdy", id: 3},
-    {key: "fire_faster", id: 4}, {key: "move_faster", id: 5},{key: "get_sturdy", id: 6},
-    {key: "fire_faster", id: 7}, {key: "move_faster", id: 8},{key: "get_sturdy", id: 9},
-    {key: "fire_faster", id: 10}, {key: "move_faster", id: 11},{key: "get_sturdy", id: 12},
-];
+global.default_deck = deck_struct(
+    "Base Deck", 
+    [
+        {key: "fire_faster", id: 1}, {key: "move_faster", id: 2},{key: "get_sturdy", id: 3},
+        {key: "fire_faster", id: 4}, {key: "move_faster", id: 5},{key: "get_sturdy", id: 6},
+        {key: "fire_faster", id: 7}, {key: "move_faster", id: 8},{key: "get_sturdy", id: 9},
+        {key: "fire_faster", id: 10}, {key: "move_faster", id: 11},{key: "get_sturdy", id: 12},
+    ]);
 global.deck_number_limit = 10;
 global.deck_limit = 20;
 global.card_type_limit = 3;
-global.saved_decks = get_save_data_property("decks", [deck_struct("Base Deck", global.default_deck)]);;
+global.saved_decks = get_save_data_property(DECKS, [global.default_deck]);;
 global.active_deck = {};
-global.available_decks = [];
 
 // Collection
 global.default_collection = [];
@@ -184,20 +185,11 @@ function build_deck_of_structs(_cards = []) {
 }
 
 function init_decks_list() {
-    global.available_decks = [
-        deck_struct("Base Deck", global.default_deck),
-        deck_struct("Advanced Deck", global.default_deck),
-        deck_struct("Mega Deck", global.default_deck),
-        deck_struct("Base Deck", global.default_deck),
-        deck_struct("Advanced Deck", global.default_deck),
-        deck_struct("Mega Deck", global.default_deck),
-        deck_struct("Base Deck", global.default_deck),
-        deck_struct("Advanced Deck", global.default_deck),
-    ];
-    global.active_deck = global.available_decks[0];
+    global.active_deck = global.saved_decks[0];
     global.default_collection = global.active_deck.cards;
     global.collection = get_save_data_property(COLLECTION, global.default_collection);
 }
+
 
 // Collection functions
 function add_to_collection(_card = {}) {
@@ -219,6 +211,7 @@ function remove_from_collection(_card = {}){
     
     set_save_data_property(COLLECTION, global.collection);
 }
+
 
 // Card Sets
 function card_set_struct(_key = "", _name = "", _cards = []) {
@@ -418,6 +411,7 @@ function init_upgrades_collection() {
 
     return global.upgrades;
 }
+
 
 // Initialization
 init_upgrades_collection();

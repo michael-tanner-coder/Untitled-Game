@@ -336,17 +336,18 @@ Input Icons by Kenney
 					})],
 					
 					["YES (CANNOT BE UNDONE)", new ScriptRunner(function() {
-						reset_unlocks();
-						reset_all_flags();
-						set_flag("needs_tutorial", true);
 						global.tutorial = true;
 						global.first_wave_complete = false;
-						show_debug_message("deleting data");
-						set_save_data_property(DECK, global.default_deck);
-						set_save_data_property("decks", [deck_struct("Base Deck", global.default_deck)]);
-						set_save_data_property(COLLECTION, global.default_collection);
 						global.collection = global.default_collection;
-						set_save_data_property("counter", array_length(global.default_deck));
+						
+						reset_unlocks();
+						reset_all_flags();
+						
+						set_flag(NEEDS_TUTORIAL, true);
+						set_save_data_property(DECKS, [global.default_deck]);
+						set_save_data_property(COLLECTION, global.default_collection);
+						set_save_data_property(ID_COUNTER, array_length(global.default_deck));
+						
 						gotoPrevPage();
 						gotoPrevPage();
 					})]

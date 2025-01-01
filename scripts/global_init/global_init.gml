@@ -135,6 +135,7 @@ Example usage:
 
 // Flags
 #macro STARTED_GAME "started_game"
+#macro NEEDS_TUTORIAL "needs_tutorial"
 #macro PLAYED_NORMAL_CHARACTER "played_normal_character"
 #macro PLAYED_TALL_CHARACTER "played_tall_character"
 #macro PLAYED_SMALL_CHARACTER "played_small_character"
@@ -162,6 +163,7 @@ global.tutorial_flag_list = [
 #macro REQUIRED_UNLOCK_POINTS "required_unlock_points"
 #macro UNLOCK_PROGRESS_POINTS "card_unlock_progress"
 #macro UNLOCKED_LEVELS "unlocked_levels"
+#macro ID_COUNTER "counter"
 
 // Enums
 enum CHARACTER {
