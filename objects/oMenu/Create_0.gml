@@ -346,7 +346,8 @@ Input Icons by Kenney
 						set_flag(NEEDS_TUTORIAL, true);
 						set_save_data_property(DECKS, [global.default_deck]);
 						set_save_data_property(COLLECTION, global.default_collection);
-						set_save_data_property(ID_COUNTER, array_length(global.default_deck));
+						set_save_data_property(CARD_ID_COUNTER, array_length(global.default_deck));
+						set_save_data_property(DECK_ID_COUNTER, array_length([global.default_deck]));
 						
 						gotoPrevPage();
 						gotoPrevPage();

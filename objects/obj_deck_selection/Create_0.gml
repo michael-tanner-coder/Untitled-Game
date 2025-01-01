@@ -162,7 +162,8 @@ center_grid = function() {
 
 // Event Subscriptions
 subscribe(id, "create_deck", function() {
-    global.active_deck = {name: "", cards: []};
+    // setting active deck ID to -1 so that it does not collide with any existing IDs on save
+    global.active_deck = deck_struct(-1, "", []);
     room_goto(rm_deck_create_menu);
 });
 
@@ -194,6 +195,7 @@ paginate_data();
 center_grid();
 spawn_record_objects();
 spawn_ui_objects();
+global.active_deck = undefined;
 
 // State Machine
 fsm = new SnowState("selection");

@@ -4,6 +4,7 @@ global.default_unlocked_upgrades = ["fire_faster", "move_faster", "get_sturdy"];
 
 // Decks
 global.default_deck = deck_struct(
+    1,
     "Base Deck", 
     [
         {key: "fire_faster", id: 1}, {key: "move_faster", id: 2},{key: "get_sturdy", id: 3},
@@ -25,15 +26,16 @@ global.collection = [];
 global.card_sets = [];
 
 // Deck functions
-function deck_struct(_name = "", _cards = []) {
+function deck_struct(_id = 0, _name = "", _cards = []) {
     return {
+        id: _id,
         name: _name,
         cards: _cards,
     };
 }
 
 function new_card_instance(_key = "") {
-    return {key: _key, id: gen_id()};
+    return {key: _key, id: gen_id(CARD_ID_COUNTER, array_length(global.default_deck.cards))};
 }
 
 function add_to_deck(_card = {}, _deck = []) {
@@ -83,21 +85,30 @@ function is_in_deck(_card = {}, _deck = []) {
 function save_deck(_deck = {}) {
     // find deck by name
     var _updated_deck = undefined;
+    var _updated_deck_index = 0;
     var _name = struct_get(_deck, "name");
+    var _id = struct_get(_deck, "id");
     FOREACH global.saved_decks ELEMENT
-        if (_name == _elem.name) {
+        if (_id == _elem.id) {
             _updated_deck = _elem;
+            _updated_deck_index = _i;
         }
     END
     
     // if no existing deck, create one
     if (_updated_deck == undefined) {
-        array_push(global.saved_decks, _deck);
+        var _new_deck = deck_struct
+        (
+                gen_id(DECK_ID_COUNTER, array_length(global.saved_decks)),
+                _deck.name,
+                _deck.cards,
+        );
+        array_push(global.saved_decks, _new_deck);
         set_save_data_property(DECKS, global.saved_decks);
     }
     // otherwise, update existing deck
     else {
-        _updated_deck = _deck;
+        global.saved_decks[_updated_deck_index] = _deck;
         set_save_data_property(DECKS, global.saved_decks);
     }
 }

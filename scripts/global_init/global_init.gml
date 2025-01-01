@@ -163,7 +163,8 @@ global.tutorial_flag_list = [
 #macro REQUIRED_UNLOCK_POINTS "required_unlock_points"
 #macro UNLOCK_PROGRESS_POINTS "card_unlock_progress"
 #macro UNLOCKED_LEVELS "unlocked_levels"
-#macro ID_COUNTER "counter"
+#macro CARD_ID_COUNTER "card_id_counter"
+#macro DECK_ID_COUNTER "deck_id_counter"
 
 // Enums
 enum CHARACTER {

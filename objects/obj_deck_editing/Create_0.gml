@@ -219,7 +219,10 @@ subscribe(id, "confirm_changes", function() {
     }
     
     // Save changes
-   save_deck(deck_data);
+    save_deck(deck_data);
+   
+    // Return to deck selection menu
+    go_to_scene_by_key("deck-selection");
 });
 
 // Init
