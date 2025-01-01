@@ -93,12 +93,12 @@ function save_deck(_deck = {}) {
     // if no existing deck, create one
     if (_updated_deck == undefined) {
         array_push(global.saved_decks, _deck);
-        set_save_data_property("decks", global.saved_decks);
+        set_save_data_property(DECKS, global.saved_decks);
     }
     // otherwise, update existing deck
     else {
         _updated_deck = _deck;
-        set_save_data_property("decks", global.saved_decks);
+        set_save_data_property(DECKS, global.saved_decks);
     }
 }
 
