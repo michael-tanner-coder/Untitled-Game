@@ -9,7 +9,6 @@ global.default_deck = [
     {key: "fire_faster", id: 7}, {key: "move_faster", id: 8},{key: "get_sturdy", id: 9},
     {key: "fire_faster", id: 10}, {key: "move_faster", id: 11},{key: "get_sturdy", id: 12},
 ];
-
 global.deck = get_save_data_property(DECK, global.default_deck);
 global.deck_number_limit = 10;
 global.deck_limit = 20;

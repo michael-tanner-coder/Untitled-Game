@@ -39,8 +39,8 @@ spawn_level_menu_items = function() {
         _level_menu_item.cards_collected =  _unlocked_card_count;
         
         // get card unlock progress for each level
-        _level_menu_item.card_unlock_progress = global.unlock_progress[$ _key];
-        _level_menu_item.card_unlock_progress_limit = global.required_points[$ _key];
+        _level_menu_item.card_unlock_progress = global.unlock_progress[$ _key][$ "current_points"];
+        _level_menu_item.card_unlock_progress_limit = global.unlock_progress[$ _key][$ "required_points"];
     END
 }
 

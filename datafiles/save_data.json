@@ -1,22 +1,11 @@
 {
-    "unlocked_levels": [],
+    "unlocked_levels": ["level_1"],
     "flags": {
       "needs_tutorial": true,
       "finished_tutorial": false,
       "beat_game": false,
-      "played_normal_character": false,
-      "played_tall_character": false,
-      "played_small_character": false,
-      "played_big_character": false,
-      "played_bounce_character": false,
-      "played_spikey_character": false,
-      "played_float_character": false,
-      "started_game": false,
-      "played_twin_character": false
+      "started_game": false
     },
-    "characters": [
-      0
-    ],
     "inputs": {
       "up": [
         38,
@@ -65,6 +54,28 @@
         32784,
         0
       ]
+    },
+    "card_unlock_progress": {
+      "level_1": {
+        "current_points": 0,
+        "required_points": 2000,
+        "max_points": 40000
+      },
+      "level_2": {
+        "current_points": 0,
+        "required_points": 4000,
+        "max_points": 80000
+      },
+      "level_3": {
+        "current_points": 0,
+        "required_points": 8000,
+        "max_points": 160000
+      },
+      "level_4": {
+        "current_points": 0,
+        "required_points": 16000,
+        "max_points": 320000
+      }
     },
     "deck": [
       {

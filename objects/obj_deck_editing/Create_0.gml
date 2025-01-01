@@ -220,7 +220,7 @@ subscribe(id, "confirm_changes", function() {
     
     // Save changes
    save_deck(deck_data);
-})
+});
 
 // Init
 paginate_data();

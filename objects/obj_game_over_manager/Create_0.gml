@@ -4,8 +4,8 @@ outline_size = 6;
 bar_margin = 20;
 banner_x = -1000;
 
-progress_points = global.unlock_progress[$ global.chosen_level];
-total_points = global.unlock_progress[$ global.chosen_level] + score;
+progress_points = global.unlock_progress[$ global.chosen_level][$ "current_points"];
+total_points = progress_points + score;
 points_from_score = 0;
 
 item_name = "";
@@ -19,8 +19,9 @@ new_card = undefined;
 default_draw_behavior = function() {
 	draw_set_color(WHITE);
 	
-	if (is_numeric(global.required_points[$ global.chosen_level])) {
-		var _progress_percent = progress_points / global.required_points[$ global.chosen_level];
+	var _required_points = global.unlock_progress[$ global.chosen_level][$ "required_points"];
+	if (is_numeric(_required_points)) {
+		var _progress_percent = progress_points / _required_points;
 		_progress_percent = clamp(_progress_percent, 0, 1);
 	
 		draw_set_halign(fa_center);
@@ -29,7 +30,8 @@ default_draw_behavior = function() {
 		banner(200, y - 100, "", BLACK, 0.7);
 	
 		var _formatted_points = string_format(round(progress_points), 0, 0);
-		draw_text(x + sprite_get_width(outline_sprite)/2, y - sprite_get_height(outline_sprite) - bar_margin, _formatted_points + "/" + string(global.required_points[$ global.chosen_level]));
+		var _required_points = global.unlock_progress[$ global.chosen_level][$ "required_points"];
+		draw_text(x + sprite_get_width(outline_sprite)/2, y - sprite_get_height(outline_sprite) - bar_margin, _formatted_points + "/" + string(_required_points));
 	
 		var _level_data = get_level_struct(global.chosen_level); // TODO: refactor this to pull the data once in the create event
 		var _color = struct_get(_level_data, "color");
@@ -50,7 +52,7 @@ fsm.add("inactive", {
 
 fsm.add("idle", {
 	enter: function() {
-		global.unlock_progress[$ global.chosen_level] = round(progress_points); // ensure we are only saving rounded points
+		global.unlock_progress[$ global.chosen_level][$ "current_points"] = round(progress_points); // ensure we are only saving rounded points
 		set_save_data_property(UNLOCK_PROGRESS_POINTS, global.unlock_progress);
 	},
 	step: function() {
@@ -75,13 +77,14 @@ fsm.add("idle", {
 
 fsm.add("countup", {
 	enter: function() {
-		progress_points = global.unlock_progress[$ global.chosen_level];
-		total_points = global.unlock_progress[$ global.chosen_level] + points_from_score;
+		progress_points = global.unlock_progress[$ global.chosen_level][$ "current_points"];
+		total_points = progress_points + points_from_score;
 		item_name = "";
 	},
 	step: function() {
 		// gradually increase progress_points until it equals target_points
-		var _target_points = min(total_points, global.required_points[$ global.chosen_level]);
+		var _required_points = global.unlock_progress[$ global.chosen_level][$ "required_points"];
+		var _target_points = min(total_points, _required_points);
 		progress_points = lerp(progress_points, _target_points, 0.1);
 		progress_points = clamp(progress_points, 0, _target_points);
 		if (abs(progress_points - _target_points) < 1) {
@@ -99,7 +102,7 @@ fsm.add("countup", {
 		}
 		
 		// move to unlock state if we cleared the point requirement for the next unlock
-		if (is_numeric(global.required_points[$ global.chosen_level]) && progress_points >= global.required_points[$ global.chosen_level]) {
+		if (is_numeric(_required_points) && progress_points >= _required_points) {
 			fsm.change("unlock");
 			return;
 		}
@@ -139,14 +142,20 @@ fsm.add("unlock", {
 		new_card = new_card_instance(item_data.key)
 		
 		// reset target points for next time we go to the countup state
-		var _level_point_limit = struct_get(_level_data, "max_unlock_progress");
-		points_from_score -= (global.required_points[$ global.chosen_level] - global.unlock_progress[$ global.chosen_level]);
+		var _level_point_limit = global.unlock_progress[$ global.chosen_level][$ "max_points"];
+		var _required_points = global.unlock_progress[$ global.chosen_level][$ "required_points"];
+		var _current_points = global.unlock_progress[$ global.chosen_level][$ "current_points"];
+		
+		points_from_score -= (_required_points - _current_points);
 		points_from_score = clamp(points_from_score, 0, score);
 		progress_points = 0;
-		global.unlock_progress[$ global.chosen_level] = 0;
-		global.required_points[$ global.chosen_level] *= 2;
-		global.required_points[$ global.chosen_level] = clamp(global.required_points[$ global.chosen_level], 0, _level_point_limit);
-		set_save_data_property(REQUIRED_UNLOCK_POINTS, global.required_points);
+		
+		_required_points *= 2;
+		
+		global.unlock_progress[$ global.chosen_level][$ "current_points"] = 0;
+		global.unlock_progress[$ global.chosen_level][$ "required_points"] = clamp(_required_points, 0, _level_point_limit);
+		
+		set_save_data_property("card_unlock_progress", global.unlock_progress);
 		
 		play_sound(snd_tutorial_success);
 		

@@ -345,8 +345,6 @@ Input Icons by Kenney
 						set_save_data_property(DECK, global.default_deck);
 						set_save_data_property("decks", [deck_struct("Base Deck", global.default_deck)]);
 						set_save_data_property(COLLECTION, global.default_collection);
-						set_save_data_property(REQUIRED_UNLOCK_POINTS, global.default_required_points);
-						global.required_points = global.default_required_points;
 						global.deck = global.default_deck;
 						global.collection = global.default_collection;
 						set_save_data_property("counter", array_length(global.default_deck));
