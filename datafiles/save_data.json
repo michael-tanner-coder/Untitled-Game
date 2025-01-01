@@ -119,7 +119,5 @@
       "high_contrast_mode_enabled": true,
       "vsync": 0
     },
-    "unlock_progress": 0,
-    "counter": 0,
-    "unlocked_powerups": []
+    "counter": 0
   }
