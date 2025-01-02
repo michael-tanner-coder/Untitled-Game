@@ -1,6 +1,5 @@
 // TODO:
 // Fix card pagination (duplicates appearing on second page)
-// Show card names by default
 // Stop music from resetting between menus
 
 // Edit/Create Mode
@@ -9,10 +8,11 @@ deck_data = global.active_deck;
 
 // Dimensions/Positioning
 column_limit = 3;
+row_limit = 3;
 starting_x = x;
-starting_y = y;
-record_margin_x = 20;
-record_margin_y = 10;
+starting_y = y-10;
+record_margin_x = 100;
+record_margin_y = 20;
 
 // Objects
 record_object = obj_card_grid_item;
@@ -104,6 +104,7 @@ spawn_record_objects = function() {
         
         _record_object.x = _x;
         _record_object.y = _y;
+        _record_object.depth = depth - 1;
     END
 }
 
@@ -141,6 +142,7 @@ spawn_ui_objects = function() {
     _left_button.on_click_event = "prev_page";
     _left_button.use_nine_slice = false;
     _left_button.button_id = "left_button";
+    _left_button.depth = depth - 1;
 
     _right_button.sprite_index = spr_arrow_button_right_normal;
     _right_button.sprite = spr_arrow_button_right_normal;
@@ -150,6 +152,7 @@ spawn_ui_objects = function() {
     _right_button.on_click_event = "next_page";
     _right_button.use_nine_slice = false;
     _right_button.button_id = "right_button";
+    _right_button.depth = depth - 1;
     
     _confirm_button.on_click_event = "open_name_modal";
     _confirm_button.text = "CONFIRM";
@@ -157,7 +160,7 @@ spawn_ui_objects = function() {
     _confirm_button.y = room_height - 135;
     _confirm_button.button_id = "confirm_button";
     
-    _back_button.text = "<- BACK";
+    _back_button.text = "BACK";
     _back_button.on_click_event = "go_to_last_scene";
     _back_button.button_id = "back_button";
     _back_button.x = 32;
@@ -302,24 +305,24 @@ fsm.add("name_input", {
         
         // UI Inputs
         var _textinput = instance_create_layer(200, VIEW_HEIGHT/2 - 100, layer, obj_textinput);
-        var _confirm_button = instance_create_layer(_textinput.x, _textinput.y + string_height("W"), layer, obj_button);
-        var _cancel_button = instance_create_layer(_textinput.x + _confirm_button.width + 32, _textinput.y + string_height("W"), layer, obj_button);
+        var _confirm_button = instance_create_layer(_textinput.x, _textinput.y + 50, layer, obj_button);
+        var _cancel_button = instance_create_layer(_textinput.x + _confirm_button.width + 32, _confirm_button.y, layer, obj_button);
         
         _textinput.input_character_limit = 10;
         _textinput.input_id = "name_input";
         _textinput.input_string_x = _textinput.x;
         _textinput.input_string_y = _textinput.y;
-        _textinput.depth = depth - 1;
+        _textinput.depth = depth - 10;
         
         _confirm_button.button_id = "confirm_name";
         _confirm_button.text = "CONFIRM";
         _confirm_button.on_click_event = "confirm_changes";
-        _confirm_button.depth = depth - 1;
+        _confirm_button.depth = depth - 10;
         
         _cancel_button.button_id = "cancel_name";
         _cancel_button.text = "CANCEL";
         _cancel_button.on_click_event = "close_name_modal";
-        _cancel_button.depth = depth - 1;
+        _cancel_button.depth = depth - 10;
         
         // Change input text based on mode
         if (mode == "edit") {
