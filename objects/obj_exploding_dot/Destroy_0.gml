@@ -1,9 +1,11 @@
 standard_enemy_destroy_event();
 
-// Explosion Logic
+// Explosion only when at full size
 if (!hit) {
-	var _first_beam = instance_create_layer(x, y, layer, obj_laser);
-	var _second_beam = instance_create_layer(x, y, layer, obj_laser);
-	_first_beam.phy_rotation = phy_rotation;
-	_second_beam.phy_rotation = phy_rotation + 90;
+	screenshake(1, 6, 0.5);
 }
+
+// Spike Emitter
+emitted_spikes = ceil(max_spikes * (image_xscale/max_scale));
+var _spike_emitter = instance_create_layer(x, y, layer, obj_spike_emitter);
+_spike_emitter.spike_count = emitted_spikes;

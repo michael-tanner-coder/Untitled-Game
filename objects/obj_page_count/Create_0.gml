@@ -1,0 +1,9 @@
+page_count = 1;
+current_page = 0;
+page_icon = spr_page_count_dot;
+current_page_icon_color = RED;
+default_page_icon_color = WHITE;
+page_icon_margin_x = 6;
+page_icon_padding = 4;
+width = 0;
+height = 0;

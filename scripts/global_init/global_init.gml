@@ -21,6 +21,7 @@ global.temp_game_speed = 1;
 global.boss_lives = 3;
 global.attempts = 0;
 global.most_recent_unlock = "";
+global.gamepad_was_connected = false;
 
 if (!global.dev_mode) {
 	randomise();
@@ -43,6 +44,8 @@ function get_global_game_speed() {
 #macro VIEW view_camera[0]
 #macro VIEW_WIDTH camera_get_view_width(VIEW)
 #macro VIEW_HEIGHT camera_get_view_height(VIEW)
+
+#macro HEADER_HEIGHT 64
 
 // Game Rules
 #macro STANDARD_SPAWN_RATE 450
@@ -132,6 +135,7 @@ Example usage:
 
 // Flags
 #macro STARTED_GAME "started_game"
+#macro NEEDS_TUTORIAL "needs_tutorial"
 #macro PLAYED_NORMAL_CHARACTER "played_normal_character"
 #macro PLAYED_TALL_CHARACTER "played_tall_character"
 #macro PLAYED_SMALL_CHARACTER "played_small_character"
@@ -154,9 +158,13 @@ global.tutorial_flag_list = [
 // Constants
 #macro NO_FOLLOW "no_follow"
 #macro DECK "deck"
+#macro DECKS "decks"
 #macro COLLECTION "collection"
 #macro REQUIRED_UNLOCK_POINTS "required_unlock_points"
-#macro UNLOCK_PROGRESS_POINTS "unlock_progress"
+#macro UNLOCK_PROGRESS_POINTS "card_unlock_progress"
+#macro UNLOCKED_LEVELS "unlocked_levels"
+#macro CARD_ID_COUNTER "card_id_counter"
+#macro DECK_ID_COUNTER "deck_id_counter"
 
 // Enums
 enum CHARACTER {

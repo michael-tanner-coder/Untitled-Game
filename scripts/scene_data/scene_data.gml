@@ -1,27 +1,5 @@
 // Scene data
-/*
-Story:
-
-After a nuclear-level apocalypse in the magical kingdom of Blobla, only two things survived: the roaches and the slimes.
-
-Slowly but surely the slimes established their own society ruled by kings and queens, but only because they discovered the concept from a deck of enchanted playing cards. 
-
-Slimes, not being very bright, assumed royalty was something to be won in a game. So, every year they hold a tournament to decide who will be the next Slime Monarch.
-
-Competitors use the power of the magic playing cards to strengthen themselves and fight against each other for the chance of becoming Blobla's next ruler.
-*/
-
-/*
-Gameplay:
-
-Slime Wasters is a physics-based arcade-action game with light deck-building mechanics.  
-
-Your goal is to defeat other slimes in combat by pushing them into the spikey walls that surround you without getting pushed into them yourself. 
-
-As you play, you will gradually collect magical playing cards that can enhance your abilities and enable you to take on bigger and badder slimes. 
-*/
-
-global.scene_queue = [
+global.scenes = [
     {
         key: "main-menu",
         map: rm_main_menu,
@@ -34,7 +12,51 @@ global.scene_queue = [
         boss: obj_boss_test,
     },
     {
-        key: "level",
+        key: "level-selection",
+        map: rm_level_selection_menu,
+        music_layers: [],
+        goal_score: 20000,
+        time_between_spawns: 30,
+        default_max_enemy_count: 8,
+        boss_max_enemy_count: 4,
+        enemy_types: [],
+        boss: obj_boss_test,
+    },
+    {
+        key: "deck-selection",
+        map: rm_deck_selection_menu,
+        music_layers: [],
+        goal_score: 20000,
+        time_between_spawns: 30,
+        default_max_enemy_count: 8,
+        boss_max_enemy_count: 4,
+        enemy_types: [],
+        boss: obj_boss_test,
+    },
+    {
+        key: "deck-editing",
+        map: rm_deck_edit_menu,
+        music_layers: [],
+        goal_score: 20000,
+        time_between_spawns: 30,
+        default_max_enemy_count: 8,
+        boss_max_enemy_count: 4,
+        enemy_types: [],
+        boss: obj_boss_test,
+    },
+    {
+        key: "deck-creation",
+        map: rm_deck_create_menu,
+        music_layers: [],
+        goal_score: 20000,
+        time_between_spawns: 30,
+        default_max_enemy_count: 8,
+        boss_max_enemy_count: 4,
+        enemy_types: [],
+        boss: obj_boss_test,
+    },
+    {
+        key: "level_1",
         map: rm_combat_test_small,
         tutorial_flag: "basics_tutorial",
         goal_score: 20000,
@@ -69,7 +91,7 @@ global.scene_queue = [
             },
             {
                 type: obj_growing_dot,
-                points: 4000,
+                points: 300,
                 limit: 1,
             },
             {
@@ -83,92 +105,143 @@ global.scene_queue = [
     {
         key: "level_2",
         map: rm_combat_test_small,
+        tutorial_flag: "basics_tutorial",
         goal_score: 40000,
         time_between_spawns: 30,
-        max_enemy_count: 10,
+        default_max_enemy_count: 6,
+        boss_max_enemy_count: 4,
         enemy_types: [
             {
                 type: obj_dot,
                 points: 0,
-                limit: 10,
+                limit: 8,
             },
             {
                 type: obj_big_dot,
-                points: 1500,
-                limit: 3,
+                points: 1300,
+                limit: 2,
             },
             {
                 type: obj_growing_dot,
-                points: 2500,
+                points: 4000,
+                limit: 1,
+            },
+            {
+                type: obj_dot,
+                points: 0,
+                limit: 8,
+            },
+            {
+                type: obj_big_dot,
+                points: 1300,
                 limit: 2,
             },
             {
+                type: obj_growing_dot,
+                points: 300,
+                limit: 1,
+            },
+            {
                 type: obj_exploding_dot,
-                points: 3500,
-                limit: 2,
-            }
+                points: 200,
+                limit: 1,
+            },
         ],
-        boss: obj_boss_test,
+        boss: obj_chain_boss,
     },
     {
         key: "level_3",
         map: rm_combat_test_small,
-        goal_score: 80000,
+        tutorial_flag: "basics_tutorial",
+        goal_score: 40000,
         time_between_spawns: 30,
-        max_enemy_count: 10,
+        default_max_enemy_count: 6,
+        boss_max_enemy_count: 4,
         enemy_types: [
             {
                 type: obj_dot,
                 points: 0,
-                limit: 10,
+                limit: 8,
             },
             {
                 type: obj_big_dot,
-                points: 1500,
-                limit: 3,
+                points: 1300,
+                limit: 2,
             },
             {
                 type: obj_growing_dot,
-                points: 2500,
+                points: 4000,
+                limit: 1,
+            },
+            {
+                type: obj_dot,
+                points: 0,
+                limit: 8,
+            },
+            {
+                type: obj_big_dot,
+                points: 1300,
                 limit: 2,
             },
             {
+                type: obj_growing_dot,
+                points: 300,
+                limit: 1,
+            },
+            {
                 type: obj_exploding_dot,
-                points: 3500,
-                limit: 2,
-            }
+                points: 200,
+                limit: 1,
+            },
         ],
-        boss: obj_boss_test,
+        boss: obj_chain_boss,
     },
-    {
+     {
         key: "level_4",
         map: rm_combat_test_small,
-        goal_score: 160000,
+        tutorial_flag: "basics_tutorial",
+        goal_score: 40000,
         time_between_spawns: 30,
-        max_enemy_count: 10,
+        default_max_enemy_count: 6,
+        boss_max_enemy_count: 4,
         enemy_types: [
             {
                 type: obj_dot,
                 points: 0,
-                limit: 10,
+                limit: 8,
             },
             {
                 type: obj_big_dot,
-                points: 1500,
-                limit: 3,
+                points: 1300,
+                limit: 2,
             },
             {
                 type: obj_growing_dot,
-                points: 2500,
+                points: 4000,
+                limit: 1,
+            },
+            {
+                type: obj_dot,
+                points: 0,
+                limit: 8,
+            },
+            {
+                type: obj_big_dot,
+                points: 1300,
                 limit: 2,
             },
             {
+                type: obj_growing_dot,
+                points: 300,
+                limit: 1,
+            },
+            {
                 type: obj_exploding_dot,
-                points: 3500,
-                limit: 2,
-            }
+                points: 200,
+                limit: 1,
+            },
         ],
-        boss: obj_boss_test,
+        boss: obj_chain_boss,
     },
     {
         key: "victory",
@@ -191,3 +264,5 @@ global.scene_queue = [
         boss: obj_boss_test,
     },
 ];
+
+global.scene_stack = [];

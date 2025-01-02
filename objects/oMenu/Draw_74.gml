@@ -16,8 +16,8 @@ if (!surface_exists(pause_surf)) {
 		// Pause all sounds
 		// audio_pause_all();
 		// Mute the melody layer so that we only hear percussion when paused
-		var _top_layer = get_top_track_layer();
-		mute_layer(_top_layer, 300);
+		// var _top_layer = get_top_track_layer();
+		// mute_layer(_top_layer, 300);
 		
 		// Pause sound
 		if (audio.pause != undefined) audio_play_sound(audio.pause, 5, false);

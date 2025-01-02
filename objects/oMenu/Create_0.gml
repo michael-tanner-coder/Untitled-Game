@@ -306,7 +306,7 @@ Input Icons by Kenney
 		["VIEW DECK", new ScriptRunner(function() { 
 				menuModePause();
 				menuSetPreset(e_menu_presets.pause_menu);
-				room_goto(rm_item_menu);
+				room_goto(rm_deck_edit_menu);
 			}), undefined, undefined],
 		
 
@@ -336,19 +336,19 @@ Input Icons by Kenney
 					})],
 					
 					["YES (CANNOT BE UNDONE)", new ScriptRunner(function() {
-						reset_unlocks();
-						reset_all_flags();
-						set_flag("needs_tutorial", true);
 						global.tutorial = true;
 						global.first_wave_complete = false;
-						show_debug_message("deleting data");
-						set_save_data_property(DECK, global.default_deck);
-						set_save_data_property(COLLECTION, global.default_collection);
-						set_save_data_property(REQUIRED_UNLOCK_POINTS, 2000);
-						global.required_points = 2000;
-						global.deck = global.default_deck;
 						global.collection = global.default_collection;
-						set_save_data_property("counter", 0);
+						
+						reset_unlocks();
+						reset_all_flags();
+						
+						set_flag(NEEDS_TUTORIAL, true);
+						set_save_data_property(DECKS, [global.default_deck]);
+						set_save_data_property(COLLECTION, global.default_collection);
+						set_save_data_property(CARD_ID_COUNTER, array_length(global.default_deck.cards));
+						set_save_data_property(DECK_ID_COUNTER, array_length([global.default_deck]));
+						
 						gotoPrevPage();
 						gotoPrevPage();
 					})]

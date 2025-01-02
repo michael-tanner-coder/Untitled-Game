@@ -1,11 +1,17 @@
+button_id = "";
+
 // Base Styles
 width = 150;
 height = 60;
 color = BLUE;
-sprite = spr_button_normal;
+highlight_sprite = spr_button_highlighted;
+pressed_sprite = spr_button_pressed;
+normal_sprite = spr_button_normal;
+sprite = normal_sprite;
+use_nine_slice = true;
 
 // Button Content
-text = "Lorem ipsum type shit";
+text = "";
 text_font = fnt_small;
 text_padding = 5;
 
@@ -17,7 +23,7 @@ event_payload = {};
 highlighted = false;
 time_until_active = 120;
 static_button = false;
-disabled = true;
+disabled = false;
 selected = false;
 
 // Animation

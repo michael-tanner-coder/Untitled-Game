@@ -242,8 +242,8 @@ fsm.add("active", {
 		}
 
 		// --- Collision ---
-		if (position_meeting(x, y, obj_wall)) {
-			instance_destroy(self);
+		if (position_meeting(x, y, [obj_wall, obj_spike])) {
+			lose_life();
 		}
 		
 		// -- Invincibility Frames

@@ -33,6 +33,8 @@ function standard_enemy_create_event() {
     image_yscale = 2;
     is_active = false;
     target = undefined;
+    hit_flash_alpha = 0;
+    hit_flash_color = WHITE;
     
     mana_value = 25;
     
@@ -99,16 +101,45 @@ function standard_enemy_step_event() {
 	if (hit_timer <= 0) {
 	    hit = false;
 	}
+	hit_flash_alpha = (hit_timer/base_stun_time);
 	
 	// Update sprite
 	if (hit) {
 		x_force = 0;
 		y_force = 0;
 	}
+	
+	// Destroy self when touching a lethal object
+	if (position_meeting(x, y, [obj_spike])) {
+		hit = true;
+		instance_destroy(self);
+	}
 }
 
 function standard_enemy_draw_event() {
 	draw_8_direction_movement(hit ? hit_spritesheet : rolling_spritesheet, frame_width, frame_height, anim_length, image_alpha, image_blend, x_offset, y_offset);
+	
+	if (hit_flash_alpha > 0) {
+		shader_set(sh_flash);
+		
+		draw_sprite_part_ext(
+			hit ? hit_spritesheet : rolling_spritesheet,
+			0,
+			floor(x_frame) * frame_width,
+			floor(y_frame) * frame_height,
+			frame_width,
+			frame_height,
+			floor(x - x_offset),
+			floor(y - y_offset),
+			image_xscale,
+			image_yscale, 
+			hit_flash_color,
+			hit_flash_alpha,
+		);
+			
+		shader_reset();
+	}
+	
 	draw_set_color(BLUE);
 	if (global.debug) {
 		draw_set_color(BLUE);

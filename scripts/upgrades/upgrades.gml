@@ -1,45 +1,62 @@
+// Unlocks
 global.upgrades = [];
 global.default_unlocked_upgrades = ["fire_faster", "move_faster", "get_sturdy"];
 
-global.default_deck = [
-    {key: "fire_faster", id: gen_id()}, {key: "move_faster", id: gen_id()},{key: "get_sturdy", id: gen_id()},
-    {key: "fire_faster", id: gen_id()}, {key: "move_faster", id: gen_id()},{key: "get_sturdy", id: gen_id()},
-    {key: "fire_faster", id: gen_id()}, {key: "move_faster", id: gen_id()},{key: "get_sturdy", id: gen_id()},
-    {key: "fire_faster", id: gen_id()}, {key: "move_faster", id: gen_id()},{key: "get_sturdy", id: gen_id()},
-];
-global.deck = get_save_data_property(DECK, global.default_deck);
+// Decks
+global.default_deck = deck_struct(
+    1,
+    "Base Deck", 
+    [
+        {key: "fire_faster", id: 1}, {key: "move_faster", id: 2},{key: "get_sturdy", id: 3},
+        {key: "fire_faster", id: 4}, {key: "move_faster", id: 5},{key: "get_sturdy", id: 6},
+        {key: "fire_faster", id: 7}, {key: "move_faster", id: 8},{key: "get_sturdy", id: 9},
+        {key: "fire_faster", id: 10}, {key: "move_faster", id: 11},{key: "get_sturdy", id: 12},
+    ]);
+global.deck_number_limit = 10;
 global.deck_limit = 20;
 global.card_type_limit = 3;
+global.saved_decks = get_save_data_property(DECKS, [global.default_deck]);;
+global.active_deck = {};
 
+// Collection
 global.default_collection = [];
-global.collection = get_save_data_property(COLLECTION, global.default_collection);
+global.collection = [];
+
+// Sets
+global.card_sets = [];
 
 // Deck functions
-function new_card_instance(_key = "") {
-    return {key: _key, id: gen_id()};
+function deck_struct(_id = 0, _name = "", _cards = []) {
+    return {
+        id: _id,
+        name: _name,
+        cards: _cards,
+    };
 }
 
-function add_to_deck(_card = {}) {
-    if (array_length(global.deck) < global.deck_limit) {
+function new_card_instance(_key = "") {
+    return {key: _key, id: gen_id(CARD_ID_COUNTER, array_length(global.default_deck.cards))};
+}
+
+function add_to_deck(_card = {}, _deck = []) {
+    if (array_length(_deck) < global.deck_limit) {
         var _card_count = 0;
         
-        FOREACH global.deck ELEMENT
+        FOREACH _deck ELEMENT
             if (_elem.key == _card.key) {
                 _card_count++;  
             }
         END
         
         if (_card_count < global.card_type_limit) {
-            array_push(global.deck, _card);
+            array_push(_deck, _card);
         }
-        
-        set_save_data_property(DECK, global.deck);
     }
 }
 
-function remove_from_deck(_card = {}) {
+function remove_from_deck(_card = {}, _deck = []) {
     var _card_index = undefined;
-    FOREACH global.deck ELEMENT
+    FOREACH _deck ELEMENT
         if (_card.id == _elem.id && _card.key == _elem.key) {
             _card_index = _i;
             break;
@@ -47,20 +64,51 @@ function remove_from_deck(_card = {}) {
     END
     
     if (is_numeric(_card_index)) {
-        array_delete(global.deck, _card_index, 1);
-        set_save_data_property(DECK, global.deck);
+        array_delete(_deck, _card_index, 1);
+        set_save_data_property(DECK, _deck);
     }
 }
 
-function is_in_deck(_card = {}) {
+function is_in_deck(_card = {}, _deck = []) {
     var _in_deck = false;
-    FOREACH global.deck ELEMENT
+    FOREACH _deck ELEMENT
         if (_elem.id == _card.id) {
             _in_deck = true;
             break;
         }
     END
     return _in_deck;
+}
+
+function save_deck(_deck = {}) {
+    // find deck by name
+    var _updated_deck = undefined;
+    var _updated_deck_index = 0;
+    var _name = struct_get(_deck, "name");
+    var _id = struct_get(_deck, "id");
+    FOREACH global.saved_decks ELEMENT
+        if (_id == _elem.id) {
+            _updated_deck = _elem;
+            _updated_deck_index = _i;
+        }
+    END
+    
+    // if no existing deck, create one
+    if (_updated_deck == undefined) {
+        var _new_deck = deck_struct
+        (
+                gen_id(DECK_ID_COUNTER, array_length(global.saved_decks)),
+                _deck.name,
+                _deck.cards,
+        );
+        array_push(global.saved_decks, _new_deck);
+        set_save_data_property(DECKS, global.saved_decks);
+    }
+    // otherwise, update existing deck
+    else {
+        global.saved_decks[_updated_deck_index] = _deck;
+        set_save_data_property(DECKS, global.saved_decks);
+    }
 }
 
 function get_weighted_random_card(_card_collection = []) {
@@ -127,16 +175,30 @@ function get_weighted_rare_card(_card_collection = []) {
     return _found_card;
 }
 
-
-function build_deck_of_structs(_deck = []) {
+function build_deck_of_structs(_cards = []) {
     var _struct_deck = [];
-    FOREACH _deck ELEMENT
+    FOREACH _cards ELEMENT
         var _card = _elem;
-        var _card_struct = get_upgrade_type(_card.key);
+        var _card_struct = undefined;
+        
+        if (is_string(_card)) {
+            _card_struct = get_upgrade_type(_card);
+        }
+        else {
+            _card_struct = get_upgrade_type(_card.key);
+        }
+        
         array_push(_struct_deck, _card_struct);
     END
     return _struct_deck;
 }
+
+function init_decks_list() {
+    global.active_deck = global.saved_decks[0];
+    global.default_collection = global.active_deck.cards;
+    global.collection = get_save_data_property(COLLECTION, global.default_collection);
+}
+
 
 // Collection functions
 function add_to_collection(_card = {}) {
@@ -159,16 +221,35 @@ function remove_from_collection(_card = {}){
     set_save_data_property(COLLECTION, global.collection);
 }
 
-function is_in_collection(_card = {}) {
-    var _in_collection = false;
-    FOREACH global.deck ELEMENT
-        if (_elem.id == _card.id) {
-            _in_collection = true;
-            break;
+
+// Card Sets
+function card_set_struct(_key = "", _name = "", _cards = []) {
+    return {
+        key: _key,
+        name: _name,
+        cards: _cards,
+    };
+}
+
+function init_card_sets() {
+    global.card_sets = [
+        card_set_struct("jack_set", "Jack Set", ["fire_faster", "move_faster", "get_sturdy"]),  
+        card_set_struct("queen_set", "Queen Set", ["revive", "shot_spread", "extra_life"]), 
+        card_set_struct("king_set", "King Set", ["bullet_strength", "fast_fire"]),   
+        card_set_struct("joker_set", "Joker Set", ["closer", "shot_focus"])    
+    ];
+}
+
+function get_card_set_struct(_key = "") {
+    var _set = undefined;
+    FOREACH global.card_sets ELEMENT
+        if (_elem.key == _key) {
+            _set = _elem;
         }
     END
-    return _in_collection;
+    return _set;
 }
+
 
 // Card Structs
 function effect_struct(_property = "", _value = 0, _operation = OPERATIONS.SET) {
@@ -279,17 +360,17 @@ function init_upgrades_collection() {
                 ],
                 50
         ),
-        // upgrade_struct(
-        //         "shot_focus", 
-        //         "Shot Focus", 
-        //         "Decrease your shot count by 1, but each shot is stronger", 
-        //         1000, 
-        //         spr_white_circle,
-        //         [
-        //             effect_struct("player_shot_count", 1, OPERATIONS.SUBTRACT),
-        //             effect_struct("player_bullet_force", 2, OPERATIONS.DIVIDE),
-        //         ]
-        // ),
+        upgrade_struct(
+                "shot_focus", 
+                "Shot Focus", 
+                "Decrease your shot count by 1, but each shot is stronger", 
+                1000, 
+                spr_white_circle,
+                [
+                    effect_struct("player_shot_count", 1, OPERATIONS.SUBTRACT),
+                    effect_struct("player_bullet_force", 2, OPERATIONS.DIVIDE),
+                ]
+        ),
         upgrade_struct(
                 "extra_life", 
                 "Extra Life", 
@@ -333,11 +414,17 @@ function init_upgrades_collection() {
                 [
                     effect_struct("retrieve_discard_pile", 1, OPERATIONS.NONE),
                 ],
-                100
+                50
         ),
     ];
 
     return global.upgrades;
 }
 
+
+// Initialization
 init_upgrades_collection();
+
+init_decks_list();
+
+init_card_sets();

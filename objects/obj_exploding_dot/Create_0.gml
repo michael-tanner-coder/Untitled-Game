@@ -15,6 +15,10 @@ rolling_spritesheet = spr_exploding_enemy_sheet;
 radius = 8;
 my_fixture = create_circle_fixture(radius, 0.5, 1, 0.875, 0.1, 0.1, 0.4);
 
+// Spikes
+max_spikes = 5;
+emitted_spikes = 1;
+
 // State Machine
 fsm = new SnowState("active");
 
@@ -45,13 +49,35 @@ fsm.add("active", {
 			mana_value = 10 * image_xscale;
 		}
 		
+		hit_flash_alpha = image_xscale/max_scale;
 		if (image_xscale >= max_scale) {
 			instance_destroy(self);
 		}
+		
 	},
 	draw: function() {
 		draw_8_direction_movement(hit ? hit_spritesheet : rolling_spritesheet, frame_width, frame_height, anim_length, image_alpha, image_blend, (frame_width * image_xscale)/2, (frame_height * image_yscale)/2);
-		
+		if (hit_flash_alpha > 0) {
+			shader_set(sh_flash);
+			
+			draw_sprite_part_ext(
+				hit ? hit_spritesheet : rolling_spritesheet,
+				0,
+				floor(x_frame) * frame_width,
+				floor(y_frame) * frame_height,
+				frame_width,
+				frame_height,
+				floor(x - (frame_width * image_xscale)/2),
+				floor(y - (frame_height * image_yscale)/2),
+				image_xscale,
+				image_yscale, 
+				hit_flash_color,
+				hit_flash_alpha,
+			);
+			
+			shader_reset();
+		}
+	
 		if (global.debug) {
 			draw_set_color(BLUE);
 			physics_draw_debug();

@@ -97,9 +97,9 @@ function loop_clamp(_val, _min, _max) {
     return _val;
 }
 
-function gen_id() {
-    var _counter = get_save_data_property("counter", 0);
+function gen_id(_counter_key = "counter", _default_id_number = 0) {
+    var _counter = get_save_data_property(_counter_key, _default_id_number);
     _counter++;
-    set_save_data_property("counter", _counter);
+    set_save_data_property(_counter_key, _counter);
     return _counter;
 }

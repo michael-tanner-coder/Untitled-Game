@@ -1,1 +1,1 @@
-stop_all_tracks();
+// stop_all_tracks();

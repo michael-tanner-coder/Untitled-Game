@@ -1,22 +1,11 @@
 {
-    "unlocked_levels": [],
+    "unlocked_levels": ["level_1"],
     "flags": {
       "needs_tutorial": true,
       "finished_tutorial": false,
       "beat_game": false,
-      "played_normal_character": false,
-      "played_tall_character": false,
-      "played_small_character": false,
-      "played_big_character": false,
-      "played_bounce_character": false,
-      "played_spikey_character": false,
-      "played_float_character": false,
-      "started_game": false,
-      "played_twin_character": false
+      "started_game": false
     },
-    "characters": [
-      0
-    ],
     "inputs": {
       "up": [
         38,
@@ -66,48 +55,38 @@
         0
       ]
     },
-    "deck": [
-      {
-        "id": 126,
-        "key": "fire_faster"
+    "card_unlock_progress": {
+      "level_1": {
+        "current_points": 0,
+        "required_points": 2000,
+        "max_points": 40000
       },
-      {
-        "id": 125,
-        "key": "move_faster"
+      "level_2": {
+        "current_points": 0,
+        "required_points": 4000,
+        "max_points": 80000
       },
-      {
-        "id": 124,
-        "key": "get_sturdy"
+      "level_3": {
+        "current_points": 0,
+        "required_points": 8000,
+        "max_points": 160000
       },
-      {
-        "id": 123,
-        "key": "fire_faster"
-      },
-      {
-        "id": 122,
-        "key": "move_faster"
-      },
-      {
-        "id": 121,
-        "key": "get_sturdy"
-      },
-      {
-        "id": 120,
-        "key": "fire_faster"
-      },
-      {
-        "id": 119,
-        "key": "move_faster"
-      },
-      {
-        "id": 118,
-        "key": "get_sturdy"
+      "level_4": {
+        "current_points": 0,
+        "required_points": 16000,
+        "max_points": 320000
       }
-    ],
-    "upgrades": [
+    },
+    "unlocked_cards": [
       "fire_faster",
       "move_faster",
       "get_sturdy"
+    ],
+    "decks": [
+      {
+        "name": "Base Deck",
+        "cards": []
+      }
     ],
     "highscores": [],
     "collection": [],
@@ -140,7 +119,5 @@
       "high_contrast_mode_enabled": true,
       "vsync": 0
     },
-    "unlock_progress": 0,
-    "counter": 0,
-    "unlocked_powerups": []
+    "counter": 0
   }

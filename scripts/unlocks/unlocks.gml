@@ -1,5 +1,7 @@
+
 global.unlock_map = {
     upgrades: init_upgrades_collection(),
+    levels: init_levels_collection(),
 };
 
 function unlock_struct(_key = "", _category = "", _points = 0) {
@@ -10,13 +12,39 @@ function unlock_struct(_key = "", _category = "", _points = 0) {
     }
 }
 
-global.unlock_progress = get_save_data_property("unlock_progress", 0);
-global.required_points = get_save_data_property(REQUIRED_UNLOCK_POINTS, 2000);
+global.default_unlock_progress = {
+     level_1: {
+        current_points: 0,
+        required_points: 2000,
+        max_points: 40000,
+      },
+      level_2: {
+        current_points: 0,
+        required_points: 4000,
+        max_points: 80000,
+      },
+      level_3: {
+        current_points: 0,
+        required_points: 8000,
+        max_points: 160000,
+      },
+      level_4: {
+        current_points: 0,
+        required_points: 16000,
+        max_points: 320000,
+      }
+};
+global.unlock_progress = get_save_data_property(UNLOCK_PROGRESS_POINTS, global.default_unlock_progress);
 
 global.unlockables = [
-    unlock_struct("fast_fire", "upgrades", 2000),
+    unlock_struct("fire_faster", "upgrades", 1000),
+    unlock_struct("move_faster", "upgrades", 1200),
+    unlock_struct("get_sturdy", "upgrades", 1300),
+    unlock_struct("bullet_strength", "upgrades", 1400),
     unlock_struct("shot_spread", "upgrades", 8000),
+    unlock_struct("shot_focus", "upgrades", 9000),
     unlock_struct("steady_fire", "upgrades", 16000),
+    unlock_struct("fast_fire", "upgrades", 17000),
     unlock_struct("bullet_strength", "upgrades", 20000),
     unlock_struct("extra_life", "upgrades", 22000),
     unlock_struct("closer", "upgrades", 30000),
@@ -125,6 +153,7 @@ function is_unlocked(
 
 function reset_unlocks() {
     set_save_data_property("upgrades", global.default_unlocked_upgrades);
-    set_save_data_property("unlock_progress", 0);
-    global.unlock_progress = get_save_data_property("unlock_progress", 0);
+    set_save_data_property("levels", global.default_unlocked_levels);
+    set_save_data_property(UNLOCK_PROGRESS_POINTS, global.default_unlock_progress);
+    global.unlock_progress = get_save_data_property(UNLOCK_PROGRESS_POINTS, global.default_unlock_progress);
 }

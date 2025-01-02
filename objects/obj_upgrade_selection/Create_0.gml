@@ -3,15 +3,15 @@
 draw_score = 1000; // make this configurable
 hand = [];
 discard_pile = [];
-hand_size_limit = 3;
+hand_size_limit = 4;
 deck = [];
 hand_full = false;
 selected_cards = [];
 selection_price = 0;
 retrieve_count = 0;
 
-var _len = array_length(global.deck);
-array_copy(deck, 0, global.deck, 0, _len);
+var _len = array_length(global.active_deck.cards);
+array_copy(deck, 0, global.active_deck.cards, 0, _len);
 
 // card section
 card_obj_instances = [];
@@ -87,7 +87,7 @@ fsm.add("progress_to_next_draw", {
         actor_activation_timer = 5;
     },
     step: function() {
-        if (input_check_pressed("select") && (array_length(deck) > 0 || array_length(hand) > 0)) {
+        if (input_check_pressed("view_hand") && (array_length(deck) > 0 || array_length(hand) > 0)) {
             fsm.change("view_hand");
         }
         
@@ -163,7 +163,7 @@ fsm.add("view_hand", {
         	
         	// Base position for card
         	var _card = instance_create_layer(x, y, "UI_Instances", obj_card);
-        	_card.x = _start_x + ((sprite_get_width(_card.sprite_index) + _card_margin) * _i);
+        	_card.x = _start_x + (((sprite_get_width(_card.sprite_index)/2) + _card_margin) * _i);
         	_card.y = starting_card_section_y;
         	_card.starting_y = _card.y;
         	_card.target_y = card_section_y;
@@ -202,7 +202,7 @@ fsm.add("view_hand", {
     	
         upgrade_banner_y = lerp(upgrade_banner_y, target_upgrade_banner_y, 0.2);
         
-        if (input_check_pressed("select")) {
+        if (input_check_pressed("view_hand")) {
         	fsm.change("progress_to_next_draw");
         }
     },
@@ -345,11 +345,23 @@ fsm.add("draw_card", {
 
 fsm.add("discard", {
 	enter: function() {
-		var _card_margin = 30;
+		selection_price = 0;
+    	selected_cards = [];
+    	
+        var _card_margin = 30;
         
         // Pause all characters in the scene
         publish(ACTORS_DEACTIVATED);
         physics_pause_enable(true);
+        
+        // Spawn buttons
+        play_button = instance_create_layer(60, 90, "UI_Instances", obj_button);
+        play_button.text = "PLAY";
+        play_button.on_click_event = PLAYED_CARD;
+        
+        discard_button = instance_create_layer(430, 90, "UI_Instances", obj_button);
+        discard_button.text = "DISCARD";
+        discard_button.on_click_event = DISCARD_CARD;
 
 		// Spawn card_obj_instances
         var _start_x = room_width/2;
@@ -358,7 +370,7 @@ fsm.add("discard", {
         	
         	// Base position for card
         	var _card = instance_create_layer(x, y, "UI_Instances", obj_card);
-        	_card.x = _start_x + ((sprite_get_width(_card.sprite_index) + _card_margin) * _i);
+        	_card.x = _start_x + (((sprite_get_width(_card.sprite_index)/2) + _card_margin) * _i);
         	_card.y = starting_card_section_y;
         	_card.starting_y = _card.y;
         	_card.target_y = card_section_y;
@@ -387,22 +399,33 @@ fsm.add("discard", {
         END
 	},
 	step: function() {
-		 upgrade_banner_y = lerp(upgrade_banner_y, target_upgrade_banner_y, 0.2);
+    	if (play_button != undefined) {
+        	play_button.disabled = selection_price > global.currency || array_length(selected_cards) <= 0;
+    	}
+    	
+    	if (discard_button != undefined) {
+	        discard_button.disabled = array_length(selected_cards) <= 0;
+    	}
+    	
+        upgrade_banner_y = lerp(upgrade_banner_y, target_upgrade_banner_y, 0.2);
         
-        if (input_check_pressed("select")) {
+        if (input_check_pressed("view_hand")) {
         	fsm.change("progress_to_next_draw");
         }
 	},
 	draw: function() {
 		draw_card_meter();
-		banner(upgrade_banner_height, upgrade_banner_y, "HAND IS FULL: DISCARD A CARD (right-click or press 'X')", BLACK, 0.6, RED);
+		banner(upgrade_banner_height, upgrade_banner_y, "HAND IS FULL: DISCARD A CARD", BLACK, 0.6, RED);
+		draw_shadow_text(room_width/2, room_height/2 - 90, "MANA COST: " + string(selection_price), global.currency >= selection_price ? WHITE : RED, PURPLE);
 		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.75), "(press R to pass)")
 	},
 })
 
 fsm.add("inactive", {
 	step: function() {},
-	draw: function() {},
+	draw: function() {
+		draw_card_meter();
+	},
 })
 
 // Methods
@@ -418,7 +441,7 @@ generate_card_hand = function() {
 	// 	global.most_recent_unlock = "";
 	// }
 	var _cards_to_remove = [];
-	for (var _i = 0; _i < hand_size_limit-1; _i++) {
+	for (var _i = 0; _i < hand_size_limit; _i++) {
 		draw_new_card();
 	}
 }
