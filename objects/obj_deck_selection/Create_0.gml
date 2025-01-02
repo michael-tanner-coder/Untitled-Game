@@ -11,6 +11,7 @@ record_object = obj_deck;
 page_counter = undefined;
 edit_button = undefined;
 new_button = undefined;
+confirm_button = undefined;
 
 // Pagination
 current_page = 0;
@@ -150,6 +151,8 @@ spawn_ui_objects = function() {
     page_counter = instance_create_layer(room_width/2, room_height - 165, layer, obj_page_count);
     page_counter.page_count =  page_count;
     page_counter.current_page = current_page;
+    
+    confirm_button = _confirm_button;
 }
 
 center_grid = function() {
@@ -208,6 +211,9 @@ fsm.add("selection", {
         
         // disable the "edit" button if we do not have an actively selected deck
         edit_button.disabled = global.active_deck == undefined;
+
+        // disable the "confirm" button if we do not have an actively selected deck
+        confirm_button.disabled = global.active_deck == undefined;
     },
     draw: function() {},
 });
