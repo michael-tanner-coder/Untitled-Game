@@ -135,17 +135,17 @@ spawn_ui_objects = function() {
     
     edit_button.on_click_event = "edit_deck";
     edit_button.text = "EDIT";
-    edit_button.x = VIEW_WIDTH - 128;
-    edit_button.y = VIEW_HEIGHT - 128;
-    edit_button.width = 64;
+    edit_button.x = VIEW_WIDTH - 164;
+    edit_button.y = VIEW_HEIGHT - 152;
+    edit_button.width = 128;
     edit_button.height = 24;
 
     new_button.on_click_event = "create_deck";
     new_button.text = "+NEW";
     new_button.x = edit_button.x;
     new_button.y = edit_button.y + edit_button.height + 8;
-    new_button.width = 64;
-    new_button.height = 24;
+    new_button.width = 128;
+    new_button.height = 48;
 
     page_counter = instance_create_layer(room_width/2, room_height - 165, layer, obj_page_count);
     page_counter.page_count =  page_count;
