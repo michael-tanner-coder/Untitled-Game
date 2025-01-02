@@ -291,6 +291,12 @@ fsm.add("editing", {
 
 fsm.add("name_input", {
     enter: function() {
+        var _underlay = instance_create_layer(0, 0, layer, obj_underlay);
+        _underlay.depth = depth - 9;
+        _underlay.image_alpha = 0.6;
+        _underlay.image_xscale = VIEW_WIDTH;
+        _underlay.image_yscale = VIEW_HEIGHT;
+        
         // Disabled existing UI inputs
         with(record_object) {
             disabled = true;
@@ -331,10 +337,10 @@ fsm.add("name_input", {
         }
     },
     step: function() {},
-    draw: function() {
-        draw_set_alpha(0.5);
-        draw_set_color(BLACK);
-        draw_rectangle(0, 0, VIEW_WIDTH, VIEW_HEIGHT, false);
-        draw_set_alpha(1);
-    },
+    draw: function() {},
+    leave: function() {
+        with(obj_underlay) {
+            instance_destroy(self);
+        }
+    }
 });
