@@ -1,6 +1,3 @@
-// TODO:
-// Fix card pagination (duplicates appearing on second page)
-
 // Edit/Create Mode
 mode = "edit";
 deck_data = global.active_deck;

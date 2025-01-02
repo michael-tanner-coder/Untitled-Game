@@ -193,7 +193,6 @@ fsm.add("unlock", {
 		draw_rectangle(_rect_x, _rect_y, _rect_x + _rect_width, _rect_y + _rect_height, false);
 		draw_set_alpha(1);
 		
-		
 		// header
 		draw_set_font(fnt_header);
 		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 40, "NEW CARD UNLOCKED!", WHITE, PURPLE)
@@ -206,23 +205,10 @@ fsm.add("unlock", {
 		var _description = struct_get(item_data, "description");
 		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 200, _description, WHITE, PURPLE);
 		
-		
-		// _text_renderer.starting_format("fnt_paragraph", WHITE).align(fa_center, fa_middle).draw(_rect_x + _rect_width - (_rect_width/4), _rect_y + string_height("CONTINUE"));
-		// item sprite
-		// var _sprite = struct_get(item_data, "sprite");
-		// if (_sprite != undefined) {
-		// 	draw_set_color(WHITE);
-		// 	draw_sprite_ext(spr_circle_fill, 0, _rect_x + _rect_width/2, _rect_y + _rect_height/2 + 40, 1, 1, 0, c_white, 1);
-		// 	draw_sprite_ext(_sprite, 0, _rect_x + _rect_width/2, _rect_y + _rect_height/2, 1, 1, 0, c_white, 1);
-		// }
-		
 		// inputs
 		draw_set_font(fnt_header);
 		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 250, "ADD TO DECK: R", WHITE, PURPLE);
 		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 300, "PRESS SPACE TO CONTINUE", WHITE, PURPLE)
-		// var _continue_icon = input_verb_get_icon("progress");
-		// var _text_renderer = scribble(_description);
-		// _text_renderer.starting_format("fnt_cutscene_default", WHITE).align(fa_center, fa_middle).draw(_rect_x + _rect_width - (_rect_width/4), _rect_y + string_height("CONTINUE"));
 	}
 });
 
