@@ -164,11 +164,11 @@ center_grid = function() {
 subscribe(id, "create_deck", function() {
     // setting active deck ID to -1 so that it does not collide with any existing IDs on save
     global.active_deck = deck_struct(-1, "", []);
-    room_goto(rm_deck_create_menu);
+    go_to_scene_by_key("deck-creation");
 });
 
 subscribe(id, "edit_deck", function(_payload = {}) {
-    room_goto(rm_deck_edit_menu);
+    go_to_scene_by_key("deck-editing");
 });
 
 subscribe(id, "next_page", function() {

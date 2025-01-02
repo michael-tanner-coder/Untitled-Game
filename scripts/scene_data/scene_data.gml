@@ -1,5 +1,5 @@
 // Scene data
-global.scene_queue = [
+global.scenes = [
     {
         key: "main-menu",
         map: rm_main_menu,
@@ -25,6 +25,28 @@ global.scene_queue = [
     {
         key: "deck-selection",
         map: rm_deck_selection_menu,
+        music_layers: [],
+        goal_score: 20000,
+        time_between_spawns: 30,
+        default_max_enemy_count: 8,
+        boss_max_enemy_count: 4,
+        enemy_types: [],
+        boss: obj_boss_test,
+    },
+    {
+        key: "deck-editing",
+        map: rm_deck_edit_menu,
+        music_layers: [],
+        goal_score: 20000,
+        time_between_spawns: 30,
+        default_max_enemy_count: 8,
+        boss_max_enemy_count: 4,
+        enemy_types: [],
+        boss: obj_boss_test,
+    },
+    {
+        key: "deck-creation",
+        map: rm_deck_create_menu,
         music_layers: [],
         goal_score: 20000,
         time_between_spawns: 30,
@@ -242,3 +264,5 @@ global.scene_queue = [
         boss: obj_boss_test,
     },
 ];
+
+global.scene_stack = [];

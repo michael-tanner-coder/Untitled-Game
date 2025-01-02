@@ -1,4 +1,4 @@
-var _scene = global.scene_queue[global.scene_index];
+var _scene = global.scenes[global.scene_index];
 
 var _scene_key = struct_get(_scene, "key");
 

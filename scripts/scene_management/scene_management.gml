@@ -13,6 +13,28 @@ function scene_transition(_scene = {}) {
 
 }
 
+function get_scene_by_key(_key = "") {
+	
+	if (!is_string(_key)) {
+        show_debug_message("Error: Provided key is not a string");
+        return;
+    }
+    
+    var _found_scene = undefined;
+    var _found_scene_index = 0;
+    
+    FOREACH global.scenes ELEMENT
+        if (_elem.key == _key) {
+            _found_scene = _elem;
+            _found_scene_index = _i;
+        } 
+    END
+    
+    
+    return _found_scene;
+    
+} 
+
 function go_to_scene_by_key(_key = "") {
     
     if (!is_string(_key)) {
@@ -23,7 +45,7 @@ function go_to_scene_by_key(_key = "") {
     var _found_scene = undefined;
     var _found_scene_index = 0;
     
-    FOREACH global.scene_queue ELEMENT
+    FOREACH global.scenes ELEMENT
         if (_elem.key == _key) {
             _found_scene = _elem;
             _found_scene_index = _i;
@@ -33,6 +55,11 @@ function go_to_scene_by_key(_key = "") {
     if (_found_scene != undefined) {
         scene_transition(_found_scene);
         global.scene_index = _found_scene_index;
+    }
+    
+    // push to stack of scene keys to track our routing throughout the game
+    if (array_length(global.scene_stack) == 0 || global.scene_stack[array_length(global.scene_stack)-1] != _key) {
+    	array_push(global.scene_stack, _key);
     }
     
 }
@@ -55,54 +82,38 @@ function go_to_next_scene() {
         global.scene_index += 1;
     }
     
-    if (global.scene_index > array_length(global.scene_queue) - 1) {
-        global.scene_index = array_length(global.scene_queue) - 1;
+    if (global.scene_index > array_length(global.scenes) - 1) {
+        global.scene_index = array_length(global.scenes) - 1;
     }
 
 }
 
 function go_to_previous_scene() {
+    array_pop(global.scene_stack);
     
-    var _previous_scene = get_previous_scene();
-    
-    if (_previous_scene != undefined) {
-        scene_transition(_previous_scene);
-        global.scene_index -= 1;
+    if (array_length(global.scene_stack) > 0) {
+    	var _previous_scene_key = global.scene_stack[array_length(global.scene_stack)-1];
+    	go_to_scene_by_key(_previous_scene_key);
     }
-    
-    if (global.scene_index < 0) {
-        global.scene_index = 0;
-    }
-
 }
 
 function get_next_scene() {
     
-    if (global.scene_index + 1 > array_length(global.scene_queue) - 1) {
+    if (global.scene_index + 1 > array_length(global.scenes) - 1) {
         return undefined;
     }
     
-    return global.scene_queue[global.scene_index + 1];
-    
-}
-
-function get_previous_scene() {
-    
-    if (global.scene_index - 1 < 0) {
-        return undefined;
-    }
-    
-    return global.scene_queue[global.scene_index - 1];
+    return global.scenes[global.scene_index + 1];
     
 }
 
 function get_current_scene() {
     
-    if (global.scene_index <= array_length(global.scene_queue) - 1) {
-        return global.scene_queue[global.scene_index];
+    if (global.scene_index <= array_length(global.scenes) - 1) {
+        return global.scenes[global.scene_index];
     }
     else {
-        return global.scene_queue[array_length(global.scene_queue) - 1];
+        return global.scenes[array_length(global.scenes) - 1];
     }
     
 }

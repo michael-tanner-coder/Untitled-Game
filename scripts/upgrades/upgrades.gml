@@ -51,8 +51,6 @@ function add_to_deck(_card = {}, _deck = []) {
         if (_card_count < global.card_type_limit) {
             array_push(_deck, _card);
         }
-        
-        set_save_data_property(DECK, _deck);
     }
 }
 

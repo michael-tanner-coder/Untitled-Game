@@ -164,7 +164,9 @@ fsm.add("unlock", {
 	step: function() {
 		// adds card to deck; adds to collection if deck is full
 		if (input_check_pressed("view_deck") && array_length(global.active_deck) < global.deck_limit) {
-			add_to_deck(new_card);
+			add_to_deck(new_card, global.active_deck.cards);
+			save_deck(global.active_deck);
+			add_to_collection(new_card);
 			fsm.change("countup");
 			global.unlock_modal_open = false;
 		}

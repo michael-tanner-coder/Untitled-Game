@@ -1,3 +1,9 @@
+// TODO:
+// Fix card pagination (duplicates appearing on second page)
+// Show card names by default
+// Stop music from resetting between menus
+// Fix discard bug
+
 // Edit/Create Mode
 mode = "edit";
 deck_data = global.active_deck;
@@ -126,6 +132,7 @@ spawn_ui_objects = function() {
     var _left_button = instance_create_layer(starting_x - sprite_get_width(spr_arrow_button_left_normal) - record_margin_x, room_height/2, layer, obj_button);
     var _right_button = instance_create_layer(starting_x + _grid_width, room_height/2, layer, obj_button);
     var _confirm_button = instance_create_layer(x, y, layer, obj_button);
+    var _back_button = instance_create_layer(x, y, layer, obj_button);
 
     _left_button.sprite_index = spr_arrow_button_left_normal;
     _left_button.sprite = spr_arrow_button_left_normal;
@@ -150,6 +157,12 @@ spawn_ui_objects = function() {
     _confirm_button.x = VIEW_WIDTH/2 - _confirm_button.width/2;
     _confirm_button.y = room_height - 135;
     _confirm_button.button_id = "confirm_button";
+    
+    _back_button.text = "<- BACK";
+    _back_button.on_click_event = "go_to_last_scene";
+    _back_button.button_id = "back_button";
+    _back_button.x = 32;
+    _back_button.y = HEADER_HEIGHT;
 
     page_counter = instance_create_layer(room_width/2, room_height - 165, layer, obj_page_count);
     page_counter.page_count =  page_count;
@@ -220,6 +233,11 @@ subscribe(id, "confirm_changes", function() {
     // Return to deck selection menu
     go_to_scene_by_key("deck-selection");
 });
+
+subscribe(id, "go_to_last_scene", function() {
+    go_to_previous_scene();
+    // go_to_scene_by_key("deck-selection");
+})
 
 // Init
 paginate_data();
