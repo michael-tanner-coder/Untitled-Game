@@ -6,11 +6,14 @@ input_string_x = x;
 input_string_y = y;
 keyboard_string = input_string;
 input_character_limit = 10;
+label = "";
 
 // Style Properties
 font = fnt_default;
 text_color = WHITE;
 text_shadow_color = PURPLE;
+label_text_color = WHITE;
+label_margin = 4;
 
 // Scribble effects
 typist = scribble_typist();

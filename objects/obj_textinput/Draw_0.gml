@@ -9,7 +9,6 @@ draw_set_valign(fa_top);
 var _box_width = string_width("W") * (input_character_limit + 1);
 var _box_height = string_height("W");
 draw_sprite_stretched(sprite_index, 0, x, y, string_width("W") * (input_character_limit + 1), _box_height);
-// draw_shadow_text(input_string_x + string_width("W")/2, input_string_y, input_string, text_color, text_shadow_color);
 
 // animated text
 var _text_shadow_renderer = scribble(input_string);
@@ -30,4 +29,10 @@ var _char_count = string_length(input_string);
 var _limit_color = _char_count < input_character_limit ? WHITE : RED;
 draw_shadow_text(x + _box_width + string_width("W")/2, y, string(_char_count) + "/" + string(input_character_limit), _limit_color, PURPLE);
 
+// input label
+draw_set_halign(fa_left);
+draw_set_valign(fa_bottom);
+draw_shadow_text(x, y-label_margin, label, label_text_color);
+
+// reset alpha
 draw_set_alpha(1);

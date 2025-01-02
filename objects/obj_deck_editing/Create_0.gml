@@ -238,7 +238,6 @@ subscribe(id, "confirm_changes", function() {
 
 subscribe(id, "go_to_last_scene", function() {
     go_to_previous_scene();
-    // go_to_scene_by_key("deck-selection");
 })
 
 // Init
@@ -279,7 +278,7 @@ fsm.add("editing", {
         var _tooltip = tooltip;
         with(record_object) {
             if (highlighted) {
-                _tooltip.anchor_x = x + sprite_get_width(sprite_index);
+                _tooltip.anchor_x = x + sprite_get_width(sprite_index)/2;
                 _tooltip.anchor_y = y;
                 _tooltip.header = struct_get(card_data, "name");
                 _tooltip.text = struct_get(card_data, "description");
@@ -316,6 +315,7 @@ fsm.add("name_input", {
         
         _textinput.input_character_limit = 10;
         _textinput.input_id = "name_input";
+        _textinput.label = "Enter Deck Name";
         _textinput.input_string_x = _textinput.x;
         _textinput.input_string_y = _textinput.y;
         _textinput.depth = depth - 10;
@@ -337,7 +337,9 @@ fsm.add("name_input", {
         }
     },
     step: function() {},
-    draw: function() {},
+    draw: function() {
+        
+    },
     leave: function() {
         with(obj_underlay) {
             instance_destroy(self);
