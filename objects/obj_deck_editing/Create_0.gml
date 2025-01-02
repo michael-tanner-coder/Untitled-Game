@@ -2,7 +2,6 @@
 // Fix card pagination (duplicates appearing on second page)
 // Show card names by default
 // Stop music from resetting between menus
-// Fix discard bug
 
 // Edit/Create Mode
 mode = "edit";
