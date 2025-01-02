@@ -1,6 +1,5 @@
 // TODO:
 // Fix card pagination (duplicates appearing on second page)
-// Stop music from resetting between menus
 
 // Edit/Create Mode
 mode = "edit";
