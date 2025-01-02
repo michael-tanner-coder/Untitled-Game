@@ -3,8 +3,8 @@
 column_limit = 3;
 starting_x = x;
 starting_y = y;
-record_margin_x = 20;
-record_margin_y = 10;
+record_margin_x = 90;
+record_margin_y = 40;
 
 // Objects
 record_object = obj_deck;
@@ -16,7 +16,7 @@ new_button = undefined;
 current_page = 0;
 page_count = 1;
 pages = [];
-records_per_page = 9;
+records_per_page = 6;
 records = get_save_data_property(DECKS, [global.default_deck]);
 
 // Transition animation

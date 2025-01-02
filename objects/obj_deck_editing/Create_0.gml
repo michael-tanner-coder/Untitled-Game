@@ -1,7 +1,3 @@
-// TODO:
-// Deck Create/Edit:
-// save/edit decks when confirming changes
-
 // Edit/Create Mode
 mode = "edit";
 deck_data = global.active_deck;
