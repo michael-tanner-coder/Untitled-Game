@@ -26,6 +26,9 @@ play_button = undefined;
 discard_button = undefined;
 retrieve_button = undefined;
 
+// UI elements
+tooltip = undefined;
+
 // draw indictator
 flash_time = 0;
 got_lucky_draw = false;
@@ -155,6 +158,9 @@ fsm.add("view_hand", {
         discard_button = instance_create_layer(430, 90, "UI_Instances", obj_button);
         discard_button.text = "DISCARD";
         discard_button.on_click_event = DISCARD_CARD;
+        
+        // Spawn tooltip
+		create_tooltip();
 
 		// Spawn card_obj_instances
         var _start_x = room_width/2;
@@ -205,6 +211,8 @@ fsm.add("view_hand", {
         if (input_check_pressed("view_hand")) {
         	fsm.change("progress_to_next_draw");
         }
+        
+        hover_tooltip();
     },
     draw: function() {
 		draw_card_meter();
@@ -216,6 +224,7 @@ fsm.add("view_hand", {
 	},
 	leave: function() {
 		got_lucky_draw = false;
+		instance_destroy(tooltip);
 	}
 });
 
@@ -235,6 +244,9 @@ fsm.add("view_discard_pile", {
         retrieve_button.x -= retrieve_button.width/2;
 		retrieve_button.text = "RETRIEVE";
         retrieve_button.on_click_event = RETRIEVE_CARD;
+        
+        // Spawn tooltip
+		create_tooltip();
 		
 		// Spawn card_obj_instances
         var _start_x = room_width/2;
@@ -281,6 +293,8 @@ fsm.add("view_discard_pile", {
         if (input_check_pressed("view_discard_pile")) {
         	fsm.change("progress_to_next_draw");
         }
+        
+      hover_tooltip();
     },
     draw: function() {
 		draw_card_meter();
@@ -299,6 +313,8 @@ fsm.add("view_discard_pile", {
 		card_obj_instances = [];
 	    
 	    selected_cards = [];
+	    
+	    instance_destroy(tooltip);
 	}
 });
 
@@ -362,6 +378,9 @@ fsm.add("discard", {
         discard_button = instance_create_layer(430, 90, "UI_Instances", obj_button);
         discard_button.text = "DISCARD";
         discard_button.on_click_event = DISCARD_CARD;
+        
+        // Spawn tooltip
+		create_tooltip();
 
 		// Spawn card_obj_instances
         var _start_x = room_width/2;
@@ -412,12 +431,17 @@ fsm.add("discard", {
         if (input_check_pressed("view_hand")) {
         	fsm.change("progress_to_next_draw");
         }
+        
+        hover_tooltip();
 	},
 	draw: function() {
 		draw_card_meter();
 		banner(upgrade_banner_height, upgrade_banner_y, "HAND IS FULL: DISCARD A CARD", BLACK, 0.6, RED);
 		draw_shadow_text(room_width/2, room_height/2 - 90, "MANA COST: " + string(selection_price), global.currency >= selection_price ? WHITE : RED, PURPLE);
 		draw_shadow_text(room_width/2, upgrade_banner_y + (upgrade_banner_height * 0.75), "(press R to pass)")
+	},
+	leave: function() {
+		instance_destroy(tooltip);
 	},
 })
 
@@ -508,6 +532,32 @@ check_if_card_selected = function(_card) {
 	END
 	
 	return _found_card;
+}
+
+create_tooltip = function() {
+    tooltip = instance_create_layer(-1000, -1000, layer, obj_tooltip);
+	tooltip.header = "HEADER";
+	tooltip.text = "Description";
+	tooltip.depth = depth - 10;
+}
+
+hover_tooltip = function() {
+	    if (tooltip == undefined || !instance_exists(tooltip)) {
+	    	return;
+	    }
+	    
+	    // Show tooltip on hovered card
+        tooltip.anchor_x = -1000;
+        tooltip.anchor_y = -1000;
+        var _tooltip = tooltip;
+        with(obj_card) {
+            if (highlighted) {
+                _tooltip.anchor_x = x + sprite_get_width(sprite_index)/2;
+                _tooltip.anchor_y = y;
+                _tooltip.header = header;
+                _tooltip.text = description;
+            }
+        }
 }
 
 // -- Randomly select cards for your starting hand 
