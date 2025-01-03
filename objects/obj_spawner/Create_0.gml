@@ -76,7 +76,7 @@ fsm.add("wave", {
 			
 			var _sprite = object_get_sprite(boss_type);
 			var _sprite_height = sprite_get_height(_sprite);
-			var _falling_spawn = instance_create_layer(obj_boss_spawn_point.x, -1*_sprite_height, layer, obj_falling_spawn);
+			var _falling_spawn = instance_create_layer(obj_boss_spawn_point.x, -1*_sprite_height, "Instances", obj_falling_spawn);
 			
 			_falling_spawn.spawn_type = boss_type;
 			_falling_spawn.target_y = obj_boss_spawn_point.x;
@@ -124,8 +124,8 @@ fsm.add("wave", {
 
 				var _sprite = object_get_sprite(_chosen_spawn.type);
 				var _sprite_height = sprite_get_height(_sprite);
-				var _falling_spawn = instance_create_layer(_chosen_spawn_point.x_pos, -1 * _sprite_height, layer, obj_falling_spawn);
-				
+				var _falling_spawn = instance_create_layer(_chosen_spawn_point.x_pos, -1 * _sprite_height, "Instances", obj_falling_spawn);
+
 				_falling_spawn.spawn_type = _chosen_spawn.type;
 				_falling_spawn.target_y = _chosen_spawn_point.y_pos;
 				_falling_spawn.spawn_height = _sprite_height;

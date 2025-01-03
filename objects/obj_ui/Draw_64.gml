@@ -1,8 +1,13 @@
 // HUD
-draw_set_font(fnt_default);
-draw_set_color(WHITE);
-draw_set_halign(fa_center);
 
+// -- HUD Background
+draw_set_color(BACKGROUND_BLACK);
+draw_rectangle(0, 0, VIEW_WIDTH, HEADER_HEIGHT, false);
+
+// -- Font and Color 
+draw_set_font(fnt_default);
+draw_set_halign(fa_center);
+draw_set_color(WHITE);
 var _hud_element_y = 20;
 
 // -- Score
