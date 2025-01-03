@@ -312,6 +312,7 @@ lose_life = function() {
 	if (upgrade_stats.player_lives <= 0) {
 		instance_destroy(self);
 		publish(LOST_LEVEL);
+		publish(ACTORS_DEACTIVATED);
 		return;
 	}
 	
