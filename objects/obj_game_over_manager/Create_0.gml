@@ -194,21 +194,18 @@ fsm.add("unlock", {
 		draw_set_alpha(1);
 		
 		// header
-		draw_set_font(fnt_header);
-		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 40, "NEW CARD UNLOCKED!", WHITE, PURPLE)
+		draw_scribble_shadow_text(_rect_x + _rect_width/2, _rect_y + 40, "NEW CARD UNLOCKED!", WHITE, PURPLE, "fnt_header_nonsdf", VIEW_WIDTH);
 		
 		// item name
-		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 100, item_name, WHITE, PURPLE)
+		draw_scribble_shadow_text(_rect_x + _rect_width/2, _rect_y + 100, item_name, WHITE, PURPLE, "fnt_header_nonsdf", VIEW_WIDTH);
 		
 		// item description
-		draw_set_font(fnt_paragraph);
 		var _description = struct_get(item_data, "description");
-		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 200, _description, WHITE, PURPLE);
+		draw_scribble_shadow_text(_rect_x + _rect_width/2, _rect_y + 200, _description, WHITE, PURPLE, "fnt_paragraph_nonsdf", VIEW_WIDTH);
 		
 		// inputs
-		draw_set_font(fnt_header);
-		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 250, "ADD TO DECK: R", WHITE, PURPLE);
-		draw_shadow_text(_rect_x + _rect_width/2, _rect_y + 300, "PRESS SPACE TO CONTINUE", WHITE, PURPLE)
+		draw_scribble_shadow_text(_rect_x + _rect_width/2, _rect_y + 275, "ADD TO DECK: R", WHITE, PURPLE, "fnt_header_nonsdf", VIEW_WIDTH);
+		draw_scribble_shadow_text(_rect_x + _rect_width/2, _rect_y + 325, "PRESS SPACE TO CONTINUE", WHITE, PURPLE, "fnt_header_nonsdf", VIEW_WIDTH);
 	}
 });
 

@@ -192,6 +192,7 @@
     {"name":"fnt_header_nonsdf","order":5,"path":"fonts/fnt_header_nonsdf/fnt_header_nonsdf.yy",},
     {"name":"fnt_large","order":11,"path":"fonts/fnt_large/fnt_large.yy",},
     {"name":"fnt_medium","order":10,"path":"fonts/fnt_medium/fnt_medium.yy",},
+    {"name":"fnt_paragraph_nonsdf","order":12,"path":"fonts/fnt_paragraph_nonsdf/fnt_paragraph_nonsdf.yy",},
     {"name":"fnt_paragraph","order":1,"path":"fonts/fnt_paragraph/fnt_paragraph.yy",},
     {"name":"fnt_small","order":9,"path":"fonts/fnt_small/fnt_small.yy",},
     {"name":"fnt_tip","order":2,"path":"fonts/fnt_tip/fnt_tip.yy",},

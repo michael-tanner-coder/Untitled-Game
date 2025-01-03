@@ -55,11 +55,19 @@ function leave_trail(_color = c_white, _sprite = undefined) {
 	}
 }
 
-function draw_shadow_text(x,y,_text = "",_color = WHITE, _shadow_color=PURPLE) {
+function draw_shadow_text(_x, _y, _text = "", _color = WHITE, _shadow_color = PURPLE) {
 	draw_set_color(_shadow_color);
-	draw_text(x + 2,y + 2,_text);
+	draw_text(_x + 2, _y + 2,_text);
 	draw_set_color(_color);
-	draw_text(x,y,_text);
+	draw_text(_x, _y, _text);
+}
+
+function draw_scribble_shadow_text(_x, _y, _text = "", _color = WHITE, _shadow_color = PURPLE, _font = "fnt_default", _max_width = VIEW_WIDTH, _halign = fa_center, _valign = fa_middle) {
+	var _text_shadow_renderer = scribble(_text);
+	_text_shadow_renderer.starting_format(_font, _shadow_color).align(_halign, _valign).wrap(_max_width).draw(_x + 2, _y + 2);
+	
+	var _text_renderer = scribble(_text);
+	_text_renderer.starting_format(_font, _color).align(_halign, _valign).wrap(_max_width).draw(_x, _y);
 }
 
 function fillbar(_x = 0, _y = 0, _width = 100, _height = 50, _fill_percentage = 1, _fill_color = RED, _outline_color = undefined) {
